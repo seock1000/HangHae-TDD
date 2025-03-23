@@ -11,7 +11,6 @@ import static io.hhplus.tdd.point.domain.PointConstant.*;
 public class UserPointDomain {
     private long id;
     private long point;
-    private long updateMillis;
 
     /**
      * 포인트 충전
@@ -22,7 +21,6 @@ public class UserPointDomain {
             throw new ExceedMaxPointError();
         }
         this.point += amount;
-        this.updateMillis = System.currentTimeMillis();
     }
 
     /**
@@ -34,6 +32,5 @@ public class UserPointDomain {
             throw new UnderMinPointError();
         }
         this.point -= amount;
-        this.updateMillis = System.currentTimeMillis();
     }
 }
