@@ -1,6 +1,7 @@
 package io.hhplus.tdd.point.domain;
 
 import io.hhplus.tdd.point.domain.error.ExceedMaxPointError;
+import io.hhplus.tdd.point.domain.error.UnderMinPointError;
 import io.hhplus.tdd.point.domain.model.UserPointDomainFixture;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,10 @@ import static org.assertj.core.api.Assertions.*;
 
 class UserPointDomainTest {
 
+    /**
+     * 포인트 충전 성공 TC
+     * 포인트는 정책상 최대 잔고까지 충전 가능해야 한다.
+     */
     @Test
     @DisplayName("포인트 충전")
     void charge() {
@@ -24,6 +29,10 @@ class UserPointDomainTest {
         assertThat(userPointDomain.getPoint()).isEqualTo(expectedPoint);
     }
 
+    /**
+     * 포인트 충전 실패 TC - 최대 잔고 초과
+     * 정책상 최대 잔고를 초과하는 경우, 충전에 실패하며 ExceedMaxPointError를 발생시킨다.
+     */
     @Test
     @DisplayName("포인트 충전_최대 포인트를 초과하면 ExceedMaxPointError를 발생시킨다.")
     void chargeExceedMaxPoint() {
@@ -34,5 +43,40 @@ class UserPointDomainTest {
         //when & then
         assertThatThrownBy(() -> userPointDomain.charge(chargePoint))
                 .isInstanceOf(ExceedMaxPointError.class);
+    }
+
+    /**
+     * 포인트 사용 성공 TC
+     * 포인트는 정책상 최소 잔고까지 사용 가능해야 한다.
+     */
+    @Test
+    @DisplayName("포인트 사용")
+    void use() {
+        //given
+        UserPointDomain userPointDomain = UserPointDomainFixture.initByMax();
+        long usePoint = PointConstant.MAX_POINT - PointConstant.MIN_POINT;
+        long expectedPoint = userPointDomain.getPoint() - usePoint;
+
+        //when
+        userPointDomain.use(usePoint);
+
+        //then
+        assertThat(userPointDomain.getPoint()).isEqualTo(expectedPoint);
+    }
+
+    /**
+     * 포인트 사용 실패 TC - 최소 잔고 미만
+     * 포인트 사용 시 정책상 최소 잔고 미만이 되는 경우, 사용에 실패하며 UnderMinPointError를 발생시킨다.
+     */
+    @Test
+    @DisplayName("포인트 사용_최소 포인트 미만이면 UnderMinPointError를 발생시킨다.")
+    void useUnderMinPoint() {
+        //given
+        UserPointDomain userPointDomain = UserPointDomainFixture.initByMin();
+        long usePoint = 1;
+
+        //when & then
+        assertThatThrownBy(() -> userPointDomain.use(usePoint))
+                .isInstanceOf(UnderMinPointError.class);
     }
 }
