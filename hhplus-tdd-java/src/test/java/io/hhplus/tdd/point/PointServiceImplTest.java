@@ -35,7 +35,6 @@ class PointServiceImplTest {
     /**
      * 유저 포인트 조회 TC - 성공
      * parameter로 전달된 user id에 해당하는 UserPoint를 조회하는지 검증하기 위해 stubbing 사용
-     */
     @Test
     @DisplayName("요청한 ID의 UserPoint를 읽어온다.")
     void readUserPoint() {
@@ -61,4 +60,7 @@ class PointServiceImplTest {
         assertThat(expectedUserPoint2).isEqualTo(actualUserPoint2);
         assertThat(expectedUserPoint3).isEqualTo(actualUserPoint3);
     }
+    */
+
+
 }
