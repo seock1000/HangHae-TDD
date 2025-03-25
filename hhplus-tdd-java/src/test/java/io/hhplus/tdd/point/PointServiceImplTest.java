@@ -2,16 +2,20 @@ package io.hhplus.tdd.point;
 
 import io.hhplus.tdd.database.PointHistoryTable;
 import io.hhplus.tdd.database.UserPointTable;
+import org.apache.catalina.User;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.format.annotation.NumberFormat;
 
 import java.io.PipedInputStream;
 
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -33,34 +37,46 @@ class PointServiceImplTest {
     }
 
     /**
-     * 유저 포인트 조회 TC - 성공
-     * parameter로 전달된 user id에 해당하는 UserPoint를 조회하는지 검증하기 위해 stubbing 사용
+     * 유저 포인트 충전 TC - 성공
+     * 유저 포인트를 충전할 때, 올바른 값이 충전되고 충전내역이 올바르게 전달되는지 검증합니다.
+     */
     @Test
-    @DisplayName("요청한 ID의 UserPoint를 읽어온다.")
-    void readUserPoint() {
+    @DisplayName("유저 포인트 충전 테스트 - 성공")
+    void chargeUserPointTest() {
         //given
-        UserPoint expectedUserPoint1 = new UserPoint(1, 10, System.currentTimeMillis());
-        UserPoint expectedUserPoint2 = new UserPoint(2, 100, System.currentTimeMillis());
-        UserPoint expectedUserPoint3 = new UserPoint(3, 1000, System.currentTimeMillis());
+        long givenUserId = 1L;
+        long givenChargeAmount = 100L;
 
-        Mockito.when(userPointTable.selectById(expectedUserPoint1.id()))
-                .thenReturn(expectedUserPoint1);
-        Mockito.when(userPointTable.selectById(expectedUserPoint2.id()))
-                .thenReturn(expectedUserPoint2);
-        Mockito.when(userPointTable.selectById(expectedUserPoint3.id()))
-                .thenReturn(expectedUserPoint3);
+        long expectedUserId = givenUserId;
+        long expectedChargeAmount = givenChargeAmount;
+        TransactionType expectedTransactionType = TransactionType.CHARGE;
+
+        ArgumentCaptor<Long> userIdCapture = ArgumentCaptor.forClass(Long.class);
+        ArgumentCaptor<Long> chargeAmountCapture = ArgumentCaptor.forClass(Long.class);
+        ArgumentCaptor<Long> historyUserIdCapture = ArgumentCaptor.forClass(Long.class);
+        ArgumentCaptor<Long> historyChargeAmountCapture = ArgumentCaptor.forClass(Long.class);
+        ArgumentCaptor<TransactionType> historyTransactionTypeCapture = ArgumentCaptor.forClass(TransactionType.class);
+
+        Mockito.verify(userPointTable).insertOrUpdate(userIdCapture.capture(), chargeAmountCapture.capture());
+        Mockito.verify(pointHistoryTable).insert(
+                historyUserIdCapture.capture(),
+                historyChargeAmountCapture.capture(),
+                historyTransactionTypeCapture.capture(),
+                Mockito.any()
+        );
 
         //when
-        UserPoint actualUserPoint1 = pointService.readUserPoint(expectedUserPoint1.id());
-        UserPoint actualUserPoint2 = pointService.readUserPoint(expectedUserPoint2.id());
-        UserPoint actualUserPoint3 = pointService.readUserPoint(expectedUserPoint3.id());
+        UserPoint actualUserPoint = pointService.chargeUserPoint(givenUserId, givenChargeAmount);
 
         //then
-        assertThat(expectedUserPoint1).isEqualTo(actualUserPoint1);
-        assertThat(expectedUserPoint2).isEqualTo(actualUserPoint2);
-        assertThat(expectedUserPoint3).isEqualTo(actualUserPoint3);
+        assertThat(actualUserPoint.id()).isEqualTo(expectedUserId);
+        assertThat(actualUserPoint.point()).isEqualTo(expectedChargeAmount);
+
+        assertThat(userIdCapture.getValue()).isEqualTo(expectedUserId);
+        assertThat(chargeAmountCapture.getValue()).isEqualTo(expectedChargeAmount);
+
+        assertThat(historyUserIdCapture.getValue()).isEqualTo(expectedUserId);
+        assertThat(historyChargeAmountCapture.getValue()).isEqualTo(expectedChargeAmount);
+        assertThat(historyTransactionTypeCapture.getValue()).isEqualTo(expectedTransactionType);
     }
-    */
-
-
 }

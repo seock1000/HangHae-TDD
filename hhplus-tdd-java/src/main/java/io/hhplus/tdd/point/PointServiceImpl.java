@@ -23,4 +23,9 @@ public class PointServiceImpl implements PointService {
     public List<PointHistory> readPointHistoryByUserId(long userId) {
         return pointHistoryTable.selectAllByUserId(userId);
     }
+
+    @Override
+    public UserPoint chargeUserPoint(long userId, long amount) {
+        return null;
+    }
 }
