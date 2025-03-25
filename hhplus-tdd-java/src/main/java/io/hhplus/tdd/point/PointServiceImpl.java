@@ -2,6 +2,7 @@ package io.hhplus.tdd.point;
 
 import io.hhplus.tdd.database.PointHistoryTable;
 import io.hhplus.tdd.database.UserPointTable;
+import io.hhplus.tdd.point.domain.UserPointDomain;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,17 @@ public class PointServiceImpl implements PointService {
 
     @Override
     public UserPoint chargeUserPoint(long userId, long amount) {
-        return null;
+        UserPointDomain userPointDomain = userPointTable.selectById(userId).toDomain();
+        userPointDomain.charge(amount);
+
+        UserPoint updatedUserPoint = userPointTable.insertOrUpdate(userPointDomain.getId(), userPointDomain.getPoint());
+        pointHistoryTable.insert(
+                updatedUserPoint.id(),
+                updatedUserPoint.point(),
+                TransactionType.CHARGE,
+                updatedUserPoint.updateMillis()
+        );
+
+        return updatedUserPoint;
     }
 }
