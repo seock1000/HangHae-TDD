@@ -4,6 +4,7 @@ import io.hhplus.tdd.database.PointHistoryTable;
 import io.hhplus.tdd.database.UserPointTable;
 import io.hhplus.tdd.point.domain.UserPointDomain;
 import io.hhplus.tdd.point.dto.ChargePointDto;
+import io.hhplus.tdd.point.dto.UsePointDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -43,9 +44,9 @@ public class PointServiceImpl implements PointService {
     }
 
     @Override
-    public UserPoint useUserPoint(long userId, long amount) {
-        UserPointDomain userPointDomain = userPointTable.selectById(userId).toDomain();
-        userPointDomain.use(amount);
+    public UserPoint useUserPoint(UsePointDto dto) {
+        UserPointDomain userPointDomain = userPointTable.selectById(dto.userId()).toDomain();
+        userPointDomain.use(dto.amount());
 
         UserPoint updatedUserPoint = userPointTable.insertOrUpdate(userPointDomain.getId(), userPointDomain.getPoint());
         pointHistoryTable.insert(

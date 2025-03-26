@@ -33,5 +33,4 @@ class PointServiceImplTest {
     private PointHistoryTable pointHistoryTable;
     @InjectMocks
     private PointServiceImpl pointService;
-
 }
