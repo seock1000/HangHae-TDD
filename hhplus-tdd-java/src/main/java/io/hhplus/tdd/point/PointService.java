@@ -1,5 +1,7 @@
 package io.hhplus.tdd.point;
 
+import io.hhplus.tdd.point.dto.ChargePointDto;
+
 import java.util.List;
 
 public interface PointService {
@@ -8,5 +10,7 @@ public interface PointService {
 
     public List<PointHistory> readPointHistoryByUserId(long userId);
 
-    public UserPoint chargeUserPoint(long userId, long amount);
+    public UserPoint chargeUserPoint(ChargePointDto chargePointDto);
+
+    public UserPoint useUserPoint(long userId, long amount);
 }
