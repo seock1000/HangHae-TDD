@@ -15,7 +15,7 @@ class UserPointDomainTest {
      * 포인트는 정책상 최대 잔고까지 충전 가능해야 한다.
      */
     @Test
-    @DisplayName("포인트 충전")
+    @DisplayName("포인트 충전_포인트 충전에 성공하면 충전액과 합산된 값으로 보유 포인트가 업데이트 된다.")
     void charge() {
         //given
         UserPointDomain userPointDomain = UserPointDomainFixture.initByZero();
@@ -34,7 +34,7 @@ class UserPointDomainTest {
      * 정책상 최대 잔고를 초과하는 경우, 충전에 실패하며 ExceedMaxPointError를 발생시킨다.
      */
     @Test
-    @DisplayName("포인트 충전_최대 포인트를 초과하면 ExceedMaxPointError를 발생시킨다.")
+    @DisplayName("포인트 충전_보유포인트와 충전액과의 합산 값이 최대 포인트를 초과하면 ExceedMaxPointError를 발생시킨다.")
     void chargeExceedMaxPoint() {
         //given
         UserPointDomain userPointDomain = UserPointDomainFixture.initByZero();
@@ -50,7 +50,7 @@ class UserPointDomainTest {
      * 포인트는 정책상 최소 잔고까지 사용 가능해야 한다.
      */
     @Test
-    @DisplayName("포인트 사용")
+    @DisplayName("포인트 사용_포인트 사용에 성공하면 사용액을 차감한 값으로 보유 포인트가 업데이트 된다.")
     void use() {
         //given
         UserPointDomain userPointDomain = UserPointDomainFixture.initByMax();
@@ -69,7 +69,7 @@ class UserPointDomainTest {
      * 포인트 사용 시 정책상 최소 잔고 미만이 되는 경우, 사용에 실패하며 UnderMinPointError를 발생시킨다.
      */
     @Test
-    @DisplayName("포인트 사용_최소 포인트 미만이면 UnderMinPointError를 발생시킨다.")
+    @DisplayName("포인트 사용_보유 포인트에서 사용액을 차감한 값이 최소 포인트 미만이면 UnderMinPointError를 발생시킨다.")
     void useUnderMinPoint() {
         //given
         UserPointDomain userPointDomain = UserPointDomainFixture.initByMin();
