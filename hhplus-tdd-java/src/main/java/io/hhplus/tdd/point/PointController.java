@@ -1,6 +1,7 @@
 package io.hhplus.tdd.point;
 
 import io.hhplus.tdd.point.dto.ChargePointDto;
+import io.hhplus.tdd.point.dto.UsePointDto;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +39,7 @@ public class PointController {
     }
 
     /**
-     * 특정 유저의 포인트를 충전하는 기능을 작성해주세요.
+     * 특정 유저의 포인트를 충전
      */
     @PatchMapping("{id}/charge")
     public UserPoint charge(
@@ -49,13 +50,13 @@ public class PointController {
     }
 
     /**
-     * TODO - 특정 유저의 포인트를 사용하는 기능을 작성해주세요.
+     * 특정 유저의 포인트를 사용
      */
     @PatchMapping("{id}/use")
     public UserPoint use(
             @PathVariable long id,
             @RequestBody long amount
     ) {
-        return new UserPoint(0, 0, 0);
+        return pointService.useUserPoint(new UsePointDto(id, amount));
     }
 }
