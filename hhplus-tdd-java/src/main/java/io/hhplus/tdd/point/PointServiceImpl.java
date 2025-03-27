@@ -1,5 +1,6 @@
 package io.hhplus.tdd.point;
 
+import io.hhplus.tdd.DomainException;
 import io.hhplus.tdd.database.PointHistoryTable;
 import io.hhplus.tdd.database.UserPointTable;
 import io.hhplus.tdd.point.domain.UserPointDomain;
@@ -31,48 +32,49 @@ public class PointServiceImpl implements PointService {
         return pointHistoryTable.selectAllByUserId(userId);
     }
 
-    // 작업 중간 에러가 발생하면 이후의 작업이 수행되면 안되므로 try 문으로 묶음
     @Override
     public UserPoint chargeUserPoint(ChargePointDto dto) {
         lock.lock();
+        UserPointDomain userPointDomain;
+        UserPoint updatedUserPoint;
         try {
-            UserPointDomain userPointDomain = userPointTable.selectById(dto.userId()).toDomain();
+            userPointDomain = userPointTable.selectById(dto.userId()).toDomain();
             userPointDomain.charge(dto.amount());
 
-            UserPoint updatedUserPoint = userPointTable.insertOrUpdate(userPointDomain.getId(), userPointDomain.getPoint());
-
-            pointHistoryTable.insert(
-                    updatedUserPoint.id(),
-                    updatedUserPoint.point(),
-                    TransactionType.CHARGE,
-                    updatedUserPoint.updateMillis()
-            );
-
-            return updatedUserPoint;
+            updatedUserPoint = userPointTable.insertOrUpdate(userPointDomain.getId(), userPointDomain.getPoint());
         } finally {
             lock.unlock();
         }
+        pointHistoryTable.insert(
+                updatedUserPoint.id(),
+                updatedUserPoint.point(),
+                TransactionType.CHARGE,
+                updatedUserPoint.updateMillis()
+        );
+
+        return updatedUserPoint;
     }
 
-    // 작업 중간 에러가 발생하면 이후의 작업이 수행되면 안되므로 try 문으로 묶음
     @Override
     public UserPoint useUserPoint(UsePointDto dto) {
         lock.lock();
+        UserPointDomain userPointDomain;
+        UserPoint updatedUserPoint;
         try {
-            UserPointDomain userPointDomain = userPointTable.selectById(dto.userId()).toDomain();
+            userPointDomain = userPointTable.selectById(dto.userId()).toDomain();
             userPointDomain.use(dto.amount());
 
-            UserPoint updatedUserPoint = userPointTable.insertOrUpdate(userPointDomain.getId(), userPointDomain.getPoint());
-            pointHistoryTable.insert(
-                    updatedUserPoint.id(),
-                    updatedUserPoint.point(),
-                    TransactionType.USE,
-                    updatedUserPoint.updateMillis()
-            );
-
-            return updatedUserPoint;
+            updatedUserPoint = userPointTable.insertOrUpdate(userPointDomain.getId(), userPointDomain.getPoint());
         } finally {
             lock.unlock();
         }
+        pointHistoryTable.insert(
+                updatedUserPoint.id(),
+                updatedUserPoint.point(),
+                TransactionType.USE,
+                updatedUserPoint.updateMillis()
+        );
+
+        return updatedUserPoint;
     }
 }

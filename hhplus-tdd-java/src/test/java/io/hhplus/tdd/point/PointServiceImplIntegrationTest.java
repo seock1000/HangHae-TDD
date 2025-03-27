@@ -2,13 +2,17 @@ package io.hhplus.tdd.point;
 
 import io.hhplus.tdd.database.PointHistoryTable;
 import io.hhplus.tdd.database.UserPointTable;
+import io.hhplus.tdd.point.domain.PointConstant;
 import io.hhplus.tdd.point.dto.ChargePointDto;
+import io.hhplus.tdd.point.dto.UsePointDto;
+import jakarta.annotation.PostConstruct;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -112,5 +116,54 @@ public class PointServiceImplIntegrationTest {
         assertThat(pointHistory.amount()).isEqualTo(expectedPoint);
         assertThat(pointHistory.type()).isEqualTo(TransactionType.CHARGE);
         assertThat(pointHistory.updateMillis()).isEqualTo(updatedUserPoint.updateMillis());
+    }
+
+    /**
+     * 동시성 테스트
+     * - 같은 사용자의 충전 요청이 동시에 여러번 이루어질 때, 모든 요청이 정상적으로 반영되어야 한다.
+     * - 같은 사용자의 사용 요청이 동시에 여러번 이루어질 때, 모든 요청이 정상적으로 반영되어야 한다.
+     */
+
+    @Test
+    @DisplayName("포인트 충전시, 같은 사용자의 동시 요청 여러번이 모두 정상 반영되어야 한다.")
+    void concurrentChargeTest() throws InterruptedException {
+        //given
+        int latchSize = Long.valueOf(50L).intValue();
+        CountDownLatch latch = new CountDownLatch(latchSize);
+
+        //when
+        for(int i = 0; i < latchSize; i++) {
+            new Thread(() -> {
+                pointService.chargeUserPoint(new ChargePointDto(1L, 1L));
+                latch.countDown();
+            }).start();
+        }
+        latch.await();
+
+        //then
+        UserPoint resultUserPoint = userPointTable.selectById(1L);
+        assertThat(resultUserPoint.point()).isEqualTo(50L);
+    }
+
+    @Test
+    @DisplayName("포인트 사용시, 같은 사용자의 동시 요청 여러번이 모두 정상 반영되어야 한다.")
+    void concurrentUseTest() throws InterruptedException {
+        //given
+        userPointTable.insertOrUpdate(1L, 100L);
+        int latchSize = Long.valueOf(50L).intValue();
+        CountDownLatch latch = new CountDownLatch(latchSize);
+
+        //when
+        for(int i = 0; i < latchSize; i++) {
+            new Thread(() -> {
+                pointService.useUserPoint(new UsePointDto(1L, 1L));
+                latch.countDown();
+            }).start();
+        }
+        latch.await();
+
+        //then
+        UserPoint resultUserPoint = userPointTable.selectById(1L);
+        assertThat(resultUserPoint.point()).isEqualTo(50L);
     }
 }
