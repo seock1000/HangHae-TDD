@@ -7,6 +7,7 @@ import io.hhplus.tdd.point.domain.error.ExceedMaxPointError;
 import io.hhplus.tdd.point.domain.error.UnderMinPointError;
 import io.hhplus.tdd.point.dto.ChargePointDto;
 import io.hhplus.tdd.point.dto.UsePointDto;
+import io.hhplus.tdd.point.util.UserPointLockManager;
 import jakarta.annotation.PostConstruct;
 import org.apache.catalina.User;
 import org.assertj.core.api.Assertions;
@@ -25,8 +26,8 @@ import java.io.PipedInputStream;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -36,6 +37,8 @@ class PointServiceImplTest {
     private UserPointTable userPointTable;
     @Mock
     private PointHistoryTable pointHistoryTable;
+    @Mock
+    private UserPointLockManager userPointLockManager;
     @InjectMocks
     private PointServiceImpl pointService;
 
@@ -61,6 +64,8 @@ class PointServiceImplTest {
         //then
         assertThat(actualUserPoint.id()).isEqualTo(updatedUserPoint.id());
         assertThat(actualUserPoint.point()).isEqualTo(updatedUserPoint.point());
+        //mock - pointHistoryTable이 호출 되었는가
+        verify(pointHistoryTable).insert(eq(updatedUserPoint.id()), eq(updatedUserPoint.point()), eq(TransactionType.CHARGE), eq(updatedUserPoint.updateMillis()));
     }
 
     /**
@@ -84,5 +89,7 @@ class PointServiceImplTest {
         //then
         assertThat(actualUserPoint.id()).isEqualTo(updatedUserPoint.id());
         assertThat(actualUserPoint.point()).isEqualTo(updatedUserPoint.point());
+        //mock - pointHistoryTable이 호출 되었는가
+        verify(pointHistoryTable).insert(eq(updatedUserPoint.id()), eq(updatedUserPoint.point()), eq(TransactionType.USE), eq(updatedUserPoint.updateMillis()));
     }
 }
