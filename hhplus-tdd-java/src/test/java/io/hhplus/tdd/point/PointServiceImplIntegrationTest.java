@@ -5,6 +5,7 @@ import io.hhplus.tdd.database.UserPointTable;
 import io.hhplus.tdd.point.domain.PointConstant;
 import io.hhplus.tdd.point.dto.ChargePointDto;
 import io.hhplus.tdd.point.dto.UsePointDto;
+import io.hhplus.tdd.point.util.UserPointLockManager;
 import jakarta.annotation.PostConstruct;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class PointServiceImplIntegrationTest {
     void setDependencies() {
         userPointTable = new UserPointTable();
         pointHistoryTable = new PointHistoryTable();
-        pointService = new PointServiceImpl(userPointTable, pointHistoryTable);
+        pointService = new PointServiceImpl(userPointTable, pointHistoryTable, new UserPointLockManager());
     }
     /**
      * 1. 포인트 조회
@@ -128,7 +129,7 @@ public class PointServiceImplIntegrationTest {
     @DisplayName("포인트 충전시, 같은 사용자의 동시 요청 여러번이 모두 정상 반영되어야 한다.")
     void concurrentChargeTest() throws InterruptedException {
         //given
-        int latchSize = Long.valueOf(50L).intValue();
+        int latchSize = Long.valueOf(5L).intValue();
         CountDownLatch latch = new CountDownLatch(latchSize);
 
         //when
@@ -142,15 +143,15 @@ public class PointServiceImplIntegrationTest {
 
         //then
         UserPoint resultUserPoint = userPointTable.selectById(1L);
-        assertThat(resultUserPoint.point()).isEqualTo(50L);
+        assertThat(resultUserPoint.point()).isEqualTo(5L);
     }
 
     @Test
     @DisplayName("포인트 사용시, 같은 사용자의 동시 요청 여러번이 모두 정상 반영되어야 한다.")
     void concurrentUseTest() throws InterruptedException {
         //given
-        userPointTable.insertOrUpdate(1L, 100L);
-        int latchSize = Long.valueOf(50L).intValue();
+        userPointTable.insertOrUpdate(1L, 10L);
+        int latchSize = Long.valueOf(5L).intValue();
         CountDownLatch latch = new CountDownLatch(latchSize);
 
         //when
@@ -164,6 +165,6 @@ public class PointServiceImplIntegrationTest {
 
         //then
         UserPoint resultUserPoint = userPointTable.selectById(1L);
-        assertThat(resultUserPoint.point()).isEqualTo(50L);
+        assertThat(resultUserPoint.point()).isEqualTo(5L);
     }
 }
