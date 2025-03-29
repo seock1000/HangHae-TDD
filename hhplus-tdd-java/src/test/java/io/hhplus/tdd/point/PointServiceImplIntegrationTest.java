@@ -167,4 +167,89 @@ public class PointServiceImplIntegrationTest {
         UserPoint resultUserPoint = userPointTable.selectById(1L);
         assertThat(resultUserPoint.point()).isEqualTo(5L);
     }
+
+    /**
+     * 피드백 반영 테스트 추가
+     * 1. 같은 사용자의 사용/충전 요청 테스트
+     * 2. 서로 다른 사용자의 동시 요청 테스트
+     */
+
+    @Test
+    @DisplayName("같은 사용자의 포인트 사용/충전 요청이 모두 정상반영 되어야 한다.")
+    void concurrentUseAndChargeTest() throws InterruptedException {
+        //given
+        userPointTable.insertOrUpdate(1L, 10L);
+        int useNum = 3;
+        int chargeNum = 2;
+        int latchSize = useNum + chargeNum;
+        CountDownLatch latch = new CountDownLatch(latchSize);
+
+        long expected = 9L;
+
+        //when
+        for(int i = 0; i < useNum; i++) {
+            new Thread(() -> {
+                pointService.useUserPoint(new UsePointDto(1L, 1L));
+                latch.countDown();
+            }).start();
+        }
+        for(int i = 0; i < chargeNum; i++) {
+            new Thread(() -> {
+                pointService.chargeUserPoint(new ChargePointDto(1L, 1L));
+                latch.countDown();
+            }).start();
+        }
+        latch.await();
+
+        //then
+        UserPoint resultUserPoint = userPointTable.selectById(1L);
+        assertThat(resultUserPoint.point()).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("다른 사용자의 포인트 사용/충전 요청이 모두 정상반영 되어야 한다.")
+    void concurrentUsersUseAndChargeTest() throws InterruptedException {
+        //given
+        userPointTable.insertOrUpdate(1L, 10L);
+        userPointTable.insertOrUpdate(2L, 10L);
+        int useNum = 3;
+        int chargeNum = 2;
+        int latchSize = (useNum + chargeNum) * 2;
+        CountDownLatch latch = new CountDownLatch(latchSize);
+
+        long expected = 9L;
+
+        //when
+        for(int i = 0; i < useNum; i++) {
+            new Thread(() -> {
+                pointService.useUserPoint(new UsePointDto(1L, 1L));
+                latch.countDown();
+            }).start();
+        }
+        for(int i = 0; i < useNum; i++) {
+            new Thread(() -> {
+                pointService.useUserPoint(new UsePointDto(2L, 1L));
+                latch.countDown();
+            }).start();
+        }
+        for(int i = 0; i < chargeNum; i++) {
+            new Thread(() -> {
+                pointService.chargeUserPoint(new ChargePointDto(1L, 1L));
+                latch.countDown();
+            }).start();
+        }
+        for(int i = 0; i < chargeNum; i++) {
+            new Thread(() -> {
+                pointService.chargeUserPoint(new ChargePointDto(2L, 1L));
+                latch.countDown();
+            }).start();
+        }
+        latch.await();
+
+        //then
+        UserPoint resultUserPoint1 = userPointTable.selectById(1L);
+        UserPoint resultUserPoint2 = userPointTable.selectById(2L);
+        assertThat(resultUserPoint1.point()).isEqualTo(expected);
+        assertThat(resultUserPoint2.point()).isEqualTo(expected);
+    }
 }
