@@ -64,6 +64,8 @@ class PointServiceImplTest {
         //then
         assertThat(actualUserPoint.id()).isEqualTo(updatedUserPoint.id());
         assertThat(actualUserPoint.point()).isEqualTo(updatedUserPoint.point());
+        //mock 필요해서 추가
+        verify(userPointTable).insertOrUpdate(eq(updatedUserPoint.id()), eq(updatedUserPoint.point()));
         //mock - pointHistoryTable이 호출 되었는가
         verify(pointHistoryTable).insert(eq(updatedUserPoint.id()), eq(updatedUserPoint.point()), eq(TransactionType.CHARGE), eq(updatedUserPoint.updateMillis()));
     }
@@ -89,6 +91,8 @@ class PointServiceImplTest {
         //then
         assertThat(actualUserPoint.id()).isEqualTo(updatedUserPoint.id());
         assertThat(actualUserPoint.point()).isEqualTo(updatedUserPoint.point());
+        //mock 필요해서 추가
+        verify(userPointTable).insertOrUpdate(eq(updatedUserPoint.id()), eq(updatedUserPoint.point()));
         //mock - pointHistoryTable이 호출 되었는가
         verify(pointHistoryTable).insert(eq(updatedUserPoint.id()), eq(updatedUserPoint.point()), eq(TransactionType.USE), eq(updatedUserPoint.updateMillis()));
     }
