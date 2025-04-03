@@ -11,3 +11,5 @@
 ```bash
 docker-compose up -d
 ```
+
+[요구사항 정의서](./docs/requirements.md)
