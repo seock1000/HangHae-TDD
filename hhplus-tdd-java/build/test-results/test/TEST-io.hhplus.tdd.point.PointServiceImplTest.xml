@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="io.hhplus.tdd.point.PointServiceImplTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-03-29T16:51:56" hostname="yeomseogcheon-ui-MacBookPro.local" time="2.073">
+  <properties/>
+  <testcase name="포인트 충전에 성공하면 충전 결과 포인트를 반환한다." classname="io.hhplus.tdd.point.PointServiceImplTest" time="2.044"/>
+  <testcase name="포인트 사용에 성공하면 사용 결과 포인트를 반환한다." classname="io.hhplus.tdd.point.PointServiceImplTest" time="0.018"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
