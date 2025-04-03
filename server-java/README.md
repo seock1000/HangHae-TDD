@@ -12,4 +12,18 @@
 docker-compose up -d
 ```
 
-[요구사항 정의서](./docs/requirements.md)
+#### 1.요구사항 정의서
+Link: [요구사항 정의서](./docs/requirements.md)
+
+#### 2.Sequence Diagram
+Link: [시퀀스 다이어그램](./docs/sequence-diagram.md)
+
+#### 3.ERD
+Link: [ERD](./docs/er-diagram.md)
+
+#### 4.API Spec
+Link: [API 스펙](./docs/APIspec.md)
+
+#### 5.Swagger
+URL : http://localhost:8080/swagger-ui/index.html
+
