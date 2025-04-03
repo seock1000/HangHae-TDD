@@ -103,10 +103,12 @@
 </details>
 </details>
 
-### 포인트 사용 API (결제)
+## Payment
+
+### 결제 API
 
 > ![](https://img.shields.io/static/v1?label=&message=POST&color=brightgreen) <br>
-> `/api/v1/points/use`
+> `/api/v1/payments`
 
 <details markdown="1">
 
@@ -187,10 +189,15 @@
 </details>
 <br>
 
+## Best Seller
+
+---
+
+
 ### 최근 3일간 가장 많이 팔린 인기 상품 5개 조회 API
 
 > ![](https://img.shields.io/static/v1?label=&message=GET&color=blue) <br>
-> /api/v1/products/best
+> /api/v1/best-sellers
 
 <details markdown="1">
 <summary>스펙 상세</summary>
