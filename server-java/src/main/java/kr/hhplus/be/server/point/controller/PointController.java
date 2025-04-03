@@ -1,9 +1,11 @@
 package kr.hhplus.be.server.point.controller;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import kr.hhplus.be.server.BaseResponse;
 import kr.hhplus.be.server.point.controller.in.ChargePointRequest;
 import kr.hhplus.be.server.point.controller.out.ChargePointResponse;
 import kr.hhplus.be.server.point.controller.out.GetPointResponse;
+import kr.hhplus.be.server.point.controller.spec.PointSpec;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +16,7 @@ import static org.springframework.http.HttpStatus.CONFLICT;
 
 @RestController
 @RequestMapping("/api/v1/points")
-public class PointController {
+public class PointController implements PointSpec {
 
     /**
      * 발생 가능 예외
@@ -22,6 +24,7 @@ public class PointController {
      * 409 : 1회 최대 충전 금액 초과
      * 409 : 최대 잔고 초과
      */
+    @Override
     @PostMapping("/charge")
     public ResponseEntity<BaseResponse<ChargePointResponse>> charge(
             @RequestBody ChargePointRequest request
@@ -44,12 +47,13 @@ public class PointController {
     /**
      * 발생 가능 예외 X
      */
+    @Override
     @GetMapping
-    public ResponseEntity<BaseResponse<List<GetPointResponse>>> getPoint(
+    public ResponseEntity<BaseResponse<GetPointResponse>> getPoint(
             @RequestParam("userId") Long userId
     ) {
         return ResponseEntity.ok(
-                BaseResponse.success(List.of(new GetPointResponse(userId, 0)))
+                BaseResponse.success(new GetPointResponse(userId, 0))
         );
     }
 

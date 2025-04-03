@@ -3,6 +3,7 @@ package kr.hhplus.be.server.coupon.controller;
 import kr.hhplus.be.server.BaseResponse;
 import kr.hhplus.be.server.coupon.controller.in.IssueCouponRequest;
 import kr.hhplus.be.server.coupon.controller.out.GetCouponsResponse;
+import kr.hhplus.be.server.coupon.controller.spec.CouponSpec;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +15,13 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @RestController
 @RequestMapping("/api/v1/coupons")
-public class CouponController {
+public class CouponController implements CouponSpec {
 
     /**
      * 발생 가능 예외
      * 400 : 유효하지 않은 사용자입니다.
      * */
+    @Override
     @GetMapping
     public ResponseEntity<BaseResponse<List<GetCouponsResponse>>> getCoupons(
             @RequestParam("userId") Long userId
@@ -40,6 +42,7 @@ public class CouponController {
      * 400 : 유효하지 않은 사용자입니다.
      * 400 : 유효하지 않은 쿠폰입니다.
      */
+    @Override
     @PostMapping("/issue")
     public ResponseEntity<BaseResponse<Void>> issueCoupon(
                 @RequestBody IssueCouponRequest request
