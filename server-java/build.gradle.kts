@@ -37,6 +37,7 @@ dependencies {
 
 	// Lombok
 	implementation("org.projectlombok:lombok")
+	testImplementation("org.projectlombok:lombok")
 
 	// Springdoc Swagger
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")

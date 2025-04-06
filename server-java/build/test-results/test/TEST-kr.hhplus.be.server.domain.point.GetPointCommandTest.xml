@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.domain.point.GetPointCommandTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-04-06T08:15:22" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.024">
-  <properties/>
-  <testcase name="GetPointCommand 생성 시 userId가 0이하이면 IllegalArgumentException 예외가 발생한다." classname="kr.hhplus.be.server.domain.point.GetPointCommandTest" time="0.022"/>
-  <testcase name="GetPointCommand 생성 시 0보다 큰 사용자 ID를 받으면 생성에 성공한다." classname="kr.hhplus.be.server.domain.point.GetPointCommandTest" time="0.001"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
