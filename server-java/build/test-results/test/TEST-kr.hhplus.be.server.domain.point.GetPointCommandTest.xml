@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.hhplus.be.server.domain.point.GetPointCommandTest" tests="2" skipped="0" failures="1" errors="0" timestamp="2025-04-06T08:11:44" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.058">
+  <properties/>
+  <testcase name="GetPointCommand 생성 시 userId가 0이하이면 IllegalArgumentException 예외가 발생한다." classname="kr.hhplus.be.server.domain.point.GetPointCommandTest" time="0.052">
+    <failure message="org.opentest4j.AssertionFailedError: Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
+	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at app//org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+	at app//org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at app//org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+	at app//kr.hhplus.be.server.domain.point.GetPointCommandTest.GetPointCommand_NegativeUserId_ThrowsIllegalArgumentException(GetPointCommandTest.java:29)
+	at java.base@17.0.11/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
+</failure>
+  </testcase>
+  <testcase name="GetPointCommand 생성 시 0보다 큰 사용자 ID를 받으면 생성에 성공한다." classname="kr.hhplus.be.server.domain.point.GetPointCommandTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
