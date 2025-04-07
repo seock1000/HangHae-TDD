@@ -9,19 +9,4 @@ import java.util.Optional;
 
 @Repository
 public class PointRepositoryImpl implements PointRepository {
-
-    @Override
-    public Point save(Point point) {
-        return null;
-    }
-
-    @Override
-    public Optional<Point> findByUserId(long userId) {
-        return Optional.empty();
-    }
-
-    @Override
-    public PointHistory saveHistory(PointHistory pointHistory) {
-        return null;
-    }
 }
