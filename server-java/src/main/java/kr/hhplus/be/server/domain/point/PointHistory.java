@@ -7,7 +7,7 @@ import lombok.Getter;
 @EqualsAndHashCode
 public class PointHistory {
     private long id;
-    private long pointId;
+    private Point point;
     private int amount;
     private int balance;
     private TransactionType type;

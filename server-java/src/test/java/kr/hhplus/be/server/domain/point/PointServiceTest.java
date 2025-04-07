@@ -2,24 +2,26 @@ package kr.hhplus.be.server.domain.point;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class PointServiceTest {
 
     @Mock
     private PointRepository pointRepository;
-    @Mock
-    private PointHistoryRepository pointHistoryRepository;
     @InjectMocks
-    private PointService pointService;
+    private PointServiceImpl pointService;
 
     @Test
     @DisplayName("포인트 조회 시, 유효한 사용자 ID를 받으면 사용자 포인트 잔고를 반환한다.")
@@ -41,7 +43,6 @@ class PointServiceTest {
     void getPointByUserId_NoPointInfo() {
         //given
         GetPointCommand command = new GetPointCommand(1L);
-
         when(pointRepository.findByUserId(anyLong())).thenReturn(Optional.empty());
 
         //when
