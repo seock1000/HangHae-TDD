@@ -6,6 +6,7 @@ import kr.hhplus.be.server.domain.point.error.InvalidChargeAmountError;
 import lombok.*;
 
 @Getter
+@EqualsAndHashCode
 public class Point {
     private Long id;
     private long user;

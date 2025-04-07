@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.hhplus.be.server.domain.point.PointServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-07T15:36:26" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.021">
+  <properties/>
+  <testcase name="Point 객체와 사용금액을 입력받아 포인트 사용 이력을 생성한다." classname="kr.hhplus.be.server.domain.point.PointServiceTest" time="0.021"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

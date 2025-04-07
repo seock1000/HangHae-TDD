@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
+@EqualsAndHashCode
 public class PointHistory {
     private Long id;
     private Long point;

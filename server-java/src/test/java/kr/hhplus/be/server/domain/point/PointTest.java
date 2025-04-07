@@ -8,6 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * 검증영역은 도메인에서 처리하여 해피케이스만 작성
+ * 이게 쓸모있는 테스트인지는 의문입니다.
+ */
 class PointTest {
 
     @Test
@@ -24,7 +28,7 @@ class PointTest {
     }
 
     @Test
-    @DisplayName("포인트 충전 시, 충전금액이 1_000_000을 초과하면 InvalidChargeAmountException이 발생한다.")
+    @DisplayName("포인트 충전 시, 충전금액이 1_000_000을 초과하면 InvalidChargeAmountError가 발생한다.")
     void charge_ExceedMaxChargeAmount() {
         // given
         Point point = new Point(1L, 1L, 0);
@@ -37,7 +41,7 @@ class PointTest {
     }
 
     @Test
-    @DisplayName("포인트 충전 시, 잔고가 5_000_000을 초과하면 ExceedMaxBalanceException이 발생한다.")
+    @DisplayName("포인트 충전 시, 잔고가 5_000_000을 초과하면 ExceedMaxBalanceError가 발생한다.")
     void charge_ExceedMaxBalance() {
         // given
         Point point = new Point(1L, 1L, 5_000_000);
@@ -63,7 +67,7 @@ class PointTest {
     }
 
     @Test
-    @DisplayName("포인트 사용 시, 잔고가 부족하면 InsufficientBalanceException이 발생한다.")
+    @DisplayName("포인트 사용 시, 잔고가 부족하면 InsufficientBalanceError가 발생한다.")
     void use_InsufficientBalance() {
         // given
         Point point = new Point(1L, 1L, 0);
