@@ -4,4 +4,10 @@ import java.util.Optional;
 
 public interface PointRepository {
 
+    public Optional<Point> findByUserId(long userId);
+
+    public Point save(Point point);
+
+    public PointHistory saveHistory(PointHistory pointHistory);
+
 }

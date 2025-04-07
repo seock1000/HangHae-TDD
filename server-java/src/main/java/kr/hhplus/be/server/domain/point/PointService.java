@@ -1,8 +1,13 @@
 package kr.hhplus.be.server.domain.point;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  * 검증은 도메인에서 완료하였으므로, TC 존재하지 않음 -> 해피케이스만 작성
  */
+@Service
+@Transactional
 public class PointService {
 
     /**
