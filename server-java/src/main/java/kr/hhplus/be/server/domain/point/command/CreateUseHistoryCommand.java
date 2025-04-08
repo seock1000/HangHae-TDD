@@ -18,7 +18,7 @@ public record CreateUseHistoryCommand(
             throw PointNotExistError.of("포인트 정보가 존재하지 않습니다.");
         }
         if (amount <= 0) {
-            throw InvalidAmountError.of("잘못된 충전 금액 형식입니다.");
+            throw InvalidAmountError.of("잘못된 사용 금액 형식입니다.");
         }
     }
 }

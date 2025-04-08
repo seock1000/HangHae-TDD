@@ -5,6 +5,8 @@ import kr.hhplus.be.server.domain.point.Point;
 import kr.hhplus.be.server.domain.point.PointHistory;
 import kr.hhplus.be.server.domain.point.PointRepository;
 import kr.hhplus.be.server.domain.point.PointService;
+import kr.hhplus.be.server.domain.point.command.ChargePointCommand;
+import kr.hhplus.be.server.domain.point.command.CreateChargeHistoryCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,11 +41,11 @@ public class PointFacade {
                         .orElseThrow(() -> PointInfoNotFoundError.of("존재하지 않는 포인트 정보입니다."));
 
                 point = pointRepository.save(
-                        pointService.charge(point, criteria.amount())
+                        pointService.charge(new ChargePointCommand(point, criteria.amount()))
                 );
 
                 pointRepository.saveHistory(
-                        pointService.createChargeHistory(point, criteria.amount())
+                        pointService.createChargeHistory(new CreateChargeHistoryCommand(point, criteria.amount()))
                 );
 
                 return new PointResult(point.getId(), point.getBalance());

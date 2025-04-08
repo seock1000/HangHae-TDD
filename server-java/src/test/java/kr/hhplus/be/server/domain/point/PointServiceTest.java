@@ -1,5 +1,9 @@
 package kr.hhplus.be.server.domain.point;
 
+import kr.hhplus.be.server.domain.point.command.ChargePointCommand;
+import kr.hhplus.be.server.domain.point.command.CreateChargeHistoryCommand;
+import kr.hhplus.be.server.domain.point.command.CreateUseHistoryCommand;
+import kr.hhplus.be.server.domain.point.command.UsePointCommand;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,9 +19,10 @@ class PointServiceTest {
         Point given = new Point(1L, 1L, 4_000_000);
         Point expected = new Point(1L, 1L, 5_000_000);
         int chargeAmount = 1_000_000;
+        ChargePointCommand command = new ChargePointCommand(given, chargeAmount);
 
         // when
-        pointService.charge(given, chargeAmount);
+        pointService.charge(command);
 
         // then
         assertEquals(expected, given);
@@ -30,9 +35,10 @@ class PointServiceTest {
         Point given = new Point(1L, 1L, 1_000_000);
         Point expected = new Point(1L, 1L, 0);
         int useAmount = 1_000_000;
+        UsePointCommand command = new UsePointCommand(given, useAmount);
 
         // when
-        pointService.use(given, useAmount);
+        pointService.use(command);
 
         // then
         assertEquals(expected, given);
@@ -45,9 +51,10 @@ class PointServiceTest {
         Point point = new Point(1L, 1L, 1_000_000);
         int chargeAmount = 1_000_000;
         PointHistory expected = PointHistory.createChargeHistory(point.getId(), chargeAmount, point.getBalance());
+        CreateChargeHistoryCommand command = new CreateChargeHistoryCommand(point, chargeAmount);
 
         // when
-        PointHistory actual = pointService.createChargeHistory(point, chargeAmount);
+        PointHistory actual = pointService.createChargeHistory(command);
 
         // then
         assertEquals(expected, actual);
@@ -60,9 +67,10 @@ class PointServiceTest {
         Point point = new Point(1L, 1L, 1_000_000);
         int useAmount = 500_000;
         PointHistory expected = PointHistory.createUseHistory(point.getId(), useAmount, point.getBalance());
+        CreateUseHistoryCommand command = new CreateUseHistoryCommand(point, useAmount);
 
         // when
-        PointHistory actual = pointService.useHistory(point, useAmount);
+        PointHistory actual = pointService.useHistory(command);
 
         // then
         assertEquals(expected, actual);
