@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.hhplus.be.server.application.point.ChargePointCriteriaTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-04-08T12:33:05" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.039">
+  <properties/>
+  <testcase name="충전 금액이 0보다 작거나 같으면 IllegalArgumentException이 발생한다." classname="kr.hhplus.be.server.application.point.ChargePointCriteriaTest" time="0.03"/>
+  <testcase name="형식적으로 유효한 사용자 ID와 충전 금액이 주어지면 ChargePointCriteria 객체를 생성한다." classname="kr.hhplus.be.server.application.point.ChargePointCriteriaTest" time="0.002"/>
+  <testcase name="사용자 ID가 0보다 작거나 같으면 IllegalArgumentException이 발생한다." classname="kr.hhplus.be.server.application.point.ChargePointCriteriaTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
