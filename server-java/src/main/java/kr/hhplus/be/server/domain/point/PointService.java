@@ -34,4 +34,21 @@ public class PointService {
 
         return pointRepository.save(point);
     }
+
+    /**
+     * TC
+     * userId로 포인트 정보를 조회하여 포인트를 사용하고, 사용 이력을 저장한 뒤 포인트를 반환한다.
+     * 포인트 정보가 존재하지 않으면 PointNotExistError를 발생시킨다.
+     */
+    public Point use(UsePointCommand cmd) {
+        Point point = pointRepository.findByUserId(cmd.userId())
+                .orElseThrow(() -> PointNotExistError.of("포인트 정보가 존재하지 않습니다."));
+
+        point.use(cmd.amount());
+        pointHistoryRepository.save(
+                PointHistory.createUseHistory(point, cmd.amount())
+        );
+
+        return pointRepository.save(point);
+    }
 }
