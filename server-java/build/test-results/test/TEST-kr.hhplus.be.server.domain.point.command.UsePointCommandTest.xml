@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.domain.point.command.UsePointCommandTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-04-08T13:27:30" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.062">
-  <properties/>
-  <testcase name="UsePointCommand 생성 시, point가 null이면 PointNotExistError가 발생한다." classname="kr.hhplus.be.server.domain.point.command.UsePointCommandTest" time="0.051"/>
-  <testcase name="UsePointCommand 생성 시, amount가 0보다 작거나 같으면 InvalidAmountError가 발생한다." classname="kr.hhplus.be.server.domain.point.command.UsePointCommandTest" time="0.005"/>
-  <testcase name="UsePointCommand 생성 시, point가 null이 아니고 amount가 0보다 크면 성공한다." classname="kr.hhplus.be.server.domain.point.command.UsePointCommandTest" time="0.002"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

@@ -20,11 +20,11 @@ public class PointHistory {
         this.type = type;
     }
 
-    public static PointHistory createChargeHistory(Long point, int amount, int curBalance) {
-        return new PointHistory(point, amount, curBalance, TransactionType.CHARGE);
+    public static PointHistory createChargeHistory(Point point, int amount) {
+        return new PointHistory(point.getId(), amount, point.getBalance(), TransactionType.CHARGE);
     }
 
-    public static PointHistory createUseHistory(Long point, int amount, int curBalance) {
-        return new PointHistory(point, amount, curBalance, TransactionType.USE);
+    public static PointHistory createUseHistory(Point point, int amount) {
+        return new PointHistory(point.getId(), amount, point.getBalance(), TransactionType.USE);
     }
 }

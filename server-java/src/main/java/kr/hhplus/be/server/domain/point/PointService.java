@@ -1,9 +1,9 @@
 package kr.hhplus.be.server.domain.point;
 
 import kr.hhplus.be.server.domain.point.command.ChargePointCommand;
-import kr.hhplus.be.server.domain.point.command.CreateChargeHistoryCommand;
-import kr.hhplus.be.server.domain.point.command.CreateUseHistoryCommand;
 import kr.hhplus.be.server.domain.point.command.UsePointCommand;
+import kr.hhplus.be.server.domain.point.error.PointNotExistError;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,33 +12,27 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class PointService {
 
+    private final PointRepository pointRepository;
+    private final PointHistoryRepository pointHistoryRepository;
+
     /**
-     * charge 와 createChargeHistory는 하나인가 별개인가.
-     * 해당 메서드에서 Point.addHistories() 와 같은 동작은 불필요한 History 조회 유발
-     * 애초에 History를 조회하면 paging 처리가 들어가지 않나?? -> 그렇다면 이력 조회에도 History를 안쓰는데 참조를 할 필요가 있나?
+     * TC
+     * userId로 포인트 정보를 조회하여 포인트를 충전하고, 충전 이력을 저장한 뒤 포인트를 반환한다.
+     * 포인트 정보가 존재하지 않으면 PointNotExistError를 발생시킨다.
      */
     public Point charge(ChargePointCommand cmd) {
-        Point point = cmd.point();
+        Point point = pointRepository.findByUserId(cmd.userId())
+                .orElseThrow(() -> PointNotExistError.of("포인트 정보가 존재하지 않습니다."));
+
         point.charge(cmd.amount());
+        pointRepository.save(point);
+
+        PointHistory pointHistory = PointHistory.createChargeHistory(point, cmd.amount());
+        pointHistoryRepository.save(pointHistory);
+
         return point;
     }
-
-    public Point use(UsePointCommand cmd) {
-        Point point = cmd.point();
-        point.use(cmd.amount());
-        return point;
-    }
-
-    public PointHistory createChargeHistory(CreateChargeHistoryCommand cmd) {
-        Point point = cmd.point();
-        return PointHistory.createChargeHistory(point.getId(), cmd.amount(), point.getBalance());
-    }
-
-    public PointHistory useHistory(CreateUseHistoryCommand cmd) {
-        Point point = cmd.point();
-        return PointHistory.createUseHistory(point.getId(), cmd.amount(), point.getBalance());
-    }
-
 }
