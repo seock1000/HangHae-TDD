@@ -4,6 +4,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @EqualsAndHashCode
 public class PointHistory {
@@ -12,6 +14,8 @@ public class PointHistory {
     private int amount;
     private int balance;
     private TransactionType type;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     private PointHistory(Long point, int amount, int balance, TransactionType type) {
         this.point = point;

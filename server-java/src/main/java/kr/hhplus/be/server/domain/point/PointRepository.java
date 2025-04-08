@@ -8,6 +8,4 @@ public interface PointRepository {
 
     public Point save(Point point);
 
-    public PointHistory saveHistory(PointHistory pointHistory);
-
 }

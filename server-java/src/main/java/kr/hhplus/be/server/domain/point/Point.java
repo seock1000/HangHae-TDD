@@ -5,12 +5,16 @@ import kr.hhplus.be.server.domain.point.error.InsufficientBalanceError;
 import kr.hhplus.be.server.domain.point.error.InvalidChargeAmountError;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Getter
 @EqualsAndHashCode
 public class Point {
     private Long id;
     private long user;
     private int balance;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public Point(Long id, long user, int balance) {
         this.id = id;

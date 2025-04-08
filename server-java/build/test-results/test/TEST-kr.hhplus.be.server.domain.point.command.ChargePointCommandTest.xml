@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.domain.point.command.ChargePointCommandTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-04-08T14:25:14" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.076">
-  <properties/>
-  <testcase name="ChargePointCommand 생성 시, userId와 amount가 0보다 크면 성공한다." classname="kr.hhplus.be.server.domain.point.command.ChargePointCommandTest" time="0.061"/>
-  <testcase name="ChargePointCommand 생성 시, userId가 0보다 작거나 같으면 InvalidUserIdError 발생한다." classname="kr.hhplus.be.server.domain.point.command.ChargePointCommandTest" time="0.007"/>
-  <testcase name="ChargePointCommand 생성 시, amount가 0보다 작거나 같으면 InvalidAmountError가 발생한다." classname="kr.hhplus.be.server.domain.point.command.ChargePointCommandTest" time="0.002"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

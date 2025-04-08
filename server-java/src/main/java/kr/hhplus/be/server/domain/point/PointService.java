@@ -28,11 +28,10 @@ public class PointService {
                 .orElseThrow(() -> PointNotExistError.of("포인트 정보가 존재하지 않습니다."));
 
         point.charge(cmd.amount());
-        pointRepository.save(point);
+        pointHistoryRepository.save(
+                PointHistory.createChargeHistory(point, cmd.amount())
+        );
 
-        PointHistory pointHistory = PointHistory.createChargeHistory(point, cmd.amount());
-        pointHistoryRepository.save(pointHistory);
-
-        return point;
+        return pointRepository.save(point);
     }
 }
