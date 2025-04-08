@@ -12,7 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
@@ -114,6 +114,41 @@ class PointServiceTest {
         assertThrows(PointNotExistError.class, () -> {
             pointService.use(command);
         });
+    }
+
+    @Test
+    @DisplayName("포인트 조회 시, 유저 ID에 대한 포인트 정보가 존재하면 포인트 정보를 반환한다.")
+    void testGetByUserId() {
+        // given
+        long givenUserId = 1L;
+        int givenBalance = 1_000_000;
+        Point givenPoint = new Point(1L, givenUserId, givenBalance);
+
+        when(pointRepository.findByUserId(givenUserId)).thenReturn(Optional.of(givenPoint));
+
+        // when
+        Optional<Point> result = pointService.getByUserId(givenUserId);
+
+        // then
+        verify(pointRepository).findByUserId(givenUserId);
+        assert(result.isPresent());
+        assertEquals(givenPoint, result.get());
+    }
+
+    @Test
+    @DisplayName("포인트 조회 시, 유저 ID에 대한 포인트 정보가 존재하지 않으면 Optional.empty()를 반환한다.")
+    void testGetByUserId_OptionalEmpty() {
+        // given
+        long givenUserId = 1L;
+
+        when(pointRepository.findByUserId(givenUserId)).thenReturn(Optional.empty());
+
+        // when
+        Optional<Point> result = pointService.getByUserId(givenUserId);
+
+        // then
+        verify(pointRepository).findByUserId(givenUserId);
+        assert(result.isEmpty());
     }
 
 }

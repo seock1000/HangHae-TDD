@@ -2,7 +2,6 @@ package kr.hhplus.be.server.domain.point;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 
