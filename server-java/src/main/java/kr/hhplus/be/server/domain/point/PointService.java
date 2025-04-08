@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 /**
  * 검증은 도메인에서 완료하였으므로, TC 존재하지 않음 -> 해피케이스만 작성
  */
@@ -50,5 +52,14 @@ public class PointService {
         );
 
         return pointRepository.save(point);
+    }
+
+    /**
+     * TC
+     * userId로 포인트 정보를 조회하고 있으면 반환한다.
+     * userId로 포인트 정보를 조회하고 없으면 Optioanl.empty()를 반환한다.
+     */
+    public Optional<Point> getByUserId(long userId) {
+        return pointRepository.findByUserId(userId);
     }
 }
