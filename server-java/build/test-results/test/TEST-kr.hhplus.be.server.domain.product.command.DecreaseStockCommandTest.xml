@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.domain.product.command.DecreaseStockCommandTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-04-09T11:51:18" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.029">
-  <properties/>
-  <testcase name="DecreaseStockCommand 생성 시, 수량이 0 이하이면 InvalidAmountError 예외가 발생한다." classname="kr.hhplus.be.server.domain.product.command.DecreaseStockCommandTest" time="0.023"/>
-  <testcase name="DecreaseStockCommand 생성 시, 상품 ID와 수량이 0보다 크면 객체가 생성된다." classname="kr.hhplus.be.server.domain.product.command.DecreaseStockCommandTest" time="0.001"/>
-  <testcase name="DecreaseStockCommand 생성 시, 상품 ID가 0 이하이면 InvalidProductError 예외가 발생한다." classname="kr.hhplus.be.server.domain.product.command.DecreaseStockCommandTest" time="0.002"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.hhplus.be.server.domain.product.ProductServiceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2025-04-09T12:09:35" hostname="yeomseogcheon-ui-MacBookPro.local" time="1.012">
+  <properties/>
+  <testcase name="재고 증가 시, 존재하는 상품이면 재고가 증가한다." classname="kr.hhplus.be.server.domain.product.ProductServiceTest" time="0.984"/>
+  <testcase name="재고 차감 시, 존재하는 상품이면 재고가 차감된다." classname="kr.hhplus.be.server.domain.product.ProductServiceTest" time="0.006"/>
+  <testcase name="재고 차감 시, 존재하지 않는 상품이면 ProductNotExist 예외가 발생한다." classname="kr.hhplus.be.server.domain.product.ProductServiceTest" time="0.008"/>
+  <testcase name="존재하는 상품들을 리스트로 조회한다." classname="kr.hhplus.be.server.domain.product.ProductServiceTest" time="0.005"/>
+  <testcase name="재고 증가 시, 존재하지 않는 상품이면 ProductNotExist 예외가 발생한다." classname="kr.hhplus.be.server.domain.product.ProductServiceTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

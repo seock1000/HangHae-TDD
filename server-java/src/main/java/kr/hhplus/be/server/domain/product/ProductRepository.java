@@ -8,4 +8,6 @@ public interface ProductRepository {
     public List<Product> getProductsAll();
 
     public Optional<Product> findById(Long id);
+
+    public Product save(Product product);
 }
