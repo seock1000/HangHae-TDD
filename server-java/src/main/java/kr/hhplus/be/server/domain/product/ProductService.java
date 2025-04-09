@@ -20,4 +20,10 @@ public class ProductService {
     public List<Product> getProducts() {
         return productRepository.getProductsAll();
     }
+
+    //재고 차감
+
+    //재고 추가
+
+
 }

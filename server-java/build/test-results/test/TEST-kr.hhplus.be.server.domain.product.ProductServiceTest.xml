@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.domain.product.ProductServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-08T15:41:04" hostname="yeomseogcheon-ui-MacBookPro.local" time="1.241">
-  <properties/>
-  <testcase name="존재하는 상품들을 리스트로 조회한다." classname="kr.hhplus.be.server.domain.product.ProductServiceTest" time="1.241"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
