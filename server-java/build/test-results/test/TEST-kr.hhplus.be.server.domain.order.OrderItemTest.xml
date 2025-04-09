@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.domain.order.OrderItemTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-09T15:56:37" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.022">
-  <properties/>
-  <testcase name="주문 아이템 생성 시, 주문번호와 상품 ID, 가격, 수량을 전달하면 주문번호, 상품 ID, 총액, 가격, 수량을 가진 주문 아이템이 생성된다." classname="kr.hhplus.be.server.domain.order.OrderItemTest" time="0.022"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
