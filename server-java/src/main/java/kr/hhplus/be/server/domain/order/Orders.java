@@ -7,12 +7,12 @@ import java.time.LocalDateTime;
 
 @Getter
 public class Orders {
-    String id;
-    Long user;
-    int totalAmount;
-    OrderStatus status;
-    LocalDateTime createdAt;
-    LocalDateTime updatedAt;
+    private String id;
+    private Long user;
+    private int totalAmount;
+    private OrderStatus status;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     private Orders(String id, Long user, int totalAmount, OrderStatus status) {
         this.id = id;

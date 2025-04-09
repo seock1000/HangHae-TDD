@@ -5,9 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -15,6 +12,7 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderIdGenerator orderIdGenerator;
+    private final OrderCancelHandler orderCancelHandler;
 
     /**
      * 주문 생성
@@ -29,9 +27,11 @@ public class OrderService {
         command.orderItemSpecs().forEach(orderItemSpec -> {
             int itemAmount = orderRepository.saveOrderItem(
                     OrderItem.create(orderId, orderItemSpec.productId(), orderItemSpec.price(), orderItemSpec.quantity())
-            ).amount;
+            ).getAmount();
             order.plusTotalAmount(itemAmount);
         });
+
+        orderCancelHandler.register(order.getId());
 
         return orderRepository.saveOrder(order);
     }

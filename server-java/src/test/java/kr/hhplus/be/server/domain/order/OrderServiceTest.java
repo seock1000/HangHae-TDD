@@ -21,6 +21,8 @@ class OrderServiceTest {
     private OrderRepository orderRepository;
     @Mock
     private OrderIdGenerator orderIdGenerator;
+    @Mock
+    private OrderCancelHandler orderCancelHandler;
     @InjectMocks
     private OrderService orderService;
 
@@ -39,13 +41,16 @@ class OrderServiceTest {
         ));
 
         when(orderIdGenerator.gen()).thenReturn(orderId);
+        //어차피 mock 검증이라 아무거나 반환
+        when(orderRepository.saveOrderItem(any())).thenReturn(OrderItem.create(orderId, 1L, 1000, 2));
 
         // when
         Orders order = orderService.createOrder(command);
 
         // then
-        verify(orderRepository, times(1)).saveOrderItems(any());
+        verify(orderRepository, times(2)).saveOrderItem(any());
         verify(orderRepository, times(1)).saveOrder(any());
+        verify(orderCancelHandler, times(1)).register(orderId);
     }
 
 }

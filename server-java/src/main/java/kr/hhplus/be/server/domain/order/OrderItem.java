@@ -6,14 +6,14 @@ import java.time.LocalDateTime;
 
 @Getter
 public class OrderItem {
-    Long id;
-    String ordersId;
-    Long productId;
-    int amount;
-    int price;
-    int quantity;
-    LocalDateTime createdAt;
-    LocalDateTime updatedAt;
+    private Long id;
+    private String ordersId;
+    private Long productId;
+    private int amount;
+    private int price;
+    private int quantity;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     private OrderItem(String ordersId, Long productId, int amount, int price, int quantity) {
         this.ordersId = ordersId;
