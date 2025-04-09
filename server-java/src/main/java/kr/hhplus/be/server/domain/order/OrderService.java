@@ -26,13 +26,13 @@ public class OrderService {
         String orderId = orderIdGenerator.gen();
         Orders order = Orders.createWithIdAndUser(orderId, command.userId());
 
-        List<OrderItem> orderItems = command.orderItemSpecs().stream().map(orderItemSpec -> {
-            OrderItem orderItem = OrderItem.create(orderId, orderItemSpec.productId(), orderItemSpec.price(), orderItemSpec.quantity());
-            order.plusTotalAmount(orderItem.getAmount());
-            return orderItem;
-        }).toList();
+        command.orderItemSpecs().forEach(orderItemSpec -> {
+            int itemAmount = orderRepository.saveOrderItem(
+                    OrderItem.create(orderId, orderItemSpec.productId(), orderItemSpec.price(), orderItemSpec.quantity())
+            ).amount;
+            order.plusTotalAmount(itemAmount);
+        });
 
-        orderRepository.saveOrderItems(orderItems);
         return orderRepository.saveOrder(order);
     }
 }
