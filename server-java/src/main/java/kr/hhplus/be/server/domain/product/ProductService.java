@@ -22,8 +22,12 @@ public class ProductService {
     }
 
     //재고 차감
+    public void decreaseStock(Long productId, int amount) {
+    }
 
     //재고 추가
+    public void increaseStock(Long productId, int amount) {
+    }
 
 
 }
