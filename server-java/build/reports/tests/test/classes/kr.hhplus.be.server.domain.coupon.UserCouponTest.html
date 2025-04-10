@@ -29,7 +29,7 @@
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">4</div>
+<div class="counter">0</div>
 <p>failures</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.683s</div>
+<div class="counter">0.330s</div>
 <p>duration</p>
 </div>
 </td>
@@ -50,8 +50,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox failures" id="successRate">
-<div class="percent">20%</div>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
 <p>successful</p>
 </div>
 </td>
@@ -61,84 +61,10 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Failed tests</a>
-</li>
-<li>
-<a href="#tab1">Tests</a>
+<a href="#tab0">Tests</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
-<h2>Failed tests</h2>
-<div class="test">
-<a name="initCoupon()"></a>
-<h3 class="failures">쿠폰 초기화 시, 사용 상태가 false로 초기화된다.</h3>
-<span class="code">
-<pre>org.opentest4j.AssertionFailedError: expected: &lt;false&gt; but was: &lt;true&gt;
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at app//org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
-	at app//org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
-	at app//org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:31)
-	at app//org.junit.jupiter.api.Assertions.assertFalse(Assertions.java:231)
-	at app//kr.hhplus.be.server.domain.coupon.UserCouponTest.initCoupon(UserCouponTest.java:96)
-	at java.base@17.0.11/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="useAlreadyUsedCoupon()"></a>
-<h3 class="failures">쿠폰 사용 시, 이미 사용된 쿠폰이면 사용에 실패한다.</h3>
-<span class="code">
-<pre>org.opentest4j.AssertionFailedError: Expected kr.hhplus.be.server.domain.coupon.error.AlreadyUsedCouponError to be thrown, but nothing was thrown.
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
-	at app//org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
-	at app//org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
-	at app//org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
-	at app//kr.hhplus.be.server.domain.coupon.UserCouponTest.useAlreadyUsedCoupon(UserCouponTest.java:62)
-	at java.base@17.0.11/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="useExpiredCoupon()"></a>
-<h3 class="failures">쿠폰 사용 시, 만료일이 지났으면 사용에 실패한다.</h3>
-<span class="code">
-<pre>org.opentest4j.AssertionFailedError: Expected kr.hhplus.be.server.domain.coupon.error.ExpiredCouponError to be thrown, but nothing was thrown.
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
-	at app//org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
-	at app//org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
-	at app//org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
-	at app//kr.hhplus.be.server.domain.coupon.UserCouponTest.useExpiredCoupon(UserCouponTest.java:78)
-	at java.base@17.0.11/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="useValidCoupon()"></a>
-<h3 class="failures">쿠폰 사용 시, 유효한 쿠폰이면 사용에 성공하고 사용 상태로 변경된다.</h3>
-<span class="code">
-<pre>org.opentest4j.AssertionFailedError: expected: &lt;true&gt; but was: &lt;false&gt;
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at app//org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
-	at app//org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
-	at app//org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
-	at app//org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)
-	at app//kr.hhplus.be.server.domain.coupon.UserCouponTest.useValidCoupon(UserCouponTest.java:46)
-	at java.base@17.0.11/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
-</pre>
-</span>
-</div>
-</div>
-<div id="tab1" class="tab">
 <h2>Tests</h2>
 <table>
 <thead>
@@ -152,32 +78,32 @@
 <tr>
 <td class="success">UserCoupon 생성 시, 사용자 ID와 Coupon 객체를 전달하여 미사용 상태로 생성한다.</td>
 <td class="success">createWithUserIdAndCoupon()</td>
-<td class="success">0.606s</td>
+<td class="success">0.289s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">쿠폰 초기화 시, 사용 상태가 false로 초기화된다.</td>
-<td class="failures">initCoupon()</td>
-<td class="failures">0.013s</td>
-<td class="failures">failed</td>
+<td class="success">쿠폰 초기화 시, 사용 상태가 false로 초기화된다.</td>
+<td class="success">initCoupon()</td>
+<td class="success">0.006s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">쿠폰 사용 시, 이미 사용된 쿠폰이면 사용에 실패한다.</td>
-<td class="failures">useAlreadyUsedCoupon()</td>
-<td class="failures">0.012s</td>
-<td class="failures">failed</td>
+<td class="success">쿠폰 사용 시, 이미 사용된 쿠폰이면 사용에 실패한다.</td>
+<td class="success">useAlreadyUsedCoupon()</td>
+<td class="success">0.012s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">쿠폰 사용 시, 만료일이 지났으면 사용에 실패한다.</td>
-<td class="failures">useExpiredCoupon()</td>
-<td class="failures">0.045s</td>
-<td class="failures">failed</td>
+<td class="success">쿠폰 사용 시, 만료일이 지났으면 사용에 실패한다.</td>
+<td class="success">useExpiredCoupon()</td>
+<td class="success">0.018s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">쿠폰 사용 시, 유효한 쿠폰이면 사용에 성공하고 사용 상태로 변경된다.</td>
-<td class="failures">useValidCoupon()</td>
-<td class="failures">0.007s</td>
-<td class="failures">failed</td>
+<td class="success">쿠폰 사용 시, 유효한 쿠폰이면 사용에 성공하고 사용 상태로 변경된다.</td>
+<td class="success">useValidCoupon()</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
 </tr>
 </table>
 </div>
@@ -189,7 +115,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.11.1</a> at 2025. 4. 11. 오전 3:45:33</p>
+<a href="http://www.gradle.org">Gradle 8.11.1</a> at 2025. 4. 11. 오전 3:47:07</p>
 </div>
 </div>
 </body>
