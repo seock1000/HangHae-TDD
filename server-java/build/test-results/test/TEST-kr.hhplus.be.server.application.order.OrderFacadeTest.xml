@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.application.order.OrderFacadeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-10T12:51:49" hostname="yeomseogcheon-ui-MacBookPro.local" time="1.307">
+<testsuite name="kr.hhplus.be.server.application.order.OrderFacadeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-10T14:56:52" hostname="yeomseogcheon-ui-MacBookPro.local" time="1.026">
   <properties/>
-  <testcase name="상품 주문 시, 재고를 차감하고 유저를 조회한 뒤 주문을 생성한다." classname="kr.hhplus.be.server.application.order.OrderFacadeTest" time="1.307"/>
+  <testcase name="상품 주문 시, 재고를 차감하고 유저를 조회한 뒤 주문을 생성한다." classname="kr.hhplus.be.server.application.order.OrderFacadeTest" time="1.026"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

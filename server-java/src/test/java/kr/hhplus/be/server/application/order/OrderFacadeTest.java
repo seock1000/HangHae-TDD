@@ -36,9 +36,9 @@ class OrderFacadeTest {
     @DisplayName("상품 주문 시, 재고를 차감하고 유저를 조회한 뒤 주문을 생성한다.")
     void testPlaceOrder() {
         // given
-        OrderCriteria criteria = new OrderCriteria(1L, List.of(
-                new OrderCriteria.OrderItemSpec(1L, 2),
-                new OrderCriteria.OrderItemSpec(2L, 3)
+        PlaceOrderCommand command = new PlaceOrderCommand(1L, List.of(
+                new PlaceOrderCommand.OrderItemSpec(1L, 2),
+                new PlaceOrderCommand.OrderItemSpec(2L, 3)
         ));
         when(productService.decreaseStock(any()))
                 .thenReturn(new Product(1L, "product", "description", 1000, 10))
@@ -47,7 +47,7 @@ class OrderFacadeTest {
         when(orderService.createOrder(any())).thenReturn(Orders.createWithIdAndUser("orderId", 1L));
 
         // when
-        OrderResult result = orderFacade.placeOrder(criteria);
+        OrderResult result = orderFacade.placeOrder(command);
 
         // then
 

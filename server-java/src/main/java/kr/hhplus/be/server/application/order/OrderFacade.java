@@ -29,20 +29,20 @@ public class OrderFacade {
      * TC
      * 주문 흐름만 테스트
      */
-    public OrderResult placeOrder(OrderCriteria criteria) {
+    public OrderResult placeOrder(PlaceOrderCommand command) {
 
         List<CreateOrderCommand.OrderItemSpec> orderItemSpecs =
-        criteria.orderItemSpecs().stream().map(orderItemSpec -> {
-            DecreaseStockCommand productCmd = new DecreaseStockCommand(orderItemSpec.productId(), orderItemSpec.quantity());
-            Product soldProduct = productService.decreaseStock(productCmd);
-            return new CreateOrderCommand.OrderItemSpec(
-                    orderItemSpec.productId(),
-                    orderItemSpec.quantity(),
-                    soldProduct.getPrice()
-            );
-        }).toList();
+                command.orderItemSpecs().stream().map(orderItemSpec -> {
+                    DecreaseStockCommand productCmd = new DecreaseStockCommand(orderItemSpec.productId(), orderItemSpec.quantity());
+                    Product soldProduct = productService.decreaseStock(productCmd);
+                    return new CreateOrderCommand.OrderItemSpec(
+                            orderItemSpec.productId(),
+                            orderItemSpec.quantity(),
+                            soldProduct.getPrice()
+                    );
+                }).toList();
 
-        GetUserCommand userCmd = new GetUserCommand(criteria.userId());
+        GetUserCommand userCmd = new GetUserCommand(command.userId());
         User user = userService.getUserById(userCmd);
 
         CreateOrderCommand orderCmd = new CreateOrderCommand(user.getId(), orderItemSpecs);
