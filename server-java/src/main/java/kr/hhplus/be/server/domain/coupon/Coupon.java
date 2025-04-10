@@ -1,5 +1,7 @@
 package kr.hhplus.be.server.domain.coupon;
 
+import kr.hhplus.be.server.domain.coupon.error.ExpiredCouponError;
+import kr.hhplus.be.server.domain.coupon.error.OutOfStockCouponError;
 import lombok.Getter;
 
 import java.math.BigDecimal;
@@ -24,6 +26,13 @@ public class Coupon {
      * 쿠폰 재고가 없으면 발급에 실패한다. => OutOfStockCouponError
      */
     public UserCoupon issueByUserId(Long userId) {
-        return null;
+        if (endDate.isBefore(LocalDateTime.now())) {
+            throw ExpiredCouponError.of("쿠폰이 만료되었습니다.");
+        }
+        if (stock <= 0) {
+            throw OutOfStockCouponError.of("쿠폰 재고가 없습니다.");
+        }
+        this.stock--;
+        return UserCoupon.createWithUserIdAndCoupon(userId, this);
     }
 }

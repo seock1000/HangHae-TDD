@@ -29,7 +29,7 @@
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">3</div>
+<div class="counter">0</div>
 <p>failures</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.253s</div>
+<div class="counter">0.185s</div>
 <p>duration</p>
 </div>
 </td>
@@ -50,8 +50,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox failures" id="successRate">
-<div class="percent">0%</div>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
 <p>successful</p>
 </div>
 </td>
@@ -61,66 +61,10 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Failed tests</a>
-</li>
-<li>
-<a href="#tab1">Tests</a>
+<a href="#tab0">Tests</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
-<h2>Failed tests</h2>
-<div class="test">
-<a name="testCouponIssueWithExpiredDate()"></a>
-<h3 class="failures">쿠폰 발급 시 만료일이 지났으면 발급에 실패하며 ExpiredCouponError를 던진다.</h3>
-<span class="code">
-<pre>org.opentest4j.AssertionFailedError: Expected kr.hhplus.be.server.domain.coupon.error.ExpiredCouponError to be thrown, but nothing was thrown.
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
-	at app//org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
-	at app//org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
-	at app//org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
-	at app//kr.hhplus.be.server.domain.coupon.CouponTest.testCouponIssueWithExpiredDate(CouponTest.java:25)
-	at java.base@17.0.11/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="testCouponIssueWithOutOfStock()"></a>
-<h3 class="failures">쿠폰 발급 시 쿠폰 재고가 없으면 발급에 실패하며 OutOfStockCouponError를 던진다.</h3>
-<span class="code">
-<pre>org.opentest4j.AssertionFailedError: Expected kr.hhplus.be.server.domain.coupon.error.OutOfStockCouponError to be thrown, but nothing was thrown.
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
-	at app//org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
-	at app//org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
-	at app//org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
-	at app//kr.hhplus.be.server.domain.coupon.CouponTest.testCouponIssueWithOutOfStock(CouponTest.java:42)
-	at java.base@17.0.11/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="testCouponIssueWithValidCoupon()"></a>
-<h3 class="failures">쿠폰 발급 시 유효한 쿠폰이면 발급에 성공한다.</h3>
-<span class="code">
-<pre>org.opentest4j.AssertionFailedError: expected: not &lt;null&gt;
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at app//org.junit.jupiter.api.AssertNotNull.failNull(AssertNotNull.java:49)
-	at app//org.junit.jupiter.api.AssertNotNull.assertNotNull(AssertNotNull.java:35)
-	at app//org.junit.jupiter.api.AssertNotNull.assertNotNull(AssertNotNull.java:30)
-	at app//org.junit.jupiter.api.Assertions.assertNotNull(Assertions.java:304)
-	at app//kr.hhplus.be.server.domain.coupon.CouponTest.testCouponIssueWithValidCoupon(CouponTest.java:63)
-	at java.base@17.0.11/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
-</pre>
-</span>
-</div>
-</div>
-<div id="tab1" class="tab">
 <h2>Tests</h2>
 <table>
 <thead>
@@ -132,22 +76,22 @@
 </tr>
 </thead>
 <tr>
-<td class="failures">쿠폰 발급 시 만료일이 지났으면 발급에 실패하며 ExpiredCouponError를 던진다.</td>
-<td class="failures">testCouponIssueWithExpiredDate()</td>
-<td class="failures">0.008s</td>
-<td class="failures">failed</td>
+<td class="success">쿠폰 발급 시 만료일이 지났으면 발급에 실패하며 ExpiredCouponError를 던진다.</td>
+<td class="success">testCouponIssueWithExpiredDate()</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">쿠폰 발급 시 쿠폰 재고가 없으면 발급에 실패하며 OutOfStockCouponError를 던진다.</td>
-<td class="failures">testCouponIssueWithOutOfStock()</td>
-<td class="failures">0.006s</td>
-<td class="failures">failed</td>
+<td class="success">쿠폰 발급 시 쿠폰 재고가 없으면 발급에 실패하며 OutOfStockCouponError를 던진다.</td>
+<td class="success">testCouponIssueWithOutOfStock()</td>
+<td class="success">0.006s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">쿠폰 발급 시 유효한 쿠폰이면 발급에 성공한다.</td>
-<td class="failures">testCouponIssueWithValidCoupon()</td>
-<td class="failures">0.239s</td>
-<td class="failures">failed</td>
+<td class="success">쿠폰 발급 시 유효한 쿠폰이면 발급에 성공한다.</td>
+<td class="success">testCouponIssueWithValidCoupon()</td>
+<td class="success">0.174s</td>
+<td class="success">passed</td>
 </tr>
 </table>
 </div>
@@ -159,7 +103,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.11.1</a> at 2025. 4. 11. 오전 3:54:29</p>
+<a href="http://www.gradle.org">Gradle 8.11.1</a> at 2025. 4. 11. 오전 3:55:32</p>
 </div>
 </div>
 </body>
