@@ -60,6 +60,7 @@ public class CouponService {
     /**
      * TC
      * 실패케이스 없음
+     * 조회는 쿼리 스트링으로 받으므로 사용자 검증 로직 제외
      */
     public List<UserCouponInfo> getUserCouponsById(Long userId) {
         return couponRepository.findUserCouponsByUserId(userId)

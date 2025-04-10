@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.hhplus.be.server.application.coupon.CouponFacadeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-10T20:22:51" hostname="yeomseogcheon-ui-MacBookPro.local" time="1.272">
+  <properties/>
+  <testcase name="유저를 검증하고 쿠폰을 발급한다." classname="kr.hhplus.be.server.application.coupon.CouponFacadeTest" time="1.272"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
