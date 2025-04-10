@@ -1,6 +1,6 @@
 package kr.hhplus.be.server.domain.order;
 
-import kr.hhplus.be.server.domain.order.command.CancelOrderCommand;
+import kr.hhplus.be.server.domain.order.command.CancelOrderHandlerCommand;
 import kr.hhplus.be.server.domain.order.command.CreateOrderCommand;
 import kr.hhplus.be.server.domain.order.error.OrderNotExistError;
 import org.junit.jupiter.api.DisplayName;
@@ -57,7 +57,7 @@ class OrderServiceTest {
     @DisplayName("주문 취소 시 유효한 CancelOrderCommand를 전달하면 주문을 취소하고 저장한다.")
     void cancelOrderTest() {
         // given
-        CancelOrderCommand command = new CancelOrderCommand("orderId");
+        CancelOrderHandlerCommand command = new CancelOrderHandlerCommand("orderId");
         Orders order = Orders.createWithIdAndUser("orderId", 1L);
         when(orderRepository.findOrderById(command.orderId())).thenReturn(Optional.of(order));
         when(orderRepository.saveOrder(any())).thenReturn(order);
@@ -74,7 +74,7 @@ class OrderServiceTest {
     @DisplayName("주문 취소 시 주문이 존재하지 않으면 OrderNotExistError 예외를 발생시킨다.")
     void cancelOrderNotExistTest() {
         // given
-        CancelOrderCommand command = new CancelOrderCommand("orderId");
+        CancelOrderHandlerCommand command = new CancelOrderHandlerCommand("orderId");
         when(orderRepository.findOrderById(command.orderId())).thenReturn(Optional.empty());
 
         // when, then

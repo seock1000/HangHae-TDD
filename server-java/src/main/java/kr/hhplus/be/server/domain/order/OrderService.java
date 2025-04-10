@@ -1,6 +1,6 @@
 package kr.hhplus.be.server.domain.order;
 
-import kr.hhplus.be.server.domain.order.command.CancelOrderCommand;
+import kr.hhplus.be.server.domain.order.command.CancelOrderHandlerCommand;
 import kr.hhplus.be.server.domain.order.command.CreateOrderCommand;
 import kr.hhplus.be.server.domain.order.error.OrderNotExistError;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +40,7 @@ public class OrderService {
      * 주문이 존재하지 않는 경우 예외를 발생시킵니다.
      * 주문 취소는 주문 도메인에서 처리합니다.
      */
-    public Orders cancelByHandler(CancelOrderCommand command) {
+    public Orders cancelByHandler(CancelOrderHandlerCommand command) {
         Orders order = orderRepository.findOrderById(command.orderId())
                 .orElseThrow(() -> OrderNotExistError.of("주문이 존재하지 않습니다."));
 
