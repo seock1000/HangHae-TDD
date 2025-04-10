@@ -33,8 +33,6 @@ public class OrderService {
         return orderRepository.saveOrderWithItems(order);
     }
 
-    //TODO 주문 facade
-
     /**
      * 주문 취소
      * 주문 취소는 주문이 존재하는지 확인한 뒤, 주문을 취소하고 저장합니다.
