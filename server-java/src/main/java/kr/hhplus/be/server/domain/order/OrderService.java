@@ -2,6 +2,7 @@ package kr.hhplus.be.server.domain.order;
 
 import kr.hhplus.be.server.domain.order.command.CancelOrderCommand;
 import kr.hhplus.be.server.domain.order.command.CreateOrderCommand;
+import kr.hhplus.be.server.domain.order.error.OrderNotExistError;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,5 +34,19 @@ public class OrderService {
     }
 
     //TODO 주문 facade
-    //TODO 주문 취소
+
+    /**
+     * 주문 취소
+     * 주문 취소는 주문이 존재하는지 확인한 뒤, 주문을 취소하고 저장합니다.
+     * TC
+     * 주문이 존재하지 않는 경우 예외를 발생시킵니다.
+     * 주문 취소는 주문 도메인에서 처리합니다.
+     */
+    public Orders cancelByHandler(CancelOrderCommand command) {
+        Orders order = orderRepository.findOrderById(command.orderId())
+                .orElseThrow(() -> OrderNotExistError.of("주문이 존재하지 않습니다."));
+
+        order.cancel();
+        return orderRepository.saveOrder(order);
+    }
 }

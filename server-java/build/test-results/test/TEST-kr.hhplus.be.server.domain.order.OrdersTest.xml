@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.domain.order.OrdersTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-10T10:15:10" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.024">
+<testsuite name="kr.hhplus.be.server.domain.order.OrdersTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2025-04-10T11:10:04" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.04">
   <properties/>
-  <testcase name="주문 객체에 confirm 메서드를 호출하면 주문상태가 CONFIRMED로 변경된다." classname="kr.hhplus.be.server.domain.order.OrdersTest" time="0.024"/>
+  <testcase name="주문 생성 시, 주문번호와 사용자 ID를 전달하면 총 주문금액은 0원, 주문상태는 PENDING으로 생성된다." classname="kr.hhplus.be.server.domain.order.OrdersTest" time="0.025"/>
+  <testcase name="주문 객체에 minusTotalAmount 메서드를 호출할 때, 총 주문금액이 부족하면 InsufficientTotalAmountError 예외가 발생한다." classname="kr.hhplus.be.server.domain.order.OrdersTest" time="0.002"/>
+  <testcase name="주문 객체에 cancel 메서드를 호출하면 주문상태가 CANCELLED로 변경된다." classname="kr.hhplus.be.server.domain.order.OrdersTest" time="0.001"/>
+  <testcase name="주문 객체에 minusTotalAmount 메서드를 호출하면 amount 만큼 총 주문금액이 감소한다." classname="kr.hhplus.be.server.domain.order.OrdersTest" time="0.001"/>
+  <testcase name="주문 객체에 cancel 메서드를 호출할 때, 주문상태가 PENDING이 아니면 CanNotCancelOrderError 예외가 발생한다." classname="kr.hhplus.be.server.domain.order.OrdersTest" time="0.001"/>
+  <testcase name="주문 객체에 confirm 메서드를 호출하면 주문상태가 CONFIRMED로 변경된다." classname="kr.hhplus.be.server.domain.order.OrdersTest" time="0.0"/>
+  <testcase name="주문 객체에 confirm 메서드를 호출할 때, 주문상태가 PENDING이 아니면 CanNotConfirmOrderError 예외가 발생한다." classname="kr.hhplus.be.server.domain.order.OrdersTest" time="0.001"/>
+  <testcase name="주문 객체에 OrderItem을 추가하면 총 OrderItem과 주문금액이 증가한다." classname="kr.hhplus.be.server.domain.order.OrdersTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

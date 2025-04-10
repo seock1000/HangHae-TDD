@@ -1,5 +1,7 @@
 package kr.hhplus.be.server.domain.order;
 
+import kr.hhplus.be.server.domain.order.error.CanNotCancelOrderError;
+import kr.hhplus.be.server.domain.order.error.CanNotConfirmOrderError;
 import kr.hhplus.be.server.domain.order.error.InsufficientTotalAmountError;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -95,6 +97,22 @@ class OrdersTest {
     }
 
     @Test
+    @DisplayName("주문 객체에 cancel 메서드를 호출할 때, 주문상태가 PENDING이 아니면 CanNotCancelOrderError 예외가 발생한다.")
+    void cancelOrderNotPendingTest() {
+        // given
+        String orderId = "orderId";
+        Long userId = 1L;
+        Orders order = Orders.createWithIdAndUser(orderId, userId);
+        order.confirm();
+
+        // when & then
+        CanNotCancelOrderError exception = assertThrows(CanNotCancelOrderError.class, () -> {
+            order.cancel();
+        });
+        assertEquals("주문을 취소할 수 없습니다.", exception.getMessage());
+    }
+
+    @Test
     @DisplayName("주문 객체에 confirm 메서드를 호출하면 주문상태가 CONFIRMED로 변경된다.")
     void confirmOrderTest() {
         // given
@@ -107,6 +125,22 @@ class OrdersTest {
 
         // then
         assertEquals(OrderStatus.CONFIRMED, order.getStatus());
+    }
+
+    @Test
+    @DisplayName("주문 객체에 confirm 메서드를 호출할 때, 주문상태가 PENDING이 아니면 CanNotConfirmOrderError 예외가 발생한다.")
+    void confirmOrderNotPendingTest() {
+        // given
+        String orderId = "orderId";
+        Long userId = 1L;
+        Orders order = Orders.createWithIdAndUser(orderId, userId);
+        order.cancel();
+
+        // when & then
+        CanNotConfirmOrderError exception = assertThrows(CanNotConfirmOrderError.class, () -> {
+            order.confirm();
+        });
+        assertEquals("주문을 확정할 수 없습니다.", exception.getMessage());
     }
 
 }
