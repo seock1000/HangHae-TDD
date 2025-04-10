@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.domain.user.UserServiceTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-04-10T11:57:03" hostname="yeomseogcheon-ui-MacBookPro.local" time="1.095">
-  <properties/>
-  <testcase name="testGetUserNotExist()" classname="kr.hhplus.be.server.domain.user.UserServiceTest" time="1.088"/>
-  <testcase name="사용자]가 존재하면 정상적으로 사용자 정보를 가져온다." classname="kr.hhplus.be.server.domain.user.UserServiceTest" time="0.005"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

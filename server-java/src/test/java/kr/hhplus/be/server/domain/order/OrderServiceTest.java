@@ -45,7 +45,7 @@ class OrderServiceTest {
         when(orderRepository.saveOrderWithItems(any())).thenReturn(Orders.createWithIdAndUser("orderId", 1L));
 
         // when
-        Orders order = orderService.placeOrder(command);
+        Orders order = orderService.createOrder(command);
 
         // then
         assertNotNull(order);
