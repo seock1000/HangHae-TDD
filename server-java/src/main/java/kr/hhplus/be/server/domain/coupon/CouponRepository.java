@@ -4,6 +4,7 @@ import java.util.Optional;
 
 public interface CouponRepository {
     Optional<Coupon> findCouponById(long couponId);
+    Optional<UserCoupon> findUserCouponById(long userCouponId);
 
     boolean existsUserCouponByUserIdAndCoupon(long userId, Coupon coupon);
 

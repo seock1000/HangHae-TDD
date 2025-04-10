@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.domain.coupon.CouponServiceTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-04-10T19:50:55" hostname="yeomseogcheon-ui-MacBookPro.local" time="1.562">
+<testsuite name="kr.hhplus.be.server.domain.coupon.CouponServiceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2025-04-10T20:01:22" hostname="yeomseogcheon-ui-MacBookPro.local" time="1.298">
   <properties/>
-  <testcase name="쿠폰 발급 시, 쿠폰이 존재하지 않으면 CouponNotExistsError 예외가 발생한다." classname="kr.hhplus.be.server.domain.coupon.CouponServiceTest" time="1.269"/>
-  <testcase name="쿠폰 발급 시, 유효한 요청이면 정상적으로 쿠폰이 발급된다." classname="kr.hhplus.be.server.domain.coupon.CouponServiceTest" time="0.284"/>
-  <testcase name="쿠폰 발급 시, 이미 발급받은 쿠폰이면 AlreadyIssuedCouponError 예외가 발생한다." classname="kr.hhplus.be.server.domain.coupon.CouponServiceTest" time="0.006"/>
+  <testcase name="쿠폰 발급 시, 쿠폰이 존재하지 않으면 CouponNotExistsError 예외가 발생한다." classname="kr.hhplus.be.server.domain.coupon.CouponServiceTest" time="0.972"/>
+  <testcase name="사용자 쿠폰 사용 시, 쿠폰이 존재하면 사용한다." classname="kr.hhplus.be.server.domain.coupon.CouponServiceTest" time="0.284"/>
+  <testcase name="쿠폰 발급 시, 유효한 요청이면 정상적으로 쿠폰이 발급된다." classname="kr.hhplus.be.server.domain.coupon.CouponServiceTest" time="0.018"/>
+  <testcase name="쿠폰 발급 시, 이미 발급받은 쿠폰이면 AlreadyIssuedCouponError 예외가 발생한다." classname="kr.hhplus.be.server.domain.coupon.CouponServiceTest" time="0.007"/>
+  <testcase name="사용자 쿠폰 사용 시, 쿠폰이 존재하지 않으면 CouponNotExistsError 예외가 발생한다." classname="kr.hhplus.be.server.domain.coupon.CouponServiceTest" time="0.01"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
