@@ -36,7 +36,10 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 
 	// Lombok
-	implementation("org.projectlombok:lombok")
+	compileOnly("org.projectlombok:lombok")
+	annotationProcessor("org.projectlombok:lombok")
+	testCompileOnly("org.projectlombok:lombok")
+	testAnnotationProcessor("org.projectlombok:lombok")
 
 	// Springdoc Swagger
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
@@ -50,6 +53,9 @@ dependencies {
 	testImplementation("org.testcontainers:junit-jupiter")
 	testImplementation("org.testcontainers:mysql")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+	// Instancio
+	testImplementation("org.instancio:instancio-junit:5.4.0")
 }
 
 tasks.withType<Test> {
