@@ -53,7 +53,7 @@ public class OrderFacade {
     }
 
     /**
-     * 미결제 주문 취소 Facade
+     * 미결제 주문 취소 Facade - scheduler 등에 의해 호출
      * TC
      * 주문 취소 흐름만 테스트 - mock
      */
