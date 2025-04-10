@@ -15,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import static org.instancio.Select.field;
@@ -149,4 +150,22 @@ class CouponServiceTest {
         verify(couponRepository).saveUserCoupon(any());
     }
 
+    @Test
+    @DisplayName("사용자 쿠폰 조회 시, 사용자 ID로 쿠폰 목록을 조회한다.")
+    void testGetUserCouponsById() {
+        // given
+        long userId = 1L;
+        UserCoupon userCoupon1 = Instancio.create(UserCoupon.class);
+        UserCoupon userCoupon2 = Instancio.create(UserCoupon.class);
+
+        when(couponRepository.findUserCouponsByUserId(userId))
+                .thenReturn(List.of(userCoupon1, userCoupon2));
+
+        // when
+        List<UserCouponInfo> userCoupons = couponService.getUserCouponsById(userId);
+
+        // then
+        assertEquals(2, userCoupons.size());
+        verify(couponRepository).findUserCouponsByUserId(userId);
+    }
 }

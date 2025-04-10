@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.domain.coupon.CouponServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-10T20:05:53" hostname="yeomseogcheon-ui-MacBookPro.local" time="1.265">
+<testsuite name="kr.hhplus.be.server.domain.coupon.CouponServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-10T20:11:00" hostname="yeomseogcheon-ui-MacBookPro.local" time="1.239">
   <properties/>
-  <testcase name="쿠폰 사용 취소 시, 쿠폰이 존재하면 사용 취소한다." classname="kr.hhplus.be.server.domain.coupon.CouponServiceTest" time="1.265"/>
+  <testcase name="사용자 쿠폰 조회 시, 사용자 ID로 쿠폰 목록을 조회한다." classname="kr.hhplus.be.server.domain.coupon.CouponServiceTest" time="1.239"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

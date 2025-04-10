@@ -57,7 +57,14 @@ public class CouponService {
         return couponRepository.saveUserCoupon(userCoupon);
     }
 
+    /**
+     * TC
+     * 실패케이스 없음
+     */
     public List<UserCouponInfo> getUserCouponsById(Long userId) {
-        return null;
+        return couponRepository.findUserCouponsByUserId(userId)
+                .stream()
+                .map(UserCouponInfo::of)
+                .toList();
     }
 }
