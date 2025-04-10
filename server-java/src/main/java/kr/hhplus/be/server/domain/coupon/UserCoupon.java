@@ -12,6 +12,7 @@ public class UserCoupon {
     private Long userId;
     private Coupon coupon;
     private boolean isUsed;
+    private int discountedAmount;
     private LocalDateTime issuedAt;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -33,12 +34,17 @@ public class UserCoupon {
      * 이미 사용된 쿠폰이면 사용에 실패한다. => AlreadyUsedCouponError
      * 만료일이 지났으면 사용에 실패한다. => ExpiredCouponError
      */
-    public void use() {
+    public void use(int amount) {
         if (isUsed) {
             throw AlreadyUsedCouponError.of("이미 사용된 쿠폰입니다.");
         }
         if (coupon.getEndDate().isBefore(LocalDateTime.now())) {
             throw ExpiredCouponError.of("쿠폰이 만료되었습니다.");
+        }
+
+        switch (coupon.getDiscountType()) {
+            case AMOUNT -> this.discountedAmount = coupon.getDiscountValue().intValue();
+            case RATE -> this.discountedAmount = (int) (amount * coupon.getDiscountValue().doubleValue() / 100);
         }
         this.isUsed = true;
     }

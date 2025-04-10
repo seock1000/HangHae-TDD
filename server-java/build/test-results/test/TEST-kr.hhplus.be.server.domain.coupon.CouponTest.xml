@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.domain.coupon.CouponTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-04-10T18:55:32" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.187">
-  <properties/>
-  <testcase name="쿠폰 발급 시 유효한 쿠폰이면 발급에 성공한다." classname="kr.hhplus.be.server.domain.coupon.CouponTest" time="0.174"/>
-  <testcase name="쿠폰 발급 시 만료일이 지났으면 발급에 실패하며 ExpiredCouponError를 던진다." classname="kr.hhplus.be.server.domain.coupon.CouponTest" time="0.005"/>
-  <testcase name="쿠폰 발급 시 쿠폰 재고가 없으면 발급에 실패하며 OutOfStockCouponError를 던진다." classname="kr.hhplus.be.server.domain.coupon.CouponTest" time="0.006"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
