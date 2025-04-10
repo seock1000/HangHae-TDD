@@ -46,8 +46,15 @@ public class CouponService {
         return couponRepository.saveUserCoupon(userCoupon);
     }
 
+    /**
+     * TC
+     * 쿠폰이 존재하지 않으면 실패한다. => CouponNotExistError
+     */
     public UserCoupon cancel(CancelCouponCommand command) {
-        return null;
+        UserCoupon userCoupon = couponRepository.findUserCouponById(command.userCouponId())
+                .orElseThrow(() -> CouponNotExistError.of("쿠폰이 존재하지 않습니다."));
+        userCoupon.init();
+        return couponRepository.saveUserCoupon(userCoupon);
     }
 
     public List<UserCouponInfo> getUserCouponsById(Long userId) {

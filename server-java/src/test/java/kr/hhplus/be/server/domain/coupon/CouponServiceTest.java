@@ -1,5 +1,6 @@
 package kr.hhplus.be.server.domain.coupon;
 
+import kr.hhplus.be.server.domain.coupon.command.CancelCouponCommand;
 import kr.hhplus.be.server.domain.coupon.command.IssueCouponCommand;
 import kr.hhplus.be.server.domain.coupon.command.UseCouponCommand;
 import kr.hhplus.be.server.domain.coupon.error.AlreadyIssuedCouponError;
@@ -112,6 +113,36 @@ class CouponServiceTest {
 
         // when
         UserCoupon usedUserCoupon = couponService.use(command);
+
+        // then
+        verify(couponRepository).findUserCouponById(command.userCouponId());
+        verify(couponRepository).saveUserCoupon(any());
+    }
+
+    @Test
+    @DisplayName("쿠폰 사용 취소 시, 쿠폰이 존재하지 않으면 CouponNotExistsError 예외가 발생한다.")
+    void testCancelCouponNotExistsError() {
+        // given
+        long userCouponId = 1L;
+        when(couponRepository.findUserCouponById(userCouponId))
+                .thenReturn(Optional.empty());
+
+        // when & then
+        assertThrows(CouponNotExistError.class, () -> couponService.cancel(new CancelCouponCommand(userCouponId)));
+    }
+
+    @Test
+    @DisplayName("쿠폰 사용 취소 시, 쿠폰이 존재하면 사용 취소한다.")
+    void testCancelValidCoupon() {
+        // given
+        CancelCouponCommand command = new CancelCouponCommand(1L);
+        UserCoupon userCoupon = Instancio.create(UserCoupon.class);
+
+        when(couponRepository.findUserCouponById(anyLong()))
+                .thenReturn(Optional.of(userCoupon));
+
+        // when
+        couponService.cancel(command);
 
         // then
         verify(couponRepository).findUserCouponById(command.userCouponId());
