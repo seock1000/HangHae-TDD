@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.hhplus.be.server.domain.order.OrdersTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-10T10:15:10" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.024">
+  <properties/>
+  <testcase name="주문 객체에 confirm 메서드를 호출하면 주문상태가 CONFIRMED로 변경된다." classname="kr.hhplus.be.server.domain.order.OrdersTest" time="0.024"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

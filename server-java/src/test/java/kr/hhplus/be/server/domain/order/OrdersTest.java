@@ -26,18 +26,21 @@ class OrdersTest {
     }
 
     @Test
-    @DisplayName("주문 객체에 plusTotalAmount 메서드를 호출하면 amount 만큼 총 주문금액이 증가한다.")
+    @DisplayName("주문 객체에 OrderItem을 추가하면 총 OrderItem과 주문금액이 증가한다.")
     void plusTotalAmountTest() {
         // given
         String orderId = "orderId";
         Long userId = 1L;
         Orders order = Orders.createWithIdAndUser(orderId, userId);
+        OrderItem orderItem = OrderItem.create(orderId, 1L, 1000, 2);
+        int expectedTotalAmount = 2000;
 
         // when
-        order.plusTotalAmount(1000);
+        order.addOrderItem(orderItem);
 
         // then
-        assertEquals(1000, order.getTotalAmount());
+        assertEquals(1, order.getOrderItems().size());
+        assertEquals(expectedTotalAmount, order.getTotalAmount());
     }
 
     @Test
@@ -47,13 +50,15 @@ class OrdersTest {
         String orderId = "orderId";
         Long userId = 1L;
         Orders order = Orders.createWithIdAndUser(orderId, userId);
-        order.plusTotalAmount(1000);
+        OrderItem orderItem = OrderItem.create(orderId, 1L, 1000, 1);
+        order.addOrderItem(orderItem);
+        int expectedTotalAmount = 0;
 
         // when
         order.minusTotalAmount(1000);
 
         // then
-        assertEquals(0, order.getTotalAmount());
+        assertEquals(expectedTotalAmount, order.getTotalAmount());
     }
 
     @Test
@@ -63,7 +68,8 @@ class OrdersTest {
         String orderId = "orderId";
         Long userId = 1L;
         Orders order = Orders.createWithIdAndUser(orderId, userId);
-        order.plusTotalAmount(1000);
+        OrderItem orderItem = OrderItem.create(orderId, 1L, 1000, 1);
+        order.addOrderItem(orderItem);
 
         // when & then
         InsufficientTotalAmountError exception = assertThrows(InsufficientTotalAmountError.class, () -> {
@@ -71,6 +77,36 @@ class OrdersTest {
         });
 
         assertEquals("총 주문금액은 0원 이상이어야 합니다.", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("주문 객체에 cancel 메서드를 호출하면 주문상태가 CANCELLED로 변경된다.")
+    void cancelOrderTest() {
+        // given
+        String orderId = "orderId";
+        Long userId = 1L;
+        Orders order = Orders.createWithIdAndUser(orderId, userId);
+
+        // when
+        order.cancel();
+
+        // then
+        assertEquals(OrderStatus.CANCELLED, order.getStatus());
+    }
+
+    @Test
+    @DisplayName("주문 객체에 confirm 메서드를 호출하면 주문상태가 CONFIRMED로 변경된다.")
+    void confirmOrderTest() {
+        // given
+        String orderId = "orderId";
+        Long userId = 1L;
+        Orders order = Orders.createWithIdAndUser(orderId, userId);
+
+        // when
+        order.confirm();
+
+        // then
+        assertEquals(OrderStatus.CONFIRMED, order.getStatus());
     }
 
 }
