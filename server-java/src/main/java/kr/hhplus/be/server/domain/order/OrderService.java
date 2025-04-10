@@ -21,7 +21,7 @@ public class OrderService {
      * TC
      * 예외 케이스는 command와 domain model에서 검증
      */
-    public Orders createOrder(CreateOrderCommand command) {
+    public Orders placeOrder(CreateOrderCommand command) {
         Orders order = Orders.createWithIdAndUser(orderIdGenerator.gen(), command.userId());
         command.orderItemSpecs().forEach(orderItemSpec ->
             order.addOrderItem(
