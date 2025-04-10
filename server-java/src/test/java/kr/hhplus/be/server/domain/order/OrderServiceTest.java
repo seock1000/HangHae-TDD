@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -58,7 +59,7 @@ class OrderServiceTest {
         // given
         CancelOrderCommand command = new CancelOrderCommand("orderId");
         Orders order = Orders.createWithIdAndUser("orderId", 1L);
-        when(orderRepository.findOrderById(command.orderId())).thenReturn(java.util.Optional.of(order));
+        when(orderRepository.findOrderById(command.orderId())).thenReturn(Optional.of(order));
         when(orderRepository.saveOrder(any())).thenReturn(order);
 
         // when
@@ -74,10 +75,39 @@ class OrderServiceTest {
     void cancelOrderNotExistTest() {
         // given
         CancelOrderCommand command = new CancelOrderCommand("orderId");
-        when(orderRepository.findOrderById(command.orderId())).thenReturn(java.util.Optional.empty());
+        when(orderRepository.findOrderById(command.orderId())).thenReturn(Optional.empty());
 
         // when, then
         assertThrows(OrderNotExistError.class, () -> orderService.cancelByHandler(command));
+        verify(orderRepository, times(0)).saveOrder(any());
+    }
+
+    @Test
+    @DisplayName("주문 확정 시 유효한 주문 ID를 전달하면 주문을 확정하고 저장한다.")
+    void confirmOrderTest() {
+        // given
+        String orderId = "orderId";
+        Orders order = Orders.createWithIdAndUser(orderId, 1L);
+        when(orderRepository.findOrderById(orderId)).thenReturn(Optional.of(order));
+        when(orderRepository.saveOrder(any())).thenReturn(order);
+
+        // when
+        Orders confirmedOrder = orderService.confirmOrder(orderId);
+
+        // then
+        assertNotNull(confirmedOrder);
+        verify(orderRepository, times(1)).saveOrder(any());
+    }
+
+    @Test
+    @DisplayName("주문 확정 시 주문이 존재하지 않으면 OrderNotExistError 예외를 발생시킨다.")
+    void confirmOrderNotExistTest() {
+        // given
+        String orderId = "orderId";
+        when(orderRepository.findOrderById(orderId)).thenReturn(Optional.empty());
+
+        // when, then
+        assertThrows(OrderNotExistError.class, () -> orderService.confirmOrder(orderId));
         verify(orderRepository, times(0)).saveOrder(any());
     }
 

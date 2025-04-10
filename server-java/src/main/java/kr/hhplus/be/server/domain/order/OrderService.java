@@ -47,4 +47,18 @@ public class OrderService {
         order.cancel();
         return orderRepository.saveOrder(order);
     }
+
+    /**
+     * 주문 확정
+     * 주문 확정은 주문이 존재하는지 확인한 뒤, 주문을 확정하고 저장합니다.
+     * TC
+     * 주문이 존재하지 않는 경우 예외를 발생시킵니다.
+     */
+    public Orders confirmOrder(String orderId) {
+        Orders order = orderRepository.findOrderById(orderId)
+                .orElseThrow(() -> OrderNotExistError.of("주문이 존재하지 않습니다."));
+
+        order.confirm();
+        return orderRepository.saveOrder(order);
+    }
 }

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.domain.order.OrderServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-10T11:16:01" hostname="yeomseogcheon-ui-MacBookPro.local" time="1.076">
+<testsuite name="kr.hhplus.be.server.domain.order.OrderServiceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2025-04-10T11:43:57" hostname="yeomseogcheon-ui-MacBookPro.local" time="1.273">
   <properties/>
-  <testcase name="주문 취소 시 주문이 존재하지 않으면 OrderNotExistError 예외를 발생시킨다." classname="kr.hhplus.be.server.domain.order.OrderServiceTest" time="1.076"/>
+  <testcase name="주문 생성 시 유효한 CreateOrderCommand를 전달하면 주문과 주문 아이템을 생성하고 저장, 미결제시 주문 취소를 하는 handler에 등록한다." classname="kr.hhplus.be.server.domain.order.OrderServiceTest" time="1.224"/>
+  <testcase name="주문 취소 시 유효한 CancelOrderCommand를 전달하면 주문을 취소하고 저장한다." classname="kr.hhplus.be.server.domain.order.OrderServiceTest" time="0.009"/>
+  <testcase name="주문 확정 시 유효한 주문 ID를 전달하면 주문을 확정하고 저장한다." classname="kr.hhplus.be.server.domain.order.OrderServiceTest" time="0.008"/>
+  <testcase name="주문 취소 시 주문이 존재하지 않으면 OrderNotExistError 예외를 발생시킨다." classname="kr.hhplus.be.server.domain.order.OrderServiceTest" time="0.014"/>
+  <testcase name="주문 확정 시 주문이 존재하지 않으면 OrderNotExistError 예외를 발생시킨다." classname="kr.hhplus.be.server.domain.order.OrderServiceTest" time="0.01"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
