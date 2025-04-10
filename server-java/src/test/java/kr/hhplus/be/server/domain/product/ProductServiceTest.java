@@ -2,7 +2,7 @@ package kr.hhplus.be.server.domain.product;
 
 import kr.hhplus.be.server.domain.product.command.DecreaseStockCommand;
 import kr.hhplus.be.server.domain.product.command.IncreaseStockCommand;
-import kr.hhplus.be.server.domain.product.error.ProductNotExist;
+import kr.hhplus.be.server.domain.product.error.ProductNotExistError;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -77,7 +77,7 @@ class ProductServiceTest {
         when(productRepository.findById(productId)).thenReturn(Optional.empty());
 
         // when, then
-        Exception exception = assertThrows(ProductNotExist.class, () -> {
+        Exception exception = assertThrows(ProductNotExistError.class, () -> {
             productService.decreaseStock(command);
         });
         assertEquals("존재하지 않는 상품입니다.", exception.getMessage());
@@ -116,7 +116,7 @@ class ProductServiceTest {
         when(productRepository.findById(productId)).thenReturn(Optional.empty());
 
         // when, then
-        Exception exception = assertThrows(ProductNotExist.class, () -> {
+        Exception exception = assertThrows(ProductNotExistError.class, () -> {
             productService.increaseStock(command);
         });
         assertEquals("존재하지 않는 상품입니다.", exception.getMessage());

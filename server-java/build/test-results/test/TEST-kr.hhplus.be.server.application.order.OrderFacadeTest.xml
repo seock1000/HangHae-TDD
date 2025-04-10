@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.hhplus.be.server.application.order.OrderFacadeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-10T15:38:02" hostname="yeomseogcheon-ui-MacBookPro.local" time="1.373">
+  <properties/>
+  <testcase name="주문 취소 시, 주문을 취소하고 가점유했던만큼 상품의 재고를 증가시킨다." classname="kr.hhplus.be.server.application.order.OrderFacadeTest" time="1.373"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

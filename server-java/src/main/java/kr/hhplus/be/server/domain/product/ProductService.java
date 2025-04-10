@@ -2,7 +2,7 @@ package kr.hhplus.be.server.domain.product;
 
 import kr.hhplus.be.server.domain.product.command.DecreaseStockCommand;
 import kr.hhplus.be.server.domain.product.command.IncreaseStockCommand;
-import kr.hhplus.be.server.domain.product.error.ProductNotExist;
+import kr.hhplus.be.server.domain.product.error.ProductNotExistError;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +32,7 @@ public class ProductService {
      */
     public Product decreaseStock(DecreaseStockCommand command) {
         Product product = productRepository.findById(command.productId())
-                .orElseThrow(() -> ProductNotExist.of("존재하지 않는 상품입니다."));
+                .orElseThrow(() -> ProductNotExistError.of("존재하지 않는 상품입니다."));
 
         product.decreaseStock(command.amount());
         return productRepository.save(product);
@@ -46,7 +46,7 @@ public class ProductService {
      */
     public Product increaseStock(IncreaseStockCommand command) {
         Product product = productRepository.findById(command.productId())
-                .orElseThrow(() -> ProductNotExist.of("존재하지 않는 상품입니다."));
+                .orElseThrow(() -> ProductNotExistError.of("존재하지 않는 상품입니다."));
 
         product.increaseStock(command.amount());
         return productRepository.save(product);

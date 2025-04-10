@@ -7,6 +7,7 @@ import kr.hhplus.be.server.domain.order.command.CreateOrderCommand;
 import kr.hhplus.be.server.domain.product.Product;
 import kr.hhplus.be.server.domain.product.ProductService;
 import kr.hhplus.be.server.domain.product.command.DecreaseStockCommand;
+import kr.hhplus.be.server.domain.product.command.IncreaseStockCommand;
 import kr.hhplus.be.server.domain.user.GetUserCommand;
 import kr.hhplus.be.server.domain.user.User;
 import kr.hhplus.be.server.domain.user.UserService;
@@ -30,7 +31,7 @@ public class OrderFacade {
      * TC
      * 주문 흐름만 테스트 - mock
      */
-    public OrderResult placeOrder(PlaceOrderCommand command) {
+    public PlaceOrderResult placeOrder(PlaceOrderCommand command) {
 
         List<CreateOrderCommand.OrderItemSpec> orderItemSpecs =
                 command.orderItemSpecs().stream().map(spec -> {
@@ -48,7 +49,7 @@ public class OrderFacade {
         // 주문 생성
         CreateOrderCommand orderCmd = new CreateOrderCommand(user.getId(), orderItemSpecs);
         Orders order = orderService.createOrder(orderCmd);
-        return OrderResult.of(order);
+        return PlaceOrderResult.of(order);
     }
 
     /**
@@ -57,6 +58,11 @@ public class OrderFacade {
      * 주문 취소 흐름만 테스트 - mock
      */
     public void cancelOrderByHandler(CancelOrderHandlerCommand command) {
-        orderService.cancelByHandler(command);
+        // 주문 취소
+        Orders order = orderService.cancelByHandler(command);
+        // 주문 취소 시 재고 증가
+        order.getOrderItems().forEach(item ->
+                productService.increaseStock(new IncreaseStockCommand(item.getProductId(), item.getQuantity()))
+        );
     }
 }
