@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.hhplus.be.server.domain.coupon.CouponTest" tests="3" skipped="0" failures="1" errors="0" timestamp="2025-04-12T07:29:34" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.037">
+  <properties/>
+  <testcase name="쿠폰 발급 시 유효한 쿠폰이면 발급에 성공한다." classname="kr.hhplus.be.server.domain.coupon.CouponTest" time="0.008"/>
+  <testcase name="쿠폰 발급 시 만료일이 지났으면 발급에 실패하며 ExpiredCouponError를 던진다." classname="kr.hhplus.be.server.domain.coupon.CouponTest" time="0.005"/>
+  <testcase name="쿠폰 발급 시 쿠폰 재고가 없으면 발급에 실패하며 OutOfStockCouponError를 던진다." classname="kr.hhplus.be.server.domain.coupon.CouponTest" time="0.022">
+    <failure message="org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: &lt;kr.hhplus.be.server.domain.coupon.error.OutOfStockCouponError&gt; but was: &lt;kr.hhplus.be.server.domain.coupon.error.ExpiredCouponError&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: &lt;kr.hhplus.be.server.domain.coupon.error.OutOfStockCouponError&gt; but was: &lt;kr.hhplus.be.server.domain.coupon.error.ExpiredCouponError&gt;
+	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at app//org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+	at app//org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at app//org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+	at app//kr.hhplus.be.server.domain.coupon.CouponTest.testCouponIssueWithOutOfStock(CouponTest.java:42)
+	at java.base@17.0.11/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: kr.hhplus.be.server.domain.coupon.error.ExpiredCouponError: 쿠폰이 만료되었습니다.
+	at app//kr.hhplus.be.server.domain.coupon.error.ExpiredCouponError.of(ExpiredCouponError.java:5)
+	at app//kr.hhplus.be.server.domain.coupon.Coupon.issueByUserId(Coupon.java:30)
+	at app//kr.hhplus.be.server.domain.coupon.CouponTest.lambda$testCouponIssueWithOutOfStock$1(CouponTest.java:43)
+	at app//org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	... 6 more
+</failure>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

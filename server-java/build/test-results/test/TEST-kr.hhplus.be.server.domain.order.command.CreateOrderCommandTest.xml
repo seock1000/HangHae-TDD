@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.hhplus.be.server.domain.order.command.CreateOrderCommandTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2025-04-12T07:29:34" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.026">
+  <properties/>
+  <testcase name="OrderItemSpec 객체를 생성할 때, 0보다 큰 상품 ID, 가격, 수량을 전달하면 상품 ID, 가격, 수량을 가진 주문 아이템 DTO가 생성된다." classname="kr.hhplus.be.server.domain.order.command.CreateOrderCommandTest" time="0.001"/>
+  <testcase name="OrderItemSpec 객체를 생성할 때, 상품 ID가 0보다 작거나 같으면 InvalidProductError 예외가 발생한다." classname="kr.hhplus.be.server.domain.order.command.CreateOrderCommandTest" time="0.004"/>
+  <testcase name="CreateOrderCommand 객체를 생성할 때, 주문 항목이 null이거나 비어있으면 InvalidOrderItemError 예외가 발생한다." classname="kr.hhplus.be.server.domain.order.command.CreateOrderCommandTest" time="0.001"/>
+  <testcase name="OrderItemSpec 객체를 생성할 때, 가격이 0보다 작거나 같으면 InvalidPriceError 예외가 발생한다." classname="kr.hhplus.be.server.domain.order.command.CreateOrderCommandTest" time="0.002"/>
+  <testcase name="CreateOrderCommand 객체를 생성할 때, 사용자 ID가 0보다 작거나 같으면 InvalidUserError 예외가 발생한다." classname="kr.hhplus.be.server.domain.order.command.CreateOrderCommandTest" time="0.004"/>
+  <testcase name="OrderItemSpec 객체를 생성할 때, 수량이 0보다 작거나 같으면 InvalidQuantityError 예외가 발생한다." classname="kr.hhplus.be.server.domain.order.command.CreateOrderCommandTest" time="0.002"/>
+  <testcase name="CreateOrderCommand 객체를 생성할 때, 사용자 ID와 주문 항목을 전달하면 CreateOrderCommand 객체가 생성된다." classname="kr.hhplus.be.server.domain.order.command.CreateOrderCommandTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

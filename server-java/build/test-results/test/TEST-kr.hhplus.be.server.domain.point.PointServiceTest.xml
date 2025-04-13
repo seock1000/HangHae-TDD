@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.hhplus.be.server.domain.point.PointServiceTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2025-04-12T07:29:34" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.149">
+  <properties/>
+  <testcase name="포인트 조회 시, 유저 ID에 대한 포인트 정보가 존재하면 포인트 정보를 반환한다." classname="kr.hhplus.be.server.domain.point.PointServiceTest" time="0.12"/>
+  <testcase name="포인트 조회 시, 유저 ID에 대한 포인트 정보가 존재하지 않으면 Optional.empty()를 반환한다." classname="kr.hhplus.be.server.domain.point.PointServiceTest" time="0.003"/>
+  <testcase name="포인트 사용 시, 포인트 정보가 존재하지 않으면 PointNotExistError를 발생시킨다." classname="kr.hhplus.be.server.domain.point.PointServiceTest" time="0.007"/>
+  <testcase name="포인트 충전 시, 포인트를 충전하고 포인트와 충전이력을 저장한다." classname="kr.hhplus.be.server.domain.point.PointServiceTest" time="0.006"/>
+  <testcase name="포인트 사용 시, 포인트를 사용하고 포인트와 사용이력을 저장한다." classname="kr.hhplus.be.server.domain.point.PointServiceTest" time="0.004"/>
+  <testcase name="포인트 충전 시, 포인트 정보가 존재하지 않으면 PointNotExistError를 발생시킨다." classname="kr.hhplus.be.server.domain.point.PointServiceTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -20,13 +20,13 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">1</div>
+<div class="counter">103</div>
 <p>tests</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">0</div>
+<div class="counter">3</div>
 <p>failures</p>
 </div>
 </td>
@@ -38,7 +38,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">1.272s</div>
+<div class="counter">3.147s</div>
 <p>duration</p>
 </div>
 </td>
@@ -47,8 +47,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox success" id="successRate">
-<div class="percent">100%</div>
+<div class="infoBox failures" id="successRate">
+<div class="percent">97%</div>
 <p>successful</p>
 </div>
 </td>
@@ -58,13 +58,33 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Packages</a>
+<a href="#tab0">Failed tests</a>
 </li>
 <li>
-<a href="#tab1">Classes</a>
+<a href="#tab1">Packages</a>
+</li>
+<li>
+<a href="#tab2">Classes</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
+<h2>Failed tests</h2>
+<ul class="linkList">
+<li>
+<a href="classes/kr.hhplus.be.server.ServerApplicationTests.html">ServerApplicationTests</a>.
+<a href="classes/kr.hhplus.be.server.ServerApplicationTests.html#contextLoads()">contextLoads()</a>
+</li>
+<li>
+<a href="classes/kr.hhplus.be.server.domain.coupon.CouponTest.html">CouponTest</a>.
+<a href="classes/kr.hhplus.be.server.domain.coupon.CouponTest.html#testCouponIssueWithOutOfStock()">쿠폰 발급 시 쿠폰 재고가 없으면 발급에 실패하며 OutOfStockCouponError를 던진다.</a>
+</li>
+<li>
+<a href="classes/kr.hhplus.be.server.domain.order.OrderServiceTest.html">OrderServiceTest</a>.
+<a href="classes/kr.hhplus.be.server.domain.order.OrderServiceTest.html#createOrderTest()">주문 생성 시 유효한 CreateOrderCommand를 전달하면 주문과 주문 아이템을 생성하고 저장, 미결제시 주문 취소를 하는 handler에 등록한다.</a>
+</li>
+</ul>
+</div>
+<div id="tab1" class="tab">
 <h2>Packages</h2>
 <table>
 <thead>
@@ -79,19 +99,139 @@
 </thead>
 <tbody>
 <tr>
+<td class="failures">
+<a href="packages/kr.hhplus.be.server.html">kr.hhplus.be.server</a>
+</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0.024s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
 <td class="success">
 <a href="packages/kr.hhplus.be.server.application.coupon.html">kr.hhplus.be.server.application.coupon</a>
 </td>
 <td>1</td>
 <td>0</td>
 <td>0</td>
-<td>1.272s</td>
+<td>1.846s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="packages/kr.hhplus.be.server.application.order.html">kr.hhplus.be.server.application.order</a>
+</td>
+<td>8</td>
+<td>0</td>
+<td>0</td>
+<td>0.193s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="packages/kr.hhplus.be.server.application.payment.html">kr.hhplus.be.server.application.payment</a>
+</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td>0.291s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="packages/kr.hhplus.be.server.domain.coupon.html">kr.hhplus.be.server.domain.coupon</a>
+</td>
+<td>17</td>
+<td>1</td>
+<td>0</td>
+<td>0.228s</td>
+<td class="failures">94%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="packages/kr.hhplus.be.server.domain.coupon.command.html">kr.hhplus.be.server.domain.coupon.command</a>
+</td>
+<td>8</td>
+<td>0</td>
+<td>0</td>
+<td>0.018s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="packages/kr.hhplus.be.server.domain.order.html">kr.hhplus.be.server.domain.order</a>
+</td>
+<td>14</td>
+<td>1</td>
+<td>0</td>
+<td>0.208s</td>
+<td class="failures">92%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="packages/kr.hhplus.be.server.domain.order.command.html">kr.hhplus.be.server.domain.order.command</a>
+</td>
+<td>10</td>
+<td>0</td>
+<td>0</td>
+<td>0.027s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="packages/kr.hhplus.be.server.domain.point.html">kr.hhplus.be.server.domain.point</a>
+</td>
+<td>13</td>
+<td>0</td>
+<td>0</td>
+<td>0.160s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="packages/kr.hhplus.be.server.domain.point.command.html">kr.hhplus.be.server.domain.point.command</a>
+</td>
+<td>8</td>
+<td>0</td>
+<td>0</td>
+<td>0.012s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="packages/kr.hhplus.be.server.domain.product.html">kr.hhplus.be.server.domain.product</a>
+</td>
+<td>8</td>
+<td>0</td>
+<td>0</td>
+<td>0.076s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="packages/kr.hhplus.be.server.domain.product.command.html">kr.hhplus.be.server.domain.product.command</a>
+</td>
+<td>6</td>
+<td>0</td>
+<td>0</td>
+<td>0.009s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="packages/kr.hhplus.be.server.domain.user.html">kr.hhplus.be.server.domain.user</a>
+</td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>0.055s</td>
 <td class="success">100%</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="tab1" class="tab">
+<div id="tab2" class="tab">
 <h2>Classes</h2>
 <table>
 <thead>
@@ -106,13 +246,293 @@
 </thead>
 <tbody>
 <tr>
+<td class="failures">
+<a href="classes/kr.hhplus.be.server.ServerApplicationTests.html">kr.hhplus.be.server.ServerApplicationTests</a>
+</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0.024s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
 <td class="success">
 <a href="classes/kr.hhplus.be.server.application.coupon.CouponFacadeTest.html">kr.hhplus.be.server.application.coupon.CouponFacadeTest</a>
 </td>
 <td>1</td>
 <td>0</td>
 <td>0</td>
-<td>1.272s</td>
+<td>1.846s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.application.order.OrderFacadeTest.html">kr.hhplus.be.server.application.order.OrderFacadeTest</a>
+</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0.143s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.application.order.PlaceOrderCommandTest.html">kr.hhplus.be.server.application.order.PlaceOrderCommandTest</a>
+</td>
+<td>6</td>
+<td>0</td>
+<td>0</td>
+<td>0.050s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.application.payment.PayCommandTest.html">kr.hhplus.be.server.application.payment.PayCommandTest</a>
+</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0.014s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.application.payment.PaymentFacadeTest.html">kr.hhplus.be.server.application.payment.PaymentFacadeTest</a>
+</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0.277s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.domain.coupon.CouponServiceTest.html">kr.hhplus.be.server.domain.coupon.CouponServiceTest</a>
+</td>
+<td>8</td>
+<td>0</td>
+<td>0</td>
+<td>0.151s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="classes/kr.hhplus.be.server.domain.coupon.CouponTest.html">kr.hhplus.be.server.domain.coupon.CouponTest</a>
+</td>
+<td>3</td>
+<td>1</td>
+<td>0</td>
+<td>0.035s</td>
+<td class="failures">66%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.domain.coupon.UserCouponTest.html">kr.hhplus.be.server.domain.coupon.UserCouponTest</a>
+</td>
+<td>6</td>
+<td>0</td>
+<td>0</td>
+<td>0.042s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.domain.coupon.command.CancelCouponCommandTest.html">kr.hhplus.be.server.domain.coupon.command.CancelCouponCommandTest</a>
+</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0.003s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.domain.coupon.command.IssueCouponCommandTest.html">kr.hhplus.be.server.domain.coupon.command.IssueCouponCommandTest</a>
+</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0.007s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.domain.coupon.command.UseCouponCommandTest.html">kr.hhplus.be.server.domain.coupon.command.UseCouponCommandTest</a>
+</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0.008s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.domain.order.OrderItemTest.html">kr.hhplus.be.server.domain.order.OrderItemTest</a>
+</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0.001s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="classes/kr.hhplus.be.server.domain.order.OrderServiceTest.html">kr.hhplus.be.server.domain.order.OrderServiceTest</a>
+</td>
+<td>5</td>
+<td>1</td>
+<td>0</td>
+<td>0.199s</td>
+<td class="failures">80%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.domain.order.OrdersTest.html">kr.hhplus.be.server.domain.order.OrdersTest</a>
+</td>
+<td>8</td>
+<td>0</td>
+<td>0</td>
+<td>0.008s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.domain.order.command.CancelOrderHandlerCommandTest.html">kr.hhplus.be.server.domain.order.command.CancelOrderHandlerCommandTest</a>
+</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0.007s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.domain.order.command.CreateOrderCommandTest.html">kr.hhplus.be.server.domain.order.command.CreateOrderCommandTest</a>
+</td>
+<td>7</td>
+<td>0</td>
+<td>0</td>
+<td>0.020s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.domain.point.PointHistoryTest.html">kr.hhplus.be.server.domain.point.PointHistoryTest</a>
+</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0.008s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.domain.point.PointServiceTest.html">kr.hhplus.be.server.domain.point.PointServiceTest</a>
+</td>
+<td>6</td>
+<td>0</td>
+<td>0</td>
+<td>0.144s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.domain.point.PointTest.html">kr.hhplus.be.server.domain.point.PointTest</a>
+</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td>0.008s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.domain.point.command.ChargePointCommandTest.html">kr.hhplus.be.server.domain.point.command.ChargePointCommandTest</a>
+</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0.003s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.domain.point.command.GetUserPointCommandTest.html">kr.hhplus.be.server.domain.point.command.GetUserPointCommandTest</a>
+</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0.005s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.domain.point.command.UsePointCommandTest.html">kr.hhplus.be.server.domain.point.command.UsePointCommandTest</a>
+</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0.004s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.domain.product.ProductServiceTest.html">kr.hhplus.be.server.domain.product.ProductServiceTest</a>
+</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td>0.071s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.domain.product.ProductTest.html">kr.hhplus.be.server.domain.product.ProductTest</a>
+</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0.005s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.domain.product.command.DecreaseStockCommandTest.html">kr.hhplus.be.server.domain.product.command.DecreaseStockCommandTest</a>
+</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0.004s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.domain.product.command.IncreaseStockCommandTest.html">kr.hhplus.be.server.domain.product.command.IncreaseStockCommandTest</a>
+</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0.005s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.domain.user.GetUserCommandTest.html">kr.hhplus.be.server.domain.user.GetUserCommandTest</a>
+</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0.001s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/kr.hhplus.be.server.domain.user.UserServiceTest.html">kr.hhplus.be.server.domain.user.UserServiceTest</a>
+</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0.054s</td>
 <td class="success">100%</td>
 </tr>
 </tbody>
@@ -126,7 +546,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.11.1</a> at 2025. 4. 11. 오전 5:22:52</p>
+<a href="http://www.gradle.org">Gradle 8.11.1</a> at 2025. 4. 12. 오후 4:29:35</p>
 </div>
 </div>
 </body>
