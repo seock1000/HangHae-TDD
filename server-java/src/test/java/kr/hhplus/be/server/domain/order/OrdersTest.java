@@ -2,6 +2,7 @@ package kr.hhplus.be.server.domain.order;
 
 import kr.hhplus.be.server.ApiError;
 import kr.hhplus.be.server.ApiException;
+import kr.hhplus.be.server.domain.coupon.UserCoupon;
 import kr.hhplus.be.server.domain.product.Product;
 import kr.hhplus.be.server.domain.user.User;
 import org.instancio.Instancio;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import static org.instancio.Select.field;
 import static org.junit.jupiter.api.Assertions.*;
@@ -56,6 +58,20 @@ class OrdersTest {
         assertEquals(1, orders.getOrderItems().size());
         assertEquals(orders.getOrderItems().get(0).getProductId(), product.getId());
         assertEquals(orders.getOrderItems().get(0).getQuantity(), quantity);
+    }
+
+    @Test
+    @DisplayName("적용된 쿠폰이 존재할 경우 ApiException(ORDER_ALREADY_COUPON_APPLIED) 예외가 발생한다.")
+    void applyCouponFail() {
+        // given
+        Orders orders = Instancio.of(Orders.class)
+                .set(field("couponId"), Optional.of(1L))
+                .create();
+        UserCoupon userCoupon = Mockito.mock(UserCoupon.class);
+
+        // when & then
+        ApiException exception = assertThrows(ApiException.class, () -> orders.applyCoupon(userCoupon));
+        assertEquals(ApiError.ORDER_ALREADY_COUPON_APPLIED, exception.getApiError());
     }
 
     @Test

@@ -10,6 +10,7 @@ public enum ApiError {
     ORDER_NOT_FOUND(HttpStatus.NOT_FOUND, "Order not found"),
     ORDER_CANNOT_BE_CANCELED(HttpStatus.BAD_REQUEST, "Order cannot be canceled"),
     ORDER_CANNOT_BE_CONFIRMED(HttpStatus.BAD_REQUEST, "Order cannot be confirmed"),
+    ORDER_ALREADY_COUPON_APPLIED(HttpStatus.BAD_REQUEST, "Order already coupon applied"),
 
     //coupon
     COUPON_NOT_FOUND(HttpStatus.NOT_FOUND, "Coupon not found"),

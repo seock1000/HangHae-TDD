@@ -48,9 +48,12 @@ public class Orders {
     }
 
     /**
-     * userCoupon 기능이라 테스트 필요 없을 듯
+     * 이미 적용된 쿠폰이 존재할 시 ORDER_ALREADY_COUPON_APPLIED 예외가 발생한다.
      */
     public void applyCoupon(UserCoupon userCoupon) {
+        couponId.ifPresent(id -> {
+            throw ApiException.of(ApiError.ORDER_ALREADY_COUPON_APPLIED);
+        });
         userCoupon.use();
         this.couponId = Optional.of(userCoupon.getId());
         this.discountAmount = userCoupon.discount(totalAmount);

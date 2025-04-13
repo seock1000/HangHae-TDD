@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.hhplus.be.server.domain.order.OrderServiceTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2025-04-13T12:18:29" hostname="yeomseogcheon-ui-MacBookPro.local" time="1.465">
+  <properties/>
+  <testcase name="주문 생성 시, 주문자와 상품 목록, 쿠폰을 받아 주문을 생성한다." classname="kr.hhplus.be.server.domain.order.OrderServiceTest" time="1.465">
+    <failure message="org.mockito.exceptions.misusing.NotAMockException: &#10;Argument passed to verify() is of type Orders and is not a mock!&#10;Make sure you place the parenthesis correctly!&#10;See the examples of correct verifications:&#10;    verify(mock).someMethod();&#10;    verify(mock, times(10)).someMethod();&#10;    verify(mock, atLeastOnce()).someMethod();" type="org.mockito.exceptions.misusing.NotAMockException">org.mockito.exceptions.misusing.NotAMockException: 
+Argument passed to verify() is of type Orders and is not a mock!
+Make sure you place the parenthesis correctly!
+See the examples of correct verifications:
+    verify(mock).someMethod();
+    verify(mock, times(10)).someMethod();
+    verify(mock, atLeastOnce()).someMethod();
+	at app//kr.hhplus.be.server.domain.order.OrderServiceTest.createOrder(OrderServiceTest.java:66)
+	at java.base@17.0.11/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
+</failure>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

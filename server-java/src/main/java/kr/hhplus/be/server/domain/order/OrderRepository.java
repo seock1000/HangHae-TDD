@@ -5,7 +5,6 @@ import java.util.Optional;
 
 public interface OrderRepository {
 
-    public Orders saveOrder(Orders order);
     public Orders saveOrderWithItems(Orders order);
     public Optional<Orders> findOrderById(String orderId);
 }
