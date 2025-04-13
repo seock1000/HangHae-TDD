@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.application.point.ChargePointCommandTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-04-13T05:36:58" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.033">
-  <properties/>
-  <testcase name="userId가 0 이하인 경우 ChargePointCommand를 생성하면 ApiException(INVALID_USER_ID)이 발생한다." classname="kr.hhplus.be.server.application.point.ChargePointCommandTest" time="0.027"/>
-  <testcase name="유효한 userId와 amount로 ChargePointCommand를 생성하면 성공한다." classname="kr.hhplus.be.server.application.point.ChargePointCommandTest" time="0.001"/>
-  <testcase name="amount가 0 이하인 경우 ChargePointCommand를 생성하면 ApiException(INVALID_CHARGE_AMOUNT)이 발생한다." classname="kr.hhplus.be.server.application.point.ChargePointCommandTest" time="0.001"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

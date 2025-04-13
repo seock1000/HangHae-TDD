@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.hhplus.be.server.application.point.UsePointCommandTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-04-13T05:39:46" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.03">
+  <properties/>
+  <testcase name="userId가 0 이하인 경우 UsePointCommand를 생성하면 ApiException(INVALID_USER_ID)이 발생한다." classname="kr.hhplus.be.server.application.point.UsePointCommandTest" time="0.024"/>
+  <testcase name="유효한 userId와 amount로 UsePointCommand를 생성하면 성공한다." classname="kr.hhplus.be.server.application.point.UsePointCommandTest" time="0.0"/>
+  <testcase name="amount가 0 이하인 경우 UsePointCommand를 생성하면 ApiException(INVALID_USE_AMOUNT)이 발생한다." classname="kr.hhplus.be.server.application.point.UsePointCommandTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
