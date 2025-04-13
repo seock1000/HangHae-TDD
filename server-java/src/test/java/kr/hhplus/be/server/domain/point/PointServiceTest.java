@@ -88,45 +88,5 @@ class PointServiceTest {
         // then
         assertEquals(ApiError.POINT_NOT_FOUND, exception.getApiError());
     }
-/*
-    @Test
-    @DisplayName("포인트 충전 시, 포인트 잔액을 증가시키고 업데이트된 포인트와 충전 내역을 저장한다.")
-    void charge() {
-        // given
-        Point point = Instancio.of(Point.class)
-                .set(field("balance"), 1000)
-                .create();
-        int chargeAmount = 500;
-        when(pointRepository.save(point)).thenReturn(point);
-
-        // when
-        Point result = pointService.charge(point, chargeAmount);
-
-        // then
-        verify(pointRepository).save(any());
-        verify(pointRepository).saveHistory(any());
-        assertEquals(1500, result.getBalance());
-    }
-
-    @Test
-    @DisplayName("포인트 사용 시, 포인트 잔액을 감소시키고 업데이트된 포인트와 사용 내역을 저장한다.")
-    void use() {
-        // given
-        Point point = Instancio.of(Point.class)
-                .set(field("balance"), 1000)
-                .create();
-        int useAmount = 500;
-        when(pointRepository.save(point)).thenReturn(point);
-
-        // when
-        Point result = pointService.use(point, useAmount);
-
-        // then
-        verify(pointRepository).save(any());
-        verify(pointRepository).saveHistory(any());
-        assertEquals(500, result.getBalance());
-    }
-
- */
 
 }

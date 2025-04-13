@@ -24,16 +24,25 @@ public class PointService {
                 .orElseThrow(() -> ApiException.of(ApiError.POINT_NOT_FOUND));
     }
 
+    /**
+     * 테스트 필요 없을 듯
+     */
     public Point charge(Point point, int amount) {
         point.charge(amount);
         return point;
     }
 
+    /**
+     * 테스트 필요 없을 듯
+     */
     public Point use(Point point, int amount) {
         point.use(amount);
         return point;
     }
 
+    /**
+     * 테스트 필요 없을 듯
+     */
     public Point save(Point point) {
         return pointRepository.saveWithHistory(point);
     }
