@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.domain.user.UserServiceTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-04-13T04:24:19" hostname="yeomseogcheon-ui-MacBookPro.local" time="1.564">
-  <properties/>
-  <testcase name="유저 조회 시 유저가 존재하지 않으면 ApiException(USER_NOT_FOUND)이 발생한다." classname="kr.hhplus.be.server.domain.user.UserServiceTest" time="1.154"/>
-  <testcase name="유저 조회 시 유저가 존재하면 정상적으로 조회된다." classname="kr.hhplus.be.server.domain.user.UserServiceTest" time="0.407"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

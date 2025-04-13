@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 public enum ApiError {
     INVALID_PARAMETER(HttpStatus.BAD_REQUEST, "Invalid parameter"),
 
+    INSUFFICIENT_PRODUCT_STOCK(HttpStatus.BAD_REQUEST, "Insufficient product stock"),
+
     NOT_FOUND(HttpStatus.NOT_FOUND, "Not found"),
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "User not found"),
 
