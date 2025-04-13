@@ -18,7 +18,7 @@ import java.util.Optional;
 public class Orders {
     private String id;
     private Long user;
-    private Optional<Long> couponId;
+    private Long couponId;
     private int totalAmount;
     private int discountAmount;
     private OrderStatus status;
@@ -26,7 +26,7 @@ public class Orders {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    private Orders(String id, Long user, Optional<Long> couponId, int totalAmount, int discountAmount, OrderStatus status) {
+    private Orders(String id, Long user, Long couponId, int totalAmount, int discountAmount, OrderStatus status) {
         this.id = id;
         this.user = user;
         this.totalAmount = totalAmount;
@@ -37,7 +37,7 @@ public class Orders {
     }
 
     public static Orders createWithIdAndUser(String id, User user) {
-        return new Orders(id, user.getId(), Optional.empty(), 0, 0, OrderStatus.PENDING);
+        return new Orders(id, user.getId(), null, 0, 0, OrderStatus.PENDING);
     }
 
     public void addProduct(Product product, int quantity) {
@@ -51,11 +51,11 @@ public class Orders {
      * 이미 적용된 쿠폰이 존재할 시 ORDER_ALREADY_COUPON_APPLIED 예외가 발생한다.
      */
     public void applyCoupon(UserCoupon userCoupon) {
-        couponId.ifPresent(id -> {
+        if(isCouponUsed()) {
             throw ApiException.of(ApiError.ORDER_ALREADY_COUPON_APPLIED);
-        });
+        }
         userCoupon.use();
-        this.couponId = Optional.of(userCoupon.getId());
+        this.couponId = userCoupon.getId();
         this.discountAmount = userCoupon.discount(totalAmount);
     }
 
@@ -77,7 +77,7 @@ public class Orders {
      * 테스트 필요없을 듯
      */
     public boolean isCouponUsed() {
-        return couponId.isPresent();
+        return couponId != null;
     }
 
 }

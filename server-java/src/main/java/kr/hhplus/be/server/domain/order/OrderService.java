@@ -34,7 +34,7 @@ public class OrderService {
      * 유저 쿠폰이 있으면 쿠폰을 적용한다.
      * 유저 쿠폰이 없으면 쿠폰을 적용하지 않는다.
      */
-    public Orders createOrder(User user, Optional<UserCoupon> userCoupon, List<Pair<Product, Integer>> productAndQuantity) {
+    public Orders createOrder(User user, List<Pair<Product, Integer>> productAndQuantity) {
         String orderId = orderIdGenerator.gen();
 
         Orders order = Orders.createWithIdAndUser(orderId, user);
@@ -43,7 +43,22 @@ public class OrderService {
             int quantity = pair.getSecond();
             order.addProduct(product, quantity);
         });
-        userCoupon.ifPresent(order::applyCoupon);
+
+        return order;
+    }
+
+    public Orders createOrderWithCoupon(User user, UserCoupon userCoupon, List<Pair<Product, Integer>> productAndQuantity) {
+        String orderId = orderIdGenerator.gen();
+
+        Orders order = Orders.createWithIdAndUser(orderId, user);
+        productAndQuantity.forEach(pair -> {
+            Product product = pair.getFirst();
+            int quantity = pair.getSecond();
+            order.addProduct(product, quantity);
+        });
+        if (userCoupon != null) {
+            order.applyCoupon(userCoupon);
+        }
 
         return order;
     }

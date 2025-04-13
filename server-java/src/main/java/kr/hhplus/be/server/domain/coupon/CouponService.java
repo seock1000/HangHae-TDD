@@ -19,7 +19,7 @@ public class CouponService {
     /**
      * 테스트 필요없을 듯
      */
-    public UserCoupon getUserCouponById(Long userCouponId) {
+    public UserCoupon getUserCouponById(long userCouponId) {
         return couponRepository.findUserCouponById(userCouponId)
                 .orElseThrow(() -> ApiException.of(ApiError.COUPON_NOT_FOUND));
     }
@@ -27,7 +27,7 @@ public class CouponService {
     /**
      * 테스트 필요없을 듯
      */
-    public Coupon getCouponById(Long couponId) {
+    public Coupon getCouponById(long couponId) {
         return couponRepository.findCouponById(couponId)
                 .orElseThrow(() -> ApiException.of(ApiError.COUPON_NOT_FOUND));
     }

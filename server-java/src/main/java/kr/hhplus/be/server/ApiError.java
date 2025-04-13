@@ -11,6 +11,8 @@ public enum ApiError {
     ORDER_CANNOT_BE_CANCELED(HttpStatus.BAD_REQUEST, "Order cannot be canceled"),
     ORDER_CANNOT_BE_CONFIRMED(HttpStatus.BAD_REQUEST, "Order cannot be confirmed"),
     ORDER_ALREADY_COUPON_APPLIED(HttpStatus.BAD_REQUEST, "Order already coupon applied"),
+    INVALID_ORDER_QUANTITY(HttpStatus.BAD_REQUEST, "Invalid order quantity"),
+    INVALID_ORDER_ITEMS(HttpStatus.BAD_REQUEST, "Invalid order items"),
 
     //coupon
     COUPON_NOT_FOUND(HttpStatus.NOT_FOUND, "Coupon not found"),
@@ -32,6 +34,7 @@ public enum ApiError {
     //product
     INSUFFICIENT_PRODUCT_STOCK(HttpStatus.BAD_REQUEST, "Insufficient product stock"),
     PRODUCT_NOT_FOUND(HttpStatus.NOT_FOUND, "Product not found"),
+    INVALID_PRODUCT_ID(HttpStatus.BAD_REQUEST, "Invalid product id"),
 
     //user
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "User not found"),
