@@ -45,4 +45,11 @@ public class UserCoupon {
         return this.coupon.discount(amount);
     }
 
+    /**
+     * 테스트 불필요
+     */
+    public void init() {
+        this.isUsed = false;
+    }
+
 }

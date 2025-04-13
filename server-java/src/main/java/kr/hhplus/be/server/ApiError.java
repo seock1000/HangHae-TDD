@@ -13,6 +13,7 @@ public enum ApiError {
     ORDER_ALREADY_COUPON_APPLIED(HttpStatus.BAD_REQUEST, "Order already coupon applied"),
     INVALID_ORDER_QUANTITY(HttpStatus.BAD_REQUEST, "Invalid order quantity"),
     INVALID_ORDER_ITEMS(HttpStatus.BAD_REQUEST, "Invalid order items"),
+    INVALID_ORDER_ID(HttpStatus.BAD_REQUEST, "Invalid order id"),
 
     //coupon
     COUPON_NOT_FOUND(HttpStatus.NOT_FOUND, "Coupon not found"),

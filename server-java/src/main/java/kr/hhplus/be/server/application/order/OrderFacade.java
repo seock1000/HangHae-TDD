@@ -47,4 +47,24 @@ public class OrderFacade {
 
         return new OrderResult(order.getId());
     }
+
+    public OrderResult cancelOrder(CancelOrderCommand command) {
+        var order = orderService.getOrderById(command.orderId());
+
+        order.getOrderItems().forEach(item -> {
+            var product = productService.getProductById(item.getProductId());
+            product.increaseStock(item.getQuantity());
+            productService.save(product);
+        });
+
+        if(order.isCouponUsed()) {
+            var userCoupon = couponService.getUserCouponById(order.getCouponId());
+            userCoupon.init();
+            couponService.saveUserCoupon(userCoupon);
+        }
+
+        order.cancel();
+        orderService.saveOrder(order);
+        return new OrderResult(order.getId());
+    }
 }
