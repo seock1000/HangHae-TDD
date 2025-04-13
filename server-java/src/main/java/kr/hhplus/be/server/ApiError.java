@@ -24,6 +24,7 @@ public enum ApiError {
 
     //product
     INSUFFICIENT_PRODUCT_STOCK(HttpStatus.BAD_REQUEST, "Insufficient product stock"),
+    PRODUCT_NOT_FOUND(HttpStatus.NOT_FOUND, "Product not found"),
 
     //user
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "User not found"),
