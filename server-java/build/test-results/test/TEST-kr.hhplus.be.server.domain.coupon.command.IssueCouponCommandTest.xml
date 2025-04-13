@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.domain.coupon.command.IssueCouponCommandTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-04-12T07:29:34" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.01">
-  <properties/>
-  <testcase name="IssueCouponCommand 생성 시, 쿠폰 ID가 0 이하인 경우 InvalidCouponIdError 예외가 발생한다." classname="kr.hhplus.be.server.domain.coupon.command.IssueCouponCommandTest" time="0.004"/>
-  <testcase name="IssueCouponCommand 생성 시, 사용자 ID가 0 이하인 경우 InvalidUserIdError 예외가 발생한다." classname="kr.hhplus.be.server.domain.coupon.command.IssueCouponCommandTest" time="0.002"/>
-  <testcase name="IssueCouponCommand 생성 시, 쿠폰 ID와 사용자 ID가 0보다 큰 경우 정상적으로 생성된다." classname="kr.hhplus.be.server.domain.coupon.command.IssueCouponCommandTest" time="0.001"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

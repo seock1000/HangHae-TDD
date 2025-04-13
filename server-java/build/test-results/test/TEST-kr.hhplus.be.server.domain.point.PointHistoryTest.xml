@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.domain.point.PointHistoryTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-04-12T07:29:34" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.009">
-  <properties/>
-  <testcase name="포인트 ID와 충전금액, 현재잔고를 입력받아 포인트 충전 이력을 생성한다." classname="kr.hhplus.be.server.domain.point.PointHistoryTest" time="0.006"/>
-  <testcase name="포인트 ID와 사용금액, 현재잔고를 입력받아 포인트 사용 이력을 생성한다." classname="kr.hhplus.be.server.domain.point.PointHistoryTest" time="0.002"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
