@@ -6,6 +6,11 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum ApiError {
 
+    //order
+    ORDER_NOT_FOUND(HttpStatus.NOT_FOUND, "Order not found"),
+    ORDER_CANNOT_BE_CANCELED(HttpStatus.BAD_REQUEST, "Order cannot be canceled"),
+    ORDER_CANNOT_BE_CONFIRMED(HttpStatus.BAD_REQUEST, "Order cannot be confirmed"),
+
     //coupon
     COUPON_NOT_FOUND(HttpStatus.NOT_FOUND, "Coupon not found"),
     COUPON_ALREADY_ISSUED(HttpStatus.BAD_REQUEST, "Coupon already issued"),

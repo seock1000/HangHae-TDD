@@ -1,7 +1,12 @@
 package kr.hhplus.be.server.domain.order;
 
 import jakarta.persistence.criteria.Order;
+import kr.hhplus.be.server.ApiError;
+import kr.hhplus.be.server.ApiException;
+import kr.hhplus.be.server.domain.coupon.Coupon;
+import kr.hhplus.be.server.domain.coupon.UserCoupon;
 import kr.hhplus.be.server.domain.product.Product;
+import kr.hhplus.be.server.domain.user.User;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -15,21 +20,24 @@ public class Orders {
     private Long user;
     private Optional<Long> couponId;
     private int totalAmount;
+    private int discountAmount;
     private OrderStatus status;
     private List<OrderItem> orderItems;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    private Orders(String id, Long user, int totalAmount, OrderStatus status) {
+    private Orders(String id, Long user, Optional<Long> couponId, int totalAmount, int discountAmount, OrderStatus status) {
         this.id = id;
         this.user = user;
         this.totalAmount = totalAmount;
+        this.discountAmount = discountAmount;
+        this.couponId = couponId;
         this.status = status;
         this.orderItems = new ArrayList<>();
     }
 
-    public static Orders createWithIdAndUser(String id, Long user) {
-        return new Orders(id, user, 0, OrderStatus.PENDING);
+    public static Orders createWithIdAndUser(String id, User user) {
+        return new Orders(id, user.getId(), Optional.empty(), 0, 0, OrderStatus.PENDING);
     }
 
     public void addProduct(Product product, int quantity) {
@@ -38,4 +46,35 @@ public class Orders {
         totalAmount += orderItem.getAmount();
         orderItems.add(orderItem);
     }
+
+    /**
+     * userCoupon 기능이라 테스트 필요 없을 듯
+     */
+    public void applyCoupon(UserCoupon userCoupon) {
+        userCoupon.use();
+        this.couponId = Optional.of(userCoupon.getId());
+        this.discountAmount = userCoupon.discount(totalAmount);
+    }
+
+    public void confirm() {
+        if (!this.status.equals(OrderStatus.PENDING)) {
+            throw ApiException.of(ApiError.ORDER_CANNOT_BE_CONFIRMED);
+        }
+        this.status = OrderStatus.CONFIRMED;
+    }
+
+    public void cancel() {
+        if (!this.status.equals(OrderStatus.PENDING)) {
+            throw ApiException.of(ApiError.ORDER_CANNOT_BE_CANCELED);
+        }
+        this.status = OrderStatus.CANCELLED;
+    }
+
+    /**
+     * 테스트 필요없을 듯
+     */
+    public boolean isCouponUsed() {
+        return couponId.isPresent();
+    }
+
 }

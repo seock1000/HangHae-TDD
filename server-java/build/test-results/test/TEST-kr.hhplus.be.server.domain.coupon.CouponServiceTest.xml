@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.domain.coupon.CouponServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-13T10:07:49" hostname="yeomseogcheon-ui-MacBookPro.local" time="1.397">
-  <properties/>
-  <testcase name="쿠폰 발급 시, 이미 해당 쿠폰을 발급 받았다면 ApiException(COUPON_ALREADY_ISSUED)이 발생한다." classname="kr.hhplus.be.server.domain.coupon.CouponServiceTest" time="1.397"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

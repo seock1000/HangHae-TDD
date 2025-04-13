@@ -5,7 +5,6 @@ import lombok.Getter;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Getter
 public record UserCouponInfo(
         Long id,
         Long couponId,
