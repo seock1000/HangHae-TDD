@@ -23,12 +23,8 @@ public class PointFacade {
     public PointResult charge(ChargePointCommand command) {
         var user = userService.getUserById(command.userId());
         var point = pointService.getPointByUserId(user.getId());
-        return PointResult.of(pointService.charge(point, command.amount()));
-    }
 
-    public PointResult use(UsePointCommand command) {
-        var user = userService.getUserById(command.userId());
-        var point = pointService.getPointByUserId(user.getId());
-        return PointResult.of(pointService.use(point, command.amount()));
+        pointService.charge(point, command.amount());
+        return PointResult.of(pointService.save(point));
     }
 }

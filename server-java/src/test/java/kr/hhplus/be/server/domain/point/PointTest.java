@@ -6,17 +6,21 @@ import org.instancio.Instancio;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.instancio.Select.field;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PointTest {
 
     @Test
-    @DisplayName("포인트 충전 시, 포인트 잔액이 증가한다.")
+    @DisplayName("포인트 충전 시, 포인트 잔액이 증가하고 포인트 충전 내역을 생성한다.")
     void charge() {
         // given
         Point point = Instancio.of(Point.class)
                 .set(field("balance"), 1000)
+                .set(field("histories"), new ArrayList<>())
                 .create();
 
         // when
@@ -24,6 +28,11 @@ class PointTest {
 
         // then
         assertEquals(1500, point.getBalance());
+        assertEquals(1, point.getHistories().size());
+        assertEquals(TransactionType.CHARGE, point.getHistories().get(0).getType());
+        assertEquals(500, point.getHistories().get(0).getAmount());
+        assertEquals(1500, point.getHistories().get(0).getBalance());
+        assertEquals(point.getId(), point.getHistories().get(0).getPoint());
     }
 
     @Test
@@ -57,11 +66,12 @@ class PointTest {
     }
 
     @Test
-    @DisplayName("포인트 사용 시, 포인트 잔액이 감소한다.")
+    @DisplayName("포인트 사용 시, 포인트 잔액이 감소하고 포인트 사용 내역이 생성된다.")
     void use() {
         // given
         Point point = Instancio.of(Point.class)
                 .set(field("balance"), 1000)
+                .set(field("histories"), new ArrayList<>())
                 .create();
 
         // when
@@ -69,6 +79,11 @@ class PointTest {
 
         // then
         assertEquals(500, point.getBalance());
+        assertEquals(1, point.getHistories().size());
+        assertEquals(TransactionType.USE, point.getHistories().get(0).getType());
+        assertEquals(500, point.getHistories().get(0).getAmount());
+        assertEquals(500, point.getHistories().get(0).getBalance());
+        assertEquals(point.getId(), point.getHistories().get(0).getPoint());
     }
 
     @Test

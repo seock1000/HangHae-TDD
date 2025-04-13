@@ -5,7 +5,6 @@ import kr.hhplus.be.server.ApiException;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.DisabledIf;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -89,7 +88,7 @@ class PointServiceTest {
         // then
         assertEquals(ApiError.POINT_NOT_FOUND, exception.getApiError());
     }
-
+/*
     @Test
     @DisplayName("포인트 충전 시, 포인트 잔액을 증가시키고 업데이트된 포인트와 충전 내역을 저장한다.")
     void charge() {
@@ -127,5 +126,7 @@ class PointServiceTest {
         verify(pointRepository).saveHistory(any());
         assertEquals(500, result.getBalance());
     }
+
+ */
 
 }

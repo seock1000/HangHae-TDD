@@ -26,15 +26,15 @@ public class PointService {
 
     public Point charge(Point point, int amount) {
         point.charge(amount);
-        PointHistory history = PointHistory.createChargeHistory(point, amount);
-        pointRepository.saveHistory(history);
-        return pointRepository.save(point);
+        return point;
     }
 
     public Point use(Point point, int amount) {
         point.use(amount);
-        PointHistory history = PointHistory.createUseHistory(point, amount);
-        pointRepository.saveHistory(history);
-        return pointRepository.save(point);
+        return point;
+    }
+
+    public Point save(Point point) {
+        return pointRepository.saveWithHistory(point);
     }
 }
