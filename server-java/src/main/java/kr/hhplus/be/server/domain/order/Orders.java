@@ -57,6 +57,7 @@ public class Orders {
         userCoupon.use();
         this.couponId = userCoupon.getId();
         this.discountAmount = userCoupon.discount(totalAmount);
+        this.totalAmount -= this.discountAmount;
     }
 
     public void confirm() {

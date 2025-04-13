@@ -32,7 +32,7 @@ class OrdersTest {
         assertEquals(orderId, orders.getId());
         assertEquals(user.getId(), orders.getUser());
         assertEquals(OrderStatus.PENDING, orders.getStatus());
-        assertTrue(orders.getCouponId().isEmpty());
+        assertNull(orders.getCouponId());
         assertEquals(0, orders.getTotalAmount());
         assertEquals(0, orders.getDiscountAmount());
         assertTrue(orders.getOrderItems().isEmpty());
@@ -65,7 +65,7 @@ class OrdersTest {
     void applyCouponFail() {
         // given
         Orders orders = Instancio.of(Orders.class)
-                .set(field("couponId"), Optional.of(1L))
+                .set(field("couponId"), 1L)
                 .create();
         UserCoupon userCoupon = Mockito.mock(UserCoupon.class);
 

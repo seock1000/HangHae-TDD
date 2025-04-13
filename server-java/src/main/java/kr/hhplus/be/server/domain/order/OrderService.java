@@ -20,6 +20,8 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderIdGenerator orderIdGenerator;
+    private final OrderDataPlatform orderDataPlatform;
+    private final OrderCancelHandler orderCancelHandler;
 
     /**
      * 테스트 필요 없을 듯
@@ -44,6 +46,8 @@ public class OrderService {
             order.addProduct(product, quantity);
         });
 
+        orderCancelHandler.register(order.getId());
+
         return order;
     }
 
@@ -60,6 +64,8 @@ public class OrderService {
             order.applyCoupon(userCoupon);
         }
 
+        orderCancelHandler.register(order.getId());
+
         return order;
     }
 
@@ -75,5 +81,15 @@ public class OrderService {
      */
     public void saveOrder(Orders order) {
         orderRepository.saveOrderWithItems(order);
+    }
+
+
+    public void confirmOrder(Orders order) {
+        order.confirm();
+        try {
+            orderDataPlatform.send(order);
+        } catch (Exception e) {
+            //TODO log?
+        }
     }
 }
