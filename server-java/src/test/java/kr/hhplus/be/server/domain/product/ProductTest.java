@@ -41,5 +41,19 @@ class ProductTest {
         assertEquals(ApiError.INSUFFICIENT_PRODUCT_STOCK, exception.getApiError());
     }
 
+    @Test
+    @DisplayName("상품 재고 증가시, 입력 값만큼 상품 재고가 증가한다.")
+    void increaseStock() {
+        // given
+        Product product = Instancio.of(Product.class)
+                .set(field("stock"), 10)
+                .create();
+
+        // when
+        product.increaseStock(5);
+
+        // then
+        assertEquals(15, product.getStock());
+    }
 
 }

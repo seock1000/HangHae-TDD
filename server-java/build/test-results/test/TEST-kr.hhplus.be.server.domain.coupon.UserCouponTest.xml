@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.domain.coupon.UserCouponTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-13T08:58:26" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.208">
-  <properties/>
-  <testcase name="쿠폰 사용 시, 쿠폰이 유효하면 사용 상태로 변경된다" classname="kr.hhplus.be.server.domain.coupon.UserCouponTest" time="0.208"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

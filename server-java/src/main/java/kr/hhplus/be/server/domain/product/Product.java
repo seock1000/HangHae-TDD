@@ -28,4 +28,12 @@ public class Product {
         }
         this.stock -= quantity;
     }
+
+    /**
+     * TC
+     * 상품의 재고를 증가시킨다.
+     */
+    public void increaseStock(int quantity) {
+        this.stock += quantity;
+    }
 }
