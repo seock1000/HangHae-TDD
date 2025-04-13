@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 public enum ApiError {
 
     //point
+    POINT_NOT_FOUND(HttpStatus.NOT_FOUND, "Point not found"),
     EXCEED_CHARGE_LIMIT(HttpStatus.BAD_REQUEST, "Exceed charge limit"),
     EXCEED_BALANCE_LIMIT(HttpStatus.BAD_REQUEST, "Exceed balance"),
     UNDER_BALANCE_LIMIT(HttpStatus.BAD_REQUEST, "Under balance"),
