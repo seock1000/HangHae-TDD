@@ -5,13 +5,20 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 public enum ApiError {
-    INVALID_PARAMETER(HttpStatus.BAD_REQUEST, "Invalid parameter"),
 
+    //point
+    EXCEED_CHARGE_LIMIT(HttpStatus.BAD_REQUEST, "Exceed charge limit"),
+    EXCEED_BALANCE_LIMIT(HttpStatus.BAD_REQUEST, "Exceed balance"),
+    UNDER_BALANCE_LIMIT(HttpStatus.BAD_REQUEST, "Under balance"),
+
+
+    //product
     INSUFFICIENT_PRODUCT_STOCK(HttpStatus.BAD_REQUEST, "Insufficient product stock"),
 
-    NOT_FOUND(HttpStatus.NOT_FOUND, "Not found"),
+    //user
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "User not found"),
 
+    //common
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error");
 
     private final HttpStatus status;
