@@ -13,6 +13,7 @@ public enum ApiError {
     COUPON_OUT_OF_STOCK(HttpStatus.BAD_REQUEST, "Coupon not issued"),
     COUPON_ALREADY_USED(HttpStatus.BAD_REQUEST, "Coupon already used"),
     INVALID_DISCOUNT_TYPE(HttpStatus.INTERNAL_SERVER_ERROR, "Invalid discount type"),
+    INVALID_COUPON_ID(HttpStatus.BAD_REQUEST, "Invalid coupon id"),
 
     //point
     POINT_NOT_FOUND(HttpStatus.NOT_FOUND, "Point not found"),
