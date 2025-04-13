@@ -14,14 +14,13 @@ public class UserCouponInfo {
     private LocalDateTime issuedAt;
     private LocalDateTime endDate;
 
-    private UserCouponInfo(Long id, Long couponId, String title, boolean isUsed, int discountedAmount,
+    private UserCouponInfo(Long id, Long couponId, String title, boolean isUsed,
                             BigDecimal discountValue, DiscountType discountType, LocalDateTime issuedAt,
                             LocalDateTime endDate) {
         this.id = id;
         this.couponId = couponId;
         this.title = title;
         this.isUsed = isUsed;
-        this.discountedAmount = discountedAmount;
         this.discountValue = discountValue;
         this.discountType = discountType;
         this.issuedAt = issuedAt;
@@ -34,7 +33,6 @@ public class UserCouponInfo {
                 userCoupon.getCoupon().getId(),
                 userCoupon.getCoupon().getTitle(),
                 userCoupon.isUsed(),
-                userCoupon.getDiscountedAmount(),
                 userCoupon.getCoupon().getDiscountValue(),
                 userCoupon.getCoupon().getDiscountType(),
                 userCoupon.getIssuedAt(),

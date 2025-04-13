@@ -1,5 +1,6 @@
 package kr.hhplus.be.server.domain.order;
 
+import kr.hhplus.be.server.domain.product.Product;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -23,7 +24,7 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    public static OrderItem create(String ordersId, Long productId, int price, int quantity) {
-        return new OrderItem(ordersId, productId, price * quantity, price, quantity);
+    public static OrderItem create(String ordersId, Product product, int quantity) {
+        return new OrderItem(ordersId, product.getId(), product.getPrice() * quantity, product.getPrice(), quantity);
     }
 }

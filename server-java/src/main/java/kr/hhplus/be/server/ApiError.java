@@ -6,6 +6,14 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum ApiError {
 
+    //coupon
+    COUPON_NOT_FOUND(HttpStatus.NOT_FOUND, "Coupon not found"),
+    COUPON_ALREADY_ISSUED(HttpStatus.BAD_REQUEST, "Coupon already issued"),
+    COUPON_EXPIRED(HttpStatus.BAD_REQUEST, "Coupon expired"),
+    COUPON_OUT_OF_STOCK(HttpStatus.BAD_REQUEST, "Coupon not issued"),
+    COUPON_ALREADY_USED(HttpStatus.BAD_REQUEST, "Coupon already used"),
+    INVALID_DISCOUNT_TYPE(HttpStatus.INTERNAL_SERVER_ERROR, "Invalid discount type"),
+
     //point
     POINT_NOT_FOUND(HttpStatus.NOT_FOUND, "Point not found"),
     EXCEED_CHARGE_LIMIT(HttpStatus.BAD_REQUEST, "Exceed charge limit"),

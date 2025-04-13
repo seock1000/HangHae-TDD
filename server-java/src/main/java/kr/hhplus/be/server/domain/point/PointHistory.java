@@ -9,25 +9,25 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode
 public class PointHistory {
     private Long id;
-    private Long point;
+    private Point point;
     private int amount;
     private int balance;
     private TransactionType type;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    private PointHistory(Long point, int amount, int balance, TransactionType type) {
+    private PointHistory(Point point, int amount, TransactionType type) {
         this.point = point;
         this.amount = amount;
-        this.balance = balance;
+        this.balance = point.getBalance();
         this.type = type;
     }
 
     public static PointHistory createChargeHistory(Point point, int amount) {
-        return new PointHistory(point.getId(), amount, point.getBalance(), TransactionType.CHARGE);
+        return new PointHistory(point, amount, TransactionType.CHARGE);
     }
 
     public static PointHistory createUseHistory(Point point, int amount) {
-        return new PointHistory(point.getId(), amount, point.getBalance(), TransactionType.USE);
+        return new PointHistory(point, amount, TransactionType.USE);
     }
 }
