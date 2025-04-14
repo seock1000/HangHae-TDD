@@ -1,30 +1,33 @@
 package kr.hhplus.be.server.domain.order;
 
-import jakarta.persistence.criteria.Order;
+import jakarta.persistence.*;
 import kr.hhplus.be.server.ApiError;
 import kr.hhplus.be.server.ApiException;
-import kr.hhplus.be.server.domain.coupon.Coupon;
+import kr.hhplus.be.server.config.jpa.BaseTimeEntity;
 import kr.hhplus.be.server.domain.coupon.UserCoupon;
 import kr.hhplus.be.server.domain.product.Product;
 import kr.hhplus.be.server.domain.user.User;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+@Entity
 @Getter
-public class Orders {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Orders extends BaseTimeEntity {
+    @Id
     private String id;
     private Long user;
     private Long couponId;
     private int totalAmount;
     private int discountAmount;
     private OrderStatus status;
-    private List<OrderItem> orderItems;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    @OneToMany(mappedBy = "order", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     private Orders(String id, Long user, Long couponId, int totalAmount, int discountAmount, OrderStatus status) {
         this.id = id;
@@ -33,7 +36,6 @@ public class Orders {
         this.discountAmount = discountAmount;
         this.couponId = couponId;
         this.status = status;
-        this.orderItems = new ArrayList<>();
     }
 
     public static Orders createWithIdAndUser(String id, User user) {
@@ -42,7 +44,7 @@ public class Orders {
 
     public void addProduct(Product product, int quantity) {
         product.decreaseStock(quantity);
-        OrderItem orderItem = OrderItem.create(this.id, product, quantity);
+        OrderItem orderItem = OrderItem.create(this, product, quantity);
         totalAmount += orderItem.getAmount();
         orderItems.add(orderItem);
     }
