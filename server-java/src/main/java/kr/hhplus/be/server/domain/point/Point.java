@@ -1,7 +1,9 @@
 package kr.hhplus.be.server.domain.point;
 
+import jakarta.persistence.*;
 import kr.hhplus.be.server.ApiError;
 import kr.hhplus.be.server.ApiException;
+import kr.hhplus.be.server.config.jpa.BaseTimeEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -9,13 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@EqualsAndHashCode
-public class Point {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Point extends BaseTimeEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private long user;
     private int balance;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    // 포인트 사용내역은 포인트에 의존적이므로 cascade를 사용한다.
+    @OneToMany(mappedBy = "point", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PointHistory> histories = new ArrayList<>();
 
     public Point(Long id, long user, int balance) {
