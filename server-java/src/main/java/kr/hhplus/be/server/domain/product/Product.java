@@ -34,7 +34,7 @@ public class Product extends BaseTimeEntity {
      * 상품의 재고를 차감시킨다.
      * 재고가 부족할 경우 ApiException(INSUFFICIENT_PRODUCT_STOCK)을 발생시킨다.
      */
-    public void decreaseStock(int quantity) {
+    protected void decreaseStock(int quantity) {
         if (stock < quantity) {
             throw ApiException.of(ApiError.INSUFFICIENT_PRODUCT_STOCK);
         }
@@ -45,7 +45,15 @@ public class Product extends BaseTimeEntity {
      * TC
      * 상품의 재고를 증가시킨다.
      */
-    public void increaseStock(int quantity) {
+    protected void increaseStock(int quantity) {
         this.stock += quantity;
+    }
+
+    public RefundedProduct toRefundedProduct() {
+        return RefundedProduct.of(this);
+    }
+
+    public SoldProduct toSoldProduct() {
+        return SoldProduct.of(this);
     }
 }

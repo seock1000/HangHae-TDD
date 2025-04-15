@@ -48,8 +48,8 @@ public class Point extends BaseTimeEntity {
     /**
      * 테스트 필요없을 듯
      */
-    public PointDeductor toPointDeductor() {
-        return PointDeductor.of(this);
+    public UsedPoint toUsedPoint() {
+        return UsedPoint.of(this);
     }
 
     /**
@@ -57,7 +57,7 @@ public class Point extends BaseTimeEntity {
      * 포인트를 사용하고 사용 내역을 생성한다.
      * 사용 금액이 잔액을 초과할 경우 ApiException(UNDER_BALANCE_LIMIT)을 발생시킨다.
      */
-    public void use(int amount) {
+    protected void use(int amount) {
         if(this.balance - amount < 0) {
             throw ApiException.of(ApiError.UNDER_BALANCE_LIMIT);
         }
