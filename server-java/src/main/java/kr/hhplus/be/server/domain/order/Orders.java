@@ -64,7 +64,7 @@ public class Orders extends BaseTimeEntity {
         this.couponId = coupon.getId();
     }
 
-    public void confirm() {
+    protected void confirm() {
         if (!this.status.equals(OrderStatus.PENDING)) {
             throw ApiException.of(ApiError.ORDER_CANNOT_BE_CONFIRMED);
         }
@@ -83,6 +83,10 @@ public class Orders extends BaseTimeEntity {
      */
     public boolean isCouponUsed() {
         return couponId != null;
+    }
+
+    public PaidOrder toPaidOrder() {
+        return PaidOrder.of(this);
     }
 
 }
