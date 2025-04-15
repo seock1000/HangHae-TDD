@@ -2,8 +2,10 @@ package kr.hhplus.be.server.domain.order;
 
 import kr.hhplus.be.server.ApiError;
 import kr.hhplus.be.server.ApiException;
+import kr.hhplus.be.server.domain.coupon.AppliedCoupon;
 import kr.hhplus.be.server.domain.coupon.UserCoupon;
 import kr.hhplus.be.server.domain.product.Product;
+import kr.hhplus.be.server.domain.product.SoldProduct;
 import kr.hhplus.be.server.domain.user.User;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.DisplayName;
@@ -15,6 +17,9 @@ import java.util.Optional;
 
 import static org.instancio.Select.field;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.when;
 
 class OrdersTest {
 
@@ -46,14 +51,15 @@ class OrdersTest {
                 .set(field("totalAmount"), 0)
                 .set(field("orderItems"), new ArrayList<>())
                 .create();
-        Product product = Mockito.mock(Product.class);
+        SoldProduct product = Mockito.mock(SoldProduct.class);
+        when(product.getPrice()).thenReturn(10000);
         int quantity = 2;
 
         // when
         orders.addProduct(product, quantity);
 
         // then
-        Mockito.verify(product).decreaseStock(quantity);
+        Mockito.verify(product).deductStock(quantity);
         assertEquals(orders.getTotalAmount(), product.getPrice() * quantity);
         assertEquals(1, orders.getOrderItems().size());
         assertEquals(orders.getOrderItems().get(0).getProductId(), product.getId());
@@ -61,17 +67,34 @@ class OrdersTest {
     }
 
     @Test
-    @DisplayName("적용된 쿠폰이 존재할 경우 ApiException(ORDER_ALREADY_COUPON_APPLIED) 예외가 발생한다.")
+    @DisplayName("이미 적용된 쿠폰이 존재할 경우 ApiException(ORDER_ALREADY_COUPON_APPLIED) 예외가 발생한다.")
     void applyCouponFail() {
         // given
         Orders orders = Instancio.of(Orders.class)
                 .set(field("couponId"), 1L)
                 .create();
-        UserCoupon userCoupon = Mockito.mock(UserCoupon.class);
+        AppliedCoupon coupon = Mockito.mock(AppliedCoupon.class);
 
         // when & then
-        ApiException exception = assertThrows(ApiException.class, () -> orders.applyCoupon(userCoupon));
+        ApiException exception = assertThrows(ApiException.class, () -> orders.applyCoupon(coupon));
         assertEquals(ApiError.ORDER_ALREADY_COUPON_APPLIED, exception.getApiError());
+    }
+
+    @Test
+    @DisplayName("쿠폰 할인 금액이 총 주문 금액보다 많을 시, ApiException(ORDER_COUPON_DISCOUNT_AMOUNT_EXCEEDS_TOTAL_AMOUNT) 예외가 발생한다.")
+    void applyCouponFail2() {
+        // given
+        Orders orders = Instancio.of(Orders.class)
+                .set(field("couponId"), null)
+                .set(field("totalAmount"), 1000)
+                .set(field("discountAmount"), 0)
+                .create();
+        AppliedCoupon coupon = Mockito.mock(AppliedCoupon.class);
+        when(coupon.discount(anyInt())).thenReturn(2000);
+
+        // when & then
+        ApiException exception = assertThrows(ApiException.class, () -> orders.applyCoupon(coupon));
+        assertEquals(ApiError.ORDER_COUPON_DISCOUNT_AMOUNT_EXCEEDS_TOTAL_AMOUNT, exception.getApiError());
     }
 
     @Test

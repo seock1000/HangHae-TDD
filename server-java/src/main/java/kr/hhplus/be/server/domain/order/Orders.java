@@ -58,10 +58,13 @@ public class Orders extends BaseTimeEntity {
         if(isCouponUsed()) {
             throw ApiException.of(ApiError.ORDER_ALREADY_COUPON_APPLIED);
         }
-        coupon.use();
         this.discountAmount = coupon.discount(totalAmount);
+        if(this.totalAmount < this.discountAmount) {
+            throw ApiException.of(ApiError.ORDER_COUPON_DISCOUNT_AMOUNT_EXCEEDS_TOTAL_AMOUNT);
+        }
         this.totalAmount -= this.discountAmount;
         this.couponId = coupon.getId();
+        coupon.use();
     }
 
     protected void confirm() {

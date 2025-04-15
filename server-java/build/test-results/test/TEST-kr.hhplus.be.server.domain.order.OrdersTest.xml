@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.domain.order.OrdersTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-13T13:16:46" hostname="yeomseogcheon-ui-MacBookPro.local" time="1.272">
+<testsuite name="kr.hhplus.be.server.domain.order.OrdersTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-15T13:20:10" hostname="yeomseogcheon-ui-MacBookPro.local" time="1.021">
   <properties/>
-  <testcase name="적용된 쿠폰이 존재할 경우 ApiException(ORDER_ALREADY_COUPON_APPLIED) 예외가 발생한다." classname="kr.hhplus.be.server.domain.order.OrdersTest" time="1.272"/>
+  <testcase name="쿠폰 할인 금액이 총 주문 금액보다 많을 시, ApiException(ORDER_COUPON_DISCOUNT_AMOUNT_EXCEEDS_TOTAL_AMOUNT) 예외가 발생한다." classname="kr.hhplus.be.server.domain.order.OrdersTest" time="1.021"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

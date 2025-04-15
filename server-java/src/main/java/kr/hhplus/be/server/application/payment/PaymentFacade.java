@@ -25,6 +25,6 @@ public class PaymentFacade {
         pointService.save(point);
         orderService.saveOrder(order);
         paymentService.savePayment(payment);
-        return PayResult.of(order);
+        return PayResult.of(payment);
     }
 }

@@ -26,7 +26,7 @@ class UserCouponTest {
 
         // then
         assertNotNull(userCoupon);
-        assertEquals(user, userCoupon.getUser());
+        assertEquals(user.getId(), userCoupon.getUserId());
         assertEquals(coupon, userCoupon.getCoupon());
         assertFalse(userCoupon.isUsed());
     }

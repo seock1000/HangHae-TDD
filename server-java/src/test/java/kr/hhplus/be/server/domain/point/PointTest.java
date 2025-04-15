@@ -32,7 +32,7 @@ class PointTest {
         assertEquals(TransactionType.CHARGE, point.getHistories().get(0).getType());
         assertEquals(500, point.getHistories().get(0).getAmount());
         assertEquals(1500, point.getHistories().get(0).getBalance());
-        assertEquals(point.getId(), point.getHistories().get(0).getPoint());
+        assertEquals(point.getId(), point.getHistories().get(0).getPointId());
     }
 
     @Test
@@ -83,7 +83,7 @@ class PointTest {
         assertEquals(TransactionType.USE, point.getHistories().get(0).getType());
         assertEquals(500, point.getHistories().get(0).getAmount());
         assertEquals(500, point.getHistories().get(0).getBalance());
-        assertEquals(point.getId(), point.getHistories().get(0).getPoint());
+        assertEquals(point.getId(), point.getHistories().get(0).getPointId());
     }
 
     @Test
@@ -99,5 +99,20 @@ class PointTest {
 
         // then
         assertEquals(ApiError.UNDER_BALANCE_LIMIT, exception.getApiError());
+    }
+
+    @Test
+    @DisplayName("포인트 사용 시 포인트 사용 금액이 0원 이하일 경우 ApiException(INVALID_USE_AMOUNT)을 발생시킨다.")
+    void use_InvalidUseAmount() {
+        // given
+        Point point = Instancio.of(Point.class)
+                .set(field("balance"), 1000)
+                .create();
+
+        // when
+        ApiException exception = assertThrows(ApiException.class, () -> point.use(0));
+
+        // then
+        assertEquals(ApiError.INVALID_USE_AMOUNT, exception.getApiError());
     }
 }
