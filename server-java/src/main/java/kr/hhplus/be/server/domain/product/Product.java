@@ -45,12 +45,8 @@ public class Product extends BaseTimeEntity {
      * TC
      * 상품의 재고를 증가시킨다.
      */
-    protected void increaseStock(int quantity) {
+    public void increaseStock(int quantity) {
         this.stock += quantity;
-    }
-
-    public RefundedProduct toRefundedProduct() {
-        return RefundedProduct.of(this);
     }
 
     public SoldProduct toSoldProduct() {

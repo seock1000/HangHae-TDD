@@ -49,16 +49,12 @@ public class UserCoupon extends BaseTimeEntity {
     /**
      * 테스트 불필요
      */
-    protected void init() {
+    public void init() {
         this.isUsed = false;
     }
 
     public AppliedCoupon toAppliedCoupon() {
         return AppliedCoupon.of(this);
-    }
-
-    public CanceledCoupon toCanceledCoupon() {
-        return CanceledCoupon.of(this);
     }
 
 }

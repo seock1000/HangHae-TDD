@@ -18,4 +18,8 @@ public class AppliedCoupon {
     public int discount(int amount) {
         return userCoupon.getCoupon().discount(amount);
     }
+
+    public Long getId() {
+        return userCoupon.getId();
+    }
 }
