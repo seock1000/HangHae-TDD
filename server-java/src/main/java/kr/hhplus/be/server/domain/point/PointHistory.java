@@ -15,15 +15,13 @@ public class PointHistory extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "point_id")
-    private Point point;
+    private Long pointId;
     private int amount;
     private int balance;
     private TransactionType type;
 
     private PointHistory(Point point, int amount, TransactionType type) {
-        this.point = point;
+        this.pointId = point.getId();
         this.amount = amount;
         this.balance = point.getBalance();
         this.type = type;

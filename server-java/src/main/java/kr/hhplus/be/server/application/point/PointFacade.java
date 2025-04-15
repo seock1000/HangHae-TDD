@@ -24,7 +24,7 @@ public class PointFacade {
         var user = userService.getUserById(command.userId());
         var point = pointService.getPointByUserId(user.getId());
 
-        pointService.charge(point, command.amount());
+        point.charge(command.amount());
         pointService.save(point);
         return PointResult.of(point);
     }

@@ -5,6 +5,7 @@ import kr.hhplus.be.server.ApiError;
 import kr.hhplus.be.server.ApiException;
 import kr.hhplus.be.server.config.jpa.BaseTimeEntity;
 import lombok.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,8 +19,7 @@ public class Point extends BaseTimeEntity {
     private Long id;
     private long user;
     private int balance;
-    // 포인트 사용내역은 포인트에 의존적이므로 cascade를 사용한다.
-    @OneToMany(mappedBy = "point", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @Transient
     private List<PointHistory> histories = new ArrayList<>();
 
     public Point(Long id, long user, int balance) {
@@ -43,6 +43,13 @@ public class Point extends BaseTimeEntity {
         }
         this.balance += amount;
         this.histories.add(PointHistory.createChargeHistory(this, amount));
+    }
+
+    /**
+     * 테스트 필요없을 듯
+     */
+    public PointDeductor toPointDeductor() {
+        return PointDeductor.of(this);
     }
 
     /**

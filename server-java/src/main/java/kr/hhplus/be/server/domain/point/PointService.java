@@ -27,20 +27,6 @@ public class PointService {
     /**
      * 테스트 필요 없을 듯
      */
-    public void charge(Point point, int amount) {
-        point.charge(amount);
-    }
-
-    /**
-     * 테스트 필요 없을 듯
-     */
-    public void use(Point point, int amount) {
-        point.use(amount);
-    }
-
-    /**
-     * 테스트 필요 없을 듯
-     */
     public void save(Point point) {
         pointRepository.saveWithHistory(point);
     }
