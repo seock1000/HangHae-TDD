@@ -61,7 +61,7 @@ public class OrderService {
     }
 
     public void removeOrderToCancelHandler(Orders order) {
-        orderCancelHandler.register(order.getId());
+        orderCancelHandler.delete(order.getId());
     }
 
     /**

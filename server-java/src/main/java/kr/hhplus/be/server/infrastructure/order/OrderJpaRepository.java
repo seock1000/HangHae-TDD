@@ -14,7 +14,7 @@ public interface OrderJpaRepository extends JpaRepository<Orders, String> {
     @Query(
             "SELECT new kr.hhplus.be.server.domain.order.OrderSalesAmount(oi.productId, SUM(oi.quantity))" +
                     "FROM Orders o INNER JOIN o.orderItems oi " +
-                    "WHERE o.orderDate = :targetDate AND o.status = 'COMPLETED'" +
+                    "WHERE o.orderDate = :targetDate AND o.status = kr.hhplus.be.server.domain.order.OrderStatus.CONFIRMED " +
                     "GROUP BY oi.productId"
     )
     List<OrderSalesAmount> findProductSalesAmountByDate(@Param("targetDate") LocalDate targetDate);

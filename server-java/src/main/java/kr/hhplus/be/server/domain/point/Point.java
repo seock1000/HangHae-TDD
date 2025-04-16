@@ -11,20 +11,21 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Point extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private long user;
+    private long userId;
     private int balance;
     @Transient
     private List<PointHistory> histories = new ArrayList<>();
 
-    public Point(Long id, long user, int balance) {
+    public Point(Long id, long userId, int balance) {
         this.id = id;
-        this.user = user;
+        this.userId = userId;
         this.balance = balance;
     }
 
