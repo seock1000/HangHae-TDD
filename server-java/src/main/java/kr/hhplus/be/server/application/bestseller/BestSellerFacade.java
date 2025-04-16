@@ -16,7 +16,8 @@ public class BestSellerFacade {
 
     private final BestSellerService bestSellerService;
 
-    public List<BestSellerProductInfo> getBestSellersByDate(LocalDate date) {
-        return bestSellerService.getTop5BestSellersByDate(date);
+    @Transactional(readOnly = true)
+    public List<BestSellerProductInfo> getTodayBestSellersByDate() {
+        return bestSellerService.getTop5BestSellersByDate(LocalDate.now());
     }
 }

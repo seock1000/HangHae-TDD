@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.beans.Transient;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class PaymentService {
 

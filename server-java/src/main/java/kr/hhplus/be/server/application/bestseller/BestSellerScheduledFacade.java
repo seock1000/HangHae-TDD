@@ -26,13 +26,17 @@ public class BestSellerScheduledFacade {
     public void saveYesterdaySalesAmounts() {
         var targetDate = LocalDate.now().minusDays(1);
 
+        // 어제의 판매량을 가져온다.
         var salesAmounts = orderService.getSalesAmountByDate(targetDate);
+        // 어제의 판매량을 기준으로 베스트셀러 베이스를 생성한다.
         var bestSellerBases = salesAmounts.stream()
                 .map(it -> BestSellerBase.createWithSalesAmountAndDate(it, targetDate))
                 .toList();
         bestSellerService.saveBaseAll(bestSellerBases);
 
-        var salesStats = bestSellerService.getSalesStatBetween(targetDate.minusDays(3), targetDate);
+        // 어제까지의 3일치 판매량을 가져온다.
+        var salesStats = bestSellerService.getSalesStatBetween(targetDate.minusDays(2), targetDate);
+        // 3일치 판매량을 기준으로 베스트셀러를 생성한다.
         var bestSellers = salesStats.stream()
                 .map(it -> BestSeller.createWithSalesStatAndDate(it, targetDate))
                 .toList();

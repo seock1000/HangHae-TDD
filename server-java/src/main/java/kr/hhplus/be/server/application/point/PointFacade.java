@@ -15,6 +15,7 @@ public class PointFacade {
     private final UserService userService;
     private final PointService pointService;
 
+    @Transactional(readOnly = true)
     public Optional<PointResult> getPointByUserId(Long userId) {
         return pointService.getPointByUserIdWithEmpty(userId)
                 .map(PointResult::of);
