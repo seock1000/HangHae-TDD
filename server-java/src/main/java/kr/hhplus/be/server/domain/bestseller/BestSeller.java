@@ -10,6 +10,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -19,4 +21,15 @@ public class BestSeller extends BaseTimeEntity {
     private Long id;
     private Long productId;
     private int salesAmount;
+    private LocalDate date;
+
+    private BestSeller(Long productId, int salesAmount, LocalDate date) {
+        this.productId = productId;
+        this.salesAmount = salesAmount;
+        this.date = date;
+    }
+
+    public static BestSeller createWithSalesStatAndDate(SalesStat stat, LocalDate date) {
+        return new BestSeller(stat.getProductId(), stat.getAmount(), date);
+    }
 }

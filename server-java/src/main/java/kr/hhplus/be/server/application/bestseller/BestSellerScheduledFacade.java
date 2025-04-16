@@ -1,5 +1,6 @@
 package kr.hhplus.be.server.application.bestseller;
 
+import kr.hhplus.be.server.domain.bestseller.BestSeller;
 import kr.hhplus.be.server.domain.bestseller.BestSellerBase;
 import kr.hhplus.be.server.domain.bestseller.BestSellerService;
 import kr.hhplus.be.server.domain.order.OrderService;
@@ -31,7 +32,10 @@ public class BestSellerScheduledFacade {
                 .toList();
         bestSellerService.saveBaseAll(bestSellerBases);
 
-        var bestSellers = bestSellerService.getTop5BestSellersBefore3Days();
+        var salesStats = bestSellerService.getTop5SalesStatBefore3Days();
+        var bestSellers = salesStats.stream()
+                .map(it -> BestSeller.createWithSalesStatAndDate(it, targetDate))
+                .toList();
         bestSellerService.saveAll(bestSellers);
     }
 

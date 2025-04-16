@@ -3,6 +3,7 @@ package kr.hhplus.be.server.domain.bestseller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -19,7 +20,11 @@ public class BestSellerService {
         bestSellerRepository.saveAll(bestSellers);
     }
 
-    public List<BestSeller> getTop5BestSellersBefore3Days() {
-        return bestSellerRepository.getTopBestSellersBeforeDays(5, 3);
+    public List<SalesStat> getTop5SalesStatBefore3Days() {
+        return bestSellerRepository.getTopBestSellersBeforeDaysByBase(5, 3);
+    }
+
+    public List<BestSellerProductInfo> getBestSellersByDate(LocalDate date) {
+        return bestSellerRepository.getBestSellersByDate(date);
     }
 }
