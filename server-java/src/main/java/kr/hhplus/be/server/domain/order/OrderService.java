@@ -12,6 +12,7 @@ import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +32,10 @@ public class OrderService {
     public Orders getOrderById(String orderId) {
         return orderRepository.findOrderById(orderId)
                 .orElseThrow(() -> ApiException.of(ApiError.ORDER_NOT_FOUND));
+    }
+
+    public List<OrderSalesAmount> getSalesAmountByDate(LocalDate targetDate) {
+        return orderRepository.findOrderItemSalesAmountByDate(targetDate);
     }
 
     /**
@@ -58,20 +63,12 @@ public class OrderService {
     /**
      * 테스트 필요없을 듯
      */
-    public void cancelOrder(Orders order) {
-        order.cancel();
-    }
-
-    /**
-     * 테스트 필요없을 듯
-     */
     public void saveOrder(Orders order) {
         orderRepository.saveOrderWithItems(order);
     }
 
 
-    public void confirmOrder(Orders order) {
-        order.confirm();
+    public void sendOrderData(Orders order) {
         try {
             orderDataPlatform.send(order);
         } catch (Exception e) {

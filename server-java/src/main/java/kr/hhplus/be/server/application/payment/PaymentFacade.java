@@ -25,6 +25,12 @@ public class PaymentFacade {
         pointService.save(point);
         orderService.saveOrder(order);
         paymentService.savePayment(payment);
+
+        try {
+            orderService.sendOrderData(order);
+        } catch (Exception e) {
+            //TODO logging..?
+        }
         return PayResult.of(payment);
     }
 }
