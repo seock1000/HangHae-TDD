@@ -20,11 +20,11 @@ public class BestSellerService {
         bestSellerRepository.saveAll(bestSellers);
     }
 
-    public List<SalesStat> getTop5SalesStatBefore3Days() {
-        return bestSellerRepository.getTopBestSellersBeforeDaysByBase(5, 3);
+    public List<SalesStat> getSalesStatBetween(LocalDate startDate, LocalDate endDate) {
+        return bestSellerRepository.getSalesAmountSumBetween(startDate, endDate);
     }
 
-    public List<BestSellerProductInfo> getBestSellersByDate(LocalDate date) {
-        return bestSellerRepository.getBestSellersByDate(date);
+    public List<BestSellerProductInfo> getTop5BestSellersByDate(LocalDate date) {
+        return bestSellerRepository.getTopBestSellersByDate(5, date);
     }
 }

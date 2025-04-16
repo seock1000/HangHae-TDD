@@ -56,6 +56,9 @@ dependencies {
 
 	// Instancio
 	testImplementation("org.instancio:instancio-junit:5.4.0")
+
+	// Quartz
+	implementation("org.springframework.boot:spring-boot-starter-quartz")
 }
 
 tasks.withType<Test> {

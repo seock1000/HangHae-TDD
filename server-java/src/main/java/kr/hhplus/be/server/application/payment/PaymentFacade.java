@@ -31,6 +31,7 @@ public class PaymentFacade {
         } catch (Exception e) {
             //TODO logging..?
         }
+        orderService.removeOrderToCancelHandler(order);
         return PayResult.of(payment);
     }
 }

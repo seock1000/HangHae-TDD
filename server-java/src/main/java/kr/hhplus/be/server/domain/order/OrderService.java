@@ -60,6 +60,10 @@ public class OrderService {
         orderCancelHandler.register(order.getId());
     }
 
+    public void removeOrderToCancelHandler(Orders order) {
+        orderCancelHandler.register(order.getId());
+    }
+
     /**
      * 테스트 필요없을 듯
      */

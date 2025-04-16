@@ -32,7 +32,7 @@ public class BestSellerScheduledFacade {
                 .toList();
         bestSellerService.saveBaseAll(bestSellerBases);
 
-        var salesStats = bestSellerService.getTop5SalesStatBefore3Days();
+        var salesStats = bestSellerService.getSalesStatBetween(targetDate.minusDays(3), targetDate);
         var bestSellers = salesStats.stream()
                 .map(it -> BestSeller.createWithSalesStatAndDate(it, targetDate))
                 .toList();

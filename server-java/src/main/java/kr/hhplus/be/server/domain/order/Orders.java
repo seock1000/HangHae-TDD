@@ -13,6 +13,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ public class Orders extends BaseTimeEntity {
     private int totalAmount;
     private int discountAmount;
     private OrderStatus status;
+    private LocalDate orderDate;
     @OneToMany(mappedBy = "order", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OrderItem> orderItems = new ArrayList<>();
 
@@ -72,6 +74,7 @@ public class Orders extends BaseTimeEntity {
             throw ApiException.of(ApiError.ORDER_CANNOT_BE_CONFIRMED);
         }
         this.status = OrderStatus.CONFIRMED;
+        this.orderDate = LocalDate.now();
     }
 
     public void cancel() {

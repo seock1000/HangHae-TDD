@@ -8,7 +8,7 @@ public interface BestSellerRepository {
     void saveBaseAll(List<BestSellerBase> bestSellerBases);
     void saveAll(List<BestSeller> bestSellers);
 
-    List<SalesStat> getTopBestSellersBeforeDaysByBase(int i, int i1);
+    List<SalesStat> getSalesAmountSumBetween(LocalDate startDate, LocalDate endDate);
 
-    List<BestSellerProductInfo> getBestSellersByDate(LocalDate date);
+    List<BestSellerProductInfo> getTopBestSellersByDate(int limit, LocalDate date);
 }

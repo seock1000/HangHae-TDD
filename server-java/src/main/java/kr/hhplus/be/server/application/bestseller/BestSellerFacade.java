@@ -17,6 +17,6 @@ public class BestSellerFacade {
     private final BestSellerService bestSellerService;
 
     public List<BestSellerProductInfo> getBestSellersByDate(LocalDate date) {
-        return bestSellerService.getBestSellersByDate(date);
+        return bestSellerService.getTop5BestSellersByDate(date);
     }
 }
