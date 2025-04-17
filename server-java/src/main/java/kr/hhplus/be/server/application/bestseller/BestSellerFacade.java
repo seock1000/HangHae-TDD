@@ -18,6 +18,6 @@ public class BestSellerFacade {
 
     @Transactional(readOnly = true)
     public List<BestSellerProductInfo> getTodayBestSellersByDate() {
-        return bestSellerService.getTop5BestSellersByDate(LocalDate.now());
+        return bestSellerService.getTop5BestSellersByDate(LocalDate.now().minusDays(1));
     }
 }
