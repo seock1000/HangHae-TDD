@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-class CouponFacadeTest {
+class CouponFacadeIntegrationTest {
 
     @Autowired
     private CouponFacade couponFacade;

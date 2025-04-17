@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-class OrderFacadeTest {
+class OrderFacadeIntegrationTest {
 
     @Autowired
     private OrderFacade orderFacade;
