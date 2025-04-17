@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2025-04-17T15:41:37" hostname="yeomseogcheon-ui-MacBookPro.local" time="1.423">
+  <properties/>
+  <testcase name="여러 스레드에서 동시에 주문 취소 요청 시, 하나의 요청만 성공하며 상품 재고 관리가 정확하게 되어야 한다." classname="kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest" time="1.423">
+    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;110&gt; but was: &lt;100&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;110&gt; but was: &lt;100&gt;
+	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at app//org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
+	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:145)
+	at app//org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:531)
+	at app//kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest.testConcurrentCancelOrder(OrderFacadeConcurrentTest.java:351)
+	at java.base@17.0.11/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
+</failure>
+  </testcase>
+  <system-out><![CDATA[15:40:58.645 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest]: OrderFacadeConcurrentTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+15:40:58.876 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.1)
+
+2025-04-17T15:40:59.568Z  INFO 1977 --- [hhplus] [    Test worker] k.h.b.s.a.o.OrderFacadeConcurrentTest    : Starting OrderFacadeConcurrentTest using Java 17.0.11 with PID 1977 (started by yeomseogcheon in /Users/yeomseogcheon/Documents/workspace/study/HangHae-TDD/server-java)
+2025-04-17T15:40:59.569Z  INFO 1977 --- [hhplus] [    Test worker] k.h.b.s.a.o.OrderFacadeConcurrentTest    : The following 1 profile is active: "local"
+2025-04-17T15:41:00.813Z  INFO 1977 --- [hhplus] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-17T15:41:00.909Z  INFO 1977 --- [hhplus] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 84 ms. Found 10 JPA repository interfaces.
+2025-04-17T15:41:01.548Z  INFO 1977 --- [hhplus] [    Test worker] org.testcontainers.images.PullPolicy     : Image pull policy will be performed by: DefaultPullPolicy()
+2025-04-17T15:41:01.552Z  INFO 1977 --- [hhplus] [    Test worker] o.t.utility.ImageNameSubstitutor         : Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-04-17T15:41:01.562Z  INFO 1977 --- [hhplus] [    Test worker] org.testcontainers.DockerClientFactory   : Testcontainers version: 1.20.4
+2025-04-17T15:41:01.790Z  INFO 1977 --- [hhplus] [    Test worker] o.t.d.DockerClientProviderStrategy       : Loaded org.testcontainers.dockerclient.UnixSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2025-04-17T15:41:02.112Z  INFO 1977 --- [hhplus] [    Test worker] o.t.d.DockerClientProviderStrategy       : Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+2025-04-17T15:41:02.114Z  INFO 1977 --- [hhplus] [    Test worker] org.testcontainers.DockerClientFactory   : Docker host IP address is localhost
+2025-04-17T15:41:02.146Z  INFO 1977 --- [hhplus] [    Test worker] org.testcontainers.DockerClientFactory   : Connected to docker: 
+  Server Version: 27.5.1
+  API Version: 1.47
+  Operating System: Docker Desktop
+  Total Memory: 7838 MB
+  Labels: 
+    com.docker.desktop.address=unix:///Users/yeomseogcheon/Library/Containers/com.docker.docker/Data/docker-cli.sock
+2025-04-17T15:41:02.176Z  INFO 1977 --- [hhplus] [    Test worker] tc.testcontainers/ryuk:0.11.0            : Creating container for image: testcontainers/ryuk:0.11.0
+2025-04-17T15:41:02.347Z  INFO 1977 --- [hhplus] [    Test worker] o.t.utility.RegistryAuthLocator          : Credential helper/store (docker-credential-desktop) does not have credentials for https://index.docker.io/v1/
+2025-04-17T15:41:02.460Z  INFO 1977 --- [hhplus] [    Test worker] tc.testcontainers/ryuk:0.11.0            : Container testcontainers/ryuk:0.11.0 is starting: add0160db672dcc929cbfb58dc099a9b73fbbe1ee5ada8633b88ce00e6595111
+2025-04-17T15:41:02.882Z  INFO 1977 --- [hhplus] [    Test worker] tc.testcontainers/ryuk:0.11.0            : Container testcontainers/ryuk:0.11.0 started in PT0.705894S
+2025-04-17T15:41:02.922Z  INFO 1977 --- [hhplus] [    Test worker] o.t.utility.RyukResourceReaper           : Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2025-04-17T15:41:02.923Z  INFO 1977 --- [hhplus] [    Test worker] org.testcontainers.DockerClientFactory   : Checking the system...
+2025-04-17T15:41:02.923Z  INFO 1977 --- [hhplus] [    Test worker] org.testcontainers.DockerClientFactory   : ✔︎ Docker server version should be at least 1.6.0
+2025-04-17T15:41:02.927Z  INFO 1977 --- [hhplus] [    Test worker] tc.mysql:8.0                             : Creating container for image: mysql:8.0
+2025-04-17T15:41:03.021Z  INFO 1977 --- [hhplus] [    Test worker] tc.mysql:8.0                             : Container mysql:8.0 is starting: 7cb675341c384599e833a6304d5ad8296fb7c13102da2934cd06f75af47a0b83
+2025-04-17T15:41:03.484Z  INFO 1977 --- [hhplus] [    Test worker] tc.mysql:8.0                             : Waiting for database connection to become available at jdbc:mysql://localhost:62418/hhplus using query 'SELECT 1'
+2025-04-17T15:41:25.570Z  INFO 1977 --- [hhplus] [    Test worker] tc.mysql:8.0                             : Container mysql:8.0 started in PT22.642898S
+2025-04-17T15:41:25.573Z  INFO 1977 --- [hhplus] [    Test worker] tc.mysql:8.0                             : Container is started (JDBC URL: jdbc:mysql://localhost:62418/hhplus)
+2025-04-17T15:41:26.718Z  INFO 1977 --- [hhplus] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-17T15:41:26.819Z  INFO 1977 --- [hhplus] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.4.Final
+2025-04-17T15:41:26.894Z  INFO 1977 --- [hhplus] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-17T15:41:27.217Z  INFO 1977 --- [hhplus] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-17T15:41:27.248Z  INFO 1977 --- [hhplus] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HangHaePlusDataSource - Starting...
+2025-04-17T15:41:27.401Z  INFO 1977 --- [hhplus] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HangHaePlusDataSource - Added connection com.mysql.cj.jdbc.ConnectionImpl@524418a2
+2025-04-17T15:41:27.403Z  INFO 1977 --- [hhplus] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HangHaePlusDataSource - Start completed.
+2025-04-17T15:41:27.439Z  WARN 1977 --- [hhplus] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-17T15:41:27.440Z  WARN 1977 --- [hhplus] [    Test worker] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-04-17T15:41:27.459Z  INFO 1977 --- [hhplus] [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HangHaePlusDataSource)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-17T15:41:29.629Z  INFO 1977 --- [hhplus] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-17T15:41:30.264Z  INFO 1977 --- [hhplus] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-17T15:41:30.967Z  INFO 1977 --- [hhplus] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-17T15:41:32.869Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2025-04-17T15:41:32.874Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.simpl.SimpleThreadPool        : Job execution threads will use class loader of thread: Test worker
+2025-04-17T15:41:32.893Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2025-04-17T15:41:32.893Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.2 created.
+2025-04-17T15:41:32.894Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2025-04-17T15:41:32.895Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.2) 'DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2025-04-17T15:41:32.896Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'DefaultQuartzScheduler' initialized from default resource file in Quartz package: 'quartz.properties'
+2025-04-17T15:41:32.896Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.2
+2025-04-17T15:41:32.896Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.core.QuartzScheduler          : Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED started.
+2025-04-17T15:41:34.554Z  INFO 1977 --- [hhplus] [    Test worker] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-04-17T15:41:37.185Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2025-04-17T15:41:37.187Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2025-04-17T15:41:37.187Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.2 created.
+2025-04-17T15:41:37.188Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2025-04-17T15:41:37.188Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2025-04-17T15:41:37.188Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2025-04-17T15:41:37.189Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.2
+2025-04-17T15:41:37.189Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@2c193600
+2025-04-17T15:41:37.286Z  INFO 1977 --- [hhplus] [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2025-04-17T15:41:37.441Z  INFO 1977 --- [hhplus] [    Test worker] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2025-04-17T15:41:37.441Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2025-04-17T15:41:37.483Z  INFO 1977 --- [hhplus] [    Test worker] k.h.b.s.a.o.OrderFacadeConcurrentTest    : Started OrderFacadeConcurrentTest in 38.449 seconds (process running for 39.791)
+2025-04-17T15:41:38.852Z ERROR 1977 --- [hhplus] [eduler_Worker-1] org.quartz.core.JobRunShell              : Job cancelOrderJob.2299ad76-a3b8-404f-99b1-f6ebaba386d3 threw an unhandled Exception: 
+
+java.lang.NullPointerException: Cannot invoke "org.springframework.web.context.WebApplicationContext.getBean(String)" because "appContext" is null
+	at kr.hhplus.be.server.infrastructure.order.CancelOrderJob.executeInternal(CancelOrderJob.java:17) ~[main/:na]
+	at org.springframework.scheduling.quartz.QuartzJobBean.execute(QuartzJobBean.java:75) ~[spring-context-support-6.2.1.jar:6.2.1]
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.3.2.jar:na]
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573) ~[quartz-2.3.2.jar:na]
+
+2025-04-17T15:41:38.859Z ERROR 1977 --- [hhplus] [eduler_Worker-1] org.quartz.core.ErrorLogger              : Job (cancelOrderJob.2299ad76-a3b8-404f-99b1-f6ebaba386d3 threw an exception.
+
+org.quartz.SchedulerException: Job threw an unhandled exception.
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:213) ~[quartz-2.3.2.jar:na]
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573) ~[quartz-2.3.2.jar:na]
+Caused by: java.lang.NullPointerException: Cannot invoke "org.springframework.web.context.WebApplicationContext.getBean(String)" because "appContext" is null
+	at kr.hhplus.be.server.infrastructure.order.CancelOrderJob.executeInternal(CancelOrderJob.java:17) ~[main/:na]
+	at org.springframework.scheduling.quartz.QuartzJobBean.execute(QuartzJobBean.java:75) ~[spring-context-support-6.2.1.jar:6.2.1]
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.3.2.jar:na]
+	... 1 common frames omitted
+
+]]></system-out>
+  <system-err><![CDATA[kr.hhplus.be.server.ApiException: Order cannot be canceled
+	at kr.hhplus.be.server.ApiException.of(ApiException.java:15)
+	at kr.hhplus.be.server.domain.order.Orders.cancel(Orders.java:82)
+	at kr.hhplus.be.server.application.order.OrderFacade.cancelOrder(OrderFacade.java:52)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at kr.hhplus.be.server.application.order.OrderFacade$$SpringCGLIB$$0.cancelOrder(<generated>)
+	at kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest.lambda$testConcurrentCancelOrder$15(OrderFacadeConcurrentTest.java:341)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1796)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165)
+]]></system-err>
+</testsuite>
