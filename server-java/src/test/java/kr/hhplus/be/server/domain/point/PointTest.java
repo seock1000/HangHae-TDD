@@ -32,7 +32,7 @@ class PointTest {
         assertEquals(TransactionType.CHARGE, point.getHistories().get(0).getType());
         assertEquals(500, point.getHistories().get(0).getAmount());
         assertEquals(1500, point.getHistories().get(0).getBalance());
-        assertEquals(point.getId(), point.getHistories().get(0).getPointId());
+        assertEquals(point, point.getHistories().get(0).getPoint());
     }
 
     @Test
@@ -83,7 +83,7 @@ class PointTest {
         assertEquals(TransactionType.USE, point.getHistories().get(0).getType());
         assertEquals(500, point.getHistories().get(0).getAmount());
         assertEquals(500, point.getHistories().get(0).getBalance());
-        assertEquals(point.getId(), point.getHistories().get(0).getPointId());
+        assertEquals(point, point.getHistories().get(0).getPoint());
     }
 
     @Test

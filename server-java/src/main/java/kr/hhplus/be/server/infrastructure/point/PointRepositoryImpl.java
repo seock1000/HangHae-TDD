@@ -19,7 +19,7 @@ public class PointRepositoryImpl implements PointRepository {
     }
 
     @Override
-    public Point saveWithHistory(Point point) {
-        return pointJpaRepository.save(point);
+    public void saveWithHistory(Point point) {
+        pointJpaRepository.save(point);
     }
 }

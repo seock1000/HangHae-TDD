@@ -5,9 +5,7 @@ import kr.hhplus.be.server.ApiError;
 import kr.hhplus.be.server.ApiException;
 import kr.hhplus.be.server.config.jpa.BaseTimeEntity;
 import lombok.*;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +18,8 @@ public class Point extends BaseTimeEntity {
     private Long id;
     private long userId;
     private int balance;
-    @Transient
-    private List<PointHistory> histories = new ArrayList<>();
+    @OneToMany(mappedBy = "point", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<PointHistory> histories = new ArrayList<>();
 
     public Point(Long id, long userId, int balance) {
         this.id = id;
