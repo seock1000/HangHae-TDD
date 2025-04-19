@@ -32,7 +32,7 @@ class PointServiceTest {
         // given
         long userId = 1L;
         Point point = Instancio.of(Point.class)
-                .set(field("user"), userId)
+                .set(field("userId"), userId)
                 .create();
         when(pointRepository.findByUserId(userId)).thenReturn(Optional.of(point));
 
@@ -64,7 +64,7 @@ class PointServiceTest {
         // given
         long userId = 1L;
         Point point = Instancio.of(Point.class)
-                .set(field("user"), userId)
+                .set(field("userId"), userId)
                 .create();
         when(pointRepository.findByUserId(userId)).thenReturn(Optional.of(point));
 

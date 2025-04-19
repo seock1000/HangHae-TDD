@@ -15,6 +15,7 @@ public class PointFacade {
     private final UserService userService;
     private final PointService pointService;
 
+    @Transactional(readOnly = true)
     public Optional<PointResult> getPointByUserId(Long userId) {
         return pointService.getPointByUserIdWithEmpty(userId)
                 .map(PointResult::of);
@@ -24,7 +25,7 @@ public class PointFacade {
         var user = userService.getUserById(command.userId());
         var point = pointService.getPointByUserId(user.getId());
 
-        pointService.charge(point, command.amount());
+        point.charge(command.amount());
         pointService.save(point);
         return PointResult.of(point);
     }

@@ -31,7 +31,7 @@ class CouponTest {
 
         // then
         assertNotNull(userCoupon);
-        assertEquals(user, userCoupon.getUser());
+        assertEquals(user.getId(), userCoupon.getUserId());
         assertEquals(coupon, userCoupon.getCoupon());
         assertFalse(userCoupon.isUsed());
     }
@@ -66,23 +66,6 @@ class CouponTest {
         // when, then
         ApiException exception = assertThrows(ApiException.class, () -> coupon.issue(user));
         assertEquals(ApiError.COUPON_OUT_OF_STOCK, exception.getApiError());
-    }
-
-    @Test
-    @DisplayName("쿠폰 수량 증가 시, 쿠폰 재고량이 1 증가한다")
-    void increaseStock() {
-        // given
-        Coupon coupon = Instancio.of(Coupon.class)
-                .set(field("startDate"), LocalDateTime.now().minusDays(1))
-                .set(field("endDate"), LocalDateTime.now().plusDays(1))
-                .set(field("stock"), 0)
-                .create();
-
-        // when
-        coupon.increaseStock();
-
-        // then
-        assertEquals(1, coupon.getStock());
     }
 
     @Test

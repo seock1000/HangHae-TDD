@@ -27,29 +27,30 @@ public class OrderFacade {
     public OrderResult placeOrder(PlaceOrderCommand command) {
         var user = userService.getUserById(command.userId());
         List<Pair<Product, Integer>> productAndQuantity = command.items().stream()
-                .map(item -> {
-                    Product product = productService.getProductById(item.productId());
-                    return Pair.of(product, item.quantity());
-                })
+                .map(it -> Pair.of(productService.getProductById(it.productId()), it.quantity()))
                 .toList();
 
-        Orders order;
-        if(command.useCouponId() == null) {
-            order = orderService.createOrder(user, productAndQuantity);
-        } else {
-            UserCoupon userCoupon = couponService.getUserCouponById(command.useCouponId());
-            order = orderService.createOrderWithCoupon(user, userCoupon, productAndQuantity);
-            couponService.saveUserCoupon(userCoupon);
-        }
+        Orders order = orderService.createOrder(user, productAndQuantity.stream()
+                .map(it -> Pair.of(it.getFirst().toSoldProduct(), it.getSecond()))
+                .toList());
 
-        orderService.saveOrder(order);
+        if (command.useCouponId() != null) {
+            var coupon = couponService.getUserCouponById(command.useCouponId());
+            order.applyCoupon(coupon.toAppliedCoupon());
+            couponService.saveUserCoupon(coupon);
+        }
         productAndQuantity.forEach(pair -> productService.save(pair.getFirst()));
+        orderService.saveOrder(order);
+
+        orderService.registerOrderToCancelHandler(order);
 
         return new OrderResult(order.getId());
     }
 
     public OrderResult cancelOrder(CancelOrderCommand command) {
         var order = orderService.getOrderById(command.orderId());
+        order.cancel();
+        orderService.saveOrder(order);
 
         order.getOrderItems().forEach(item -> {
             var product = productService.getProductById(item.getProductId());
@@ -63,8 +64,6 @@ public class OrderFacade {
             couponService.saveUserCoupon(userCoupon);
         }
 
-        order.cancel();
-        orderService.saveOrder(order);
         return new OrderResult(order.getId());
     }
 }

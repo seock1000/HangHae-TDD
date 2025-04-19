@@ -14,6 +14,7 @@ public enum ApiError {
     INVALID_ORDER_QUANTITY(HttpStatus.BAD_REQUEST, "Invalid order quantity"),
     INVALID_ORDER_ITEMS(HttpStatus.BAD_REQUEST, "Invalid order items"),
     INVALID_ORDER_ID(HttpStatus.BAD_REQUEST, "Invalid order id"),
+    ORDER_COUPON_DISCOUNT_AMOUNT_EXCEEDS_TOTAL_AMOUNT(HttpStatus.BAD_REQUEST, "Coupon discount amount exceeds total amount"),
 
     //coupon
     COUPON_NOT_FOUND(HttpStatus.NOT_FOUND, "Coupon not found"),

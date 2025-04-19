@@ -6,6 +6,6 @@ public interface PointRepository {
 
     public Optional<Point> findByUserId(long userId);
 
-    public Point saveWithHistory(Point point);
+    public void saveWithHistory(Point point);
 
 }

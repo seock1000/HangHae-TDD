@@ -18,6 +18,7 @@ public class CouponFacade {
     private final CouponService couponService;
     private final UserService userService;
 
+    @Transactional(readOnly = true)
     public List<UserCouponInfo> getUserCouponInfosByUser(GetUserCouponCommand command) {
         return couponService.getUserCouponInfosByUser(command);
     }

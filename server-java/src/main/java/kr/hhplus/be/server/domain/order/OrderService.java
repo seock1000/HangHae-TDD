@@ -2,19 +2,21 @@ package kr.hhplus.be.server.domain.order;
 
 import kr.hhplus.be.server.ApiError;
 import kr.hhplus.be.server.ApiException;
+import kr.hhplus.be.server.domain.coupon.AppliedCoupon;
 import kr.hhplus.be.server.domain.coupon.UserCoupon;
 import kr.hhplus.be.server.domain.product.Product;
+import kr.hhplus.be.server.domain.product.SoldProduct;
 import kr.hhplus.be.server.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class OrderService {
 
@@ -31,49 +33,34 @@ public class OrderService {
                 .orElseThrow(() -> ApiException.of(ApiError.ORDER_NOT_FOUND));
     }
 
+    public List<OrderSalesAmount> getSalesAmountByDate(LocalDate targetDate) {
+        return orderRepository.findOrderItemSalesAmountByDate(targetDate);
+    }
+
     /**
      * TC
      * 유저 쿠폰이 있으면 쿠폰을 적용한다.
      * 유저 쿠폰이 없으면 쿠폰을 적용하지 않는다.
      */
-    public Orders createOrder(User user, List<Pair<Product, Integer>> productAndQuantity) {
+    public Orders createOrder(User user, List<Pair<SoldProduct, Integer>> productAndQuantity) {
         String orderId = orderIdGenerator.gen();
 
         Orders order = Orders.createWithIdAndUser(orderId, user);
         productAndQuantity.forEach(pair -> {
-            Product product = pair.getFirst();
+            SoldProduct product = pair.getFirst();
             int quantity = pair.getSecond();
             order.addProduct(product, quantity);
         });
 
-        orderCancelHandler.register(order.getId());
-
         return order;
     }
 
-    public Orders createOrderWithCoupon(User user, UserCoupon userCoupon, List<Pair<Product, Integer>> productAndQuantity) {
-        String orderId = orderIdGenerator.gen();
-
-        Orders order = Orders.createWithIdAndUser(orderId, user);
-        productAndQuantity.forEach(pair -> {
-            Product product = pair.getFirst();
-            int quantity = pair.getSecond();
-            order.addProduct(product, quantity);
-        });
-        if (userCoupon != null) {
-            order.applyCoupon(userCoupon);
-        }
-
+    public void registerOrderToCancelHandler(Orders order) {
         orderCancelHandler.register(order.getId());
-
-        return order;
     }
 
-    /**
-     * 테스트 필요없을 듯
-     */
-    public void cancelOrder(Orders order) {
-        order.cancel();
+    public void removeOrderToCancelHandler(Orders order) {
+        orderCancelHandler.delete(order.getId());
     }
 
     /**
@@ -84,8 +71,7 @@ public class OrderService {
     }
 
 
-    public void confirmOrder(Orders order) {
-        order.confirm();
+    public void sendOrderData(Orders order) {
         try {
             orderDataPlatform.send(order);
         } catch (Exception e) {

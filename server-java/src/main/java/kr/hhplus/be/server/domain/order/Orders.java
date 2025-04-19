@@ -1,30 +1,37 @@
 package kr.hhplus.be.server.domain.order;
 
-import jakarta.persistence.criteria.Order;
+import jakarta.persistence.*;
 import kr.hhplus.be.server.ApiError;
 import kr.hhplus.be.server.ApiException;
-import kr.hhplus.be.server.domain.coupon.Coupon;
+import kr.hhplus.be.server.config.jpa.BaseTimeEntity;
+import kr.hhplus.be.server.domain.coupon.AppliedCoupon;
 import kr.hhplus.be.server.domain.coupon.UserCoupon;
 import kr.hhplus.be.server.domain.product.Product;
+import kr.hhplus.be.server.domain.product.SoldProduct;
 import kr.hhplus.be.server.domain.user.User;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+@Entity
 @Getter
-public class Orders {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Orders extends BaseTimeEntity {
+    @Id
     private String id;
     private Long user;
     private Long couponId;
     private int totalAmount;
     private int discountAmount;
     private OrderStatus status;
-    private List<OrderItem> orderItems;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private LocalDate orderDate;
+    @OneToMany(mappedBy = "order", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     private Orders(String id, Long user, Long couponId, int totalAmount, int discountAmount, OrderStatus status) {
         this.id = id;
@@ -33,16 +40,15 @@ public class Orders {
         this.discountAmount = discountAmount;
         this.couponId = couponId;
         this.status = status;
-        this.orderItems = new ArrayList<>();
     }
 
     public static Orders createWithIdAndUser(String id, User user) {
         return new Orders(id, user.getId(), null, 0, 0, OrderStatus.PENDING);
     }
 
-    public void addProduct(Product product, int quantity) {
-        product.decreaseStock(quantity);
-        OrderItem orderItem = OrderItem.create(this.id, product, quantity);
+    public void addProduct(SoldProduct product, int quantity) {
+        product.deductStock(quantity);
+        OrderItem orderItem = OrderItem.create(this, product, quantity);
         totalAmount += orderItem.getAmount();
         orderItems.add(orderItem);
     }
@@ -50,21 +56,25 @@ public class Orders {
     /**
      * 이미 적용된 쿠폰이 존재할 시 ORDER_ALREADY_COUPON_APPLIED 예외가 발생한다.
      */
-    public void applyCoupon(UserCoupon userCoupon) {
+    public void applyCoupon(AppliedCoupon coupon) {
         if(isCouponUsed()) {
             throw ApiException.of(ApiError.ORDER_ALREADY_COUPON_APPLIED);
         }
-        userCoupon.use();
-        this.couponId = userCoupon.getId();
-        this.discountAmount = userCoupon.discount(totalAmount);
+        this.discountAmount = coupon.discount(totalAmount);
+        if(this.totalAmount < this.discountAmount) {
+            throw ApiException.of(ApiError.ORDER_COUPON_DISCOUNT_AMOUNT_EXCEEDS_TOTAL_AMOUNT);
+        }
         this.totalAmount -= this.discountAmount;
+        this.couponId = coupon.getId();
+        coupon.use();
     }
 
-    public void confirm() {
+    protected void confirm() {
         if (!this.status.equals(OrderStatus.PENDING)) {
             throw ApiException.of(ApiError.ORDER_CANNOT_BE_CONFIRMED);
         }
         this.status = OrderStatus.CONFIRMED;
+        this.orderDate = LocalDate.now();
     }
 
     public void cancel() {
@@ -79,6 +89,10 @@ public class Orders {
      */
     public boolean isCouponUsed() {
         return couponId != null;
+    }
+
+    public PaidOrder toPaidOrder() {
+        return PaidOrder.of(this);
     }
 
 }

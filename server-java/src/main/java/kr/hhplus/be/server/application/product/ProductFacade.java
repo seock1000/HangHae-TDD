@@ -17,6 +17,7 @@ public class ProductFacade {
     /**
      * 테스트 필요 없을 듯
      */
+    @Transactional(readOnly = true)
     public List<ProductResult> getProductAll() {
         return productService.getAllProducts()
                 .stream()
