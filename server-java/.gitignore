@@ -1,0 +1,28 @@
+# Gradle build
+/build/
+!.gradle
+
+# IDE 설정 파일들
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# OS 파일
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Java / Kotlin
+*.class
+*.jar
+*.war
+*.ear
+
+# 기타 캐시나 백업
+*.swp
+*.swo
+*.bak
