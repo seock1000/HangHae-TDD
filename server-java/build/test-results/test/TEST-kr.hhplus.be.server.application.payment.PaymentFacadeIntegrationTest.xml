@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.application.payment.PaymentFacadeIntegrationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-20T04:06:09" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.119">
+<testsuite name="kr.hhplus.be.server.application.payment.PaymentFacadeIntegrationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-20T04:24:11" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.058">
   <properties/>
-  <testcase name="주문 내역 결제 시, 주문 금액이 보유 포인트보다 작거나 같고 주문 상태가 PENDING이라면 결제에 성공한다." classname="kr.hhplus.be.server.application.payment.PaymentFacadeIntegrationTest" time="0.119"/>
-  <system-out><![CDATA[2025-04-20T04:06:09.454Z  INFO 73903 --- [hhplus] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kr.hhplus.be.server.application.payment.PaymentFacadeIntegrationTest]: PaymentFacadeIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-04-20T04:06:09.498Z  INFO 73903 --- [hhplus] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.payment.PaymentFacadeIntegrationTest
+  <testcase name="주문 내역 결제 시, 주문 금액이 보유 포인트보다 작거나 같고 주문 상태가 PENDING이라면 결제에 성공한다." classname="kr.hhplus.be.server.application.payment.PaymentFacadeIntegrationTest" time="0.058"/>
+  <system-out><![CDATA[2025-04-20T04:24:11.195Z  INFO 75376 --- [hhplus] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kr.hhplus.be.server.application.payment.PaymentFacadeIntegrationTest]: PaymentFacadeIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-04-20T04:24:11.221Z  INFO 75376 --- [hhplus] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.payment.PaymentFacadeIntegrationTest
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

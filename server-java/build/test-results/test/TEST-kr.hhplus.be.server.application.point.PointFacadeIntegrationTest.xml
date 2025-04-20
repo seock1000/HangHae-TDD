@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.application.point.PointFacadeIntegrationTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-04-20T04:06:10" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.178">
+<testsuite name="kr.hhplus.be.server.application.point.PointFacadeIntegrationTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-04-20T04:24:11" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.147">
   <properties/>
-  <testcase name="포인트 충전 시, 포인트가 충전되고 충전내역이 생성된다." classname="kr.hhplus.be.server.application.point.PointFacadeIntegrationTest" time="0.101"/>
-  <testcase name="포인트 조회 시, 받은 유저 ID에 대한 포인트가 없으면 Optional.empty()를 반환한다." classname="kr.hhplus.be.server.application.point.PointFacadeIntegrationTest" time="0.031"/>
-  <testcase name="포인트 조회 시, 받은 유저 ID에 대한 포인트가 있으면 Optional.of(PointResult)를 반환한다." classname="kr.hhplus.be.server.application.point.PointFacadeIntegrationTest" time="0.042"/>
-  <system-out><![CDATA[2025-04-20T04:06:10.367Z  INFO 73903 --- [hhplus] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kr.hhplus.be.server.application.point.PointFacadeIntegrationTest]: PointFacadeIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-04-20T04:06:10.378Z  INFO 73903 --- [hhplus] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.point.PointFacadeIntegrationTest
+  <testcase name="포인트 충전 시, 포인트가 충전되고 충전내역이 생성된다." classname="kr.hhplus.be.server.application.point.PointFacadeIntegrationTest" time="0.091"/>
+  <testcase name="포인트 조회 시, 받은 유저 ID에 대한 포인트가 없으면 Optional.empty()를 반환한다." classname="kr.hhplus.be.server.application.point.PointFacadeIntegrationTest" time="0.021"/>
+  <testcase name="포인트 조회 시, 받은 유저 ID에 대한 포인트가 있으면 Optional.of(PointResult)를 반환한다." classname="kr.hhplus.be.server.application.point.PointFacadeIntegrationTest" time="0.032"/>
+  <system-out><![CDATA[2025-04-20T04:24:11.292Z  INFO 75376 --- [hhplus] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kr.hhplus.be.server.application.point.PointFacadeIntegrationTest]: PointFacadeIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-04-20T04:24:11.301Z  INFO 75376 --- [hhplus] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.point.PointFacadeIntegrationTest
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

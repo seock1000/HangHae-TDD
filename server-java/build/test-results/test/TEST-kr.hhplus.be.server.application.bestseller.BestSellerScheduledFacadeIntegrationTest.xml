@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.application.bestseller.BestSellerScheduledFacadeIntegrationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-20T04:06:08" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.289">
+<testsuite name="kr.hhplus.be.server.application.bestseller.BestSellerScheduledFacadeIntegrationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-20T04:24:10" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.22">
   <properties/>
-  <testcase name="어제의 판매량을 가져와 best_seller_base 테이블에 저장하고, 어제의 판매량을 기준으로 3일치 판매량을 합해 best_seller 테이블에 저장한다." classname="kr.hhplus.be.server.application.bestseller.BestSellerScheduledFacadeIntegrationTest" time="0.289"/>
-  <system-out><![CDATA[2025-04-20T04:06:08.434Z  INFO 73903 --- [hhplus] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kr.hhplus.be.server.application.bestseller.BestSellerScheduledFacadeIntegrationTest]: BestSellerScheduledFacadeIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-04-20T04:06:08.443Z  INFO 73903 --- [hhplus] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.bestseller.BestSellerScheduledFacadeIntegrationTest
+  <testcase name="어제의 판매량을 가져와 best_seller_base 테이블에 저장하고, 어제의 판매량을 기준으로 3일치 판매량을 합해 best_seller 테이블에 저장한다." classname="kr.hhplus.be.server.application.bestseller.BestSellerScheduledFacadeIntegrationTest" time="0.22"/>
+  <system-out><![CDATA[2025-04-20T04:24:10.430Z  INFO 75376 --- [hhplus] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kr.hhplus.be.server.application.bestseller.BestSellerScheduledFacadeIntegrationTest]: BestSellerScheduledFacadeIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-04-20T04:24:10.439Z  INFO 75376 --- [hhplus] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.bestseller.BestSellerScheduledFacadeIntegrationTest
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

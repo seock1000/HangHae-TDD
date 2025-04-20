@@ -58,7 +58,7 @@ public class OrderFacade {
 
         if(order.isCouponUsed()) {
             var userCoupon = couponService.getUserCouponById(order.getCouponId());
-            userCoupon.init();
+            userCoupon.cancelUse();
             couponService.saveUserCoupon(userCoupon);
         }
 

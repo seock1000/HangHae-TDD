@@ -29,7 +29,7 @@
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">2</div>
+<div class="counter">0</div>
 <p>failures</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.072s</div>
+<div class="counter">0.070s</div>
 <p>duration</p>
 </div>
 </td>
@@ -50,8 +50,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox failures" id="successRate">
-<div class="percent">0%</div>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
 <p>successful</p>
 </div>
 </td>
@@ -61,55 +61,13 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Failed tests</a>
+<a href="#tab0">Tests</a>
 </li>
 <li>
-<a href="#tab1">Tests</a>
-</li>
-<li>
-<a href="#tab2">Standard output</a>
+<a href="#tab1">Standard output</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
-<h2>Failed tests</h2>
-<div class="test">
-<a name="getProductAll()"></a>
-<h3 class="failures">상품 전체 조회 테스트</h3>
-<span class="code">
-<pre>org.opentest4j.AssertionFailedError: expected: &lt;true&gt; but was: &lt;false&gt;
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at app//org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
-	at app//org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
-	at app//org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
-	at app//org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)
-	at app//kr.hhplus.be.server.application.product.ProductFacadeIntegrationTest.getProductAll(ProductFacadeIntegrationTest.java:35)
-	at java.base@17.0.11/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="getProductAllWithProducts()"></a>
-<h3 class="failures">상품 전체 조회 테스트 - 상품이 존재하는 경우</h3>
-<span class="code">
-<pre>org.opentest4j.AssertionFailedError: expected: &lt;2&gt; but was: &lt;3&gt;
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at app//org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
-	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
-	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:145)
-	at app//org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:531)
-	at app//kr.hhplus.be.server.application.product.ProductFacadeIntegrationTest.getProductAllWithProducts(ProductFacadeIntegrationTest.java:57)
-	at java.base@17.0.11/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
-</pre>
-</span>
-</div>
-</div>
-<div id="tab1" class="tab">
 <h2>Tests</h2>
 <table>
 <thead>
@@ -121,24 +79,24 @@
 </tr>
 </thead>
 <tr>
-<td class="failures">상품 전체 조회 테스트</td>
-<td class="failures">getProductAll()</td>
-<td class="failures">0.021s</td>
-<td class="failures">failed</td>
+<td class="success">상품 전체 조회 테스트</td>
+<td class="success">getProductAll()</td>
+<td class="success">0.023s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">상품 전체 조회 테스트 - 상품이 존재하는 경우</td>
-<td class="failures">getProductAllWithProducts()</td>
-<td class="failures">0.051s</td>
-<td class="failures">failed</td>
+<td class="success">상품 전체 조회 테스트 - 상품이 존재하는 경우</td>
+<td class="success">getProductAllWithProducts()</td>
+<td class="success">0.047s</td>
+<td class="success">passed</td>
 </tr>
 </table>
 </div>
-<div id="tab2" class="tab">
+<div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2025-04-20T04:06:10.564Z  INFO 73903 --- [hhplus] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kr.hhplus.be.server.application.product.ProductFacadeIntegrationTest]: ProductFacadeIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-04-20T04:06:10.590Z  INFO 73903 --- [hhplus] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.product.ProductFacadeIntegrationTest
+<pre>2025-04-20T04:24:10.124Z  INFO 75376 --- [hhplus] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kr.hhplus.be.server.application.product.ProductFacadeIntegrationTest]: ProductFacadeIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-04-20T04:24:10.144Z  INFO 75376 --- [hhplus] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.product.ProductFacadeIntegrationTest
 </pre>
 </span>
 </div>
@@ -150,7 +108,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.11.1</a> at 2025. 4. 20. 오후 1:06:13</p>
+<a href="http://www.gradle.org">Gradle 8.11.1</a> at 2025. 4. 20. 오후 1:24:13</p>
 </div>
 </div>
 </body>

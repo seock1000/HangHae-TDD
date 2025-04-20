@@ -1,36 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.application.product.ProductFacadeIntegrationTest" tests="2" skipped="0" failures="2" errors="0" timestamp="2025-04-20T04:06:10" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.073">
+<testsuite name="kr.hhplus.be.server.application.product.ProductFacadeIntegrationTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-04-20T04:24:10" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.071">
   <properties/>
-  <testcase name="상품 전체 조회 테스트 - 상품이 존재하는 경우" classname="kr.hhplus.be.server.application.product.ProductFacadeIntegrationTest" time="0.051">
-    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;2&gt; but was: &lt;3&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;2&gt; but was: &lt;3&gt;
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at app//org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
-	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
-	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:145)
-	at app//org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:531)
-	at app//kr.hhplus.be.server.application.product.ProductFacadeIntegrationTest.getProductAllWithProducts(ProductFacadeIntegrationTest.java:57)
-	at java.base@17.0.11/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
-</failure>
-  </testcase>
-  <testcase name="상품 전체 조회 테스트" classname="kr.hhplus.be.server.application.product.ProductFacadeIntegrationTest" time="0.021">
-    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;true&gt; but was: &lt;false&gt;
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at app//org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
-	at app//org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
-	at app//org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
-	at app//org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)
-	at app//kr.hhplus.be.server.application.product.ProductFacadeIntegrationTest.getProductAll(ProductFacadeIntegrationTest.java:35)
-	at java.base@17.0.11/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
-</failure>
-  </testcase>
-  <system-out><![CDATA[2025-04-20T04:06:10.564Z  INFO 73903 --- [hhplus] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kr.hhplus.be.server.application.product.ProductFacadeIntegrationTest]: ProductFacadeIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-04-20T04:06:10.590Z  INFO 73903 --- [hhplus] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.product.ProductFacadeIntegrationTest
+  <testcase name="상품 전체 조회 테스트 - 상품이 존재하는 경우" classname="kr.hhplus.be.server.application.product.ProductFacadeIntegrationTest" time="0.047"/>
+  <testcase name="상품 전체 조회 테스트" classname="kr.hhplus.be.server.application.product.ProductFacadeIntegrationTest" time="0.023"/>
+  <system-out><![CDATA[2025-04-20T04:24:10.124Z  INFO 75376 --- [hhplus] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kr.hhplus.be.server.application.product.ProductFacadeIntegrationTest]: ProductFacadeIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-04-20T04:24:10.144Z  INFO 75376 --- [hhplus] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.product.ProductFacadeIntegrationTest
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

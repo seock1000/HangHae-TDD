@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.domain.coupon.UserCouponTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-04-20T04:06:11" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.044">
+<testsuite name="kr.hhplus.be.server.domain.coupon.UserCouponTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-04-20T04:24:12" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.035">
   <properties/>
-  <testcase name="쿠폰 생성 시, User와 Coupon이 주어지면 미사용 상태로 UserCoupon이 생성된다" classname="kr.hhplus.be.server.domain.coupon.UserCouponTest" time="0.009"/>
-  <testcase name="쿠폰 사용 시, 이미 사용된 쿠폰이면 ApiException(COUPON_ALREADY_USED)이 발생한다" classname="kr.hhplus.be.server.domain.coupon.UserCouponTest" time="0.008"/>
+  <testcase name="쿠폰 생성 시, User와 Coupon이 주어지면 미사용 상태로 UserCoupon이 생성된다" classname="kr.hhplus.be.server.domain.coupon.UserCouponTest" time="0.006"/>
+  <testcase name="쿠폰 사용 시, 이미 사용된 쿠폰이면 ApiException(COUPON_ALREADY_USED)이 발생한다" classname="kr.hhplus.be.server.domain.coupon.UserCouponTest" time="0.006"/>
   <testcase name="쿠폰 사용 시, 쿠폰이 만료되었으면 ApiException(COUPON_EXPIRED)이 발생한다" classname="kr.hhplus.be.server.domain.coupon.UserCouponTest" time="0.01"/>
-  <testcase name="쿠폰 사용 시, 쿠폰이 유효하면 사용 상태로 변경된다" classname="kr.hhplus.be.server.domain.coupon.UserCouponTest" time="0.009"/>
+  <testcase name="쿠폰 사용 시, 쿠폰이 유효하면 사용 상태로 변경된다" classname="kr.hhplus.be.server.domain.coupon.UserCouponTest" time="0.008"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest" tests="2" skipped="0" failures="2" errors="0" timestamp="2025-04-20T04:06:09" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.693">
+<testsuite name="kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest" tests="2" skipped="0" failures="2" errors="0" timestamp="2025-04-20T04:24:09" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.751">
   <properties/>
-  <testcase name="여러 스레드에서 포인트 충전과 결제 요청이 동시에 이루어질 때 정확하게 합산된 값이 반영되어야 한다." classname="kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest" time="0.482">
+  <testcase name="여러 스레드에서 포인트 충전과 결제 요청이 동시에 이루어질 때 정확하게 합산된 값이 반영되어야 한다." classname="kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest" time="0.553">
     <failure message="java.util.NoSuchElementException: No value present" type="java.util.NoSuchElementException">java.util.NoSuchElementException: No value present
 	at java.base/java.util.Optional.orElseThrow(Optional.java:377)
 	at kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest.testConcurrentChargeAndPayment(PointFacadeConcurrencyTest.java:181)
@@ -10,7 +10,7 @@
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 </failure>
   </testcase>
-  <testcase name="여러 스레드에서 동시에 포인트 충전 요청 시 정확하게 합산된 값이 반영되어야 한다." classname="kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest" time="0.21">
+  <testcase name="여러 스레드에서 동시에 포인트 충전 요청 시 정확하게 합산된 값이 반영되어야 한다." classname="kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest" time="0.197">
     <failure message="java.util.NoSuchElementException: No value present" type="java.util.NoSuchElementException">java.util.NoSuchElementException: No value present
 	at java.base/java.util.Optional.orElseThrow(Optional.java:377)
 	at kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest.testConcurrentCharge(PointFacadeConcurrencyTest.java:104)
@@ -19,16 +19,16 @@
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 </failure>
   </testcase>
-  <system-out><![CDATA[2025-04-20T04:06:09.631Z  INFO 73903 --- [hhplus] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest]: PointFacadeConcurrencyTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-04-20T04:06:09.660Z  INFO 73903 --- [hhplus] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest
-2025-04-20T04:06:09.842Z  WARN 73903 --- [hhplus] [onPool-worker-2] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1213, SQLState: 40001
-2025-04-20T04:06:09.842Z  WARN 73903 --- [hhplus] [onPool-worker-3] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1213, SQLState: 40001
-2025-04-20T04:06:09.842Z ERROR 73903 --- [hhplus] [onPool-worker-2] o.h.engine.jdbc.spi.SqlExceptionHelper   : Deadlock found when trying to get lock; try restarting transaction
-2025-04-20T04:06:09.843Z ERROR 73903 --- [hhplus] [onPool-worker-3] o.h.engine.jdbc.spi.SqlExceptionHelper   : Deadlock found when trying to get lock; try restarting transaction
-2025-04-20T04:06:10.226Z  WARN 73903 --- [hhplus] [onPool-worker-2] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1213, SQLState: 40001
-2025-04-20T04:06:10.226Z  WARN 73903 --- [hhplus] [onPool-worker-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1213, SQLState: 40001
-2025-04-20T04:06:10.227Z ERROR 73903 --- [hhplus] [onPool-worker-2] o.h.engine.jdbc.spi.SqlExceptionHelper   : Deadlock found when trying to get lock; try restarting transaction
-2025-04-20T04:06:10.227Z ERROR 73903 --- [hhplus] [onPool-worker-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : Deadlock found when trying to get lock; try restarting transaction
+  <system-out><![CDATA[2025-04-20T04:24:09.325Z  INFO 75376 --- [hhplus] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest]: PointFacadeConcurrencyTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-04-20T04:24:09.361Z  INFO 75376 --- [hhplus] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest
+2025-04-20T04:24:09.559Z  WARN 75376 --- [hhplus] [onPool-worker-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1213, SQLState: 40001
+2025-04-20T04:24:09.559Z  WARN 75376 --- [hhplus] [onPool-worker-3] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1213, SQLState: 40001
+2025-04-20T04:24:09.559Z ERROR 75376 --- [hhplus] [onPool-worker-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : Deadlock found when trying to get lock; try restarting transaction
+2025-04-20T04:24:09.560Z ERROR 75376 --- [hhplus] [onPool-worker-3] o.h.engine.jdbc.spi.SqlExceptionHelper   : Deadlock found when trying to get lock; try restarting transaction
+2025-04-20T04:24:09.987Z  WARN 75376 --- [hhplus] [onPool-worker-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1213, SQLState: 40001
+2025-04-20T04:24:09.987Z  WARN 75376 --- [hhplus] [onPool-worker-4] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1213, SQLState: 40001
+2025-04-20T04:24:09.988Z ERROR 75376 --- [hhplus] [onPool-worker-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : Deadlock found when trying to get lock; try restarting transaction
+2025-04-20T04:24:09.988Z ERROR 75376 --- [hhplus] [onPool-worker-4] o.h.engine.jdbc.spi.SqlExceptionHelper   : Deadlock found when trying to get lock; try restarting transaction
 ]]></system-out>
   <system-err><![CDATA[org.springframework.dao.CannotAcquireLockException: could not execute statement [Deadlock found when trying to get lock; try restarting transaction] [update point set balance=?,updated_at=?,user_id=? where id=?]; SQL [update point set balance=?,updated_at=?,user_id=? where id=?]
 	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:283)
@@ -160,7 +160,7 @@ org.springframework.dao.CannotAcquireLockException: could not execute statement 
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
 	at kr.hhplus.be.server.application.point.PointFacade$$SpringCGLIB$$0.charge(<generated>)
-	at kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest.lambda$testConcurrentCharge$0(PointFacadeConcurrencyTest.java:74)
+	at kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest.lambda$testConcurrentCharge$2(PointFacadeConcurrencyTest.java:88)
 	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804)
 	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1796)
 	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373)
