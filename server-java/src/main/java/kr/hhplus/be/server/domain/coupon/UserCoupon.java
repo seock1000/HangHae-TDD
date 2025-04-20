@@ -49,12 +49,15 @@ public class UserCoupon extends BaseTimeEntity {
     /**
      * 테스트 불필요
      */
-    public void init() {
+    public void cancelUse() {
+        if(!isUsed) {
+            throw ApiException.of(ApiError.COUPON_NOT_USED);
+        }
         this.isUsed = false;
     }
 
-    public AppliedCoupon toAppliedCoupon() {
-        return AppliedCoupon.of(this);
+    public IssuedCoupon toAppliedCoupon() {
+        return IssuedCoupon.of(this);
     }
 
 }

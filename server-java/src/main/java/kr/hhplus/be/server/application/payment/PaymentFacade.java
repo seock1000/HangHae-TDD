@@ -20,7 +20,7 @@ public class PaymentFacade {
         var order = orderService.getOrderById(command.orderId());
         var point = pointService.getPointByUserId(order.getUser());
 
-        Payment payment = Payment.payWithPoint(order.toPaidOrder(), point.toUsedPoint());
+        Payment payment = Payment.payWithPoint(order.toPaidOrder(), point.toUserPoint());
 
         pointService.save(point);
         orderService.saveOrder(order);

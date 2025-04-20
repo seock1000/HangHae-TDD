@@ -5,8 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import kr.hhplus.be.server.config.jpa.BaseTimeEntity;
-import kr.hhplus.be.server.domain.order.PaidOrder;
-import kr.hhplus.be.server.domain.point.UsedPoint;
+import kr.hhplus.be.server.domain.order.PendingOrder;
+import kr.hhplus.be.server.domain.point.UserPoint;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,8 +28,8 @@ public class Payment extends BaseTimeEntity {
         this.amount = amount;
     }
 
-    public static Payment payWithPoint(PaidOrder order, UsedPoint usedPoint) {
-        usedPoint.use(order.getTotalAmount());
+    public static Payment payWithPoint(PendingOrder order, UserPoint point) {
+        point.use(order.getTotalAmount());
         order.confirm();
         return new Payment(order.getId(), PaymentMethod.POINT, order.getTotalAmount());
     }

@@ -71,12 +71,12 @@ class BestSellerScheduledFacadeIntegrationTest {
                 .set(field("id"), 1L)
                 .set(field("stock"), 100)
                 .create()
-                .toSoldProduct();
+                .toOrderedProduct();
         var product2 = Instancio.of(Product.class)
                 .set(field("id"), 2L)
                 .set(field("stock"), 50)
                 .create()
-                .toSoldProduct();
+                .toOrderedProduct();
 
         orderParams.get(0).addProduct(product1, 10);
         orderParams.get(0).addProduct(product2, 5);

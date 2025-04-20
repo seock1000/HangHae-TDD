@@ -1,12 +1,10 @@
 package kr.hhplus.be.server.application.order;
 
 import kr.hhplus.be.server.domain.coupon.CouponService;
-import kr.hhplus.be.server.domain.coupon.UserCoupon;
 import kr.hhplus.be.server.domain.order.OrderService;
 import kr.hhplus.be.server.domain.order.Orders;
 import kr.hhplus.be.server.domain.product.Product;
 import kr.hhplus.be.server.domain.product.ProductService;
-import kr.hhplus.be.server.domain.user.UserRepository;
 import kr.hhplus.be.server.domain.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.util.Pair;
@@ -31,7 +29,7 @@ public class OrderFacade {
                 .toList();
 
         Orders order = orderService.createOrder(user, productAndQuantity.stream()
-                .map(it -> Pair.of(it.getFirst().toSoldProduct(), it.getSecond()))
+                .map(it -> Pair.of(it.getFirst().toOrderedProduct(), it.getSecond()))
                 .toList());
 
         if (command.useCouponId() != null) {
@@ -60,7 +58,7 @@ public class OrderFacade {
 
         if(order.isCouponUsed()) {
             var userCoupon = couponService.getUserCouponById(order.getCouponId());
-            userCoupon.init();
+            userCoupon.cancelUse();
             couponService.saveUserCoupon(userCoupon);
         }
 

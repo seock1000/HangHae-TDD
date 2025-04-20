@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.hhplus.be.server.domain.product.ProductServiceTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-04-20T04:34:32" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.055">
+  <properties/>
+  <testcase name="상품을 ID로 조회하여 반환한다." classname="kr.hhplus.be.server.domain.product.ProductServiceTest" time="0.048"/>
+  <testcase name="상품이 존재하지 않을 경우 ApiException(PRODUCT_NOT_FOUND)을 발생시킨다." classname="kr.hhplus.be.server.domain.product.ProductServiceTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

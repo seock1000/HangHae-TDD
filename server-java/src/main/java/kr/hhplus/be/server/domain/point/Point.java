@@ -47,8 +47,8 @@ public class Point extends BaseTimeEntity {
     /**
      * 테스트 필요없을 듯
      */
-    public UsedPoint toUsedPoint() {
-        return UsedPoint.of(this);
+    public UserPoint toUserPoint() {
+        return UserPoint.of(this);
     }
 
     /**

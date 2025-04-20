@@ -22,6 +22,7 @@ public enum ApiError {
     COUPON_EXPIRED(HttpStatus.BAD_REQUEST, "Coupon expired"),
     COUPON_OUT_OF_STOCK(HttpStatus.BAD_REQUEST, "Coupon not issued"),
     COUPON_ALREADY_USED(HttpStatus.BAD_REQUEST, "Coupon already used"),
+    COUPON_NOT_USED(HttpStatus.BAD_REQUEST, "Coupon is not used"),
     INVALID_DISCOUNT_TYPE(HttpStatus.INTERNAL_SERVER_ERROR, "Invalid discount type"),
     INVALID_COUPON_ID(HttpStatus.BAD_REQUEST, "Invalid coupon id"),
 
@@ -43,7 +44,7 @@ public enum ApiError {
     INVALID_USER_ID(HttpStatus.BAD_REQUEST, "Invalid user id"),
 
     //common
-    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error");
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error"),;
 
     private final HttpStatus status;
     private final String message;

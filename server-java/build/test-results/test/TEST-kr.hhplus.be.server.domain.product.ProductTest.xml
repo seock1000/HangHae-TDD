@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.hhplus.be.server.domain.product.ProductTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-04-20T04:34:32" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.012">
+  <properties/>
+  <testcase name="상품 재고 차감시, 재고가 부족할 경우 ApiException(INSUFFICIENT_PRODUCT_STOCK)이 발생한다." classname="kr.hhplus.be.server.domain.product.ProductTest" time="0.004"/>
+  <testcase name="상품 재고 증가시, 입력 값만큼 상품 재고가 증가한다." classname="kr.hhplus.be.server.domain.product.ProductTest" time="0.003"/>
+  <testcase name="상품 재고 차감시, 입력 값만큼 상품 재고가 감소한다." classname="kr.hhplus.be.server.domain.product.ProductTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

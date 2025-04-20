@@ -2,7 +2,6 @@ package kr.hhplus.be.server.infrastructure.order;
 
 import kr.hhplus.be.server.application.order.CancelOrderCommand;
 import kr.hhplus.be.server.application.order.OrderFacade;
-import org.apache.catalina.core.ApplicationContext;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;

@@ -49,7 +49,7 @@ public class Product extends BaseTimeEntity {
         this.stock += quantity;
     }
 
-    public SoldProduct toSoldProduct() {
-        return SoldProduct.of(this);
+    public OrderedProduct toOrderedProduct() {
+        return OrderedProduct.of(this);
     }
 }

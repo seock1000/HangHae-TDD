@@ -4,17 +4,14 @@ import jakarta.persistence.*;
 import kr.hhplus.be.server.ApiError;
 import kr.hhplus.be.server.ApiException;
 import kr.hhplus.be.server.config.jpa.BaseTimeEntity;
-import kr.hhplus.be.server.domain.coupon.AppliedCoupon;
-import kr.hhplus.be.server.domain.coupon.UserCoupon;
-import kr.hhplus.be.server.domain.product.Product;
-import kr.hhplus.be.server.domain.product.SoldProduct;
+import kr.hhplus.be.server.domain.coupon.IssuedCoupon;
+import kr.hhplus.be.server.domain.product.OrderedProduct;
 import kr.hhplus.be.server.domain.user.User;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +43,7 @@ public class Orders extends BaseTimeEntity {
         return new Orders(id, user.getId(), null, 0, 0, OrderStatus.PENDING);
     }
 
-    public void addProduct(SoldProduct product, int quantity) {
+    public void addProduct(OrderedProduct product, int quantity) {
         product.deductStock(quantity);
         OrderItem orderItem = OrderItem.create(this, product, quantity);
         totalAmount += orderItem.getAmount();
@@ -56,7 +53,7 @@ public class Orders extends BaseTimeEntity {
     /**
      * 이미 적용된 쿠폰이 존재할 시 ORDER_ALREADY_COUPON_APPLIED 예외가 발생한다.
      */
-    public void applyCoupon(AppliedCoupon coupon) {
+    public void applyCoupon(IssuedCoupon coupon) {
         if(isCouponUsed()) {
             throw ApiException.of(ApiError.ORDER_ALREADY_COUPON_APPLIED);
         }
@@ -69,7 +66,7 @@ public class Orders extends BaseTimeEntity {
         coupon.use();
     }
 
-    protected void confirm() {
+    public void confirm() {
         if (!this.status.equals(OrderStatus.PENDING)) {
             throw ApiException.of(ApiError.ORDER_CANNOT_BE_CONFIRMED);
         }
@@ -91,8 +88,8 @@ public class Orders extends BaseTimeEntity {
         return couponId != null;
     }
 
-    public PaidOrder toPaidOrder() {
-        return PaidOrder.of(this);
+    public PendingOrder toPaidOrder() {
+        return PendingOrder.of(this);
     }
 
 }
