@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.domain.payment.PaymentTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-20T04:24:12" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.103">
+<testsuite name="kr.hhplus.be.server.domain.payment.PaymentTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-20T04:34:32" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.088">
   <properties/>
-  <testcase name="포인트 결제 내역 생성 시, order와 point를 받아 포인트 결제 내역을 생성한다" classname="kr.hhplus.be.server.domain.payment.PaymentTest" time="0.103"/>
+  <testcase name="포인트 결제 내역 생성 시, order와 point를 받아 포인트 결제 내역을 생성한다" classname="kr.hhplus.be.server.domain.payment.PaymentTest" time="0.088"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

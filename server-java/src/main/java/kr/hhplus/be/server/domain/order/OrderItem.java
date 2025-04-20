@@ -2,8 +2,7 @@ package kr.hhplus.be.server.domain.order;
 
 import jakarta.persistence.*;
 import kr.hhplus.be.server.config.jpa.BaseTimeEntity;
-import kr.hhplus.be.server.domain.product.Product;
-import kr.hhplus.be.server.domain.product.SoldProduct;
+import kr.hhplus.be.server.domain.product.OrderedProduct;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,7 +33,7 @@ public class OrderItem extends BaseTimeEntity {
         this.quantity = quantity;
     }
 
-    public static OrderItem create(Orders order, SoldProduct product, int quantity) {
+    public static OrderItem create(Orders order, OrderedProduct product, int quantity) {
         return new OrderItem(order, product.getId(), product.getPrice() * quantity, product.getPrice(), quantity);
     }
 }

@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.233s</div>
+<div class="counter">0.204s</div>
 <p>duration</p>
 </div>
 </td>
@@ -347,25 +347,25 @@ Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or u
 <tr>
 <td class="failures">여러 스레드에서 동시에 주문 취소 요청 시, 하나의 요청만 성공하며 상품 재고 관리가 정확하게 되어야 한다.</td>
 <td class="failures">testConcurrentCancelOrder()</td>
-<td class="failures">0.066s</td>
+<td class="failures">0.057s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">여러 스레드에서 동시에 상품 주문 요청 시, 상품 재고 관리가 정확하게 되어야 한다.</td>
 <td class="failures">testConcurrentOrder()</td>
-<td class="failures">0.054s</td>
+<td class="failures">0.047s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">여러 스레드에서 상품 주문 요청 시 서로 다른 쿠폰 요청이 동시에 들어오면, 각각의 주문에 쿠폰이 적용되어야 한다.</td>
 <td class="failures">testConcurrentOrderWithDifferentCoupons()</td>
-<td class="failures">0.059s</td>
+<td class="failures">0.049s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">여러 스레드에서 상품 주문 요청 시 같은 쿠폰 요청이 동시에 들어오면, 하나의 주문에만 쿠폰이 적용되고 정상 처리 되어야 한다.</td>
 <td class="failures">testConcurrentOrderWithSameCoupon()</td>
-<td class="failures">0.054s</td>
+<td class="failures">0.051s</td>
 <td class="failures">failed</td>
 </tr>
 </table>
@@ -373,16 +373,16 @@ Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or u
 <div id="tab2" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2025-04-20T04:24:09.041Z  INFO 75376 --- [hhplus] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest]: OrderFacadeConcurrentTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-04-20T04:24:09.073Z  INFO 75376 --- [hhplus] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest
-2025-04-20T04:24:09.128Z  WARN 75376 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1451, SQLState: 23000
-2025-04-20T04:24:09.128Z ERROR 75376 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))
-2025-04-20T04:24:09.182Z  WARN 75376 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1451, SQLState: 23000
-2025-04-20T04:24:09.182Z ERROR 75376 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))
-2025-04-20T04:24:09.242Z  WARN 75376 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1451, SQLState: 23000
-2025-04-20T04:24:09.243Z ERROR 75376 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))
-2025-04-20T04:24:09.299Z  WARN 75376 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1451, SQLState: 23000
-2025-04-20T04:24:09.300Z ERROR 75376 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))
+<pre>2025-04-20T04:34:29.237Z  INFO 76511 --- [hhplus] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest]: OrderFacadeConcurrentTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-04-20T04:34:29.272Z  INFO 76511 --- [hhplus] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest
+2025-04-20T04:34:29.320Z  WARN 76511 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1451, SQLState: 23000
+2025-04-20T04:34:29.320Z ERROR 76511 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))
+2025-04-20T04:34:29.369Z  WARN 76511 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1451, SQLState: 23000
+2025-04-20T04:34:29.370Z ERROR 76511 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))
+2025-04-20T04:34:29.425Z  WARN 76511 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1451, SQLState: 23000
+2025-04-20T04:34:29.426Z ERROR 76511 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))
+2025-04-20T04:34:29.472Z  WARN 76511 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1451, SQLState: 23000
+2025-04-20T04:34:29.472Z ERROR 76511 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))
 </pre>
 </span>
 </div>
@@ -394,7 +394,7 @@ Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or u
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.11.1</a> at 2025. 4. 20. 오후 1:24:13</p>
+<a href="http://www.gradle.org">Gradle 8.11.1</a> at 2025. 4. 20. 오후 1:34:33</p>
 </div>
 </div>
 </body>

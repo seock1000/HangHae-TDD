@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest" tests="2" skipped="0" failures="2" errors="0" timestamp="2025-04-20T04:24:09" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.751">
+<testsuite name="kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest" tests="2" skipped="0" failures="2" errors="0" timestamp="2025-04-20T04:34:29" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.724">
   <properties/>
-  <testcase name="여러 스레드에서 포인트 충전과 결제 요청이 동시에 이루어질 때 정확하게 합산된 값이 반영되어야 한다." classname="kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest" time="0.553">
+  <testcase name="여러 스레드에서 포인트 충전과 결제 요청이 동시에 이루어질 때 정확하게 합산된 값이 반영되어야 한다." classname="kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest" time="0.508">
     <failure message="java.util.NoSuchElementException: No value present" type="java.util.NoSuchElementException">java.util.NoSuchElementException: No value present
 	at java.base/java.util.Optional.orElseThrow(Optional.java:377)
 	at kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest.testConcurrentChargeAndPayment(PointFacadeConcurrencyTest.java:181)
@@ -10,7 +10,7 @@
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 </failure>
   </testcase>
-  <testcase name="여러 스레드에서 동시에 포인트 충전 요청 시 정확하게 합산된 값이 반영되어야 한다." classname="kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest" time="0.197">
+  <testcase name="여러 스레드에서 동시에 포인트 충전 요청 시 정확하게 합산된 값이 반영되어야 한다." classname="kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest" time="0.214">
     <failure message="java.util.NoSuchElementException: No value present" type="java.util.NoSuchElementException">java.util.NoSuchElementException: No value present
 	at java.base/java.util.Optional.orElseThrow(Optional.java:377)
 	at kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest.testConcurrentCharge(PointFacadeConcurrencyTest.java:104)
@@ -19,77 +19,18 @@
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 </failure>
   </testcase>
-  <system-out><![CDATA[2025-04-20T04:24:09.325Z  INFO 75376 --- [hhplus] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest]: PointFacadeConcurrencyTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-04-20T04:24:09.361Z  INFO 75376 --- [hhplus] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest
-2025-04-20T04:24:09.559Z  WARN 75376 --- [hhplus] [onPool-worker-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1213, SQLState: 40001
-2025-04-20T04:24:09.559Z  WARN 75376 --- [hhplus] [onPool-worker-3] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1213, SQLState: 40001
-2025-04-20T04:24:09.559Z ERROR 75376 --- [hhplus] [onPool-worker-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : Deadlock found when trying to get lock; try restarting transaction
-2025-04-20T04:24:09.560Z ERROR 75376 --- [hhplus] [onPool-worker-3] o.h.engine.jdbc.spi.SqlExceptionHelper   : Deadlock found when trying to get lock; try restarting transaction
-2025-04-20T04:24:09.987Z  WARN 75376 --- [hhplus] [onPool-worker-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1213, SQLState: 40001
-2025-04-20T04:24:09.987Z  WARN 75376 --- [hhplus] [onPool-worker-4] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1213, SQLState: 40001
-2025-04-20T04:24:09.988Z ERROR 75376 --- [hhplus] [onPool-worker-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : Deadlock found when trying to get lock; try restarting transaction
-2025-04-20T04:24:09.988Z ERROR 75376 --- [hhplus] [onPool-worker-4] o.h.engine.jdbc.spi.SqlExceptionHelper   : Deadlock found when trying to get lock; try restarting transaction
+  <system-out><![CDATA[2025-04-20T04:34:29.491Z  INFO 76511 --- [hhplus] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest]: PointFacadeConcurrencyTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-04-20T04:34:29.522Z  INFO 76511 --- [hhplus] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest
+2025-04-20T04:34:29.720Z  WARN 76511 --- [hhplus] [onPool-worker-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1213, SQLState: 40001
+2025-04-20T04:34:29.720Z  WARN 76511 --- [hhplus] [onPool-worker-3] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1213, SQLState: 40001
+2025-04-20T04:34:29.721Z ERROR 76511 --- [hhplus] [onPool-worker-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : Deadlock found when trying to get lock; try restarting transaction
+2025-04-20T04:34:29.721Z ERROR 76511 --- [hhplus] [onPool-worker-3] o.h.engine.jdbc.spi.SqlExceptionHelper   : Deadlock found when trying to get lock; try restarting transaction
+2025-04-20T04:34:30.126Z  WARN 76511 --- [hhplus] [onPool-worker-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1213, SQLState: 40001
+2025-04-20T04:34:30.126Z  WARN 76511 --- [hhplus] [onPool-worker-3] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1213, SQLState: 40001
+2025-04-20T04:34:30.126Z ERROR 76511 --- [hhplus] [onPool-worker-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : Deadlock found when trying to get lock; try restarting transaction
+2025-04-20T04:34:30.126Z ERROR 76511 --- [hhplus] [onPool-worker-3] o.h.engine.jdbc.spi.SqlExceptionHelper   : Deadlock found when trying to get lock; try restarting transaction
 ]]></system-out>
   <system-err><![CDATA[org.springframework.dao.CannotAcquireLockException: could not execute statement [Deadlock found when trying to get lock; try restarting transaction] [update point set balance=?,updated_at=?,user_id=? where id=?]; SQL [update point set balance=?,updated_at=?,user_id=? where id=?]
-	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:283)
-	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:244)
-	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:566)
-	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:795)
-	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:758)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:698)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:416)
-	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
-	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
-	at kr.hhplus.be.server.application.point.PointFacade$$SpringCGLIB$$0.charge(<generated>)
-	at kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest.lambda$testConcurrentChargeAndPayment$5(PointFacadeConcurrencyTest.java:158)
-	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804)
-	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1796)
-	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373)
-	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182)
-	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655)
-	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622)
-	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165)
-Caused by: org.hibernate.exception.LockAcquisitionException: could not execute statement [Deadlock found when trying to get lock; try restarting transaction] [update point set balance=?,updated_at=?,user_id=? where id=?]
-	at org.hibernate.dialect.MySQLDialect.lambda$buildSQLExceptionConversionDelegate$3(MySQLDialect.java:1260)
-	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
-	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
-	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:197)
-	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.performNonBatchedMutation(AbstractMutationExecutor.java:134)
-	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorSingleNonBatched.performNonBatchedOperations(MutationExecutorSingleNonBatched.java:55)
-	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:55)
-	at org.hibernate.persister.entity.mutation.UpdateCoordinatorStandard.doStaticUpdate(UpdateCoordinatorStandard.java:781)
-	at org.hibernate.persister.entity.mutation.UpdateCoordinatorStandard.performUpdate(UpdateCoordinatorStandard.java:328)
-	at org.hibernate.persister.entity.mutation.UpdateCoordinatorStandard.update(UpdateCoordinatorStandard.java:245)
-	at org.hibernate.action.internal.EntityUpdateAction.execute(EntityUpdateAction.java:169)
-	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:644)
-	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:511)
-	at org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:414)
-	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:41)
-	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)
-	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1429)
-	at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:491)
-	at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:2354)
-	at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:1978)
-	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:439)
-	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:169)
-	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:267)
-	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:101)
-	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:562)
-	... 16 more
-Caused by: com.mysql.cj.jdbc.exceptions.MySQLTransactionRollbackException: Deadlock found when trying to get lock; try restarting transaction
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:115)
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114)
-	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:988)
-	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1166)
-	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1101)
-	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1467)
-	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:1084)
-	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61)
-	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java)
-	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:194)
-	... 37 more
-org.springframework.dao.CannotAcquireLockException: could not execute statement [Deadlock found when trying to get lock; try restarting transaction] [update point set balance=?,updated_at=?,user_id=? where id=?]; SQL [update point set balance=?,updated_at=?,user_id=? where id=?]
 	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:283)
 	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:244)
 	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:566)
@@ -160,7 +101,7 @@ org.springframework.dao.CannotAcquireLockException: could not execute statement 
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
 	at kr.hhplus.be.server.application.point.PointFacade$$SpringCGLIB$$0.charge(<generated>)
-	at kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest.lambda$testConcurrentCharge$2(PointFacadeConcurrencyTest.java:88)
+	at kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest.lambda$testConcurrentChargeAndPayment$5(PointFacadeConcurrencyTest.java:158)
 	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804)
 	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1796)
 	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373)
@@ -220,6 +161,65 @@ org.springframework.dao.CannotAcquireLockException: could not execute statement 
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
 	at kr.hhplus.be.server.application.point.PointFacade$$SpringCGLIB$$0.charge(<generated>)
 	at kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest.lambda$testConcurrentCharge$1(PointFacadeConcurrencyTest.java:81)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1796)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165)
+Caused by: org.hibernate.exception.LockAcquisitionException: could not execute statement [Deadlock found when trying to get lock; try restarting transaction] [update point set balance=?,updated_at=?,user_id=? where id=?]
+	at org.hibernate.dialect.MySQLDialect.lambda$buildSQLExceptionConversionDelegate$3(MySQLDialect.java:1260)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:197)
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.performNonBatchedMutation(AbstractMutationExecutor.java:134)
+	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorSingleNonBatched.performNonBatchedOperations(MutationExecutorSingleNonBatched.java:55)
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:55)
+	at org.hibernate.persister.entity.mutation.UpdateCoordinatorStandard.doStaticUpdate(UpdateCoordinatorStandard.java:781)
+	at org.hibernate.persister.entity.mutation.UpdateCoordinatorStandard.performUpdate(UpdateCoordinatorStandard.java:328)
+	at org.hibernate.persister.entity.mutation.UpdateCoordinatorStandard.update(UpdateCoordinatorStandard.java:245)
+	at org.hibernate.action.internal.EntityUpdateAction.execute(EntityUpdateAction.java:169)
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:644)
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:511)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:414)
+	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:41)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)
+	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1429)
+	at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:491)
+	at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:2354)
+	at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:1978)
+	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:439)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:169)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:267)
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:101)
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:562)
+	... 16 more
+Caused by: com.mysql.cj.jdbc.exceptions.MySQLTransactionRollbackException: Deadlock found when trying to get lock; try restarting transaction
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:115)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:988)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1166)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1101)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1467)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:1084)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:194)
+	... 37 more
+org.springframework.dao.CannotAcquireLockException: could not execute statement [Deadlock found when trying to get lock; try restarting transaction] [update point set balance=?,updated_at=?,user_id=? where id=?]; SQL [update point set balance=?,updated_at=?,user_id=? where id=?]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:283)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:244)
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:566)
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:795)
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:758)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:698)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:416)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at kr.hhplus.be.server.application.point.PointFacade$$SpringCGLIB$$0.charge(<generated>)
+	at kr.hhplus.be.server.application.point.PointFacadeConcurrencyTest.lambda$testConcurrentCharge$2(PointFacadeConcurrencyTest.java:88)
 	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804)
 	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1796)
 	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373)

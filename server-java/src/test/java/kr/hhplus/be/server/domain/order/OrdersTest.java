@@ -3,7 +3,7 @@ package kr.hhplus.be.server.domain.order;
 import kr.hhplus.be.server.ApiError;
 import kr.hhplus.be.server.ApiException;
 import kr.hhplus.be.server.domain.coupon.IssuedCoupon;
-import kr.hhplus.be.server.domain.product.SoldProduct;
+import kr.hhplus.be.server.domain.product.OrderedProduct;
 import kr.hhplus.be.server.domain.user.User;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.DisplayName;
@@ -49,7 +49,7 @@ class OrdersTest {
                 .set(field("totalAmount"), 0)
                 .set(field("orderItems"), new ArrayList<>())
                 .create();
-        SoldProduct product = Mockito.mock(SoldProduct.class);
+        OrderedProduct product = Mockito.mock(OrderedProduct.class);
         when(product.getPrice()).thenReturn(10000);
         int quantity = 2;
 

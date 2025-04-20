@@ -29,7 +29,7 @@ public class OrderFacade {
                 .toList();
 
         Orders order = orderService.createOrder(user, productAndQuantity.stream()
-                .map(it -> Pair.of(it.getFirst().toSoldProduct(), it.getSecond()))
+                .map(it -> Pair.of(it.getFirst().toOrderedProduct(), it.getSecond()))
                 .toList());
 
         if (command.useCouponId() != null) {

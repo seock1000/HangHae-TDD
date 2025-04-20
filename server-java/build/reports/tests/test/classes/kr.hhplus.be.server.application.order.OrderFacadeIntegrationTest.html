@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.303s</div>
+<div class="counter">0.356s</div>
 <p>duration</p>
 </div>
 </td>
@@ -81,25 +81,25 @@
 <tr>
 <td class="success">쿠폰이 사용된 주문 취소 시, 주문의 상태가 PENDING이면 주문을 취소하고 상품 재고와 쿠폰 사용 여부를 복구한다.</td>
 <td class="success">cancelOrderWithCoupon()</td>
-<td class="success">0.093s</td>
+<td class="success">0.075s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">쿠폰이 사용되지 않은 주문 취소 시, 주문의 상태가 PENDING이면 주문을 취소하고 상품 재고를 복구한다.</td>
 <td class="success">cancelOrderWithoutCoupon()</td>
-<td class="success">0.063s</td>
+<td class="success">0.077s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">쿠폰을 사용하지 않고 충분한 재고가 있는 상품을 주문 시, 주문에 성공한다.</td>
 <td class="success">placeOrderWithEnoughStock()</td>
-<td class="success">0.078s</td>
+<td class="success">0.127s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">쿠폰을 사용하고 충분한 재고가 있는 상품을 주문 시, 주문에 성공한다.</td>
 <td class="success">placeOrderWithEnoughStockAndCoupon()</td>
-<td class="success">0.069s</td>
+<td class="success">0.077s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -107,9 +107,9 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2025-04-20T04:24:10.847Z  INFO 75376 --- [hhplus] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kr.hhplus.be.server.application.order.OrderFacadeIntegrationTest]: OrderFacadeIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-04-20T04:24:10.851Z  INFO 75376 --- [hhplus] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.order.OrderFacadeIntegrationTest
-2025-04-20T04:24:10.932Z ERROR 75376 --- [hhplus] [eduler_Worker-1] org.quartz.core.JobRunShell              : Job cancelOrderJob.4ce66e5f-8c3a-4095-99dc-595c13405885 threw an unhandled Exception: 
+<pre>2025-04-20T04:34:30.864Z  INFO 76511 --- [hhplus] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kr.hhplus.be.server.application.order.OrderFacadeIntegrationTest]: OrderFacadeIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-04-20T04:34:30.868Z  INFO 76511 --- [hhplus] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.order.OrderFacadeIntegrationTest
+2025-04-20T04:34:30.957Z ERROR 76511 --- [hhplus] [eduler_Worker-1] org.quartz.core.JobRunShell              : Job cancelOrderJob.701d348a-15ae-4492-a0b4-16945d1847ba threw an unhandled Exception: 
 
 java.lang.NullPointerException: Cannot invoke &quot;org.springframework.web.context.WebApplicationContext.getBean(String)&quot; because &quot;appContext&quot; is null
 	at kr.hhplus.be.server.infrastructure.order.CancelOrderJob.executeInternal(CancelOrderJob.java:16) ~[main/:na]
@@ -117,7 +117,7 @@ java.lang.NullPointerException: Cannot invoke &quot;org.springframework.web.cont
 	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.3.2.jar:na]
 	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573) ~[quartz-2.3.2.jar:na]
 
-2025-04-20T04:24:10.938Z ERROR 75376 --- [hhplus] [eduler_Worker-1] org.quartz.core.ErrorLogger              : Job (cancelOrderJob.4ce66e5f-8c3a-4095-99dc-595c13405885 threw an exception.
+2025-04-20T04:34:30.965Z ERROR 76511 --- [hhplus] [eduler_Worker-1] org.quartz.core.ErrorLogger              : Job (cancelOrderJob.701d348a-15ae-4492-a0b4-16945d1847ba threw an exception.
 
 org.quartz.SchedulerException: Job threw an unhandled exception.
 	at org.quartz.core.JobRunShell.run(JobRunShell.java:213) ~[quartz-2.3.2.jar:na]
@@ -128,7 +128,7 @@ Caused by: java.lang.NullPointerException: Cannot invoke &quot;org.springframewo
 	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.3.2.jar:na]
 	... 1 common frames omitted
 
-2025-04-20T04:24:11.005Z ERROR 75376 --- [hhplus] [eduler_Worker-2] org.quartz.core.JobRunShell              : Job cancelOrderJob.5ec6508b-acad-4b6d-bf15-cfd2d4e791bb threw an unhandled Exception: 
+2025-04-20T04:34:31.061Z ERROR 76511 --- [hhplus] [eduler_Worker-2] org.quartz.core.JobRunShell              : Job cancelOrderJob.6b002363-77dd-467f-a47e-6104e76d2e8f threw an unhandled Exception: 
 
 java.lang.NullPointerException: Cannot invoke &quot;org.springframework.web.context.WebApplicationContext.getBean(String)&quot; because &quot;appContext&quot; is null
 	at kr.hhplus.be.server.infrastructure.order.CancelOrderJob.executeInternal(CancelOrderJob.java:16) ~[main/:na]
@@ -136,7 +136,7 @@ java.lang.NullPointerException: Cannot invoke &quot;org.springframework.web.cont
 	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.3.2.jar:na]
 	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573) ~[quartz-2.3.2.jar:na]
 
-2025-04-20T04:24:11.006Z ERROR 75376 --- [hhplus] [eduler_Worker-2] org.quartz.core.ErrorLogger              : Job (cancelOrderJob.5ec6508b-acad-4b6d-bf15-cfd2d4e791bb threw an exception.
+2025-04-20T04:34:31.061Z ERROR 76511 --- [hhplus] [eduler_Worker-2] org.quartz.core.ErrorLogger              : Job (cancelOrderJob.6b002363-77dd-467f-a47e-6104e76d2e8f threw an exception.
 
 org.quartz.SchedulerException: Job threw an unhandled exception.
 	at org.quartz.core.JobRunShell.run(JobRunShell.java:213) ~[quartz-2.3.2.jar:na]
@@ -147,7 +147,7 @@ Caused by: java.lang.NullPointerException: Cannot invoke &quot;org.springframewo
 	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.3.2.jar:na]
 	... 1 common frames omitted
 
-2025-04-20T04:24:11.084Z ERROR 75376 --- [hhplus] [eduler_Worker-3] org.quartz.core.JobRunShell              : Job cancelOrderJob.2979d074-bd8f-4925-a9d5-670312de5cf8 threw an unhandled Exception: 
+2025-04-20T04:34:31.138Z ERROR 76511 --- [hhplus] [eduler_Worker-3] org.quartz.core.JobRunShell              : Job cancelOrderJob.1275ed16-149e-4a80-a9d6-f34b36c82241 threw an unhandled Exception: 
 
 java.lang.NullPointerException: Cannot invoke &quot;org.springframework.web.context.WebApplicationContext.getBean(String)&quot; because &quot;appContext&quot; is null
 	at kr.hhplus.be.server.infrastructure.order.CancelOrderJob.executeInternal(CancelOrderJob.java:16) ~[main/:na]
@@ -155,7 +155,7 @@ java.lang.NullPointerException: Cannot invoke &quot;org.springframework.web.cont
 	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.3.2.jar:na]
 	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573) ~[quartz-2.3.2.jar:na]
 
-2025-04-20T04:24:11.085Z ERROR 75376 --- [hhplus] [eduler_Worker-3] org.quartz.core.ErrorLogger              : Job (cancelOrderJob.2979d074-bd8f-4925-a9d5-670312de5cf8 threw an exception.
+2025-04-20T04:34:31.138Z ERROR 76511 --- [hhplus] [eduler_Worker-3] org.quartz.core.ErrorLogger              : Job (cancelOrderJob.1275ed16-149e-4a80-a9d6-f34b36c82241 threw an exception.
 
 org.quartz.SchedulerException: Job threw an unhandled exception.
 	at org.quartz.core.JobRunShell.run(JobRunShell.java:213) ~[quartz-2.3.2.jar:na]
@@ -166,7 +166,7 @@ Caused by: java.lang.NullPointerException: Cannot invoke &quot;org.springframewo
 	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.3.2.jar:na]
 	... 1 common frames omitted
 
-2025-04-20T04:24:11.147Z ERROR 75376 --- [hhplus] [eduler_Worker-4] org.quartz.core.JobRunShell              : Job cancelOrderJob.df6dd31b-5d94-4c42-aa2d-1089b34a155e threw an unhandled Exception: 
+2025-04-20T04:34:31.205Z ERROR 76511 --- [hhplus] [eduler_Worker-4] org.quartz.core.JobRunShell              : Job cancelOrderJob.c53385ff-a2fc-4080-8e6c-b3acbb07feb6 threw an unhandled Exception: 
 
 java.lang.NullPointerException: Cannot invoke &quot;org.springframework.web.context.WebApplicationContext.getBean(String)&quot; because &quot;appContext&quot; is null
 	at kr.hhplus.be.server.infrastructure.order.CancelOrderJob.executeInternal(CancelOrderJob.java:16) ~[main/:na]
@@ -174,7 +174,7 @@ java.lang.NullPointerException: Cannot invoke &quot;org.springframework.web.cont
 	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.3.2.jar:na]
 	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573) ~[quartz-2.3.2.jar:na]
 
-2025-04-20T04:24:11.148Z ERROR 75376 --- [hhplus] [eduler_Worker-4] org.quartz.core.ErrorLogger              : Job (cancelOrderJob.df6dd31b-5d94-4c42-aa2d-1089b34a155e threw an exception.
+2025-04-20T04:34:31.206Z ERROR 76511 --- [hhplus] [eduler_Worker-4] org.quartz.core.ErrorLogger              : Job (cancelOrderJob.c53385ff-a2fc-4080-8e6c-b3acbb07feb6 threw an exception.
 
 org.quartz.SchedulerException: Job threw an unhandled exception.
 	at org.quartz.core.JobRunShell.run(JobRunShell.java:213) ~[quartz-2.3.2.jar:na]
@@ -196,7 +196,7 @@ Caused by: java.lang.NullPointerException: Cannot invoke &quot;org.springframewo
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.11.1</a> at 2025. 4. 20. 오후 1:24:13</p>
+<a href="http://www.gradle.org">Gradle 8.11.1</a> at 2025. 4. 20. 오후 1:34:33</p>
 </div>
 </div>
 </body>

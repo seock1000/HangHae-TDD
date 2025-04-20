@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest" tests="4" skipped="0" failures="4" errors="0" timestamp="2025-04-20T04:24:09" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.238">
+<testsuite name="kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest" tests="4" skipped="0" failures="4" errors="0" timestamp="2025-04-20T04:34:29" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.208">
   <properties/>
-  <testcase name="여러 스레드에서 동시에 주문 취소 요청 시, 하나의 요청만 성공하며 상품 재고 관리가 정확하게 되어야 한다." classname="kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest" time="0.066">
+  <testcase name="여러 스레드에서 동시에 주문 취소 요청 시, 하나의 요청만 성공하며 상품 재고 관리가 정확하게 되어야 한다." classname="kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest" time="0.057">
     <failure message="org.springframework.dao.DataIntegrityViolationException: could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))] [delete from coupon where id=?]; SQL [delete from coupon where id=?]; constraint [null]" type="org.springframework.dao.DataIntegrityViolationException">org.springframework.dao.DataIntegrityViolationException: could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))] [delete from coupon where id=?]; SQL [delete from coupon where id=?]; constraint [null]
 	at app//org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:290)
 	at app//org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)
@@ -62,7 +62,7 @@ Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or u
 	... 36 more
 </failure>
   </testcase>
-  <testcase name="여러 스레드에서 상품 주문 요청 시 같은 쿠폰 요청이 동시에 들어오면, 하나의 주문에만 쿠폰이 적용되고 정상 처리 되어야 한다." classname="kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest" time="0.054">
+  <testcase name="여러 스레드에서 상품 주문 요청 시 같은 쿠폰 요청이 동시에 들어오면, 하나의 주문에만 쿠폰이 적용되고 정상 처리 되어야 한다." classname="kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest" time="0.051">
     <failure message="org.springframework.dao.DataIntegrityViolationException: could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))] [delete from coupon where id=?]; SQL [delete from coupon where id=?]; constraint [null]" type="org.springframework.dao.DataIntegrityViolationException">org.springframework.dao.DataIntegrityViolationException: could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))] [delete from coupon where id=?]; SQL [delete from coupon where id=?]; constraint [null]
 	at app//org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:290)
 	at app//org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)
@@ -123,7 +123,7 @@ Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or u
 	... 36 more
 </failure>
   </testcase>
-  <testcase name="여러 스레드에서 상품 주문 요청 시 서로 다른 쿠폰 요청이 동시에 들어오면, 각각의 주문에 쿠폰이 적용되어야 한다." classname="kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest" time="0.059">
+  <testcase name="여러 스레드에서 상품 주문 요청 시 서로 다른 쿠폰 요청이 동시에 들어오면, 각각의 주문에 쿠폰이 적용되어야 한다." classname="kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest" time="0.049">
     <failure message="org.springframework.dao.DataIntegrityViolationException: could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))] [delete from coupon where id=?]; SQL [delete from coupon where id=?]; constraint [null]" type="org.springframework.dao.DataIntegrityViolationException">org.springframework.dao.DataIntegrityViolationException: could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))] [delete from coupon where id=?]; SQL [delete from coupon where id=?]; constraint [null]
 	at app//org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:290)
 	at app//org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)
@@ -184,7 +184,7 @@ Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or u
 	... 36 more
 </failure>
   </testcase>
-  <testcase name="여러 스레드에서 동시에 상품 주문 요청 시, 상품 재고 관리가 정확하게 되어야 한다." classname="kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest" time="0.054">
+  <testcase name="여러 스레드에서 동시에 상품 주문 요청 시, 상품 재고 관리가 정확하게 되어야 한다." classname="kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest" time="0.047">
     <failure message="org.springframework.dao.DataIntegrityViolationException: could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))] [delete from coupon where id=?]; SQL [delete from coupon where id=?]; constraint [null]" type="org.springframework.dao.DataIntegrityViolationException">org.springframework.dao.DataIntegrityViolationException: could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))] [delete from coupon where id=?]; SQL [delete from coupon where id=?]; constraint [null]
 	at app//org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:290)
 	at app//org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)
@@ -245,16 +245,16 @@ Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or u
 	... 36 more
 </failure>
   </testcase>
-  <system-out><![CDATA[2025-04-20T04:24:09.041Z  INFO 75376 --- [hhplus] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest]: OrderFacadeConcurrentTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-04-20T04:24:09.073Z  INFO 75376 --- [hhplus] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest
-2025-04-20T04:24:09.128Z  WARN 75376 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1451, SQLState: 23000
-2025-04-20T04:24:09.128Z ERROR 75376 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))
-2025-04-20T04:24:09.182Z  WARN 75376 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1451, SQLState: 23000
-2025-04-20T04:24:09.182Z ERROR 75376 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))
-2025-04-20T04:24:09.242Z  WARN 75376 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1451, SQLState: 23000
-2025-04-20T04:24:09.243Z ERROR 75376 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))
-2025-04-20T04:24:09.299Z  WARN 75376 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1451, SQLState: 23000
-2025-04-20T04:24:09.300Z ERROR 75376 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))
+  <system-out><![CDATA[2025-04-20T04:34:29.237Z  INFO 76511 --- [hhplus] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest]: OrderFacadeConcurrentTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-04-20T04:34:29.272Z  INFO 76511 --- [hhplus] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest
+2025-04-20T04:34:29.320Z  WARN 76511 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1451, SQLState: 23000
+2025-04-20T04:34:29.320Z ERROR 76511 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))
+2025-04-20T04:34:29.369Z  WARN 76511 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1451, SQLState: 23000
+2025-04-20T04:34:29.370Z ERROR 76511 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))
+2025-04-20T04:34:29.425Z  WARN 76511 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1451, SQLState: 23000
+2025-04-20T04:34:29.426Z ERROR 76511 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))
+2025-04-20T04:34:29.472Z  WARN 76511 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1451, SQLState: 23000
+2025-04-20T04:34:29.472Z ERROR 76511 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

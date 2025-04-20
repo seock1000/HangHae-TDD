@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.hhplus.be.server.domain.point.PointServiceTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-04-20T04:24:12" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.113">
+<testsuite name="kr.hhplus.be.server.domain.point.PointServiceTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-04-20T04:34:32" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.097">
   <properties/>
-  <testcase name="null 허용 포인트 조회 시, 포인트가 존재하면 포인트 정보를 반환한다." classname="kr.hhplus.be.server.domain.point.PointServiceTest" time="0.084"/>
-  <testcase name="포인트 조회 시, 포인트가 존재하면 포인트 정보를 반환한다." classname="kr.hhplus.be.server.domain.point.PointServiceTest" time="0.01"/>
-  <testcase name="null 허용 포인트 조회 시, 포인트가 존재하지 않으면 Optional.empty()를 반환한다." classname="kr.hhplus.be.server.domain.point.PointServiceTest" time="0.005"/>
-  <testcase name="포인트 조회 시, 포인트가 존재하지 않으면 ApiException(POINT_NOT_FOUND)을 발생시킨다." classname="kr.hhplus.be.server.domain.point.PointServiceTest" time="0.009"/>
+  <testcase name="null 허용 포인트 조회 시, 포인트가 존재하면 포인트 정보를 반환한다." classname="kr.hhplus.be.server.domain.point.PointServiceTest" time="0.077"/>
+  <testcase name="포인트 조회 시, 포인트가 존재하면 포인트 정보를 반환한다." classname="kr.hhplus.be.server.domain.point.PointServiceTest" time="0.007"/>
+  <testcase name="null 허용 포인트 조회 시, 포인트가 존재하지 않으면 Optional.empty()를 반환한다." classname="kr.hhplus.be.server.domain.point.PointServiceTest" time="0.004"/>
+  <testcase name="포인트 조회 시, 포인트가 존재하지 않으면 ApiException(POINT_NOT_FOUND)을 발생시킨다." classname="kr.hhplus.be.server.domain.point.PointServiceTest" time="0.006"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
