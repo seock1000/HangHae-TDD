@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.hhplus.be.server.domain.coupon.CouponTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2025-04-20T04:06:11" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.079">
+  <properties/>
+  <testcase name="쿠폰 발급 시, 쿠폰의 유효기간이 만료되었으면 ApiException(COUPON_EXPIRED)이 발생한다" classname="kr.hhplus.be.server.domain.coupon.CouponTest" time="0.011"/>
+  <testcase name="쿠폰 발급 시, 쿠폰의 수량이 0보다 작거나 같으면 ApiException(COUPON_OUT_OF_STOCK)이 발생한다" classname="kr.hhplus.be.server.domain.coupon.CouponTest" time="0.009"/>
+  <testcase name="쿠폰 발급 시, 현재가 쿠폰의 유효기간에 해당하고 쿠폰의 수량이 0보다 크면 UserCoupon이 발급된다" classname="kr.hhplus.be.server.domain.coupon.CouponTest" time="0.008"/>
+  <testcase name="쿠폰 유효성 검사 시, 쿠폰의 유효기간이 아니면 false를 반환한다" classname="kr.hhplus.be.server.domain.coupon.CouponTest" time="0.006"/>
+  <testcase name="쿠폰 할인 금액 계산 시, 할인 타입이 잘못된 경우 ApiException(INVALID_DISCOUNT_TYPE)을 발생시킨다" classname="kr.hhplus.be.server.domain.coupon.CouponTest" time="0.011"/>
+  <testcase name="쿠폰 할인 금액 계산 시, 할인 타입이 AMOUNT이면 정해진 할인 금액을 반환한다" classname="kr.hhplus.be.server.domain.coupon.CouponTest" time="0.007"/>
+  <testcase name="쿠폰 유효성 검사 시, 쿠폰의 유효기간이면 true를 반환한다" classname="kr.hhplus.be.server.domain.coupon.CouponTest" time="0.005"/>
+  <testcase name="쿠폰 할인 금액 계산 시, 할인 타입이 RATE이면 정해진 비율에 따라 할인 금액을 반환한다" classname="kr.hhplus.be.server.domain.coupon.CouponTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

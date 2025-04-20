@@ -34,6 +34,7 @@ public class BestSellerRepositoryImpl implements BestSellerRepository {
 
     @Override
     public List<BestSellerProductInfo> getTopBestSellersByDate(int limit, LocalDate date) {
+        //TODO : JPA Pageable로 변경하기 -> 어차피 count() 안나감
         String sql = """
                 SELECT b.product_id, p.title, p.description, p.stock, b.sales_amount
                 FROM best_seller b

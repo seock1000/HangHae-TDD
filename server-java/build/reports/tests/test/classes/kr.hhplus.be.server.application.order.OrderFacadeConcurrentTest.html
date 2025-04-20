@@ -23,13 +23,13 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">1</div>
+<div class="counter">4</div>
 <p>tests</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">1</div>
+<div class="counter">4</div>
 <p>failures</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">1.423s</div>
+<div class="counter">2.200s</div>
 <p>duration</p>
 </div>
 </td>
@@ -93,6 +93,154 @@
 </pre>
 </span>
 </div>
+<div class="test">
+<a name="testConcurrentOrder()"></a>
+<h3 class="failures">여러 스레드에서 동시에 상품 주문 요청 시, 상품 재고 관리가 정확하게 되어야 한다.</h3>
+<span class="code">
+<pre>org.springframework.dao.DataIntegrityViolationException: could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))] [delete from coupon where id=?]; SQL [delete from coupon where id=?]; constraint [null]
+	at app//org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:290)
+	at app//org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)
+	at app//org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:566)
+	at app//org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:795)
+	at app//org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:758)
+	at app//org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:698)
+	at app//org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:416)
+	at app//org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at app//org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at app//org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	at app//org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at app//org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:165)
+	at app//org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at app//org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+	at app/jdk.proxy3/jdk.proxy3.$Proxy185.deleteAll(Unknown Source)
+	at app//kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest.tearDown(OrderFacadeConcurrentTest.java:51)
+	at java.base@17.0.11/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))] [delete from coupon where id=?]
+	at app//org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:62)
+	at app//org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
+	at app//org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+	at app//org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:197)
+	at app//org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.performNonBatchedMutation(AbstractMutationExecutor.java:134)
+	at app//org.hibernate.engine.jdbc.mutation.internal.MutationExecutorSingleNonBatched.performNonBatchedOperations(MutationExecutorSingleNonBatched.java:55)
+	at app//org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:55)
+	at app//org.hibernate.persister.entity.mutation.AbstractDeleteCoordinator.doStaticDelete(AbstractDeleteCoordinator.java:279)
+	at app//org.hibernate.persister.entity.mutation.AbstractDeleteCoordinator.delete(AbstractDeleteCoordinator.java:87)
+	at app//org.hibernate.action.internal.EntityDeleteAction.execute(EntityDeleteAction.java:131)
+	at app//org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:644)
+	at app//org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:511)
+	at app//org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:414)
+	at app//org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:41)
+	at app//org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)
+	at app//org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1429)
+	at app//org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:491)
+	at app//org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:2354)
+	at app//org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:1978)
+	at app//org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:439)
+	at app//org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:169)
+	at app//org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:267)
+	at app//org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:101)
+	at app//org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:562)
+	... 16 more
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:109)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:988)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1166)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1101)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1467)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:1084)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:194)
+	... 36 more
+</pre>
+</span>
+</div>
+<div class="test">
+<a name="testConcurrentOrderWithDifferentCoupons()"></a>
+<h3 class="failures">여러 스레드에서 상품 주문 요청 시 서로 다른 쿠폰 요청이 동시에 들어오면, 각각의 주문에 쿠폰이 적용되어야 한다.</h3>
+<span class="code">
+<pre>org.springframework.dao.DataIntegrityViolationException: could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))] [delete from coupon where id=?]; SQL [delete from coupon where id=?]; constraint [null]
+	at app//org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:290)
+	at app//org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)
+	at app//org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:566)
+	at app//org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:795)
+	at app//org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:758)
+	at app//org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:698)
+	at app//org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:416)
+	at app//org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at app//org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at app//org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	at app//org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at app//org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:165)
+	at app//org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at app//org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+	at app/jdk.proxy3/jdk.proxy3.$Proxy185.deleteAll(Unknown Source)
+	at app//kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest.tearDown(OrderFacadeConcurrentTest.java:51)
+	at java.base@17.0.11/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))] [delete from coupon where id=?]
+	at app//org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:62)
+	at app//org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
+	at app//org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+	at app//org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:197)
+	at app//org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.performNonBatchedMutation(AbstractMutationExecutor.java:134)
+	at app//org.hibernate.engine.jdbc.mutation.internal.MutationExecutorSingleNonBatched.performNonBatchedOperations(MutationExecutorSingleNonBatched.java:55)
+	at app//org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:55)
+	at app//org.hibernate.persister.entity.mutation.AbstractDeleteCoordinator.doStaticDelete(AbstractDeleteCoordinator.java:279)
+	at app//org.hibernate.persister.entity.mutation.AbstractDeleteCoordinator.delete(AbstractDeleteCoordinator.java:87)
+	at app//org.hibernate.action.internal.EntityDeleteAction.execute(EntityDeleteAction.java:131)
+	at app//org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:644)
+	at app//org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:511)
+	at app//org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:414)
+	at app//org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:41)
+	at app//org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)
+	at app//org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1429)
+	at app//org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:491)
+	at app//org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:2354)
+	at app//org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:1978)
+	at app//org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:439)
+	at app//org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:169)
+	at app//org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:267)
+	at app//org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:101)
+	at app//org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:562)
+	... 16 more
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:109)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:988)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1166)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1101)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1467)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:1084)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:194)
+	... 36 more
+</pre>
+</span>
+</div>
+<div class="test">
+<a name="testConcurrentOrderWithSameCoupon()"></a>
+<h3 class="failures">여러 스레드에서 상품 주문 요청 시 같은 쿠폰 요청이 동시에 들어오면, 하나의 주문에만 쿠폰이 적용되고 정상 처리 되어야 한다.</h3>
+<span class="code">
+<pre>org.opentest4j.AssertionFailedError: expected: &lt;1&gt; but was: &lt;3&gt;
+	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at app//org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
+	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:145)
+	at app//org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:531)
+	at app//kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest.testConcurrentOrderWithSameCoupon(OrderFacadeConcurrentTest.java:192)
+	at java.base@17.0.11/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base@17.0.11/java.util.ArrayList.forEach(ArrayList.java:1511)
+</pre>
+</span>
+</div>
 </div>
 <div id="tab1" class="tab">
 <h2>Tests</h2>
@@ -108,7 +256,25 @@
 <tr>
 <td class="failures">여러 스레드에서 동시에 주문 취소 요청 시, 하나의 요청만 성공하며 상품 재고 관리가 정확하게 되어야 한다.</td>
 <td class="failures">testConcurrentCancelOrder()</td>
-<td class="failures">1.423s</td>
+<td class="failures">1.622s</td>
+<td class="failures">failed</td>
+</tr>
+<tr>
+<td class="failures">여러 스레드에서 동시에 상품 주문 요청 시, 상품 재고 관리가 정확하게 되어야 한다.</td>
+<td class="failures">testConcurrentOrder()</td>
+<td class="failures">0.059s</td>
+<td class="failures">failed</td>
+</tr>
+<tr>
+<td class="failures">여러 스레드에서 상품 주문 요청 시 서로 다른 쿠폰 요청이 동시에 들어오면, 각각의 주문에 쿠폰이 적용되어야 한다.</td>
+<td class="failures">testConcurrentOrderWithDifferentCoupons()</td>
+<td class="failures">0.109s</td>
+<td class="failures">failed</td>
+</tr>
+<tr>
+<td class="failures">여러 스레드에서 상품 주문 요청 시 같은 쿠폰 요청이 동시에 들어오면, 하나의 주문에만 쿠폰이 적용되고 정상 처리 되어야 한다.</td>
+<td class="failures">testConcurrentOrderWithSameCoupon()</td>
+<td class="failures">0.410s</td>
 <td class="failures">failed</td>
 </tr>
 </table>
@@ -116,8 +282,8 @@
 <div id="tab2" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>15:40:58.645 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest]: OrderFacadeConcurrentTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-15:40:58.876 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest
+<pre>04:05:28.872 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest]: OrderFacadeConcurrentTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+04:05:29.267 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -128,45 +294,45 @@
 
  :: Spring Boot ::                (v3.4.1)
 
-2025-04-17T15:40:59.568Z  INFO 1977 --- [hhplus] [    Test worker] k.h.b.s.a.o.OrderFacadeConcurrentTest    : Starting OrderFacadeConcurrentTest using Java 17.0.11 with PID 1977 (started by yeomseogcheon in /Users/yeomseogcheon/Documents/workspace/study/HangHae-TDD/server-java)
-2025-04-17T15:40:59.569Z  INFO 1977 --- [hhplus] [    Test worker] k.h.b.s.a.o.OrderFacadeConcurrentTest    : The following 1 profile is active: &quot;local&quot;
-2025-04-17T15:41:00.813Z  INFO 1977 --- [hhplus] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-04-17T15:41:00.909Z  INFO 1977 --- [hhplus] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 84 ms. Found 10 JPA repository interfaces.
-2025-04-17T15:41:01.548Z  INFO 1977 --- [hhplus] [    Test worker] org.testcontainers.images.PullPolicy     : Image pull policy will be performed by: DefaultPullPolicy()
-2025-04-17T15:41:01.552Z  INFO 1977 --- [hhplus] [    Test worker] o.t.utility.ImageNameSubstitutor         : Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
-2025-04-17T15:41:01.562Z  INFO 1977 --- [hhplus] [    Test worker] org.testcontainers.DockerClientFactory   : Testcontainers version: 1.20.4
-2025-04-17T15:41:01.790Z  INFO 1977 --- [hhplus] [    Test worker] o.t.d.DockerClientProviderStrategy       : Loaded org.testcontainers.dockerclient.UnixSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
-2025-04-17T15:41:02.112Z  INFO 1977 --- [hhplus] [    Test worker] o.t.d.DockerClientProviderStrategy       : Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
-2025-04-17T15:41:02.114Z  INFO 1977 --- [hhplus] [    Test worker] org.testcontainers.DockerClientFactory   : Docker host IP address is localhost
-2025-04-17T15:41:02.146Z  INFO 1977 --- [hhplus] [    Test worker] org.testcontainers.DockerClientFactory   : Connected to docker: 
+2025-04-20T04:05:29.830Z  INFO 73903 --- [hhplus] [    Test worker] k.h.b.s.a.o.OrderFacadeConcurrentTest    : Starting OrderFacadeConcurrentTest using Java 17.0.11 with PID 73903 (started by yeomseogcheon in /Users/yeomseogcheon/Documents/workspace/study/HangHae-TDD/server-java)
+2025-04-20T04:05:29.832Z  INFO 73903 --- [hhplus] [    Test worker] k.h.b.s.a.o.OrderFacadeConcurrentTest    : The following 1 profile is active: &quot;local&quot;
+2025-04-20T04:05:31.186Z  INFO 73903 --- [hhplus] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-20T04:05:31.338Z  INFO 73903 --- [hhplus] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 131 ms. Found 10 JPA repository interfaces.
+2025-04-20T04:05:32.153Z  INFO 73903 --- [hhplus] [    Test worker] org.testcontainers.images.PullPolicy     : Image pull policy will be performed by: DefaultPullPolicy()
+2025-04-20T04:05:32.156Z  INFO 73903 --- [hhplus] [    Test worker] o.t.utility.ImageNameSubstitutor         : Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-04-20T04:05:32.166Z  INFO 73903 --- [hhplus] [    Test worker] org.testcontainers.DockerClientFactory   : Testcontainers version: 1.20.4
+2025-04-20T04:05:32.414Z  INFO 73903 --- [hhplus] [    Test worker] o.t.d.DockerClientProviderStrategy       : Loaded org.testcontainers.dockerclient.UnixSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2025-04-20T04:05:32.714Z  INFO 73903 --- [hhplus] [    Test worker] o.t.d.DockerClientProviderStrategy       : Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+2025-04-20T04:05:32.717Z  INFO 73903 --- [hhplus] [    Test worker] org.testcontainers.DockerClientFactory   : Docker host IP address is localhost
+2025-04-20T04:05:32.739Z  INFO 73903 --- [hhplus] [    Test worker] org.testcontainers.DockerClientFactory   : Connected to docker: 
   Server Version: 27.5.1
   API Version: 1.47
   Operating System: Docker Desktop
   Total Memory: 7838 MB
   Labels: 
     com.docker.desktop.address=unix:///Users/yeomseogcheon/Library/Containers/com.docker.docker/Data/docker-cli.sock
-2025-04-17T15:41:02.176Z  INFO 1977 --- [hhplus] [    Test worker] tc.testcontainers/ryuk:0.11.0            : Creating container for image: testcontainers/ryuk:0.11.0
-2025-04-17T15:41:02.347Z  INFO 1977 --- [hhplus] [    Test worker] o.t.utility.RegistryAuthLocator          : Credential helper/store (docker-credential-desktop) does not have credentials for https://index.docker.io/v1/
-2025-04-17T15:41:02.460Z  INFO 1977 --- [hhplus] [    Test worker] tc.testcontainers/ryuk:0.11.0            : Container testcontainers/ryuk:0.11.0 is starting: add0160db672dcc929cbfb58dc099a9b73fbbe1ee5ada8633b88ce00e6595111
-2025-04-17T15:41:02.882Z  INFO 1977 --- [hhplus] [    Test worker] tc.testcontainers/ryuk:0.11.0            : Container testcontainers/ryuk:0.11.0 started in PT0.705894S
-2025-04-17T15:41:02.922Z  INFO 1977 --- [hhplus] [    Test worker] o.t.utility.RyukResourceReaper           : Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
-2025-04-17T15:41:02.923Z  INFO 1977 --- [hhplus] [    Test worker] org.testcontainers.DockerClientFactory   : Checking the system...
-2025-04-17T15:41:02.923Z  INFO 1977 --- [hhplus] [    Test worker] org.testcontainers.DockerClientFactory   : ✔︎ Docker server version should be at least 1.6.0
-2025-04-17T15:41:02.927Z  INFO 1977 --- [hhplus] [    Test worker] tc.mysql:8.0                             : Creating container for image: mysql:8.0
-2025-04-17T15:41:03.021Z  INFO 1977 --- [hhplus] [    Test worker] tc.mysql:8.0                             : Container mysql:8.0 is starting: 7cb675341c384599e833a6304d5ad8296fb7c13102da2934cd06f75af47a0b83
-2025-04-17T15:41:03.484Z  INFO 1977 --- [hhplus] [    Test worker] tc.mysql:8.0                             : Waiting for database connection to become available at jdbc:mysql://localhost:62418/hhplus using query 'SELECT 1'
-2025-04-17T15:41:25.570Z  INFO 1977 --- [hhplus] [    Test worker] tc.mysql:8.0                             : Container mysql:8.0 started in PT22.642898S
-2025-04-17T15:41:25.573Z  INFO 1977 --- [hhplus] [    Test worker] tc.mysql:8.0                             : Container is started (JDBC URL: jdbc:mysql://localhost:62418/hhplus)
-2025-04-17T15:41:26.718Z  INFO 1977 --- [hhplus] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-04-17T15:41:26.819Z  INFO 1977 --- [hhplus] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.4.Final
-2025-04-17T15:41:26.894Z  INFO 1977 --- [hhplus] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-04-17T15:41:27.217Z  INFO 1977 --- [hhplus] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-04-17T15:41:27.248Z  INFO 1977 --- [hhplus] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HangHaePlusDataSource - Starting...
-2025-04-17T15:41:27.401Z  INFO 1977 --- [hhplus] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HangHaePlusDataSource - Added connection com.mysql.cj.jdbc.ConnectionImpl@524418a2
-2025-04-17T15:41:27.403Z  INFO 1977 --- [hhplus] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HangHaePlusDataSource - Start completed.
-2025-04-17T15:41:27.439Z  WARN 1977 --- [hhplus] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-04-17T15:41:27.440Z  WARN 1977 --- [hhplus] [    Test worker] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-04-17T15:41:27.459Z  INFO 1977 --- [hhplus] [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2025-04-20T04:05:32.767Z  INFO 73903 --- [hhplus] [    Test worker] tc.testcontainers/ryuk:0.11.0            : Creating container for image: testcontainers/ryuk:0.11.0
+2025-04-20T04:05:33.048Z  INFO 73903 --- [hhplus] [    Test worker] o.t.utility.RegistryAuthLocator          : Credential helper/store (docker-credential-desktop) does not have credentials for https://index.docker.io/v1/
+2025-04-20T04:05:33.257Z  INFO 73903 --- [hhplus] [    Test worker] tc.testcontainers/ryuk:0.11.0            : Container testcontainers/ryuk:0.11.0 is starting: 3600c4c83360d4c9b36a37a6e7b5a0d668900be835d46dd337e6f26a3f9f4962
+2025-04-20T04:05:33.992Z  INFO 73903 --- [hhplus] [    Test worker] tc.testcontainers/ryuk:0.11.0            : Container testcontainers/ryuk:0.11.0 started in PT1.22434S
+2025-04-20T04:05:34.009Z  INFO 73903 --- [hhplus] [    Test worker] o.t.utility.RyukResourceReaper           : Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2025-04-20T04:05:34.009Z  INFO 73903 --- [hhplus] [    Test worker] org.testcontainers.DockerClientFactory   : Checking the system...
+2025-04-20T04:05:34.010Z  INFO 73903 --- [hhplus] [    Test worker] org.testcontainers.DockerClientFactory   : ✔︎ Docker server version should be at least 1.6.0
+2025-04-20T04:05:34.016Z  INFO 73903 --- [hhplus] [    Test worker] tc.mysql:8.0                             : Creating container for image: mysql:8.0
+2025-04-20T04:05:34.251Z  INFO 73903 --- [hhplus] [    Test worker] tc.mysql:8.0                             : Container mysql:8.0 is starting: eb1d57d80f57432f571cdebd998650ee2b0592c91791d715031c16d0da8a598b
+2025-04-20T04:05:34.813Z  INFO 73903 --- [hhplus] [    Test worker] tc.mysql:8.0                             : Waiting for database connection to become available at jdbc:mysql://localhost:49621/hhplus using query 'SELECT 1'
+2025-04-20T04:05:52.997Z  INFO 73903 --- [hhplus] [    Test worker] tc.mysql:8.0                             : Container mysql:8.0 started in PT18.981105S
+2025-04-20T04:05:52.998Z  INFO 73903 --- [hhplus] [    Test worker] tc.mysql:8.0                             : Container is started (JDBC URL: jdbc:mysql://localhost:49621/hhplus)
+2025-04-20T04:05:53.668Z  INFO 73903 --- [hhplus] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-20T04:05:53.754Z  INFO 73903 --- [hhplus] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.4.Final
+2025-04-20T04:05:53.791Z  INFO 73903 --- [hhplus] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-20T04:05:54.123Z  INFO 73903 --- [hhplus] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-20T04:05:54.155Z  INFO 73903 --- [hhplus] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HangHaePlusDataSource - Starting...
+2025-04-20T04:05:54.306Z  INFO 73903 --- [hhplus] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HangHaePlusDataSource - Added connection com.mysql.cj.jdbc.ConnectionImpl@f9979cf
+2025-04-20T04:05:54.307Z  INFO 73903 --- [hhplus] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HangHaePlusDataSource - Start completed.
+2025-04-20T04:05:54.343Z  WARN 73903 --- [hhplus] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-20T04:05:54.344Z  WARN 73903 --- [hhplus] [    Test worker] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-04-20T04:05:54.366Z  INFO 73903 --- [hhplus] [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HangHaePlusDataSource)']
 	Database driver: undefined/unknown
 	Database version: 8.0
@@ -174,15 +340,15 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-04-17T15:41:29.629Z  INFO 1977 --- [hhplus] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-04-17T15:41:30.264Z  INFO 1977 --- [hhplus] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-04-17T15:41:30.967Z  INFO 1977 --- [hhplus] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-04-17T15:41:32.869Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
-2025-04-17T15:41:32.874Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.simpl.SimpleThreadPool        : Job execution threads will use class loader of thread: Test worker
-2025-04-17T15:41:32.893Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
-2025-04-17T15:41:32.893Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.2 created.
-2025-04-17T15:41:32.894Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
-2025-04-17T15:41:32.895Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.2) 'DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+2025-04-20T04:05:55.512Z  INFO 73903 --- [hhplus] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-20T04:05:56.042Z  INFO 73903 --- [hhplus] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-20T04:05:56.524Z  INFO 73903 --- [hhplus] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-20T04:06:00.202Z  INFO 73903 --- [hhplus] [    Test worker] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2025-04-20T04:06:00.207Z  INFO 73903 --- [hhplus] [    Test worker] org.quartz.simpl.SimpleThreadPool        : Job execution threads will use class loader of thread: Test worker
+2025-04-20T04:06:00.230Z  INFO 73903 --- [hhplus] [    Test worker] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2025-04-20T04:06:00.230Z  INFO 73903 --- [hhplus] [    Test worker] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.2 created.
+2025-04-20T04:06:00.232Z  INFO 73903 --- [hhplus] [    Test worker] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2025-04-20T04:06:00.234Z  INFO 73903 --- [hhplus] [    Test worker] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.2) 'DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
   Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
   NOT STARTED.
   Currently in standby mode.
@@ -190,15 +356,15 @@
   Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
   Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
 
-2025-04-17T15:41:32.896Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'DefaultQuartzScheduler' initialized from default resource file in Quartz package: 'quartz.properties'
-2025-04-17T15:41:32.896Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.2
-2025-04-17T15:41:32.896Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.core.QuartzScheduler          : Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED started.
-2025-04-17T15:41:34.554Z  INFO 1977 --- [hhplus] [    Test worker] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
-2025-04-17T15:41:37.185Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
-2025-04-17T15:41:37.187Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
-2025-04-17T15:41:37.187Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.2 created.
-2025-04-17T15:41:37.188Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
-2025-04-17T15:41:37.188Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+2025-04-20T04:06:00.235Z  INFO 73903 --- [hhplus] [    Test worker] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'DefaultQuartzScheduler' initialized from default resource file in Quartz package: 'quartz.properties'
+2025-04-20T04:06:00.235Z  INFO 73903 --- [hhplus] [    Test worker] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.2
+2025-04-20T04:06:00.235Z  INFO 73903 --- [hhplus] [    Test worker] org.quartz.core.QuartzScheduler          : Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED started.
+2025-04-20T04:06:02.026Z  INFO 73903 --- [hhplus] [    Test worker] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-04-20T04:06:05.579Z  INFO 73903 --- [hhplus] [    Test worker] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2025-04-20T04:06:05.581Z  INFO 73903 --- [hhplus] [    Test worker] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2025-04-20T04:06:05.582Z  INFO 73903 --- [hhplus] [    Test worker] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.2 created.
+2025-04-20T04:06:05.582Z  INFO 73903 --- [hhplus] [    Test worker] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2025-04-20T04:06:05.582Z  INFO 73903 --- [hhplus] [    Test worker] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
   Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
   NOT STARTED.
   Currently in standby mode.
@@ -206,14 +372,14 @@
   Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
   Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
 
-2025-04-17T15:41:37.188Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
-2025-04-17T15:41:37.189Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.2
-2025-04-17T15:41:37.189Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@2c193600
-2025-04-17T15:41:37.286Z  INFO 1977 --- [hhplus] [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2025-04-17T15:41:37.441Z  INFO 1977 --- [hhplus] [    Test worker] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
-2025-04-17T15:41:37.441Z  INFO 1977 --- [hhplus] [    Test worker] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
-2025-04-17T15:41:37.483Z  INFO 1977 --- [hhplus] [    Test worker] k.h.b.s.a.o.OrderFacadeConcurrentTest    : Started OrderFacadeConcurrentTest in 38.449 seconds (process running for 39.791)
-2025-04-17T15:41:38.852Z ERROR 1977 --- [hhplus] [eduler_Worker-1] org.quartz.core.JobRunShell              : Job cancelOrderJob.2299ad76-a3b8-404f-99b1-f6ebaba386d3 threw an unhandled Exception: 
+2025-04-20T04:06:05.582Z  INFO 73903 --- [hhplus] [    Test worker] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2025-04-20T04:06:05.582Z  INFO 73903 --- [hhplus] [    Test worker] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.2
+2025-04-20T04:06:05.583Z  INFO 73903 --- [hhplus] [    Test worker] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@3d381435
+2025-04-20T04:06:05.656Z  INFO 73903 --- [hhplus] [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2025-04-20T04:06:05.776Z  INFO 73903 --- [hhplus] [    Test worker] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2025-04-20T04:06:05.777Z  INFO 73903 --- [hhplus] [    Test worker] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2025-04-20T04:06:05.807Z  INFO 73903 --- [hhplus] [    Test worker] k.h.b.s.a.o.OrderFacadeConcurrentTest    : Started OrderFacadeConcurrentTest in 36.345 seconds (process running for 38.588)
+2025-04-20T04:06:07.402Z ERROR 73903 --- [hhplus] [eduler_Worker-1] org.quartz.core.JobRunShell              : Job cancelOrderJob.f812265a-463e-40a4-a094-42e095a6dd68 threw an unhandled Exception: 
 
 java.lang.NullPointerException: Cannot invoke &quot;org.springframework.web.context.WebApplicationContext.getBean(String)&quot; because &quot;appContext&quot; is null
 	at kr.hhplus.be.server.infrastructure.order.CancelOrderJob.executeInternal(CancelOrderJob.java:17) ~[main/:na]
@@ -221,7 +387,7 @@ java.lang.NullPointerException: Cannot invoke &quot;org.springframework.web.cont
 	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.3.2.jar:na]
 	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573) ~[quartz-2.3.2.jar:na]
 
-2025-04-17T15:41:38.859Z ERROR 1977 --- [hhplus] [eduler_Worker-1] org.quartz.core.ErrorLogger              : Job (cancelOrderJob.2299ad76-a3b8-404f-99b1-f6ebaba386d3 threw an exception.
+2025-04-20T04:06:07.407Z ERROR 73903 --- [hhplus] [eduler_Worker-1] org.quartz.core.ErrorLogger              : Job (cancelOrderJob.f812265a-463e-40a4-a094-42e095a6dd68 threw an exception.
 
 org.quartz.SchedulerException: Job threw an unhandled exception.
 	at org.quartz.core.JobRunShell.run(JobRunShell.java:213) ~[quartz-2.3.2.jar:na]
@@ -232,6 +398,67 @@ Caused by: java.lang.NullPointerException: Cannot invoke &quot;org.springframewo
 	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.3.2.jar:na]
 	... 1 common frames omitted
 
+2025-04-20T04:06:07.881Z ERROR 73903 --- [hhplus] [eduler_Worker-2] org.quartz.core.JobRunShell              : Job cancelOrderJob.05ef8dff-7a6b-4b2c-a7f2-798a45fc7036 threw an unhandled Exception: 
+
+java.lang.NullPointerException: Cannot invoke &quot;org.springframework.web.context.WebApplicationContext.getBean(String)&quot; because &quot;appContext&quot; is null
+	at kr.hhplus.be.server.infrastructure.order.CancelOrderJob.executeInternal(CancelOrderJob.java:17) ~[main/:na]
+	at org.springframework.scheduling.quartz.QuartzJobBean.execute(QuartzJobBean.java:75) ~[spring-context-support-6.2.1.jar:6.2.1]
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.3.2.jar:na]
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573) ~[quartz-2.3.2.jar:na]
+
+2025-04-20T04:06:07.882Z ERROR 73903 --- [hhplus] [eduler_Worker-3] org.quartz.core.JobRunShell              : Job cancelOrderJob.bc1cd35c-8856-4cb2-aa2b-b60893bbac46 threw an unhandled Exception: 
+
+java.lang.NullPointerException: Cannot invoke &quot;org.springframework.web.context.WebApplicationContext.getBean(String)&quot; because &quot;appContext&quot; is null
+	at kr.hhplus.be.server.infrastructure.order.CancelOrderJob.executeInternal(CancelOrderJob.java:17) ~[main/:na]
+	at org.springframework.scheduling.quartz.QuartzJobBean.execute(QuartzJobBean.java:75) ~[spring-context-support-6.2.1.jar:6.2.1]
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.3.2.jar:na]
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573) ~[quartz-2.3.2.jar:na]
+
+2025-04-20T04:06:07.882Z ERROR 73903 --- [hhplus] [eduler_Worker-4] org.quartz.core.JobRunShell              : Job cancelOrderJob.318ec973-1355-4430-aa56-f8b77eb64353 threw an unhandled Exception: 
+
+java.lang.NullPointerException: Cannot invoke &quot;org.springframework.web.context.WebApplicationContext.getBean(String)&quot; because &quot;appContext&quot; is null
+	at kr.hhplus.be.server.infrastructure.order.CancelOrderJob.executeInternal(CancelOrderJob.java:17) ~[main/:na]
+	at org.springframework.scheduling.quartz.QuartzJobBean.execute(QuartzJobBean.java:75) ~[spring-context-support-6.2.1.jar:6.2.1]
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.3.2.jar:na]
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573) ~[quartz-2.3.2.jar:na]
+
+2025-04-20T04:06:07.883Z ERROR 73903 --- [hhplus] [eduler_Worker-3] org.quartz.core.ErrorLogger              : Job (cancelOrderJob.bc1cd35c-8856-4cb2-aa2b-b60893bbac46 threw an exception.
+
+org.quartz.SchedulerException: Job threw an unhandled exception.
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:213) ~[quartz-2.3.2.jar:na]
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573) ~[quartz-2.3.2.jar:na]
+Caused by: java.lang.NullPointerException: Cannot invoke &quot;org.springframework.web.context.WebApplicationContext.getBean(String)&quot; because &quot;appContext&quot; is null
+	at kr.hhplus.be.server.infrastructure.order.CancelOrderJob.executeInternal(CancelOrderJob.java:17) ~[main/:na]
+	at org.springframework.scheduling.quartz.QuartzJobBean.execute(QuartzJobBean.java:75) ~[spring-context-support-6.2.1.jar:6.2.1]
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.3.2.jar:na]
+	... 1 common frames omitted
+
+2025-04-20T04:06:07.883Z ERROR 73903 --- [hhplus] [eduler_Worker-4] org.quartz.core.ErrorLogger              : Job (cancelOrderJob.318ec973-1355-4430-aa56-f8b77eb64353 threw an exception.
+
+org.quartz.SchedulerException: Job threw an unhandled exception.
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:213) ~[quartz-2.3.2.jar:na]
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573) ~[quartz-2.3.2.jar:na]
+Caused by: java.lang.NullPointerException: Cannot invoke &quot;org.springframework.web.context.WebApplicationContext.getBean(String)&quot; because &quot;appContext&quot; is null
+	at kr.hhplus.be.server.infrastructure.order.CancelOrderJob.executeInternal(CancelOrderJob.java:17) ~[main/:na]
+	at org.springframework.scheduling.quartz.QuartzJobBean.execute(QuartzJobBean.java:75) ~[spring-context-support-6.2.1.jar:6.2.1]
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.3.2.jar:na]
+	... 1 common frames omitted
+
+2025-04-20T04:06:07.883Z ERROR 73903 --- [hhplus] [eduler_Worker-2] org.quartz.core.ErrorLogger              : Job (cancelOrderJob.05ef8dff-7a6b-4b2c-a7f2-798a45fc7036 threw an exception.
+
+org.quartz.SchedulerException: Job threw an unhandled exception.
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:213) ~[quartz-2.3.2.jar:na]
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573) ~[quartz-2.3.2.jar:na]
+Caused by: java.lang.NullPointerException: Cannot invoke &quot;org.springframework.web.context.WebApplicationContext.getBean(String)&quot; because &quot;appContext&quot; is null
+	at kr.hhplus.be.server.infrastructure.order.CancelOrderJob.executeInternal(CancelOrderJob.java:17) ~[main/:na]
+	at org.springframework.scheduling.quartz.QuartzJobBean.execute(QuartzJobBean.java:75) ~[spring-context-support-6.2.1.jar:6.2.1]
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) ~[quartz-2.3.2.jar:na]
+	... 1 common frames omitted
+
+2025-04-20T04:06:08.058Z  WARN 73903 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1451, SQLState: 23000
+2025-04-20T04:06:08.058Z ERROR 73903 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))
+2025-04-20T04:06:08.125Z  WARN 73903 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1451, SQLState: 23000
+2025-04-20T04:06:08.125Z ERROR 73903 --- [hhplus] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : Cannot delete or update a parent row: a foreign key constraint fails (`hhplus`.`user_coupon`, CONSTRAINT `FK23vpkw483hhbe77dgvimcipf4` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`))
 </pre>
 </span>
 </div>
@@ -240,7 +467,7 @@ Caused by: java.lang.NullPointerException: Cannot invoke &quot;org.springframewo
 <span class="code">
 <pre>kr.hhplus.be.server.ApiException: Order cannot be canceled
 	at kr.hhplus.be.server.ApiException.of(ApiException.java:15)
-	at kr.hhplus.be.server.domain.order.Orders.cancel(Orders.java:82)
+	at kr.hhplus.be.server.domain.order.Orders.cancel(Orders.java:79)
 	at kr.hhplus.be.server.application.order.OrderFacade.cancelOrder(OrderFacade.java:52)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
@@ -262,6 +489,32 @@ Caused by: java.lang.NullPointerException: Cannot invoke &quot;org.springframewo
 	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655)
 	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622)
 	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165)
+kr.hhplus.be.server.ApiException: Coupon already used
+	at kr.hhplus.be.server.ApiException.of(ApiException.java:15)
+	at kr.hhplus.be.server.domain.coupon.UserCoupon.use(UserCoupon.java:41)
+	at kr.hhplus.be.server.domain.coupon.IssuedCoupon.use(IssuedCoupon.java:15)
+	at kr.hhplus.be.server.domain.order.Orders.applyCoupon(Orders.java:66)
+	at kr.hhplus.be.server.application.order.OrderFacade.placeOrder(OrderFacade.java:39)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at kr.hhplus.be.server.application.order.OrderFacade$$SpringCGLIB$$0.placeOrder(&lt;generated&gt;)
+	at kr.hhplus.be.server.application.order.OrderFacadeConcurrentTest.lambda$testConcurrentOrderWithSameCoupon$7(OrderFacadeConcurrentTest.java:182)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1796)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165)
 </pre>
 </span>
 </div>
@@ -273,7 +526,7 @@ Caused by: java.lang.NullPointerException: Cannot invoke &quot;org.springframewo
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.11.1</a> at 2025. 4. 18. 오전 12:41:39</p>
+<a href="http://www.gradle.org">Gradle 8.11.1</a> at 2025. 4. 20. 오후 1:06:13</p>
 </div>
 </div>
 </body>

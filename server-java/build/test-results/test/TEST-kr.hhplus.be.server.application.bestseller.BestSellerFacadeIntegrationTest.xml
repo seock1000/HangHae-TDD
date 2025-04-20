@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.hhplus.be.server.application.bestseller.BestSellerFacadeIntegrationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-20T04:06:08" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.177">
+  <properties/>
+  <testcase name="BestSeller 통계 테이블에서 많은 순서대로 인기 상품을 5개 가져온다" classname="kr.hhplus.be.server.application.bestseller.BestSellerFacadeIntegrationTest" time="0.177"/>
+  <system-out><![CDATA[2025-04-20T04:06:08.207Z  INFO 73903 --- [hhplus] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kr.hhplus.be.server.application.bestseller.BestSellerFacadeIntegrationTest]: BestSellerFacadeIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-04-20T04:06:08.244Z  INFO 73903 --- [hhplus] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.bestseller.BestSellerFacadeIntegrationTest
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

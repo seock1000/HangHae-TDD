@@ -53,8 +53,8 @@ public class UserCoupon extends BaseTimeEntity {
         this.isUsed = false;
     }
 
-    public AppliedCoupon toAppliedCoupon() {
-        return AppliedCoupon.of(this);
+    public IssuedCoupon toAppliedCoupon() {
+        return IssuedCoupon.of(this);
     }
 
 }

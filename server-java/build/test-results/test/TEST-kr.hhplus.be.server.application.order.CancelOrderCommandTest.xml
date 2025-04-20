@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.hhplus.be.server.application.order.CancelOrderCommandTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-04-20T04:06:08" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.008">
+  <properties/>
+  <testcase name="orderId가 빈 문자열인 경우 CancelOrderCommand를 생성하면 ApiException(INVALID_ORDER_ID)이 발생한다." classname="kr.hhplus.be.server.application.order.CancelOrderCommandTest" time="0.002"/>
+  <testcase name="유효한 orderId로 CancelOrderCommand를 생성하면 성공한다." classname="kr.hhplus.be.server.application.order.CancelOrderCommandTest" time="0.001"/>
+  <testcase name="orderId가 null인 경우 CancelOrderCommand를 생성하면 ApiException(INVALID_ORDER_ID)이 발생한다." classname="kr.hhplus.be.server.application.order.CancelOrderCommandTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

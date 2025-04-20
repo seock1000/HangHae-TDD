@@ -2,19 +2,14 @@ package kr.hhplus.be.server.domain.order;
 
 import kr.hhplus.be.server.ApiError;
 import kr.hhplus.be.server.ApiException;
-import kr.hhplus.be.server.domain.coupon.AppliedCoupon;
-import kr.hhplus.be.server.domain.coupon.UserCoupon;
-import kr.hhplus.be.server.domain.product.Product;
 import kr.hhplus.be.server.domain.product.SoldProduct;
 import kr.hhplus.be.server.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

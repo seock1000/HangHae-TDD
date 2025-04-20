@@ -2,9 +2,7 @@ package kr.hhplus.be.server.domain.order;
 
 import kr.hhplus.be.server.ApiError;
 import kr.hhplus.be.server.ApiException;
-import kr.hhplus.be.server.domain.coupon.AppliedCoupon;
-import kr.hhplus.be.server.domain.coupon.UserCoupon;
-import kr.hhplus.be.server.domain.product.Product;
+import kr.hhplus.be.server.domain.coupon.IssuedCoupon;
 import kr.hhplus.be.server.domain.product.SoldProduct;
 import kr.hhplus.be.server.domain.user.User;
 import org.instancio.Instancio;
@@ -73,7 +71,7 @@ class OrdersTest {
         Orders orders = Instancio.of(Orders.class)
                 .set(field("couponId"), 1L)
                 .create();
-        AppliedCoupon coupon = Mockito.mock(AppliedCoupon.class);
+        IssuedCoupon coupon = Mockito.mock(IssuedCoupon.class);
 
         // when & then
         ApiException exception = assertThrows(ApiException.class, () -> orders.applyCoupon(coupon));
@@ -89,7 +87,7 @@ class OrdersTest {
                 .set(field("totalAmount"), 1000)
                 .set(field("discountAmount"), 0)
                 .create();
-        AppliedCoupon coupon = Mockito.mock(AppliedCoupon.class);
+        IssuedCoupon coupon = Mockito.mock(IssuedCoupon.class);
         when(coupon.discount(anyInt())).thenReturn(2000);
 
         // when & then

@@ -1,14 +1,14 @@
 package kr.hhplus.be.server.domain.coupon;
 
-public class AppliedCoupon {
+public class IssuedCoupon {
     private UserCoupon userCoupon;
 
-    private AppliedCoupon(UserCoupon userCoupon) {
+    private IssuedCoupon(UserCoupon userCoupon) {
         this.userCoupon = userCoupon;
     }
 
-    protected static AppliedCoupon of(UserCoupon userCoupon) {
-        return new AppliedCoupon(userCoupon);
+    protected static IssuedCoupon of(UserCoupon userCoupon) {
+        return new IssuedCoupon(userCoupon);
     }
 
     public void use() {

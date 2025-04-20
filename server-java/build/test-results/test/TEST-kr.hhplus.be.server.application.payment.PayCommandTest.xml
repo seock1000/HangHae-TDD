@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.hhplus.be.server.application.payment.PayCommandTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-04-20T04:06:09" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.004">
+  <properties/>
+  <testcase name="orderId가 빈 문자열인 경우 PayCommand를 생성하면 ApiException(INVALID_ORDER_ID)이 발생한다." classname="kr.hhplus.be.server.application.payment.PayCommandTest" time="0.001"/>
+  <testcase name="orderId가 null인 경우 PayCommand를 생성하면 ApiException(INVALID_ORDER_ID)이 발생한다." classname="kr.hhplus.be.server.application.payment.PayCommandTest" time="0.001"/>
+  <testcase name="유효한 orderId로 PayCommand를 생성하면 성공한다." classname="kr.hhplus.be.server.application.payment.PayCommandTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

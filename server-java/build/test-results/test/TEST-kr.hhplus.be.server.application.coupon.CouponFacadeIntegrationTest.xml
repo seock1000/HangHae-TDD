@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.hhplus.be.server.application.coupon.CouponFacadeIntegrationTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-04-20T04:06:08" hostname="yeomseogcheon-ui-MacBookPro.local" time="0.156">
+  <properties/>
+  <testcase name="쿠폰 조회 시, 받은 유저 ID에 대한 쿠폰이 있으면 쿠폰 리스트를 반환한다." classname="kr.hhplus.be.server.application.coupon.CouponFacadeIntegrationTest" time="0.052"/>
+  <testcase name="쿠폰 조회 시, 받은 유저 ID에 대한 쿠폰이 없으면 빈 리스트를 반환한다." classname="kr.hhplus.be.server.application.coupon.CouponFacadeIntegrationTest" time="0.029"/>
+  <testcase name="유효한 쿠폰 발급 요청 시, 쿠폰이 발급된다." classname="kr.hhplus.be.server.application.coupon.CouponFacadeIntegrationTest" time="0.073"/>
+  <system-out><![CDATA[2025-04-20T04:06:08.810Z  INFO 73903 --- [hhplus] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kr.hhplus.be.server.application.coupon.CouponFacadeIntegrationTest]: CouponFacadeIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-04-20T04:06:08.819Z  INFO 73903 --- [hhplus] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kr.hhplus.be.server.ServerApplication for test class kr.hhplus.be.server.application.coupon.CouponFacadeIntegrationTest
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
