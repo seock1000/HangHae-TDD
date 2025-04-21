@@ -11,8 +11,6 @@
         
         => TxA에서 update 한 값은 TxB에 의해 덮어 씌워지면서 상실
         ```
-        
-      - 
     - 커밋되지 않은 의존(Uncommitted Dependency)
 
         ```java
