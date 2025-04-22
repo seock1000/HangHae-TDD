@@ -17,7 +17,7 @@ public class PointHistory extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "point_id")
+    @JoinColumn(name = "point_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Point point;
     private int amount;
     private int balance;

@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface CouponRepository {
     List<UserCouponInfo> findUserCouponInfosByUserId(long userId);
     Optional<Coupon> findCouponById(Long couponId);
+    public Optional<Coupon> findCouponByIdForUpdate(Long couponId);
     Optional<UserCoupon> findUserCouponById(Long userCouponId);
 
     boolean existsUserCouponByUserAndCoupon(User user, Coupon coupon);

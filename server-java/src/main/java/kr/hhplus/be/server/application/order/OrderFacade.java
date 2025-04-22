@@ -25,7 +25,7 @@ public class OrderFacade {
     public OrderResult placeOrder(PlaceOrderCommand command) {
         var user = userService.getUserById(command.userId());
         List<Pair<Product, Integer>> productAndQuantity = command.items().stream()
-                .map(it -> Pair.of(productService.getProductById(it.productId()), it.quantity()))
+                .map(it -> Pair.of(productService.getProductByIdForUpdate(it.productId()), it.quantity()))
                 .toList();
 
         Orders order = orderService.createOrder(user, productAndQuantity.stream()
@@ -51,7 +51,7 @@ public class OrderFacade {
         orderService.saveOrder(order);
 
         order.getOrderItems().forEach(item -> {
-            var product = productService.getProductById(item.getProductId());
+            var product = productService.getProductByIdForUpdate(item.getProductId());
             product.increaseStock(item.getQuantity());
             productService.save(product);
         });

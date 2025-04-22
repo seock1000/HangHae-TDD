@@ -25,6 +25,9 @@ public class UserCoupon extends BaseTimeEntity {
     private boolean isUsed;
     private LocalDateTime issuedAt;
 
+    @Version
+    private Long version;
+
     private UserCoupon(Long userId, Coupon coupon, boolean isUsed, LocalDateTime issuedAt) {
         this.userId = userId;
         this.coupon = coupon;

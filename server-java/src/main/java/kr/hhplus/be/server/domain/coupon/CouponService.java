@@ -31,6 +31,11 @@ public class CouponService {
                 .orElseThrow(() -> ApiException.of(ApiError.COUPON_NOT_FOUND));
     }
 
+    public Coupon getCouponByIdForUpdate(long couponId) {
+        return couponRepository.findCouponByIdForUpdate(couponId)
+                .orElseThrow(() -> ApiException.of(ApiError.COUPON_NOT_FOUND));
+    }
+
     /**
      * 테스트 필요없을 듯
      */

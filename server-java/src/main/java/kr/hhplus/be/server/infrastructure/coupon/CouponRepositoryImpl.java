@@ -1,11 +1,13 @@
 package kr.hhplus.be.server.infrastructure.coupon;
 
+import jakarta.persistence.LockModeType;
 import kr.hhplus.be.server.domain.coupon.Coupon;
 import kr.hhplus.be.server.domain.coupon.CouponRepository;
 import kr.hhplus.be.server.domain.coupon.UserCoupon;
 import kr.hhplus.be.server.domain.coupon.UserCouponInfo;
 import kr.hhplus.be.server.domain.user.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,6 +30,11 @@ public class CouponRepositoryImpl implements CouponRepository {
     @Override
     public Optional<Coupon> findCouponById(Long couponId) {
         return couponJpaRepository.findById(couponId);
+    }
+
+    @Override
+    public Optional<Coupon> findCouponByIdForUpdate(Long couponId) {
+        return couponJpaRepository.findForUpdate(couponId);
     }
 
     @Override

@@ -29,6 +29,11 @@ public class ProductService {
                 .orElseThrow(() -> ApiException.of(ApiError.PRODUCT_NOT_FOUND));
     }
 
+    public Product getProductByIdForUpdate(Long id) {
+        return productRepository.findByIdForUpdate(id)
+                .orElseThrow(() -> ApiException.of(ApiError.PRODUCT_NOT_FOUND));
+    }
+
     /**
      * 테스트 필요 없을 듯
      */
