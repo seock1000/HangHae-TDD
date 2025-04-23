@@ -1,5 +1,6 @@
 package kr.hhplus.be.server.application.order;
 
+import kr.hhplus.be.server.IntegrationTestSupport;
 import kr.hhplus.be.server.domain.coupon.Coupon;
 import kr.hhplus.be.server.domain.coupon.DiscountType;
 import kr.hhplus.be.server.domain.coupon.UserCoupon;
@@ -23,9 +24,7 @@ import java.util.List;
 import static org.instancio.Select.field;
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-@Transactional
-class OrderFacadeIntegrationTest {
+class OrderFacadeIntegrationTest extends IntegrationTestSupport {
 
     @Autowired
     private OrderFacade orderFacade;

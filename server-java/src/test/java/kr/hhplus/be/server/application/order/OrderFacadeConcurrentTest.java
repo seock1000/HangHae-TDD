@@ -1,5 +1,6 @@
 package kr.hhplus.be.server.application.order;
 
+import kr.hhplus.be.server.IntegrationTestSupport;
 import kr.hhplus.be.server.domain.coupon.Coupon;
 import kr.hhplus.be.server.domain.coupon.DiscountType;
 import kr.hhplus.be.server.domain.coupon.UserCoupon;
@@ -31,8 +32,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.instancio.Select.field;
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-class OrderFacadeConcurrentTest {
+class OrderFacadeConcurrentTest extends IntegrationTestSupport {
 
     @Autowired
     private OrderFacade orderFacade;
@@ -47,14 +47,6 @@ class OrderFacadeConcurrentTest {
     @Autowired
     private ProductJpaRepository productJpaRepository;
 
-    @BeforeEach
-    void tearDown() {
-        orderJpaRepository.deleteAll();
-        couponJpaRepository.deleteAll();
-        userCouponJpaRepository.deleteAll();
-        userJpaRepository.deleteAll();
-        productJpaRepository.deleteAll();
-    }
 
     @Test
     @DisplayName("여러 스레드에서 동시에 상품 주문 요청 시, 상품 재고 관리가 정확하게 되어야 한다.")

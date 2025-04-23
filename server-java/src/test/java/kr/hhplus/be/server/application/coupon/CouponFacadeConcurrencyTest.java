@@ -1,5 +1,6 @@
 package kr.hhplus.be.server.application.coupon;
 
+import kr.hhplus.be.server.IntegrationTestSupport;
 import kr.hhplus.be.server.domain.coupon.Coupon;
 import kr.hhplus.be.server.domain.user.User;
 import kr.hhplus.be.server.infrastructure.coupon.CouponJpaRepository;
@@ -21,8 +22,7 @@ import java.util.concurrent.CompletableFuture;
 import static org.instancio.Select.field;
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-class CouponFacadeConcurrencyTest {
+class CouponFacadeConcurrencyTest extends IntegrationTestSupport {
 
     @Autowired
     private CouponFacade couponFacade;
@@ -30,11 +30,6 @@ class CouponFacadeConcurrencyTest {
     private CouponJpaRepository couponJpaRepository;
     @Autowired
     private UserJpaRepository userJpaRepository;
-
-    @BeforeEach
-    void tearDown() {
-        couponJpaRepository.deleteAll();
-    }
 
     @Test
     @DisplayName("여러 스레드에서 동시에 쿠폰 발급 요청 시 재고관리가 정확하게 되며, 발급되어야 한다.")

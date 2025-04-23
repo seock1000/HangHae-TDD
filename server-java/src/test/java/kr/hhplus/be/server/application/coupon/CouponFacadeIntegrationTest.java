@@ -1,5 +1,6 @@
 package kr.hhplus.be.server.application.coupon;
 
+import kr.hhplus.be.server.IntegrationTestSupport;
 import kr.hhplus.be.server.domain.coupon.Coupon;
 import kr.hhplus.be.server.domain.coupon.GetUserCouponCommand;
 import kr.hhplus.be.server.domain.coupon.UserCoupon;
@@ -19,9 +20,7 @@ import java.time.LocalDateTime;
 import static org.instancio.Select.field;
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-@Transactional
-class CouponFacadeIntegrationTest {
+class CouponFacadeIntegrationTest extends IntegrationTestSupport {
 
     @Autowired
     private CouponFacade couponFacade;

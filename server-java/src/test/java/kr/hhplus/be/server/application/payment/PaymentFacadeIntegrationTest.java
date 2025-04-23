@@ -1,5 +1,6 @@
 package kr.hhplus.be.server.application.payment;
 
+import kr.hhplus.be.server.IntegrationTestSupport;
 import kr.hhplus.be.server.domain.order.OrderStatus;
 import kr.hhplus.be.server.domain.order.Orders;
 import kr.hhplus.be.server.domain.point.Point;
@@ -13,13 +14,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import static org.instancio.Select.field;
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-@Transactional
-class PaymentFacadeIntegrationTest {
+class PaymentFacadeIntegrationTest extends IntegrationTestSupport {
 
     @Autowired
     private PaymentFacade paymentFacade;
@@ -33,10 +33,11 @@ class PaymentFacadeIntegrationTest {
     void payWithEnoughPoint() {
         // given
         var order = Instancio.of(Orders.class)
-                .set(field("id"), "orderId")
+                .set(field("id"), UUID.randomUUID().toString())
                 .set(field("totalAmount"), 10000)
                 .set(field("status"), OrderStatus.PENDING)
                 .set(field("orderItems"), new ArrayList<>())
+                .ignore(field("version"))
                 .create();
         orderJpaRepository.saveAndFlush(order);
 

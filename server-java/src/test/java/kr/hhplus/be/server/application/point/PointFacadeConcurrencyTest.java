@@ -1,5 +1,6 @@
 package kr.hhplus.be.server.application.point;
 
+import kr.hhplus.be.server.IntegrationTestSupport;
 import kr.hhplus.be.server.application.order.PlaceOrderCommand;
 import kr.hhplus.be.server.application.payment.PayCommand;
 import kr.hhplus.be.server.application.payment.PaymentFacade;
@@ -23,14 +24,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.instancio.Select.field;
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-class PointFacadeConcurrencyTest {
+class PointFacadeConcurrencyTest extends IntegrationTestSupport {
 
     @Autowired
     private PointFacade pointFacade;
@@ -43,12 +44,6 @@ class PointFacadeConcurrencyTest {
     @Autowired
     private PaymentFacade paymentFacade;
 
-    @AfterEach
-    void tearDown() {
-        pointJpaRepository.deleteAll();
-        userJpaRepository.deleteAll();
-        orderJpaRepository.deleteAll();
-    }
 
     @Test
     @DisplayName("여러 스레드에서 동시에 포인트 충전 요청 시 정확하게 합산된 값이 반영되어야 한다.")
@@ -109,8 +104,8 @@ class PointFacadeConcurrencyTest {
                         .set(field("histories"), new ArrayList<>())
                 .create());
 
-        String orderId1 = "orderId1";
-        String orderId2 = "orderId2";
+        String orderId1 = UUID.randomUUID().toString();
+        String orderId2 = UUID.randomUUID().toString();
         orderJpaRepository.saveAndFlush(Instancio.of(Orders.class)
                 .set(field("id"), orderId1)
                 .set(field("user"), user.getId())
@@ -118,6 +113,7 @@ class PointFacadeConcurrencyTest {
                 .set(field("couponId"), null)
                 .set(field("status"), OrderStatus.PENDING)
                 .set(field("orderItems"), new ArrayList<>())
+                .ignore(field("version"))
                 .create());
         orderJpaRepository.saveAndFlush(Instancio.of(Orders.class)
                 .set(field("id"), orderId2)
@@ -126,6 +122,7 @@ class PointFacadeConcurrencyTest {
                 .set(field("couponId"), null)
                 .set(field("status"), OrderStatus.PENDING)
                 .set(field("orderItems"), new ArrayList<>())
+                .ignore(field("version"))
                 .create());
 
         var chargeCommands = List.of(
@@ -185,10 +182,10 @@ class PointFacadeConcurrencyTest {
                         .set(field("histories"), new ArrayList<>())
                 .create());
 
-        String orderId1 = "orderId1";
-        String orderId2 = "orderId2";
-        String orderId3 = "orderId3";
-        String orderId4 = "orderId4";
+        String orderId1 = UUID.randomUUID().toString();
+        String orderId2 = UUID.randomUUID().toString();
+        String orderId3 = UUID.randomUUID().toString();
+        String orderId4 = UUID.randomUUID().toString();
         orderJpaRepository.saveAndFlush(Instancio.of(Orders.class)
                 .set(field("id"), orderId1)
                 .set(field("user"), user.getId())
@@ -196,6 +193,7 @@ class PointFacadeConcurrencyTest {
                 .set(field("couponId"), null)
                 .set(field("status"), OrderStatus.PENDING)
                 .set(field("orderItems"), new ArrayList<>())
+                .ignore(field("version"))
                 .create());
         orderJpaRepository.saveAndFlush(Instancio.of(Orders.class)
                 .set(field("id"), orderId2)
@@ -204,6 +202,7 @@ class PointFacadeConcurrencyTest {
                 .set(field("couponId"), null)
                 .set(field("status"), OrderStatus.PENDING)
                 .set(field("orderItems"), new ArrayList<>())
+                .ignore(field("version"))
                 .create());
         orderJpaRepository.saveAndFlush(Instancio.of(Orders.class)
                 .set(field("id"), orderId3)
@@ -212,6 +211,7 @@ class PointFacadeConcurrencyTest {
                 .set(field("couponId"), null)
                 .set(field("status"), OrderStatus.PENDING)
                 .set(field("orderItems"), new ArrayList<>())
+                .ignore(field("version"))
                 .create());
         orderJpaRepository.saveAndFlush(Instancio.of(Orders.class)
                 .set(field("id"), orderId4)
@@ -220,6 +220,7 @@ class PointFacadeConcurrencyTest {
                 .set(field("couponId"), null)
                 .set(field("status"), OrderStatus.PENDING)
                 .set(field("orderItems"), new ArrayList<>())
+                .ignore(field("version"))
                 .create());
 
         var commands = List.of(
