@@ -16,4 +16,8 @@ public class UserService {
         return userRepository.findById(userId)
                 .orElseThrow(() -> ApiException.of(ApiError.USER_NOT_FOUND));
     }
+
+    public User createUser() {
+        return userRepository.save(new User());
+    }
 }
