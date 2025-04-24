@@ -1,9 +1,6 @@
 package kr.hhplus.be.server.domain.coupon;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import kr.hhplus.be.server.ApiError;
 import kr.hhplus.be.server.ApiException;
 import kr.hhplus.be.server.config.jpa.BaseTimeEntity;
@@ -24,6 +21,7 @@ public class Coupon extends BaseTimeEntity {
     private Long id;
     private String title;
     private BigDecimal discountValue;
+    @Enumerated(EnumType.STRING)
     private DiscountType discountType;
     private LocalDateTime startDate;
     private LocalDateTime endDate;

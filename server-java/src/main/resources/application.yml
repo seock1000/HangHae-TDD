@@ -14,7 +14,7 @@ spring:
   jpa:
     open-in-view: false
     generate-ddl: false
-    show-sql: false
+    show-sql: true
     hibernate:
       ddl-auto: update
     properties:
@@ -25,10 +25,9 @@ spring:
 ## swagger
 springdoc:
   api-docs:
-    path: "/v3/api-docs"
+    path: /v3/api-docs
   swagger-ui:
-    path: "/swagger-ui.html"
-    url: "/v3/api-docs"
+    path: /swagger-ui.html
 ---
 spring.config.activate.on-profile: local, test
 

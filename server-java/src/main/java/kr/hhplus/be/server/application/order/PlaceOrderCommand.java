@@ -22,7 +22,7 @@ public record PlaceOrderCommand(
         }
     }
 
-    record PlaceOrderItem(
+    public record PlaceOrderItem(
             long productId,
             int quantity
     ) {
