@@ -3,14 +3,12 @@ package kr.hhplus.be.server.config.web;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.util.UUID;
 
 @Slf4j
-@Component
 public class MdcLogInterceptor implements HandlerInterceptor {
 
     @Override
@@ -19,8 +17,10 @@ public class MdcLogInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        String requestId = UUID.randomUUID().toString();
-        request.setAttribute("requestId", requestId);
+        if(request.getAttribute("request-id") == null) {
+            request.setAttribute("request-id", UUID.randomUUID().toString());
+        }
+        String requestId = (String) request.getAttribute("request-id");
         Long userId = (Long) request.getSession().getAttribute("ecommerce-user-id");
 
         log.info("Request ID: {}, User : {}, Method: {}, URI: {}",
@@ -38,7 +38,7 @@ public class MdcLogInterceptor implements HandlerInterceptor {
             return;
         }
 
-        String requestId = (String) request.getAttribute("requestId");
+        String requestId = (String) request.getAttribute("request-id");
         Long userId = (Long) request.getSession().getAttribute("ecommerce-user-id");
         log.info("Request ID: {}, User: {}, Status: {}", requestId, (userId != null) ? userId : "Anonymous", response.getStatus());
     }
