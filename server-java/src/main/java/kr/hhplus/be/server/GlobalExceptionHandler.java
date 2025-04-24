@@ -1,6 +1,7 @@
 package kr.hhplus.be.server;
 
 import io.swagger.v3.oas.annotations.Hidden;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,13 @@ public class GlobalExceptionHandler {
         e.printStackTrace();
         return ResponseEntity.status(apiError.getStatus())
                 .body(BaseResponse.fail(apiError.getStatus(), apiError.getMessage()));
+    }
+
+    @ExceptionHandler({IllegalArgumentException.class, IllegalStateException.class})
+    protected ResponseEntity<BaseResponse<ApiError>> handleHandlingException(Exception e) {
+        e.printStackTrace();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(BaseResponse.fail(HttpStatus.BAD_REQUEST, e.getMessage()));
     }
 
     @ExceptionHandler(Exception.class)
