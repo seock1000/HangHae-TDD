@@ -20,7 +20,7 @@ public class UserCoupon extends BaseTimeEntity {
     private Long id;
     private Long userId;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "coupon_id")
+    @JoinColumn(name = "coupon_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Coupon coupon;
     private boolean isUsed;
     private LocalDateTime issuedAt;

@@ -5,10 +5,15 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.test.context.ActiveProfiles;
 import org.testcontainers.containers.MySQLContainer;
+import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.utility.DockerImageName;
 
+import java.time.Duration;
+
 @Configuration
+@ActiveProfiles("test")
 class TestcontainersConfiguration {
 
 	public static final MySQLContainer<?> MYSQL_CONTAINER;
@@ -17,7 +22,8 @@ class TestcontainersConfiguration {
 		MYSQL_CONTAINER = new MySQLContainer<>(DockerImageName.parse("mysql:8.0"))
 			.withDatabaseName("hhplus")
 			.withUsername("test")
-			.withPassword("test");
+			.withPassword("test")
+			.waitingFor(Wait.forListeningPort().withStartupTimeout(Duration.ofSeconds(60)));
 		MYSQL_CONTAINER.start();
 
 		System.setProperty("spring.datasource.url", MYSQL_CONTAINER.getJdbcUrl() + "?characterEncoding=UTF-8&serverTimezone=UTC");

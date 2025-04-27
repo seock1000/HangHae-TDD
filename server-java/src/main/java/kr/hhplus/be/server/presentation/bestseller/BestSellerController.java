@@ -1,6 +1,8 @@
 package kr.hhplus.be.server.presentation.bestseller;
 
 import kr.hhplus.be.server.BaseResponse;
+import kr.hhplus.be.server.application.bestseller.BestSellerFacade;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/best-sellers")
+@RequiredArgsConstructor
 public class BestSellerController implements BestSellerSpec {
+
+    private final BestSellerFacade bestSellerFacade;
 
     /**
      * 발생 가능 예외 없음
@@ -18,8 +23,13 @@ public class BestSellerController implements BestSellerSpec {
     @Override
     @GetMapping
     public ResponseEntity<BaseResponse<List<GetBestSellerResponse>>> getBestSellers() {
+
+        List<GetBestSellerResponse> responses = bestSellerFacade.getTodayBestSellersByDate().stream()
+                .map(GetBestSellerResponse::of)
+                .toList();
+
         return ResponseEntity.ok(
-                BaseResponse.success(List.of(new GetBestSellerResponse(1L, "test", 100, 200, 100)))
+                BaseResponse.success(responses)
         );
     }
 

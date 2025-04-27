@@ -25,6 +25,7 @@ public class Orders extends BaseTimeEntity {
     private Long couponId;
     private int totalAmount;
     private int discountAmount;
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
     private LocalDate orderDate;
     @OneToMany(mappedBy = "order", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)

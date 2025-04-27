@@ -25,10 +25,9 @@ spring:
 ## swagger
 springdoc:
   api-docs:
-    path: "/v3/api-docs"
+    path: /v3/api-docs
   swagger-ui:
-    path: "/swagger-ui.html"
-    url: "/v3/api-docs"
+    path: /swagger-ui.html
 ---
 spring.config.activate.on-profile: local, test
 

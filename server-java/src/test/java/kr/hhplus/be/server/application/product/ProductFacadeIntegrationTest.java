@@ -1,5 +1,6 @@
 package kr.hhplus.be.server.application.product;
 
+import kr.hhplus.be.server.IntegrationTestSupport;
 import kr.hhplus.be.server.domain.product.Product;
 import kr.hhplus.be.server.infrastructure.point.PointJpaRepository;
 import kr.hhplus.be.server.infrastructure.product.ProductJpaRepository;
@@ -15,9 +16,7 @@ import java.util.List;
 import static org.instancio.Select.field;
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-@Transactional
-class ProductFacadeIntegrationTest {
+class ProductFacadeIntegrationTest extends IntegrationTestSupport {
 
     @Autowired
     private ProductFacade productFacade;

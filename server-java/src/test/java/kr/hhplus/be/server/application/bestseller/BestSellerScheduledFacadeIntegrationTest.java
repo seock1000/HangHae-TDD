@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static org.instancio.Select.field;
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,28 +42,32 @@ class BestSellerScheduledFacadeIntegrationTest {
         var yesterday = LocalDate.now().minusDays(1);
         var orderParams = List.of(
                 Instancio.of(Orders.class)
-                        .set(field("id"), "orderId1")
+                        .set(field("id"), UUID.randomUUID().toString())
                         .set(field("orderDate"), yesterday)
                         .set(field("status"), OrderStatus.CONFIRMED)
                         .set(field("orderItems"), new ArrayList<>())
+                        .ignore(field("version"))
                         .create(),
                 Instancio.of(Orders.class)
-                        .set(field("id"), "orderId2")
+                        .set(field("id"), UUID.randomUUID().toString())
                         .set(field("orderDate"), yesterday)
                         .set(field("status"), OrderStatus.CONFIRMED)
                         .set(field("orderItems"), new ArrayList<>())
+                        .ignore(field("version"))
                         .create(),
                 Instancio.of(Orders.class)
-                        .set(field("id"), "orderId3")
+                        .set(field("id"), UUID.randomUUID().toString())
                         .set(field("orderDate"), yesterday.minusDays(1))
                         .set(field("status"), OrderStatus.CONFIRMED)
                         .set(field("orderItems"), new ArrayList<>())
+                        .ignore(field("version"))
                         .create(),
                 Instancio.of(Orders.class)
-                        .set(field("id"), "orderId4")
+                        .set(field("id"), UUID.randomUUID().toString())
                         .set(field("orderDate"), yesterday.minusDays(2))
                         .set(field("status"), OrderStatus.CONFIRMED)
                         .set(field("orderItems"), new ArrayList<>())
+                        .ignore(field("version"))
                         .create()
         );
         orderJpaRepository.saveAllAndFlush(orderParams);

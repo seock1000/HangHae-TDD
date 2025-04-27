@@ -1,6 +1,8 @@
 package kr.hhplus.be.server.presentation.payment;
 
 import kr.hhplus.be.server.BaseResponse;
+import kr.hhplus.be.server.application.payment.PaymentFacade;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +13,10 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @RestController
 @RequestMapping("/api/v1/payments")
+@RequiredArgsConstructor
 public class PaymentController implements PaymentSpec {
+
+    private final PaymentFacade paymentFacade;
 
     /**
      * 발생 가능 예외
@@ -24,9 +29,7 @@ public class PaymentController implements PaymentSpec {
     public ResponseEntity<BaseResponse<Void>> pay(
             @RequestBody PayRequest request
             ) {
-        if(request.orderId() == null || request.orderId() < 1L) {
-            return ResponseEntity.badRequest().body(BaseResponse.fail(BAD_REQUEST, "유효하지 않은 주문입니다."));
-        }
+        paymentFacade.pay(request.toCommand());
 
         return ResponseEntity.ok(BaseResponse.success());
     }

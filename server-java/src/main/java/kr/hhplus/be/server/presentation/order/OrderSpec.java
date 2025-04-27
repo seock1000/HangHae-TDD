@@ -73,7 +73,7 @@ public interface OrderSpec {
                             """)
             }))
     })
-    ResponseEntity<BaseResponse<CreateOrderResponse>> getBestSellers(
+    ResponseEntity<BaseResponse<CreateOrderResponse>> createOrder(
             @RequestBody CreateOrderRequest request
     );
 }

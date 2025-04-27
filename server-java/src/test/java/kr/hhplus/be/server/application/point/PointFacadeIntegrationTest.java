@@ -1,5 +1,6 @@
 package kr.hhplus.be.server.application.point;
 
+import kr.hhplus.be.server.IntegrationTestSupport;
 import kr.hhplus.be.server.domain.point.Point;
 import kr.hhplus.be.server.domain.user.User;
 import kr.hhplus.be.server.infrastructure.point.PointHistoryJpaRepository;
@@ -20,9 +21,7 @@ import static org.instancio.Select.field;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest
-@Transactional
-class PointFacadeIntegrationTest {
+class PointFacadeIntegrationTest extends IntegrationTestSupport {
 
     @Autowired
     private PointFacade pointFacade;
