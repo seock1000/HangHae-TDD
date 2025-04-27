@@ -18,7 +18,7 @@ public class OrderItem extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "orders_id")
+    @JoinColumn(name = "orders_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Orders order;
     private Long productId;
     private int amount;

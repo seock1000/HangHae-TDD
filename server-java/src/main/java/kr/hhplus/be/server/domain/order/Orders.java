@@ -30,6 +30,9 @@ public class Orders extends BaseTimeEntity {
     @OneToMany(mappedBy = "order", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OrderItem> orderItems = new ArrayList<>();
 
+    @Version
+    private Long version;
+
     private Orders(String id, Long user, Long couponId, int totalAmount, int discountAmount, OrderStatus status) {
         this.id = id;
         this.user = user;

@@ -13,7 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.Map;
 
 import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
@@ -37,14 +40,12 @@ public class OrderQuartzCancelHandler implements OrderCancelHandler {
         JobDetail jobDetail = JobBuilder.newJob(CancelOrderJob.class)
                 .withIdentity(orderId, "cancelOrderJob")
                 .usingJobData("orderId", orderId)
+                .usingJobData(new JobDataMap(Map.of("webApplicationContext", appContext)))
                 .build();
 
         Trigger trigger = newTrigger()
                 .withIdentity(orderId, "cancelOrderTrigger")
-                .startAt(new Date(System.currentTimeMillis())) // 5분 후
-                .withSchedule(simpleSchedule()
-                        .withIntervalInMinutes(5)
-                        .withRepeatCount(1))
+                .startAt(Date.from(Instant.now().plus(5, ChronoUnit.MINUTES)))
                 .build();
 
         try {

@@ -21,6 +21,9 @@ public class Point extends BaseTimeEntity {
     @OneToMany(mappedBy = "point", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<PointHistory> histories = new ArrayList<>();
 
+    @Version
+    private Long version;
+
     public Point(Long id, long userId, int balance) {
         this.id = id;
         this.userId = userId;

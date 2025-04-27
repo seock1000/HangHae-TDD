@@ -11,7 +11,7 @@ public class CancelOrderJob extends QuartzJobBean {
 
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-        var appContext = (WebApplicationContext) context.getJobDetail().getJobDataMap().get("applicationContext");
+        var appContext = (WebApplicationContext) context.getJobDetail().getJobDataMap().get("webApplicationContext");
         var orderId = (String) context.getJobDetail().getJobDataMap().get("orderId");
         OrderFacade orderFacade = (OrderFacade) appContext.getBean("orderFacade");
 

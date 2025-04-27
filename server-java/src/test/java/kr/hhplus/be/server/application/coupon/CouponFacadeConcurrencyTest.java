@@ -11,8 +11,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 import static org.instancio.Select.field;
@@ -44,50 +47,33 @@ class CouponFacadeConcurrencyTest {
                 .set(field("endDate"), LocalDateTime.now().plusDays(1))
                 .create());
 
-        var user1 = userJpaRepository.saveAndFlush(Instancio.of(User.class)
-                .set(field("id"), null)
-                .create());
-        var user2 = userJpaRepository.saveAndFlush(Instancio.of(User.class)
-                .set(field("id"), null)
-                .create());
-        var user3 = userJpaRepository.saveAndFlush(Instancio.of(User.class)
-                .set(field("id"), null)
-                .create());
-        var user4 = userJpaRepository.saveAndFlush(Instancio.of(User.class)
-                .set(field("id"), null)
-                .create());
+        var users = List.of(
+                userJpaRepository.saveAndFlush(Instancio.of(User.class)
+                        .set(field("id"), null)
+                        .create()),
+                userJpaRepository.saveAndFlush(Instancio.of(User.class)
+                        .set(field("id"), null)
+                        .create()),
+                userJpaRepository.saveAndFlush(Instancio.of(User.class)
+                        .set(field("id"), null)
+                        .create()),
+                userJpaRepository.saveAndFlush(Instancio.of(User.class)
+                        .set(field("id"), null)
+                        .create())
+        );
 
         // When
-        CompletableFuture<Void> issue1 = CompletableFuture.runAsync(() -> {
-            try {
-                couponFacade.issueCoupon(new IssueCouponCommand(user1.getId(), coupon.getId()));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        CompletableFuture<Void> issue2 = CompletableFuture.runAsync(() -> {
-            try {
-                couponFacade.issueCoupon(new IssueCouponCommand(user2.getId(), coupon.getId()));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        CompletableFuture<Void> issue3 = CompletableFuture.runAsync(() -> {
-            try {
-                couponFacade.issueCoupon(new IssueCouponCommand(user3.getId(), coupon.getId()));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        CompletableFuture<Void> issue4 = CompletableFuture.runAsync(() -> {
-            try {
-                couponFacade.issueCoupon(new IssueCouponCommand(user4.getId(), coupon.getId()));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+        var issues = users.stream()
+                .map(user -> CompletableFuture.runAsync(() -> {
+                    try {
+                        couponFacade.issueCoupon(new IssueCouponCommand(user.getId(), coupon.getId()));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }))
+                .toList();
 
-        CompletableFuture.allOf(issue1, issue2, issue3, issue4).join();
+        CompletableFuture.allOf(issues.toArray(new CompletableFuture[0])).join();
 
         // Then
         var updatedCoupon = couponJpaRepository.findById(coupon.getId()).orElseThrow();
