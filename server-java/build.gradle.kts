@@ -62,6 +62,7 @@ dependencies {
 
 	// redisson
 	implementation("org.redisson:redisson-spring-boot-starter:3.18.0")
+	testImplementation("org.redisson:redisson-spring-boot-starter:3.18.0")
 }
 
 tasks.withType<Test> {
