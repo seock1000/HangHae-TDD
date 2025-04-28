@@ -38,6 +38,7 @@ public class DistributedLockAop {
         RLock rLock = redissonClient.getLock(key);
 
         try {
+            log.info("Redisson Lock (serviceName : {}, key : {})", method.getName(), key);
             boolean available = rLock.tryLock(distributedLock.waitTime(), distributedLock.leaseTime(), distributedLock.timeUnit());  // (2)
             if (!available) {
                 throw new IllegalStateException("RESOURCE LOCKED : 자원이 현재 점유되고 있어 요청에 실패했습니다.");
