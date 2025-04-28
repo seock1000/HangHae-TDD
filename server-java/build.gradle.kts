@@ -59,6 +59,9 @@ dependencies {
 
 	// Quartz
 	implementation("org.springframework.boot:spring-boot-starter-quartz")
+
+	// redisson
+	implementation("org.redisson:redisson-spring-boot-starter:3.18.0")
 }
 
 tasks.withType<Test> {
