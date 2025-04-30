@@ -24,6 +24,7 @@ public class OrderFacade {
     private final CouponService couponService;
     private final ProductService productService;
 
+
     public OrderResult placeOrder(PlaceOrderCommand command) {
         var user = userService.getUserById(command.userId());
         List<Pair<Product, Integer>> productAndQuantity = command.items().stream()

@@ -11,9 +11,14 @@ import java.util.concurrent.TimeUnit;
 public @interface DistributedLock {
 
     /**
-     * 락의 이름
+     * 락의 키
      */
     String key();
+
+    /**
+     * 락 방식 (default - SIMPLE)
+     */
+    LockMethod method() default LockMethod.SIMPLE;
 
     /**
      * 락의 시간 단위
