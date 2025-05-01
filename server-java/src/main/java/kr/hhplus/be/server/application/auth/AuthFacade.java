@@ -1,6 +1,7 @@
 package kr.hhplus.be.server.application.auth;
 
 import kr.hhplus.be.server.config.redis.DistributedLock;
+import kr.hhplus.be.server.config.redis.LockMethod;
 import kr.hhplus.be.server.domain.auth.Auth;
 import kr.hhplus.be.server.domain.auth.AuthService;
 import kr.hhplus.be.server.domain.user.User;
@@ -17,7 +18,8 @@ public class AuthFacade {
     private final AuthService authService;
     private final UserService userService;
 
-    @DistributedLock(key = "'auth:' + #command.username()")
+    // 충돌이 많지 않을 것으로 예상되어 PUB/SUB 방식 락 적용
+    @DistributedLock(key = "'auth:' + #command.username()", method = LockMethod.PUBSUB)
     public SignUpResult signUp(SignUpCommand command) {
         User signedUpUser = userService.createUser();
         Auth auth = authService.createWithUser(command.username(), command.password(), signedUpUser);

@@ -10,7 +10,6 @@ import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -34,6 +33,7 @@ public class DistributedLockAop {
 
         String key = REDISSON_LOCK_PREFIX + LockKeyParser.getDynamicValue(signature.getParameterNames(), joinPoint.getArgs(), distributedLock.key());
         LockMethod lockMethod = distributedLock.method();
+        log.info("lockMethod : {}, key : {}", lockMethod, key);
 
         switch (lockMethod) {
             case SIMPLE -> {
@@ -43,6 +43,7 @@ public class DistributedLockAop {
                 try {
                     return joinPoint.proceed();
                 } finally {
+                    log.info("lettuceLockManager unlock (serviceName : {}, key : {})", method.getName(), key);
                     try {
                         lettuceLockManager.unlock(key);
                     } catch (IllegalMonitorStateException e) {
@@ -66,6 +67,7 @@ public class DistributedLockAop {
                 try {
                     return joinPoint.proceed();
                 } finally {
+                    log.info("SPIN LOCK UNLOCK (serviceName : {}, key : {})", method.getName(), key);
                     try {
                     lettuceLockManager.unlock(key);
                     } catch (IllegalMonitorStateException e) {
@@ -85,6 +87,7 @@ public class DistributedLockAop {
                 } catch (InterruptedException e) {
                     throw new InterruptedException();
                 } finally {
+                    log.info("Redisson Lock UNLOCK (serviceName : {}, key : {})", method.getName(), key);
                     try {
                         rLock.unlock();
                     } catch (IllegalMonitorStateException e) {

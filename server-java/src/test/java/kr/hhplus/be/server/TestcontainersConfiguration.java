@@ -37,6 +37,7 @@ class TestcontainersConfiguration {
 		REDIS_CONTAINER = new RedisContainer(DockerImageName.parse("redis:7.0.11"))
 			.withExposedPorts(6379)
 			.waitingFor(Wait.forListeningPort().withStartupTimeout(Duration.ofSeconds(60)));
+		REDIS_CONTAINER.start();
 
 		System.setProperty("spring.data.redis.host", REDIS_CONTAINER.getHost());
 		System.setProperty("spring.data.redis.port", REDIS_CONTAINER.getMappedPort(6379).toString());
@@ -46,6 +47,9 @@ class TestcontainersConfiguration {
 	public void preDestroy() {
 		if (MYSQL_CONTAINER.isRunning()) {
 			MYSQL_CONTAINER.stop();
+		}
+		if (REDIS_CONTAINER.isRunning()) {
+			REDIS_CONTAINER.stop();
 		}
 	}
 }
