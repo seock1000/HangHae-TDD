@@ -6,8 +6,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.redisson.api.RLock;
-import org.redisson.api.RedissonClient;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -20,10 +18,7 @@ import java.lang.reflect.Method;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @Slf4j
 public class DistributedLockAop {
-    private static final String REDISSON_LOCK_PREFIX = "LOCK:";
-
-    private final RedissonClient redissonClient;
-    private final LettuceLockManager lettuceLockManager;
+    private final LockTemplate lockTemplate;
 
     @Around("@annotation(kr.hhplus.be.server.config.redis.DistributedLock)")
     public Object lock(final ProceedingJoinPoint joinPoint) throws Throwable {
@@ -31,73 +26,42 @@ public class DistributedLockAop {
         Method method = signature.getMethod();
         DistributedLock distributedLock = method.getAnnotation(DistributedLock.class);
 
-        String key = REDISSON_LOCK_PREFIX + LockKeyParser.getDynamicValue(signature.getParameterNames(), joinPoint.getArgs(), distributedLock.key());
+        String key = LockKeyParser.getDynamicValue(signature.getParameterNames(), joinPoint.getArgs(), distributedLock.key()).toString();
         LockMethod lockMethod = distributedLock.method();
         log.info("lockMethod : {}, key : {}", lockMethod, key);
 
         switch (lockMethod) {
             case SIMPLE -> {
-                if (!lettuceLockManager.lock(key)) {
-                    throw new IllegalStateException("RESOURCE LOCKED : 자원이 현재 점유되고 있어 요청에 실패했습니다.");
-                }
-                try {
-                    return joinPoint.proceed();
-                } finally {
-                    log.info("lettuceLockManager unlock (serviceName : {}, key : {})", method.getName(), key);
+                return lockTemplate.simpleLock(key, () -> {
                     try {
-                        lettuceLockManager.unlock(key);
-                    } catch (IllegalMonitorStateException e) {
-                        log.info("Lettuce Lock Already UnLock (serviceName : {}, key : {})", method.getName(), key);
+                        return joinPoint.proceed();
+                    } catch (Throwable e) {
+                        log.error("SIMPLE lock 실행 중 예외 발생", e);
+                        throw new RuntimeException("SIMPLE lock 실행 중 예외가 발생했습니다.", e);
                     }
-                }
+                });
             }
             case SPIN -> {
-                while (true) {
-                    if (!lettuceLockManager.lock(key)) {
-                        try {
-                            Thread.sleep(100);
-                        } catch (InterruptedException e) {
-                            Thread.currentThread().interrupt();
-                            throw new InterruptedException("RESOURCE LOCKED : 자원이 현재 점유되고 있어 요청에 실패했습니다.");
-                        }
-                    } else {
-                        break;
-                    }
-                }
-                try {
-                    return joinPoint.proceed();
-                } finally {
-                    log.info("SPIN LOCK UNLOCK (serviceName : {}, key : {})", method.getName(), key);
+                return lockTemplate.spinLock(key, () -> {
                     try {
-                    lettuceLockManager.unlock(key);
-                    } catch (IllegalMonitorStateException e) {
-                        log.info("Lettuce Lock Already UnLock (serviceName : {}, key : {})", method.getName(), key);
+                        return joinPoint.proceed();
+                    } catch (Throwable e) {
+                        log.error("SPIN lock 실행 중 예외 발생", e);
+                        throw new RuntimeException("SPIN lock 실행 중 예외가 발생했습니다.", e);
                     }
-                }
+                });
             }
             case PUBSUB -> {
-                RLock rLock = redissonClient.getLock(key);
-                try {
-                    boolean available = rLock.tryLock(distributedLock.waitTime(), distributedLock.leaseTime(), distributedLock.timeUnit());  // (2)
-                    if (!available) {
-                        throw new IllegalStateException("RESOURCE LOCKED : 자원이 현재 점유되고 있어 요청에 실패했습니다.");
-                    }
-                    return joinPoint.proceed();
-
-                } catch (InterruptedException e) {
-                    throw new InterruptedException();
-                } finally {
-                    log.info("Redisson Lock UNLOCK (serviceName : {}, key : {})", method.getName(), key);
+                return lockTemplate.pubSubLock(key, distributedLock.waitTime(), distributedLock.leaseTime(), distributedLock.timeUnit(), () -> {
                     try {
-                        rLock.unlock();
-                    } catch (IllegalMonitorStateException e) {
-                        log.info("Redisson Lock Already UnLock (serviceName : {}, key : {})", method.getName(), key);
+                        return joinPoint.proceed();
+                    } catch (Throwable e) {
+                        log.error("PUBSUB lock 실행 중 예외 발생", e);
+                        throw new RuntimeException("PUBSUB lock 실행 중 예외가 발생했습니다.", e);
                     }
-                }
+                });
             }
-            default -> {
-                throw new IllegalArgumentException("LOCK METHOD NOT FOUND : 지원하지 않는 락 방식입니다.");
-            }
+            default -> throw new IllegalArgumentException("LOCK METHOD NOT FOUND : 지원하지 않는 락 방식입니다.");
         }
     }
 }
