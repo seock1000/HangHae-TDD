@@ -23,8 +23,7 @@ public class PointFacade {
                 .map(PointResult::of);
     }
 
-    // 충돌이 많지 않을 것으로 예상되어 PUB/SUB 방식 락 적용
-    @DistributedLock(key = "'point:userId:' + #command.userId()", method = LockMethod.PUBSUB)
+    @DistributedLock(key = "'point:user:' + #command.userId()", method = LockMethod.PUBSUB)
     public PointResult charge(ChargePointCommand command) {
         var user = userService.getUserById(command.userId());
         var point = pointService.getPointByUserId(user.getId());

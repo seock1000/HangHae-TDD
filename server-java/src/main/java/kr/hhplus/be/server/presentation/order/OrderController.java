@@ -2,6 +2,7 @@ package kr.hhplus.be.server.presentation.order;
 
 import kr.hhplus.be.server.BaseResponse;
 import kr.hhplus.be.server.application.order.OrderFacade;
+import kr.hhplus.be.server.application.order.OrderLockFacade;
 import kr.hhplus.be.server.application.order.OrderResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 @RequiredArgsConstructor
 public class OrderController implements OrderSpec {
 
-    private final OrderFacade orderFacade;
+    private final OrderLockFacade orderFacade;
 
     /**
      * 발생 가능 예외

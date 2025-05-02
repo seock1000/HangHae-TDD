@@ -28,7 +28,7 @@ public class CouponFacade {
     }
 
     // 많은 경합 예상 : SPIN 방식 락 적용
-    @DistributedLock(key = "'coupon:' + #command.couponId()", method = LockMethod.SPIN)
+    @DistributedLock(key = "'coupon:' + #command.couponId()", method = LockMethod.PUBSUB)
     public IssueCouponResult issueCoupon(IssueCouponCommand command) {
         var user = userService.getUserById(command.userId());
         var coupon = couponService.getCouponByIdForUpdate(command.couponId());
