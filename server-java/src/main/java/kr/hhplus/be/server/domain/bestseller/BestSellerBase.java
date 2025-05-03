@@ -16,20 +16,20 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class BestSellerBase extends BaseTimeEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @EmbeddedId
+    private BestSellerBaseId id;
     private Long productId;
     private int salesAmount;
     private LocalDate date;
 
-    private BestSellerBase(Long productId, int salesAmount, LocalDate date) {
-        this.productId = productId;
-        this.salesAmount = salesAmount;
+    private BestSellerBase(OrderSalesAmount salesAmount, LocalDate date) {
+        this.id = BestSellerBaseId.createWithProduct(salesAmount);
+        this.productId = salesAmount.getProductId();
+        this.salesAmount = salesAmount.getAmount();
         this.date = date;
     }
 
     public static BestSellerBase createWithSalesAmountAndDate(OrderSalesAmount salesAmount, LocalDate date) {
-        return new BestSellerBase(salesAmount.getProductId(), salesAmount.getAmount(), date);
+        return new BestSellerBase(salesAmount, date);
     }
 }
