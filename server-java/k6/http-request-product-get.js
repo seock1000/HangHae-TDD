@@ -19,8 +19,7 @@ export const options = {
 };
 
 export default function () {
-    const index = (__VU - 1) * 10 + __ITER;
-    const page = Math.floor(index / 10) + 1;
+    const page = __ITER % 10 + 1; // 1~10
     let res = http.get(`http://localhost:8080/api/v1/products?page=${page}`);
 
     const success = check(res, {
