@@ -24,7 +24,7 @@ public class BestSellerService {
         return bestSellerRepository.getSalesAmountSumBetween(startDate, endDate);
     }
 
-    public List<BestSellerProductInfo> getTop5BestSellersByDate(LocalDate date) {
-        return bestSellerRepository.getTopBestSellersByDate(5, date);
+    public List<BestSeller> getTodayTop5BestSellers() {
+        return bestSellerRepository.getTop5BestSellersByDate(LocalDate.now());
     }
 }

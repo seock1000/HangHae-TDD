@@ -58,57 +58,51 @@ class BestSellerFacadeIntegrationTest {
                 .create());
 
         bestSellerJpaRepository.saveAndFlush(Instancio.of(BestSeller.class)
-                .set(field("id"), null)
                 .set(field("productId"), product1.getId())
                 .set(field("salesAmount"), 100)
-                .set(field("date"), LocalDate.now().minusDays(1))
+                .set(field("date"), LocalDate.now())
                 .create());
         bestSellerJpaRepository.saveAndFlush(Instancio.of(BestSeller.class)
-                .set(field("id"), null)
                 .set(field("productId"), product2.getId())
                 .set(field("salesAmount"), 90)
-                .set(field("date"), LocalDate.now().minusDays(1))
+                .set(field("date"), LocalDate.now())
                 .create());
         bestSellerJpaRepository.saveAndFlush(Instancio.of(BestSeller.class)
-                .set(field("id"), null)
                 .set(field("productId"), product3.getId())
                 .set(field("salesAmount"), 80)
-                .set(field("date"), LocalDate.now().minusDays(1))
+                .set(field("date"), LocalDate.now())
                 .create());
         bestSellerJpaRepository.saveAndFlush(Instancio.of(BestSeller.class)
-                .set(field("id"), null)
                 .set(field("productId"), product4.getId())
                 .set(field("salesAmount"), 70)
-                .set(field("date"), LocalDate.now().minusDays(1))
+                .set(field("date"), LocalDate.now())
                 .create());
         bestSellerJpaRepository.saveAndFlush(Instancio.of(BestSeller.class)
-                .set(field("id"), null)
                 .set(field("productId"), product5.getId())
                 .set(field("salesAmount"), 60)
-                .set(field("date"), LocalDate.now().minusDays(1))
+                .set(field("date"), LocalDate.now())
                 .create());
         bestSellerJpaRepository.saveAndFlush(Instancio.of(BestSeller.class)
-                .set(field("id"), null)
                 .set(field("productId"), product6.getId())
                 .set(field("salesAmount"), 50)
-                .set(field("date"), LocalDate.now().minusDays(1))
+                .set(field("date"), LocalDate.now())
                 .create());
 
         // when
-        var result = bestSellerFacade.getTodayBestSellersByDate();
+        var result = bestSellerFacade.getTodayBestSellers();
 
         // then
         assertNotNull(result);
         assertEquals(5, result.size());
-        assertEquals(product1.getId(), result.get(0).getProductId());
-        assertEquals(product2.getId(), result.get(1).getProductId());
-        assertEquals(product3.getId(), result.get(2).getProductId());
-        assertEquals(product4.getId(), result.get(3).getProductId());
-        assertEquals(product5.getId(), result.get(4).getProductId());
-        assertEquals(product1.getTitle(), result.get(0).getTitle());
-        assertEquals(product2.getTitle(), result.get(1).getTitle());
-        assertEquals(product3.getTitle(), result.get(2).getTitle());
-        assertEquals(product4.getTitle(), result.get(3).getTitle());
-        assertEquals(product5.getTitle(), result.get(4).getTitle());
+        assertEquals(product1.getId(), result.get(0).productId());
+        assertEquals(product2.getId(), result.get(1).productId());
+        assertEquals(product3.getId(), result.get(2).productId());
+        assertEquals(product4.getId(), result.get(3).productId());
+        assertEquals(product5.getId(), result.get(4).productId());
+        assertEquals(product1.getTitle(), result.get(0).title());
+        assertEquals(product2.getTitle(), result.get(1).title());
+        assertEquals(product3.getTitle(), result.get(2).title());
+        assertEquals(product4.getTitle(), result.get(3).title());
+        assertEquals(product5.getTitle(), result.get(4).title());
     }
 }
