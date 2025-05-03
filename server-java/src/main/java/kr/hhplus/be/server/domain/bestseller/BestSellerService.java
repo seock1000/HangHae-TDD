@@ -1,6 +1,9 @@
 package kr.hhplus.be.server.domain.bestseller;
 
+import kr.hhplus.be.server.config.cache.CacheKey;
+import kr.hhplus.be.server.config.cache.CacheManagerName;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -24,7 +27,9 @@ public class BestSellerService {
         return bestSellerRepository.getSalesAmountSumBetween(startDate, endDate);
     }
 
+    @Cacheable(value = CacheKey.BEST_SELLERS, cacheManager = CacheManagerName.LOCAL, key = CacheKey.BEST_SELLERS_EL)
     public List<BestSeller> getTodayTop5BestSellers() {
+        System.out.println("Cache Miss!!!!!");
         return bestSellerRepository.getTop5BestSellersByDate(LocalDate.now());
     }
 }

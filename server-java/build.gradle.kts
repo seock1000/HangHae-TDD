@@ -69,6 +69,10 @@ dependencies {
 
 	// redis - testcontainers
 	testImplementation("com.redis:testcontainers-redis")
+
+	// cache
+	implementation("org.springframework.boot:spring-boot-starter-cache")
+	implementation("com.github.ben-manes.caffeine:caffeine:3.1.6")
 }
 
 tasks.withType<Test> {

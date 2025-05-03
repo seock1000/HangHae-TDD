@@ -2,13 +2,13 @@ package kr.hhplus.be.server.domain.product;
 
 import kr.hhplus.be.server.ApiError;
 import kr.hhplus.be.server.ApiException;
+import kr.hhplus.be.server.config.cache.CacheKey;
+import kr.hhplus.be.server.config.cache.CacheManagerName;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +27,7 @@ public class ProductService {
      * 상품을 ID로 조회하여 반환한다.
      * 상품이 존재하지 않을 경우 ApiException(PRODUCT_NOT_FOUND)을 발생시킨다.
      */
+    @Cacheable(value = CacheKey.BEST_SELLERS, cacheManager = CacheManagerName.GLOBAL, key = CacheKey.BEST_SELLERS_EL + " + ':' + #id")
     public Product getProductById(Long id) {
         return productRepository.findById(id)
                 .orElseThrow(() -> ApiException.of(ApiError.PRODUCT_NOT_FOUND));
