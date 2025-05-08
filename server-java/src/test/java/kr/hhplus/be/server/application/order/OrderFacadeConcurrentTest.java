@@ -110,6 +110,57 @@ class OrderFacadeConcurrentTest extends IntegrationTestSupport {
         assertEquals(60, updatedProduct.getStock());
     }
 
+
+    @Test
+    @DisplayName("여러 스레드에서 동시에 상품 주문 요청 시, 상품 재고를 초과한 주문이 발생하지 않아야 한다.")
+    void 여러_주문이_동시에_발생할때_주문이_상품재고보다_초과발생하지_않는다() {
+        // Given
+        int remainStock = 3;
+        var user = userJpaRepository.saveAndFlush(Instancio.of(User.class)
+                .set(field("id"), null)
+                .create());
+
+        var product = productJpaRepository.saveAndFlush(Instancio.of(Product.class)
+                .set(field("id"), null)
+                .set(field("stock"), remainStock)
+                .create());
+
+        List<PlaceOrderCommand> commands = List.of(
+                new PlaceOrderCommand(user.getId(), null,
+                        List.of(new PlaceOrderCommand.PlaceOrderItem(product.getId(), 1))),
+                new PlaceOrderCommand(user.getId(), null,
+                        List.of(new PlaceOrderCommand.PlaceOrderItem(product.getId(), 1))),
+                new PlaceOrderCommand(user.getId(), null,
+                        List.of(new PlaceOrderCommand.PlaceOrderItem(product.getId(), 1))),
+                new PlaceOrderCommand(user.getId(), null,
+                        List.of(new PlaceOrderCommand.PlaceOrderItem(product.getId(), 1))),
+                new PlaceOrderCommand(user.getId(), null,
+                        List.of(new PlaceOrderCommand.PlaceOrderItem(product.getId(), 1)))
+        );
+        AtomicInteger successCount = new AtomicInteger(0);
+
+        // When
+        List<CompletableFuture<Void>> threads = commands.stream()
+                .map(command -> CompletableFuture.runAsync(() -> {
+                    try {
+                        orderFacade.placeOrder(command);
+                        successCount.incrementAndGet();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }))
+                .toList();
+
+        CompletableFuture.allOf(threads.toArray(new CompletableFuture[0])).join();
+
+        // Then
+        var orders = orderJpaRepository.findAll();
+        assertEquals(3, orders.size());
+        assertEquals(remainStock, successCount.get());
+        var updatedProduct = productJpaRepository.findById(product.getId()).orElseThrow();
+        assertEquals(0, updatedProduct.getStock());
+    }
+
     @Test
     @DisplayName("여러 스레드에서 상품 주문 요청 시 같은 쿠폰 요청이 동시에 들어오면, 하나의 주문에만 쿠폰이 적용되고 정상 처리 되어야 한다.")
     void testConcurrentOrderWithSameCoupon() {
