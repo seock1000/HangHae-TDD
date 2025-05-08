@@ -1,12 +1,11 @@
 package kr.hhplus.be.server.application.bestseller;
 
-import kr.hhplus.be.server.domain.bestseller.BestSellerProductInfo;
 import kr.hhplus.be.server.domain.bestseller.BestSellerService;
+import kr.hhplus.be.server.domain.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -15,9 +14,15 @@ import java.util.List;
 public class BestSellerFacade {
 
     private final BestSellerService bestSellerService;
+    private final ProductService productService;
 
     @Transactional(readOnly = true)
-    public List<BestSellerProductInfo> getTodayBestSellersByDate() {
-        return bestSellerService.getTop5BestSellersByDate(LocalDate.now().minusDays(1));
+    public List<GetBestSellerResult> getTodayBestSellers() {
+        return bestSellerService.getTodayTop5BestSellers().stream()
+                .map(it -> {
+                    var product = productService.getProductById(it.getProductId());
+                    return GetBestSellerResult.of(it, product);
+                })
+                .toList();
     }
 }

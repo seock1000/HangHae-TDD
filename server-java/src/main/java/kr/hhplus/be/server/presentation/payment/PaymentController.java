@@ -2,6 +2,7 @@ package kr.hhplus.be.server.presentation.payment;
 
 import kr.hhplus.be.server.BaseResponse;
 import kr.hhplus.be.server.application.payment.PaymentFacade;
+import kr.hhplus.be.server.application.payment.PaymentLockFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 @RequiredArgsConstructor
 public class PaymentController implements PaymentSpec {
 
-    private final PaymentFacade paymentFacade;
+    private final PaymentLockFacade paymentFacade;
 
     /**
      * 발생 가능 예외

@@ -21,24 +21,25 @@ public class BestSellerScheduledFacade {
 
     /**
      * 베스트 셀러 통계기능
+     * 23:40에 당일의 판매량을 기준으로 베스트셀러를 생성한다.
      */
-    @Scheduled(cron = "0 0 0 * * ?")
-    public void saveYesterdaySalesAmounts() {
-        var targetDate = LocalDate.now().minusDays(1);
+    @Scheduled(cron = "0 40 23 * * ?")
+    public void saveTodaySalesAmounts() {
+        var targetDate = LocalDate.now();
 
-        // 어제의 판매량을 가져온다.
+        // 오늘의 판매량을 가져온다.
         var salesAmounts = orderService.getSalesAmountByDate(targetDate);
-        // 어제의 판매량을 기준으로 베스트셀러 베이스를 생성한다.
+        // 오늘의 판매량을 기준으로 내일 표출될 베스트셀러 베이스를 생성한다.
         var bestSellerBases = salesAmounts.stream()
-                .map(it -> BestSellerBase.createWithSalesAmountAndDate(it, targetDate))
+                .map(it -> BestSellerBase.createWithSalesAmountAndDate(it, targetDate.plusDays(1)))
                 .toList();
         bestSellerService.saveBaseAll(bestSellerBases);
 
-        // 어제까지의 3일치 판매량을 가져온다.
-        var salesStats = bestSellerService.getSalesStatBetween(targetDate.minusDays(2), targetDate);
-        // 3일치 판매량을 기준으로 베스트셀러를 생성한다.
+        // 어제, 오늘, 내일자 집계 판매량을 가져온다.
+        var salesStats = bestSellerService.getSalesStatBetween(targetDate.minusDays(1), targetDate.plusDays(1));
+        // 3일치 판매량을 기준으로 내일 표출될 베스트셀러를 생성한다.
         var bestSellers = salesStats.stream()
-                .map(it -> BestSeller.createWithSalesStatAndDate(it, targetDate))
+                .map(it -> BestSeller.createWithSalesStatAndDate(it, targetDate.plusDays(1)))
                 .toList();
         bestSellerService.saveAll(bestSellers);
     }

@@ -36,35 +36,35 @@ class BestSellerScheduledFacadeIntegrationTest {
     private BestSellerBaseJpaRepository bestSellerBaseJpaRepository;
 
     @Test
-    @DisplayName("어제의 판매량을 가져와 best_seller_base 테이블에 저장하고, 어제의 판매량을 기준으로 3일치 판매량을 합해 best_seller 테이블에 저장한다.")
-    void saveYesterdayBestSellers() {
+    @DisplayName("오늘의 판매량을 가져와 best_seller_base 테이블에 저장하고, 오늘을 기준으로 3일치 판매량을 합해 best_seller 테이블에 저장한다.")
+    void saveTodayBestSellers() {
         // given
-        var yesterday = LocalDate.now().minusDays(1);
+        var today = LocalDate.now();
         var orderParams = List.of(
                 Instancio.of(Orders.class)
                         .set(field("id"), UUID.randomUUID().toString())
-                        .set(field("orderDate"), yesterday)
+                        .set(field("orderDate"), today)
                         .set(field("status"), OrderStatus.CONFIRMED)
                         .set(field("orderItems"), new ArrayList<>())
                         .ignore(field("version"))
                         .create(),
                 Instancio.of(Orders.class)
                         .set(field("id"), UUID.randomUUID().toString())
-                        .set(field("orderDate"), yesterday)
+                        .set(field("orderDate"), today)
                         .set(field("status"), OrderStatus.CONFIRMED)
                         .set(field("orderItems"), new ArrayList<>())
                         .ignore(field("version"))
                         .create(),
                 Instancio.of(Orders.class)
                         .set(field("id"), UUID.randomUUID().toString())
-                        .set(field("orderDate"), yesterday.minusDays(1))
+                        .set(field("orderDate"), today.minusDays(1))
                         .set(field("status"), OrderStatus.CONFIRMED)
                         .set(field("orderItems"), new ArrayList<>())
                         .ignore(field("version"))
                         .create(),
                 Instancio.of(Orders.class)
                         .set(field("id"), UUID.randomUUID().toString())
-                        .set(field("orderDate"), yesterday.minusDays(2))
+                        .set(field("orderDate"), today.minusDays(2))
                         .set(field("status"), OrderStatus.CONFIRMED)
                         .set(field("orderItems"), new ArrayList<>())
                         .ignore(field("version"))
@@ -95,7 +95,7 @@ class BestSellerScheduledFacadeIntegrationTest {
         orderJpaRepository.saveAllAndFlush(orderParams);
 
         // when&then
-        bestSellerScheduledFacade.saveYesterdaySalesAmounts();
+        bestSellerScheduledFacade.saveTodaySalesAmounts();
         assertEquals(2, bestSellerBaseJpaRepository.findAll().size());
         List<BestSeller> bestSellers = bestSellerJpaRepository.findAll();
         assertEquals(2, bestSellers.size());

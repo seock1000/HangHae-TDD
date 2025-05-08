@@ -59,6 +59,26 @@ dependencies {
 
 	// Quartz
 	implementation("org.springframework.boot:spring-boot-starter-quartz")
+
+	// redisson
+	implementation("org.redisson:redisson-spring-boot-starter:3.18.0")
+	testImplementation("org.redisson:redisson-spring-boot-starter:3.18.0")
+
+	//redis - 기본 어댑터로 Lettuce 사용
+	implementation("org.springframework.boot:spring-boot-starter-data-redis")
+
+	// redis - testcontainers
+	testImplementation("com.redis:testcontainers-redis")
+
+	// cache
+	implementation("org.springframework.boot:spring-boot-starter-cache")
+	implementation("com.github.ben-manes.caffeine:caffeine:3.1.6")
+
+	// jackson
+	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8")
+	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+	implementation("com.fasterxml.jackson.module:jackson-module-parameter-names")
+	implementation("org.springframework.data:spring-data-commons")
 }
 
 tasks.withType<Test> {

@@ -1,7 +1,7 @@
 package kr.hhplus.be.server.presentation.bestseller;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import kr.hhplus.be.server.domain.bestseller.BestSellerProductInfo;
+import kr.hhplus.be.server.application.bestseller.GetBestSellerResult;
 
 public record GetBestSellerResponse(
         @Schema(description = "상품 ID")
@@ -15,13 +15,13 @@ public record GetBestSellerResponse(
         @Schema(description = "상품 재고")
         Integer stock
 ){
-        public static GetBestSellerResponse of(BestSellerProductInfo bestSellerProductInfo) {
+        public static GetBestSellerResponse of(GetBestSellerResult result) {
                 return new GetBestSellerResponse(
-                        bestSellerProductInfo.getProductId(),
-                        bestSellerProductInfo.getTitle(),
-                        bestSellerProductInfo.getPrice(),
-                        bestSellerProductInfo.getSalesAmount(),
-                        bestSellerProductInfo.getStock()
+                        result.productId(),
+                        result.title(),
+                        result.price(),
+                        result.salesAmount(),
+                        result.stock()
                 );
         }
 }

@@ -27,7 +27,7 @@ public class CouponController implements CouponSpec {
     @Override
     @GetMapping
     public ResponseEntity<BaseResponse<List<GetCouponsResponse>>> getCoupons(
-            @RequestParam("userId") Long userId
+            @RequestParam("user-id") Long userId
     ) {
         List<GetCouponsResponse> responses = couponFacade.getUserCouponInfosByUser(new GetUserCouponCommand(userId))
                 .stream()
