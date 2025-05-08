@@ -48,3 +48,6 @@ spring:
 
 
 ##logging.level.org.springframework.transaction.interceptor: trace
+logging:
+  level:
+    org.springframework.data.redis: DEBUG

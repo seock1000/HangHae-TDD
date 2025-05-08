@@ -73,6 +73,12 @@ dependencies {
 	// cache
 	implementation("org.springframework.boot:spring-boot-starter-cache")
 	implementation("com.github.ben-manes.caffeine:caffeine:3.1.6")
+
+	// jackson
+	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8")
+	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+	implementation("com.fasterxml.jackson.module:jackson-module-parameter-names")
+	implementation("org.springframework.data:spring-data-commons")
 }
 
 tasks.withType<Test> {
