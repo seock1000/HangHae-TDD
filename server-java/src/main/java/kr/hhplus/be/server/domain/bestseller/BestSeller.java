@@ -1,10 +1,7 @@
 package kr.hhplus.be.server.domain.bestseller;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import kr.hhplus.be.server.config.jpa.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -16,20 +13,20 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class BestSeller extends BaseTimeEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @EmbeddedId
+    private BestSellerId id;
     private Long productId;
     private int salesAmount;
     private LocalDate date;
 
-    private BestSeller(Long productId, int salesAmount, LocalDate date) {
-        this.productId = productId;
-        this.salesAmount = salesAmount;
+    private BestSeller(SalesStat salesStat, LocalDate date) {
+        this.id = BestSellerId.createWithProduct(salesStat);
+        this.productId = salesStat.getProductId();
+        this.salesAmount = salesStat.getAmount();
         this.date = date;
     }
 
     public static BestSeller createWithSalesStatAndDate(SalesStat stat, LocalDate date) {
-        return new BestSeller(stat.getProductId(), stat.getAmount(), date);
+        return new BestSeller(stat, date);
     }
 }

@@ -9,6 +9,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -26,8 +29,11 @@ class ProductFacadeIntegrationTest extends IntegrationTestSupport {
     @Test
     @DisplayName("상품 전체 조회 테스트")
     void getProductAll() {
+        //given
+        Pageable pageable = PageRequest.of(0, 10);
+
         // when
-        var result = productFacade.getProductAll();
+        var result = productFacade.getProductAll(pageable);
 
         // then
         assertNotNull(result);
@@ -46,13 +52,14 @@ class ProductFacadeIntegrationTest extends IntegrationTestSupport {
                 .set(field("id"), null)
                 .create());
         productJpaRepository.saveAll(products);
+        Pageable pageable = PageRequest.of(0, 10);
 
         // when
-        var result = productFacade.getProductAll();
+        Page<ProductResult> result = productFacade.getProductAll(pageable);
 
         // then
         assertNotNull(result);
         assertFalse(result.isEmpty());
-        assertEquals(2, result.size());
+        assertEquals(2, result.getTotalElements());
     }
 }

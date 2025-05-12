@@ -10,5 +10,5 @@ public interface BestSellerRepository {
 
     List<SalesStat> getSalesAmountSumBetween(LocalDate startDate, LocalDate endDate);
 
-    List<BestSellerProductInfo> getTopBestSellersByDate(int limit, LocalDate date);
+    List<BestSeller> getTop5BestSellersByDate(LocalDate date);
 }

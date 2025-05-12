@@ -24,7 +24,7 @@ public class BestSellerController implements BestSellerSpec {
     @GetMapping
     public ResponseEntity<BaseResponse<List<GetBestSellerResponse>>> getBestSellers() {
 
-        List<GetBestSellerResponse> responses = bestSellerFacade.getTodayBestSellersByDate().stream()
+        List<GetBestSellerResponse> responses = bestSellerFacade.getTodayBestSellers().stream()
                 .map(GetBestSellerResponse::of)
                 .toList();
 

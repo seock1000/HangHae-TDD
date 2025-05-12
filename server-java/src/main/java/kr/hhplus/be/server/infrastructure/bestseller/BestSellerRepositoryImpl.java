@@ -33,26 +33,7 @@ public class BestSellerRepositoryImpl implements BestSellerRepository {
     }
 
     @Override
-    public List<BestSellerProductInfo> getTopBestSellersByDate(int limit, LocalDate date) {
-        //TODO : JPA Pageable로 변경하기 -> 어차피 count() 안나감
-        String sql = """
-                SELECT b.product_id, p.title, p.description, p.price, p.stock, b.sales_amount
-                FROM best_seller b
-                JOIN product p ON b.product_id = p.id
-                WHERE b.date = ?
-                ORDER BY b.sales_amount DESC
-                LIMIT ?
-                """;
-
-        return jdbcTemplate.query(sql, (rs, rowNum) -> {
-            return new BestSellerProductInfo(
-                    rs.getLong("product_id"),
-                    rs.getString("title"),
-                    rs.getString("description"),
-                    rs.getInt("price"),
-                    rs.getInt("stock"),
-                    rs.getInt("sales_amount")
-            );
-        }, date, limit);
+    public List<BestSeller> getTop5BestSellersByDate(LocalDate date) {
+        return bestSellerJpaRepository.findTop5ByDateOrderBySalesAmountDesc(date);
     }
 }
