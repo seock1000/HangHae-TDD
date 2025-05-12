@@ -1,7 +1,7 @@
 package kr.hhplus.be.server.infrastructure.order;
 
 import kr.hhplus.be.server.application.order.CancelOrderCommand;
-import kr.hhplus.be.server.application.order.OrderFacade;
+import kr.hhplus.be.server.application.order.OrderLockFacade;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
@@ -13,7 +13,7 @@ public class CancelOrderJob extends QuartzJobBean {
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
         var appContext = (WebApplicationContext) context.getJobDetail().getJobDataMap().get("webApplicationContext");
         var orderId = (String) context.getJobDetail().getJobDataMap().get("orderId");
-        OrderFacade orderFacade = (OrderFacade) appContext.getBean("orderFacade");
+        OrderLockFacade orderFacade = (OrderLockFacade) appContext.getBean("orderLockFacade");
 
         orderFacade.cancelOrder(new CancelOrderCommand(orderId));
     }

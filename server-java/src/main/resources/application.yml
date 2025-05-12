@@ -36,3 +36,9 @@ spring:
     url: jdbc:mysql://localhost:3307/hhplus?characterEncoding=UTF-8&serverTimezone=UTC
     username: application
     password: application
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+logging.level.org.springframework.transaction.interceptor: trace

@@ -59,6 +59,16 @@ dependencies {
 
 	// Quartz
 	implementation("org.springframework.boot:spring-boot-starter-quartz")
+
+	// redisson
+	implementation("org.redisson:redisson-spring-boot-starter:3.18.0")
+	testImplementation("org.redisson:redisson-spring-boot-starter:3.18.0")
+
+	//redis - 기본 어댑터로 Lettuce 사용
+	implementation("org.springframework.boot:spring-boot-starter-data-redis")
+
+	// redis - testcontainers
+	testImplementation("com.redis:testcontainers-redis")
 }
 
 tasks.withType<Test> {
