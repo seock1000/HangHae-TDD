@@ -19,6 +19,7 @@ import java.lang.reflect.Method;
 @Slf4j
 public class DistributedLockAop {
     private final LockTemplate lockTemplate;
+    private final TransactionHandler transactionHandler;
 
     @Around("@annotation(kr.hhplus.be.server.config.redis.DistributedLock)")
     public Object lock(final ProceedingJoinPoint joinPoint) throws Throwable {
@@ -34,7 +35,8 @@ public class DistributedLockAop {
             case SIMPLE -> {
                 return lockTemplate.simpleLock(key, () -> {
                     try {
-                        return joinPoint.proceed();
+//                        return joinPoint.proceed(); // 트랜잭션 이전 락이 해제될거임 -> 별도의 트랜잭션(REQUEST_NEW)로 실행 후 락 해제 필요
+                        return transactionHandler.proceed(joinPoint);
                     } catch (Throwable e) {
                         log.error("SIMPLE lock 실행 중 예외 발생", e);
                         throw new RuntimeException("SIMPLE lock 실행 중 예외가 발생했습니다.", e);
@@ -44,7 +46,8 @@ public class DistributedLockAop {
             case SPIN -> {
                 return lockTemplate.spinLock(key, () -> {
                     try {
-                        return joinPoint.proceed();
+//                        return joinPoint.proceed(); // 트랜잭션 이전 락이 해제될거임 -> 별도의 트랜잭션(REQUEST_NEW)로 실행 후 락 해제 필요
+                        return transactionHandler.proceed(joinPoint);
                     } catch (Throwable e) {
                         log.error("SPIN lock 실행 중 예외 발생", e);
                         throw new RuntimeException("SPIN lock 실행 중 예외가 발생했습니다.", e);
@@ -54,7 +57,8 @@ public class DistributedLockAop {
             case PUBSUB -> {
                 return lockTemplate.pubSubLock(key, distributedLock.waitTime(), distributedLock.leaseTime(), distributedLock.timeUnit(), () -> {
                     try {
-                        return joinPoint.proceed();
+//                        return joinPoint.proceed(); // 트랜잭션 이전 락이 해제될거임 -> 별도의 트랜잭션(REQUEST_NEW)로 실행 후 락 해제 필요
+                        return transactionHandler.proceed(joinPoint);
                     } catch (Throwable e) {
                         log.error("PUBSUB lock 실행 중 예외 발생", e);
                         throw new RuntimeException("PUBSUB lock 실행 중 예외가 발생했습니다.", e);
