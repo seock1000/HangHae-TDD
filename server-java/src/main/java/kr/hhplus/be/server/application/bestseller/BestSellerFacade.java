@@ -18,7 +18,7 @@ public class BestSellerFacade {
 
     @Transactional(readOnly = true)
     public List<GetBestSellerResult> getTodayBestSellers() {
-        return bestSellerService.getTodayTop5BestSellers().stream()
+        return bestSellerService.getTop5Last3DaysSalesStat().stream()
                 .map(it -> {
                     var product = productService.getProductById(it.getProductId());
                     return GetBestSellerResult.of(it, product);
