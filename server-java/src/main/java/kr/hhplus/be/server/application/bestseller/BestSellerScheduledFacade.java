@@ -57,7 +57,7 @@ public class BestSellerScheduledFacade {
 
         for(LocalDate date = startDate; !date.isAfter(endDate); date = date.plusDays(1)) {
             bestSellerService.getDailySalesStatByDate(date)
-                    .forEach(bestSellerService::updateDailySalesStat);
+                    .forEach(bestSellerService::updateLast3DaysSalesStat);
         }
     }
 }

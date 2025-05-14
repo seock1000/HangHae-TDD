@@ -24,6 +24,6 @@ public class BestSellerRedisKeyBuilder {
     }
 
     public String getLast3DaysKeyByDate(LocalDate date) {
-        return "BESTSELLER_SALES_STAT:ranking:last3days" + dateFormatter.format(date);
+        return "BESTSELLER_SALES_STAT:ranking:last3days:" + dateFormatter.format(date);
     }
 }

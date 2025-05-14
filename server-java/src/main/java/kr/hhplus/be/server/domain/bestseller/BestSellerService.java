@@ -63,4 +63,10 @@ public class BestSellerService {
         return bestSellerRepository.getTopLast3DaysSalesStat(5);
     }
 
+    @Scheduled(cron = "0 5 * * * *") // 예: 매 정각마다 갱신
+    @CachePut(value = CacheKey.BEST_SELLERS, cacheManager = CacheManagerName.LOCAL, key = CacheKey.BEST_SELLERS_EL)
+    public List<SalesStat> refreshTop5BestSellersCacheV2() {
+        return bestSellerRepository.getTopLast3DaysSalesStat(5);
+    }
+
 }

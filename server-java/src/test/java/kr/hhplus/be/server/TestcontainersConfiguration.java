@@ -2,6 +2,8 @@ package kr.hhplus.be.server;
 
 import com.redis.testcontainers.RedisContainer;
 import jakarta.annotation.PreDestroy;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +21,7 @@ import java.time.Duration;
 class TestcontainersConfiguration {
 
 	public static final MySQLContainer<?> MYSQL_CONTAINER;
-	public static final GenericContainer<?> REDIS_CONTAINER;
+	public static final RedisContainer REDIS_CONTAINER;
 
 	static {
 		MYSQL_CONTAINER = new MySQLContainer<>(DockerImageName.parse("mysql:8.0"))
