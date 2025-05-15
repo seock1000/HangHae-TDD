@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -27,8 +28,9 @@ public class CouponFacade {
         return couponService.getUserCouponInfosByUser(command);
     }
 
+    @Deprecated
     // 많은 경합 예상 : SPIN 방식 락 적용
-    @DistributedLock(key = "'coupon:' + #command.couponId()", method = LockMethod.PUBSUB)
+    //@DistributedLock(key = "'coupon:' + #command.couponId()", method = LockMethod.PUBSUB)
     public IssueCouponResult issueCoupon(IssueCouponCommand command) {
         var user = userService.getUserById(command.userId());
         var coupon = couponService.getCouponById(command.couponId());
@@ -39,4 +41,10 @@ public class CouponFacade {
         couponService.saveUserCoupon(userCoupon);
         return IssueCouponResult.of(userCoupon);
     }
+
+    public void registerIssueRequest(IssueCouponCommand command) {
+        couponService.saveIssueRequest(command);
+    }
+
+
 }

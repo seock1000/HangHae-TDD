@@ -2,12 +2,15 @@ package kr.hhplus.be.server.domain.coupon;
 
 import kr.hhplus.be.server.ApiError;
 import kr.hhplus.be.server.ApiException;
+import kr.hhplus.be.server.application.coupon.IssueCouponCommand;
 import kr.hhplus.be.server.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -67,5 +70,23 @@ public class CouponService {
      */
     public void saveUserCoupon(UserCoupon userCoupon) {
         couponRepository.saveUserCoupon(userCoupon);
+    }
+
+    public void saveIssueRequest(IssueCouponCommand command) {
+        couponRepository.saveIssueCommand(command);
+    }
+
+    public List<Coupon> getValidCoupons() {
+        return couponRepository.findAllCoupon().stream()
+                .filter(Coupon::isValid)
+                .toList();
+    }
+
+    public void removeIssueRequest(List<UserCoupon> userCoupons) {
+        couponRepository.removeIssueRequest(userCoupons);
+    }
+
+    public Map<Long, List<Long>> getTopIssueRequestsWithSize(int batchSize) {
+        return couponRepository.getTopIssueRequestPerCouponWithSize(batchSize);
     }
 }

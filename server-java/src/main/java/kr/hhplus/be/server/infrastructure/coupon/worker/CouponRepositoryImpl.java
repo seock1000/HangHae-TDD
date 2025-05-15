@@ -1,5 +1,6 @@
 package kr.hhplus.be.server.infrastructure.coupon.worker;
 
+import kr.hhplus.be.server.application.coupon.IssueCouponCommand;
 import kr.hhplus.be.server.domain.coupon.Coupon;
 import kr.hhplus.be.server.domain.coupon.CouponRepository;
 import kr.hhplus.be.server.domain.coupon.UserCoupon;
@@ -10,7 +11,9 @@ import kr.hhplus.be.server.infrastructure.coupon.persistence.UserCouponJpaReposi
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -68,5 +71,25 @@ public class CouponRepositoryImpl implements CouponRepository {
             couponRedisRepository.save(coupon);
         }
         return coupon;
+    }
+
+    @Override
+    public void saveIssueCommand(IssueCouponCommand command) {
+        couponRedisRepository.saveIssueCommand(command);
+    }
+
+    @Override
+    public List<Coupon> findAllCoupon() {
+        return couponRedisRepository.findAllCoupon();
+    }
+
+    @Override
+    public Map<Long, List<Long>> getTopIssueRequestPerCouponWithSize(int batchSize) {
+        return couponRedisRepository.getTopIssueRequestPerCouponWithSize(batchSize);
+    }
+
+    @Override
+    public void removeIssueRequest(List<UserCoupon> userCoupons) {
+        couponRedisRepository.removeIssueRequest(userCoupons);
     }
 }

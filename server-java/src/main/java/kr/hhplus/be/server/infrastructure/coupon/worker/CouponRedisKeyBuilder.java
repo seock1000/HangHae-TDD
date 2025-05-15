@@ -15,8 +15,12 @@ public class CouponRedisKeyBuilder {
         return "COUPON:" + couponId;
     }
 
+    public String getCouponKeyPattern() {
+        return "COUPON:*";
+    }
+
     public String getSyncCouponQueueKey() {
-        return "COUPON:SYNC_QUEUE";
+        return "COUPON_SYNC_QUEUE";
     }
 
     public String getIssueHistoryKeyByUserCoupon(UserCoupon userCoupon) {
@@ -25,5 +29,15 @@ public class CouponRedisKeyBuilder {
 
     public String getIssueHistoryKeyByUserId(Long userId) {
         return "USER:ISSUE_HISTORY:" + userId;
+    }
+
+    public String getIssueCommandKeyByCouponId(Long couponId) {
+        return "COUPON_ISSUE_COMMAND:" + couponId;
+    }
+    public String getIssueCommandKeyPattern() {
+        return "COUPON_ISSUE_COMMAND:*";
+    }
+    public Long parseCouponIdFromIssueCommandKey(String key) {
+        return Long.valueOf(key.split(":")[2]);
     }
 }

@@ -49,14 +49,14 @@ class CouponSyncWorkerTest extends IntegrationTestSupport {
         coupon.issue(user);
         couponRepository.saveCoupon(coupon);
 
-        Coupon dbCoupon = couponJpaRepository.findById(coupon.getId()).orElseThrow();
+        Coupon beforeSync = couponJpaRepository.findById(coupon.getId()).orElseThrow();
 
         // when
         couponSyncWorker.syncUpdateCoupon();
 
         // then
-        Coupon updatedCoupon = couponJpaRepository.findById(coupon.getId()).orElseThrow();
-        assertNotEquals(coupon.getStock(), dbCoupon.getStock());
-        assertEquals(coupon.getStock(), updatedCoupon.getStock());
+        Coupon afterSync = couponJpaRepository.findById(coupon.getId()).orElseThrow();
+        assertNotEquals(coupon.getStock(), beforeSync.getStock());
+        assertEquals(coupon.getStock(), afterSync.getStock());
     }
 }
