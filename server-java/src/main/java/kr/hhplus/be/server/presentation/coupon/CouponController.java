@@ -49,7 +49,7 @@ public class CouponController implements CouponSpec {
     public ResponseEntity<BaseResponse<Void>> issueCoupon(
                 @RequestBody IssueCouponRequest request
     ) {
-        couponFacade.issueCoupon(request.toCommand());
+        couponFacade.registerIssueRequest(request.toCommand());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 BaseResponse.created()

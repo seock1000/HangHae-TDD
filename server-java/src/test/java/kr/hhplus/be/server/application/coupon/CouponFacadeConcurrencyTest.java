@@ -2,21 +2,16 @@ package kr.hhplus.be.server.application.coupon;
 
 import kr.hhplus.be.server.IntegrationTestSupport;
 import kr.hhplus.be.server.domain.coupon.Coupon;
+import kr.hhplus.be.server.domain.coupon.CouponRepository;
 import kr.hhplus.be.server.domain.user.User;
-import kr.hhplus.be.server.infrastructure.coupon.CouponJpaRepository;
-import kr.hhplus.be.server.infrastructure.coupon.UserCouponJpaRepository;
-import kr.hhplus.be.server.infrastructure.user.UserJpaRepository;
+import kr.hhplus.be.server.domain.user.UserRepository;
 import org.instancio.Instancio;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -28,15 +23,15 @@ class CouponFacadeConcurrencyTest extends IntegrationTestSupport {
     @Autowired
     private CouponFacade couponFacade;
     @Autowired
-    private CouponJpaRepository couponJpaRepository;
+    private CouponRepository couponRepository;
     @Autowired
-    private UserJpaRepository userJpaRepository;
+    private UserRepository userRepository;
 
     @Test
     @DisplayName("여러 스레드에서 동시에 쿠폰 발급 요청 시 재고관리가 정확하게 되며, 발급되어야 한다.")
     void 여러_스레드에서_동시에_쿠폰_발급시_재고관리가_정확하게_되며_발급되어야_한다() {
         // Given
-        var coupon = couponJpaRepository.saveAndFlush(Instancio.of(Coupon.class)
+        var coupon = couponRepository.saveCoupon(Instancio.of(Coupon.class)
                 .set(field("id"), null)
                 .set(field("stock"), 100)
                 .set(field("startDate"), LocalDateTime.now().minusDays(1))
@@ -44,16 +39,16 @@ class CouponFacadeConcurrencyTest extends IntegrationTestSupport {
                 .create());
 
         var users = List.of(
-                userJpaRepository.saveAndFlush(Instancio.of(User.class)
+                userRepository.save(Instancio.of(User.class)
                         .set(field("id"), null)
                         .create()),
-                userJpaRepository.saveAndFlush(Instancio.of(User.class)
+                userRepository.save(Instancio.of(User.class)
                         .set(field("id"), null)
                         .create()),
-                userJpaRepository.saveAndFlush(Instancio.of(User.class)
+                userRepository.save(Instancio.of(User.class)
                         .set(field("id"), null)
                         .create()),
-                userJpaRepository.saveAndFlush(Instancio.of(User.class)
+                userRepository.save(Instancio.of(User.class)
                         .set(field("id"), null)
                         .create())
         );
@@ -72,7 +67,7 @@ class CouponFacadeConcurrencyTest extends IntegrationTestSupport {
         CompletableFuture.allOf(issues.toArray(new CompletableFuture[0])).join();
 
         // Then
-        var updatedCoupon = couponJpaRepository.findById(coupon.getId()).orElseThrow();
+        var updatedCoupon = couponRepository.findCouponById(coupon.getId()).orElseThrow();
         assertEquals(96, updatedCoupon.getStock());
     }
 
@@ -82,7 +77,7 @@ class CouponFacadeConcurrencyTest extends IntegrationTestSupport {
     void 쿠폰_수가_모자란_경우_초과발급_되지_않아야_한다() {
         // Given
         int remainCoupon = 3;
-        var coupon = couponJpaRepository.saveAndFlush(Instancio.of(Coupon.class)
+        var coupon = couponRepository.saveCoupon(Instancio.of(Coupon.class)
                 .set(field("id"), null)
                 .set(field("stock"), remainCoupon)
                 .set(field("startDate"), LocalDateTime.now().minusDays(1))
@@ -90,16 +85,16 @@ class CouponFacadeConcurrencyTest extends IntegrationTestSupport {
                 .create());
 
         var users = List.of(
-                userJpaRepository.saveAndFlush(Instancio.of(User.class)
+                userRepository.save(Instancio.of(User.class)
                         .set(field("id"), null)
                         .create()),
-                userJpaRepository.saveAndFlush(Instancio.of(User.class)
+                userRepository.save(Instancio.of(User.class)
                         .set(field("id"), null)
                         .create()),
-                userJpaRepository.saveAndFlush(Instancio.of(User.class)
+                userRepository.save(Instancio.of(User.class)
                         .set(field("id"), null)
                         .create()),
-                userJpaRepository.saveAndFlush(Instancio.of(User.class)
+                userRepository.save(Instancio.of(User.class)
                         .set(field("id"), null)
                         .create())
         );
@@ -120,7 +115,7 @@ class CouponFacadeConcurrencyTest extends IntegrationTestSupport {
         CompletableFuture.allOf(issues.toArray(new CompletableFuture[0])).join();
 
         // Then
-        var updatedCoupon = couponJpaRepository.findById(coupon.getId()).orElseThrow();
+        var updatedCoupon = couponRepository.findCouponById(coupon.getId()).orElseThrow();
         assertEquals(0, updatedCoupon.getStock());
         assertEquals(remainCoupon, successCount.get());
     }

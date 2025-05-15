@@ -1,13 +1,16 @@
 package kr.hhplus.be.server.application.bestseller;
 
 import kr.hhplus.be.server.domain.bestseller.BestSeller;
+import kr.hhplus.be.server.domain.bestseller.SalesStat;
 import kr.hhplus.be.server.domain.product.Product;
 import kr.hhplus.be.server.infrastructure.bestseller.BestSellerJpaRepository;
+import kr.hhplus.be.server.infrastructure.bestseller.BestSellerRedisRepository;
 import kr.hhplus.be.server.infrastructure.product.ProductJpaRepository;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +26,8 @@ class BestSellerFacadeIntegrationTest {
 
     @Autowired
     private BestSellerFacade bestSellerFacade;
+    @Autowired
+    private BestSellerRedisRepository bestSellerRedisRepository;
     @Autowired
     private BestSellerJpaRepository bestSellerJpaRepository;
     @Autowired
@@ -57,35 +62,29 @@ class BestSellerFacadeIntegrationTest {
                 .set(field("title"), "Product 6")
                 .create());
 
-        bestSellerJpaRepository.saveAndFlush(Instancio.of(BestSeller.class)
+        bestSellerRedisRepository.addLast3DaysSalesStat(Instancio.of(SalesStat.class)
                 .set(field("productId"), product1.getId())
-                .set(field("salesAmount"), 100)
-                .set(field("date"), LocalDate.now())
+                .set(field("amount"), 100)
                 .create());
-        bestSellerJpaRepository.saveAndFlush(Instancio.of(BestSeller.class)
+        bestSellerRedisRepository.addLast3DaysSalesStat(Instancio.of(SalesStat.class)
                 .set(field("productId"), product2.getId())
-                .set(field("salesAmount"), 90)
-                .set(field("date"), LocalDate.now())
+                .set(field("amount"), 90)
                 .create());
-        bestSellerJpaRepository.saveAndFlush(Instancio.of(BestSeller.class)
+        bestSellerRedisRepository.addLast3DaysSalesStat(Instancio.of(SalesStat.class)
                 .set(field("productId"), product3.getId())
-                .set(field("salesAmount"), 80)
-                .set(field("date"), LocalDate.now())
+                .set(field("amount"), 80)
                 .create());
-        bestSellerJpaRepository.saveAndFlush(Instancio.of(BestSeller.class)
+        bestSellerRedisRepository.addLast3DaysSalesStat(Instancio.of(SalesStat.class)
                 .set(field("productId"), product4.getId())
-                .set(field("salesAmount"), 70)
-                .set(field("date"), LocalDate.now())
+                .set(field("amount"), 70)
                 .create());
-        bestSellerJpaRepository.saveAndFlush(Instancio.of(BestSeller.class)
+        bestSellerRedisRepository.addLast3DaysSalesStat(Instancio.of(SalesStat.class)
                 .set(field("productId"), product5.getId())
-                .set(field("salesAmount"), 60)
-                .set(field("date"), LocalDate.now())
+                .set(field("amount"), 60)
                 .create());
-        bestSellerJpaRepository.saveAndFlush(Instancio.of(BestSeller.class)
+        bestSellerRedisRepository.addLast3DaysSalesStat(Instancio.of(SalesStat.class)
                 .set(field("productId"), product6.getId())
-                .set(field("salesAmount"), 50)
-                .set(field("date"), LocalDate.now())
+                .set(field("amount"), 50)
                 .create());
 
         // when
