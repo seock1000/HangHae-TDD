@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.redisson.api.RedissonClient;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class CouponSyncWorker {
 
     // 1초에 100건씩 동기화
     @Scheduled(fixedRate = 1000)
+    @Transactional
     public void syncUpdateCoupon() {
         redissonClient.getQueue(couponRedisKeyBuilder.getSyncCouponQueueKey())
                 .poll(BATCH_SIZE)
