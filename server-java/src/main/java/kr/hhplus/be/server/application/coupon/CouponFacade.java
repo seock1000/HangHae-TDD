@@ -31,7 +31,7 @@ public class CouponFacade {
     @DistributedLock(key = "'coupon:' + #command.couponId()", method = LockMethod.PUBSUB)
     public IssueCouponResult issueCoupon(IssueCouponCommand command) {
         var user = userService.getUserById(command.userId());
-        var coupon = couponService.getCouponByIdForUpdate(command.couponId());
+        var coupon = couponService.getCouponById(command.couponId());
 
         var userCoupon = couponService.issueCoupon(user, coupon);
 

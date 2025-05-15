@@ -2,18 +2,17 @@ package kr.hhplus.be.server.application.coupon;
 
 import kr.hhplus.be.server.IntegrationTestSupport;
 import kr.hhplus.be.server.domain.coupon.Coupon;
+import kr.hhplus.be.server.domain.coupon.CouponRepository;
 import kr.hhplus.be.server.domain.coupon.GetUserCouponCommand;
 import kr.hhplus.be.server.domain.coupon.UserCoupon;
 import kr.hhplus.be.server.domain.user.User;
-import kr.hhplus.be.server.infrastructure.coupon.CouponJpaRepository;
-import kr.hhplus.be.server.infrastructure.coupon.UserCouponJpaRepository;
+import kr.hhplus.be.server.infrastructure.coupon.persistence.CouponJpaRepository;
+import kr.hhplus.be.server.infrastructure.coupon.persistence.UserCouponJpaRepository;
 import kr.hhplus.be.server.infrastructure.user.UserJpaRepository;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -26,7 +25,7 @@ class CouponFacadeIntegrationTest extends IntegrationTestSupport {
     private CouponFacade couponFacade;
 
     @Autowired
-    private CouponJpaRepository couponJpaRepository;
+    private CouponRepository couponRepository;
     @Autowired
     private UserCouponJpaRepository userCouponJpaRepository;
     @Autowired
@@ -47,7 +46,7 @@ class CouponFacadeIntegrationTest extends IntegrationTestSupport {
 
     @Test
     @DisplayName("쿠폰 조회 시, 받은 유저 ID에 대한 쿠폰이 있으면 쿠폰 리스트를 반환한다.")
-    void getUserCouponInfosByUser() {
+    void getUserCouponInfosByUser() throws InterruptedException {
         // given
         var command = new GetUserCouponCommand(1L);
         var coupon = Instancio.of(Coupon.class)
@@ -58,8 +57,10 @@ class CouponFacadeIntegrationTest extends IntegrationTestSupport {
                 .set(field("coupon"), coupon)
                 .set(field("userId"), command.userId())
                 .create();
-        couponJpaRepository.saveAndFlush(coupon);
-        userCouponJpaRepository.saveAndFlush(userCoupon);
+        couponRepository.saveCoupon(coupon);
+        couponRepository.saveUserCoupon(userCoupon);
+
+        Thread.sleep(100);
 
         // when
         var result = couponFacade.getUserCouponInfosByUser(command);
@@ -82,7 +83,7 @@ class CouponFacadeIntegrationTest extends IntegrationTestSupport {
                 .set(field("id"), null)
                 .create();
         userJpaRepository.saveAndFlush(user);
-        couponJpaRepository.saveAndFlush(coupon);
+        couponRepository.saveCoupon(coupon);
 
         var command = new IssueCouponCommand(user.getId(), coupon.getId());
 

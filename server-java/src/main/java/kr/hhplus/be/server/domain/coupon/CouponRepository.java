@@ -14,6 +14,6 @@ public interface CouponRepository {
 
     boolean existsUserCouponByUserAndCoupon(User user, Coupon coupon);
 
-    void saveUserCoupon(UserCoupon userCoupon);
-    void saveCoupon(Coupon coupon);
+    UserCoupon saveUserCoupon(UserCoupon userCoupon);
+    Coupon saveCoupon(Coupon coupon);
 }
