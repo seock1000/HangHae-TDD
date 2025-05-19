@@ -22,6 +22,7 @@ public class BestSellerBase extends BaseTimeEntity {
     private int salesAmount;
     private LocalDate date;
 
+    @Deprecated
     private BestSellerBase(OrderSalesAmount salesAmount, LocalDate date) {
         this.id = BestSellerBaseId.createWithProduct(salesAmount);
         this.productId = salesAmount.getProductId();
@@ -29,7 +30,23 @@ public class BestSellerBase extends BaseTimeEntity {
         this.date = date;
     }
 
+    private BestSellerBase(SalesStat salesStat, LocalDate date) {
+        this.id = BestSellerBaseId.createWithSalesStat(salesStat);
+        this.productId = salesStat.getProductId();
+        this.salesAmount = salesStat.getAmount();
+        this.date = date;
+    }
+
+    @Deprecated
     public static BestSellerBase createWithSalesAmountAndDate(OrderSalesAmount salesAmount, LocalDate date) {
         return new BestSellerBase(salesAmount, date);
+    }
+
+    public static BestSellerBase createWithSalesStatAndDate(SalesStat salesStat, LocalDate date) {
+        return new BestSellerBase(salesStat, date);
+    }
+
+    public void addSalesAmount(int amount) {
+        this.salesAmount += amount;
     }
 }

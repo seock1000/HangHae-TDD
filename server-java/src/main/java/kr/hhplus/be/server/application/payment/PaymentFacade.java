@@ -5,6 +5,7 @@ import kr.hhplus.be.server.domain.payment.Payment;
 import kr.hhplus.be.server.domain.payment.PaymentService;
 import kr.hhplus.be.server.domain.point.PointService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,8 @@ public class PaymentFacade {
     private final OrderService orderService;
     private final PointService pointService;
     private final PaymentService paymentService;
+
+    private final ApplicationEventPublisher eventPublisher;
 
     public PayResult pay(PayCommand command) {
         var order = orderService.getOrderById(command.orderId());
@@ -32,6 +35,7 @@ public class PaymentFacade {
             //TODO logging..?
         }
         orderService.removeOrderToCancelHandler(order);
+        eventPublisher.publishEvent(OrderPaidEvent.of(order));
         return PayResult.of(payment);
     }
 }

@@ -27,4 +27,11 @@ public class BestSellerBaseId implements Serializable {
         }
         return new BestSellerBaseId(System.currentTimeMillis() + "_" + salesAmount.getProductId().toString());
     }
+
+    public static BestSellerBaseId createWithSalesStat(SalesStat salesStat) {
+        if (salesStat == null) {
+            throw new IllegalArgumentException("Product cannot be null");
+        }
+        return new BestSellerBaseId(System.currentTimeMillis() + "_" + salesStat.getProductId().toString());
+    }
 }
