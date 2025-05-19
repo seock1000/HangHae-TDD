@@ -2,25 +2,21 @@ package kr.hhplus.be.server.application.order;
 
 import kr.hhplus.be.server.IntegrationTestSupport;
 import kr.hhplus.be.server.domain.coupon.Coupon;
+import kr.hhplus.be.server.domain.coupon.CouponRepository;
 import kr.hhplus.be.server.domain.coupon.DiscountType;
 import kr.hhplus.be.server.domain.coupon.UserCoupon;
-import kr.hhplus.be.server.domain.order.OrderItem;
-import kr.hhplus.be.server.domain.order.OrderStatus;
 import kr.hhplus.be.server.domain.order.Orders;
 import kr.hhplus.be.server.domain.product.Product;
 import kr.hhplus.be.server.domain.user.User;
-import kr.hhplus.be.server.infrastructure.coupon.CouponJpaRepository;
-import kr.hhplus.be.server.infrastructure.coupon.UserCouponJpaRepository;
+import kr.hhplus.be.server.infrastructure.coupon.persistence.CouponJpaRepository;
+import kr.hhplus.be.server.infrastructure.coupon.persistence.UserCouponJpaRepository;
 import kr.hhplus.be.server.infrastructure.order.OrderJpaRepository;
 import kr.hhplus.be.server.infrastructure.product.ProductJpaRepository;
 import kr.hhplus.be.server.infrastructure.user.UserJpaRepository;
 import org.instancio.Instancio;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -39,7 +35,7 @@ class OrderFacadeConcurrentTest extends IntegrationTestSupport {
     @Autowired
     private OrderJpaRepository orderJpaRepository;
     @Autowired
-    private CouponJpaRepository couponJpaRepository;
+    private CouponRepository couponRepository;
     @Autowired
     private UserCouponJpaRepository userCouponJpaRepository;
     @Autowired
@@ -175,7 +171,7 @@ class OrderFacadeConcurrentTest extends IntegrationTestSupport {
                 .set(field("price"), 1000)
                 .create());
 
-        var coupon = couponJpaRepository.saveAndFlush(Instancio.of(Coupon.class)
+        var coupon = couponRepository.saveCoupon(Instancio.of(Coupon.class)
                 .set(field("id"), null)
                 .set(field("stock"), 100)
                 .set(field("discountValue"), BigDecimal.valueOf(1000L))
@@ -184,7 +180,7 @@ class OrderFacadeConcurrentTest extends IntegrationTestSupport {
                 .set(field("endDate"), LocalDateTime.now().plusDays(1))
                 .create());
 
-        var userCoupon = userCouponJpaRepository.saveAndFlush(Instancio.of(UserCoupon.class)
+        var userCoupon = couponRepository.saveUserCoupon(Instancio.of(UserCoupon.class)
                 .set(field("id"), null)
                 .set(field("userId"), user.getId())
                 .set(field("coupon"), coupon)
