@@ -1,5 +1,6 @@
 package kr.hhplus.be.server.application.bestseller;
 
+import kr.hhplus.be.server.application.event.PaidOrderEvent;
 import kr.hhplus.be.server.application.payment.OrderPaidEvent;
 import kr.hhplus.be.server.domain.bestseller.BestSellerService;
 import kr.hhplus.be.server.domain.bestseller.SalesStat;
@@ -11,14 +12,14 @@ import org.springframework.transaction.event.TransactionalEventListener;
 
 @Service
 @RequiredArgsConstructor
-public class BestSellerEventFacade {
+public class BestSellerEventListener {
 
     private final BestSellerService bestSellerService;
 
     @Async
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
-    public void handlePaidOrder(OrderPaidEvent event) {
-        event.getOrder().getOrderItems()
-                .forEach(it -> bestSellerService.updateDailySalesStat(SalesStat.of(it)));
+    public void handlePaidOrder(PaidOrderEvent event) {
+        event.orderItems()
+                .forEach(it -> bestSellerService.updateDailySalesStat(it.toSalesStat()));
     }
 }

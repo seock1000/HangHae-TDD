@@ -66,9 +66,9 @@ public class OrderService {
     }
 
 
-    public void sendOrderData(Orders order) {
+    public void sendOrderData(OrderData data) {
         try {
-            orderDataPlatform.send(order);
+            orderDataPlatform.send(data);
         } catch (Exception e) {
             //TODO log?
         }

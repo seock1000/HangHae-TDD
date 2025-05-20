@@ -1,5 +1,6 @@
 package kr.hhplus.be.server.application.payment;
 
+import kr.hhplus.be.server.application.event.PaidOrderEvent;
 import kr.hhplus.be.server.domain.order.OrderService;
 import kr.hhplus.be.server.domain.payment.Payment;
 import kr.hhplus.be.server.domain.payment.PaymentService;
@@ -29,13 +30,9 @@ public class PaymentFacade {
         orderService.saveOrder(order);
         paymentService.savePayment(payment);
 
-        try {
-            orderService.sendOrderData(order);
-        } catch (Exception e) {
-            //TODO logging..?
-        }
+
         orderService.removeOrderToCancelHandler(order);
-        eventPublisher.publishEvent(OrderPaidEvent.of(order));
+        eventPublisher.publishEvent(PaidOrderEvent.of(order));
         return PayResult.of(payment);
     }
 }
