@@ -1,6 +1,7 @@
 package kr.hhplus.be.server.application.order;
 
 import kr.hhplus.be.server.domain.coupon.CouponService;
+import kr.hhplus.be.server.domain.order.OrderData;
 import kr.hhplus.be.server.domain.order.OrderService;
 import kr.hhplus.be.server.domain.order.Orders;
 import kr.hhplus.be.server.domain.product.Product;
@@ -66,5 +67,10 @@ public class OrderFacade {
         }
 
         return new OrderResult(order.getId());
+    }
+
+    public void confirmOrder(ConfirmOrderCommand command) {
+        var order = orderService.getOrderById(command.orderId());
+        OrderData.of(order).forEach(orderService::sendOrderData);
     }
 }
