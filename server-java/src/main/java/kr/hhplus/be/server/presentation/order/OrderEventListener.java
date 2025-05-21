@@ -2,7 +2,6 @@ package kr.hhplus.be.server.presentation.order;
 
 import kr.hhplus.be.server.application.order.ConfirmOrderCommand;
 import kr.hhplus.be.server.application.order.OrderFacade;
-import kr.hhplus.be.server.domain.log.LogService;
 import kr.hhplus.be.server.domain.payment.PaymentEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.retry.annotation.Backoff;
