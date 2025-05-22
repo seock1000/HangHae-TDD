@@ -79,6 +79,9 @@ dependencies {
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 	implementation("com.fasterxml.jackson.module:jackson-module-parameter-names")
 	implementation("org.springframework.data:spring-data-commons")
+
+	//retry
+	implementation("org.springframework.retry:spring-retry")
 }
 
 tasks.withType<Test> {
