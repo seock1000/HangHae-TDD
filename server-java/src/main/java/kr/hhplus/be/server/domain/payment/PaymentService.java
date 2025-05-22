@@ -20,6 +20,6 @@ public class PaymentService {
 
     public void confirmPayment(Payment payment) {
         payment = paymentRepository.save(payment);
-        paymentEventPublisher.publish(PaymentEvent.of(payment));
+        paymentEventPublisher.publish(PaymentEvent.Completed.of(payment));
     }
 }

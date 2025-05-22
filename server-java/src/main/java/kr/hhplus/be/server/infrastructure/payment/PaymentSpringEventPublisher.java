@@ -13,7 +13,7 @@ public class PaymentSpringEventPublisher implements PaymentEventPublisher {
     private final ApplicationEventPublisher applicationEventPublisher;
 
     @Override
-    public void publish(PaymentEvent event) {
+    public void publish(PaymentEvent.Completed event) {
         applicationEventPublisher.publishEvent(event);
     }
 }

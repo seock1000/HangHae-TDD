@@ -34,6 +34,6 @@ class PaymentServiceTest {
 
         // then
         verify(paymentRepository, times(1)).save(payment);
-        verify(paymentEventPublisher, times(1)).publish(any(PaymentEvent.class));
+        verify(paymentEventPublisher, times(1)).publish(any(PaymentEvent.Completed.class));
     }
 }

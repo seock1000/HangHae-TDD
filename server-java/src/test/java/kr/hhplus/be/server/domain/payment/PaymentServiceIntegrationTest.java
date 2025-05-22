@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import org.springframework.test.context.event.ApplicationEvents;
 import org.springframework.test.context.event.RecordApplicationEvents;
@@ -39,7 +37,7 @@ class PaymentServiceIntegrationTest {
         paymentService.confirmPayment(payment);
 
         // then
-        verify(paymentEventPublisher, times(1)).publish(any(PaymentEvent.class));
-        assertThat(applicationEvents.stream(PaymentEvent.class)).hasSize(1);
+        verify(paymentEventPublisher, times(1)).publish(any(PaymentEvent.Completed.class));
+        assertThat(applicationEvents.stream(PaymentEvent.Completed.class)).hasSize(1);
     }
 }

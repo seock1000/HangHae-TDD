@@ -24,7 +24,7 @@ public class BestSellerEventListener {
     )
     @Async
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
-    public void handlePayment(PaymentEvent event) {
-        bestSellerFacade.updateDailyBastSeller(UpdateBestSellerCommand.of(event.getOrderId()));
+    public void handlePayment(PaymentEvent.Completed event) {
+        bestSellerFacade.updateDailyBastSeller(UpdateBestSellerCommand.of(event.orderId()));
     }
 }
