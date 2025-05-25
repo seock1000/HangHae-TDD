@@ -12,8 +12,14 @@ import java.beans.Transient;
 public class PaymentService {
 
     private final PaymentRepository paymentRepository;
+    private final PaymentEventPublisher paymentEventPublisher;
 
     public void savePayment(Payment payment) {
         paymentRepository.save(payment);
+    }
+
+    public void confirmPayment(Payment payment) {
+        payment = paymentRepository.save(payment);
+        paymentEventPublisher.publish(PaymentEvent.Completed.of(payment));
     }
 }

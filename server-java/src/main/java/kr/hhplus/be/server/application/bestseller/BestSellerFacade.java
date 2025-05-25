@@ -1,6 +1,8 @@
 package kr.hhplus.be.server.application.bestseller;
 
 import kr.hhplus.be.server.domain.bestseller.BestSellerService;
+import kr.hhplus.be.server.domain.bestseller.SalesStat;
+import kr.hhplus.be.server.domain.order.OrderService;
 import kr.hhplus.be.server.domain.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ public class BestSellerFacade {
 
     private final BestSellerService bestSellerService;
     private final ProductService productService;
+    private final OrderService orderService;
 
     @Transactional(readOnly = true)
     public List<GetBestSellerResult> getTodayBestSellers() {
@@ -24,5 +27,10 @@ public class BestSellerFacade {
                     return GetBestSellerResult.of(it, product);
                 })
                 .toList();
+    }
+
+    public void updateDailyBastSeller(UpdateBestSellerCommand command) {
+        var order = orderService.getOrderById(command.orderId());
+        order.getOrderItems().forEach(it -> bestSellerService.updateLast3DaysSalesStat(SalesStat.of(it)));
     }
 }
