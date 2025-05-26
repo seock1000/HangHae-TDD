@@ -154,3 +154,29 @@ Apache Kafka
         - 세션 타임아웃 시간보다 짧게 설정해야 함(일반적으로 session.timeout.ms의 1/3 정도)
         - 세션 타임아웃 시간보다 길게 설정하면, 컨슈머가 브로커와 연결이 끊어진 것으로 간주되어 컨슈머 그룹에서 제외될 수 있음
       - max.poll.records: 한 번의 poll() 메서드 호출로 가져올 수 있는 레코드의 최대 개수
+
+---
+### 카프카 설치 및 사용
+- 카프카 설치
+  - 웹사이트에서 다운로드 또는 brew 활용 설치
+  ```shell
+    brew install kafka
+  ```
+  - 카프카 실행
+    - 3.3 버전부터는 zookeeper 없이 kRaft로 컨트롤러를 관리하여 실행 가능
+    - 4.0 버전부터는 zookeeper가 제거되고 kRaft 모드가 기본으로 설정되어 있음
+    - 설치 경로로 접속하여 kafka-server-start.sh 스크립트로 실행
+    - 별도 설정 없이 실행하는 경우, controller 브로커는 9093 포트로 실행, 브로커는 9092 포트로 실행
+    ```shell
+      bin/kafka-server-start.sh config/server.properties
+    ```
+  - 토픽 생성
+    - quickstart-events라는 이름의 토픽을 생성
+    ```shell
+    bin/kafka-topics.sh --create --topic quickstart-events --bootstrap-server localhost:9092
+    ```
+  - 토픽 조회
+    - 생성된 토픽의 정보를 조회
+      ```shell
+      bin/kafka-topics.sh --bootstrap-server=localhost:9092 --list
+      ```
