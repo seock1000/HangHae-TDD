@@ -45,7 +45,19 @@ spring:
         jdbc.batch_size: 1000
         order_inserts: true
         order_updates: true
-
+  kafka:
+    bootstrap-servers: localhost:10000,localhost:10001,localhost:10002
+    consumer:
+      group-id: hhplus
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        spring.json.trusted.packages: '*'
+    producer:
+        key-serializer: org.apache.kafka.common.serialization.StringSerializer
+        value-serializer: org.apache.kafka.common.serialization.StringDeserializer
 
 ##logging.level.org.springframework.transaction.interceptor: trace
 logging:
