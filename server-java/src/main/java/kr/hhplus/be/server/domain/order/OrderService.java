@@ -2,6 +2,7 @@ package kr.hhplus.be.server.domain.order;
 
 import kr.hhplus.be.server.ApiError;
 import kr.hhplus.be.server.ApiException;
+import kr.hhplus.be.server.application.order.OrderEventPublisher;
 import kr.hhplus.be.server.domain.product.OrderedProduct;
 import kr.hhplus.be.server.domain.user.User;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ public class OrderService {
     private final OrderIdGenerator orderIdGenerator;
     private final OrderDataPlatform orderDataPlatform;
     private final OrderCancelHandler orderCancelHandler;
+    private final OrderEventPublisher orderEventPublisher;
 
     /**
      * 테스트 필요 없을 듯
@@ -66,11 +68,10 @@ public class OrderService {
     }
 
 
-    public void sendOrderData(OrderData data) {
-        try {
-            orderDataPlatform.send(data);
-        } catch (Exception e) {
-            //TODO log?
-        }
+    public void confirmOrder(Orders order) {
+        //order.confirm(); // paymentService에서 이미 호출함
+        orderCancelHandler.delete(order.getId());
+        orderRepository.saveOrderWithItems(order);
+        orderEventPublisher.publishConfirmEvent(OrderEvent.Confirmed.of(order));
     }
 }
