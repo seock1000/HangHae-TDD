@@ -46,7 +46,6 @@ spring:
         order_inserts: true
         order_updates: true
 
-
 ##logging.level.org.springframework.transaction.interceptor: trace
 logging:
   level:

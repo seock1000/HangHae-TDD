@@ -71,6 +71,6 @@ public class OrderFacade {
 
     public void confirmOrder(ConfirmOrderCommand command) {
         var order = orderService.getOrderById(command.orderId());
-        OrderData.of(order).forEach(orderService::sendOrderData);
+        orderService.confirmOrder(order);
     }
 }
