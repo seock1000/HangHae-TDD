@@ -4,4 +4,5 @@ import lombok.Getter;
 
 public interface KafkaEventKey {
     public static final String ORDER_CONFIRMED = "order-confirmed";
+    public static final String COUPON_ISSUE = "coupon-issue";
 }

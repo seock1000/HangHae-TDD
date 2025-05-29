@@ -28,10 +28,9 @@ public class CouponFacade {
         return couponService.getUserCouponInfosByUser(command);
     }
 
-    @Deprecated
     // 많은 경합 예상 : SPIN 방식 락 적용
     //@DistributedLock(key = "'coupon:' + #command.couponId()", method = LockMethod.PUBSUB)
-    public IssueCouponResult issueCoupon(IssueCouponCommand command) {
+    public void issueCoupon(IssueCouponCommand command) {
         var user = userService.getUserById(command.userId());
         var coupon = couponService.getCouponById(command.couponId());
 
@@ -39,11 +38,15 @@ public class CouponFacade {
 
         couponService.saveCoupon(coupon);
         couponService.saveUserCoupon(userCoupon);
-        return IssueCouponResult.of(userCoupon);
     }
 
+    @Deprecated
     public void registerIssueRequest(IssueCouponCommand command) {
         couponService.saveIssueRequest(command);
+    }
+
+    public void createIssueEvent(IssueCouponCommand command) {
+        couponService.publishIssueEventByCommand(command);
     }
 
 
