@@ -94,4 +94,12 @@ public class CouponService {
     public void publishIssueEventByCommand(IssueCouponCommand command) {
         couponEventPublisher.publishIssueEvent(command.toEvent());
     }
+
+    public void publishIssuedEvent(CouponEvent.Issued event) {
+        couponEventPublisher.publishIssuedEvent(event);
+    }
+
+    public void publishIssueFailedEvent(CouponEvent.IssueFailed event) {
+        couponEventPublisher.publishIssueFailEvent(event);
+    }
 }

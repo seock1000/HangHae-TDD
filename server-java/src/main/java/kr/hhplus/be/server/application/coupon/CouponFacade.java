@@ -3,6 +3,7 @@ package kr.hhplus.be.server.application.coupon;
 import jakarta.persistence.LockModeType;
 import kr.hhplus.be.server.config.redis.DistributedLock;
 import kr.hhplus.be.server.config.redis.LockMethod;
+import kr.hhplus.be.server.domain.coupon.CouponEvent;
 import kr.hhplus.be.server.domain.coupon.CouponService;
 import kr.hhplus.be.server.domain.coupon.GetUserCouponCommand;
 import kr.hhplus.be.server.domain.coupon.UserCouponInfo;
@@ -31,13 +32,22 @@ public class CouponFacade {
     // 많은 경합 예상 : SPIN 방식 락 적용
     //@DistributedLock(key = "'coupon:' + #command.couponId()", method = LockMethod.PUBSUB)
     public void issueCoupon(IssueCouponCommand command) {
-        var user = userService.getUserById(command.userId());
-        var coupon = couponService.getCouponById(command.couponId());
+        try {
+            var user = userService.getUserById(command.userId());
+            var coupon = couponService.getCouponById(command.couponId());
 
-        var userCoupon = couponService.issueCoupon(user, coupon);
+            var userCoupon = couponService.issueCoupon(user, coupon);
 
-        couponService.saveCoupon(coupon);
-        couponService.saveUserCoupon(userCoupon);
+            couponService.saveCoupon(coupon);
+            couponService.saveUserCoupon(userCoupon);
+            couponService.publishIssuedEvent(CouponEvent.Issued.of(user, coupon, userCoupon));
+
+        } catch (Exception e) {
+            couponService.publishIssueFailedEvent(
+                    CouponEvent.IssueFailed.of(command.userId(), command.couponId(), e)
+            );
+            throw e;
+        }
     }
 
     @Deprecated
