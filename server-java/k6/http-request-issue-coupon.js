@@ -22,8 +22,8 @@ export default function () {
     const userId = __ITER + 1; // 1~100
     const url = 'http://localhost:8080/api/v1/coupons/issue';
     const payload = JSON.stringify({
-        userId : 1,
-        couponId : 3
+        userId : userId,
+        couponId : 6
     })
     const params = {
         headers : {
