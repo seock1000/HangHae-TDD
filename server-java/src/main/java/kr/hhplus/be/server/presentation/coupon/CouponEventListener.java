@@ -26,7 +26,7 @@ public class CouponEventListener {
             groupId = COUPON_CONSUMER_GROUP,
             concurrency = "5")
     public void handleCouponIssueEvent(CouponEvent.Issue event, Acknowledgment acknowledgment) {
-        log.info("Received coupon issue event: {}", event);
+        //log.info("Received coupon issue event: {}", event);
         couponFacade.issueCoupon(CouponMapper.from(event));
         acknowledgment.acknowledge();
     }

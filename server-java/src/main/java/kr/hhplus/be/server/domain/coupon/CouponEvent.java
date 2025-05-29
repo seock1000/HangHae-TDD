@@ -31,10 +31,10 @@ public class CouponEvent {
     public record IssueFailed(
             Long userId,
             Long couponId,
-            Exception ex
+            String message
     ) {
-        public static IssueFailed of(Long userId, Long couponId, Exception ex) {
-            return new IssueFailed(userId, couponId, ex);
+        public static IssueFailed of(Long userId, Long couponId, String message) {
+            return new IssueFailed(userId, couponId, message);
         }
     }
 }

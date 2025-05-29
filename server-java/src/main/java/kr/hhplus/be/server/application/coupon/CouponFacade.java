@@ -44,7 +44,7 @@ public class CouponFacade {
 
         } catch (Exception e) {
             couponService.publishIssueFailedEvent(
-                    CouponEvent.IssueFailed.of(command.userId(), command.couponId(), e)
+                    CouponEvent.IssueFailed.of(command.userId(), command.couponId(), e.getMessage())
             );
             throw e;
         }

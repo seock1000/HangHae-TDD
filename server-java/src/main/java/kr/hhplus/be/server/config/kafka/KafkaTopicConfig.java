@@ -14,6 +14,14 @@ public class KafkaTopicConfig {
                 TopicBuilder.name(KafkaEventKey.COUPON_ISSUE)
                         .partitions(5)
                         .replicas(2)
+                        .build(),
+                TopicBuilder.name(KafkaEventKey.COUPON_ISSUED)
+                        .partitions(5)
+                        .replicas(2)
+                        .build(),
+                TopicBuilder.name(KafkaEventKey.COUPON_ISSUE_FAILED)
+                        .partitions(5)
+                        .replicas(2)
                         .build()
         );
     }

@@ -33,7 +33,7 @@ public class BestSellerEventListener {
             containerFactory = "kafkaListenerContainerFactory"
     )
     public void handlePayment(OrderEvent.Confirmed event, Acknowledgment acknowledgment) {
-        log.info("Received order confirmed event: {}", event);
+        //log.info("Received order confirmed event: {}", event);
         bestSellerFacade.updateDailyBastSeller(BestSellerMapper.from(event));
         acknowledgment.acknowledge();
     }

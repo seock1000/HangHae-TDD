@@ -23,7 +23,7 @@ public class DataPlatformEventListener {
             groupId = DATA_PLATFORM_CONSUMER_GROUP,
             containerFactory = "kafkaListenerContainerFactory")
     public void handleOrderConfirmedEvent(OrderEvent.Confirmed event, Acknowledgment acknowledgment) {
-        log.info("Received order confirmed event: {}", event);
+        //log.info("Received order confirmed event: {}", event);
         var orderData = DataPlatformMapper.from(event);
         dataPlatformService.handleOrderData(orderData);
         acknowledgment.acknowledge();
