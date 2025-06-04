@@ -11,8 +11,8 @@ export const options = {
     scenarios: {
         contacts: {
             executor: "per-vu-iterations",
-            vus: 10,
-            iterations: 100,
+            vus: 10000,
+            iterations: 1000,
             maxDuration: "30s",
         },
     },
