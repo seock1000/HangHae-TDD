@@ -17,7 +17,6 @@ public class BestSellerFacade {
 
     private final BestSellerService bestSellerService;
     private final ProductService productService;
-    private final OrderService orderService;
 
     @Transactional(readOnly = true)
     public List<GetBestSellerResult> getTodayBestSellers() {
@@ -29,8 +28,9 @@ public class BestSellerFacade {
                 .toList();
     }
 
-    public void updateDailyBastSeller(UpdateBestSellerCommand command) {
-        var order = orderService.getOrderById(command.orderId());
-        order.getOrderItems().forEach(it -> bestSellerService.updateLast3DaysSalesStat(SalesStat.of(it)));
+    public void updateDailyBastSeller(List<UpdateBestSellerCommand> commands) {
+        commands.forEach(command -> {
+            bestSellerService.updateDailySalesStat(command.toSalesStat());
+        });
     }
 }

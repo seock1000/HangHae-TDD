@@ -1,12 +1,13 @@
 package kr.hhplus.be.server.application.bestseller;
 
+import kr.hhplus.be.server.domain.bestseller.SalesStat;
+
 public record UpdateBestSellerCommand(
-        String orderId
+        Long productId,
+        int quantity
 ) {
-    public static UpdateBestSellerCommand of(String orderId) {
-        if (orderId == null || orderId.isBlank()) {
-            throw new IllegalArgumentException("Order ID cannot be null or blank");
-        }
-        return new UpdateBestSellerCommand(orderId);
+
+    public SalesStat toSalesStat() {
+        return new SalesStat(productId, (long) quantity);
     }
 }
