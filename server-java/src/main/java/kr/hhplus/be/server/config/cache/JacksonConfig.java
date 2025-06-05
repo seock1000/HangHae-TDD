@@ -21,11 +21,11 @@ public class JacksonConfig {
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
-        StdTypeResolverBuilder builder = new ObjectMapper.DefaultTypeResolverBuilder(ObjectMapper.DefaultTyping.EVERYTHING,
-                objectMapper.getPolymorphicTypeValidator());
-        builder.init(JsonTypeInfo.Id.CLASS, null);
-        builder.inclusion(JsonTypeInfo.As.PROPERTY);
-        objectMapper.setDefaultTyping(builder);
+//        StdTypeResolverBuilder builder = new ObjectMapper.DefaultTypeResolverBuilder(ObjectMapper.DefaultTyping.EVERYTHING,
+//                objectMapper.getPolymorphicTypeValidator());
+//        builder.init(JsonTypeInfo.Id.CLASS, null);
+//        builder.inclusion(JsonTypeInfo.As.PROPERTY);
+//        objectMapper.setDefaultTyping(builder);
 
         // PageImpl에 대한 커스텀 직렬/역직렬화기 등록
         SimpleModule module = new SimpleModule();
