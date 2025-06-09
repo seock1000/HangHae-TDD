@@ -1,0 +1,7 @@
+package kr.hhplus.be.server.config.kafka;
+
+import lombok.Getter;
+
+public interface KafkaEventKey {
+    public static final String ORDER_CONFIRMED = "order-confirmed";
+}
