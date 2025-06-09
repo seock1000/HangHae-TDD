@@ -17,6 +17,7 @@ import java.util.Set;
 public class CouponService {
 
     private final CouponRepository couponRepository;
+    private final CouponEventPublisher couponEventPublisher;
 
     /**
      * 테스트 필요없을 듯
@@ -88,5 +89,17 @@ public class CouponService {
 
     public Map<Long, List<Long>> getTopIssueRequestsWithSize(int batchSize) {
         return couponRepository.getTopIssueRequestPerCouponWithSize(batchSize);
+    }
+
+    public void publishIssueEventByCommand(IssueCouponCommand command) {
+        couponEventPublisher.publishIssueEvent(command.toEvent());
+    }
+
+    public void publishIssuedEvent(CouponEvent.Issued event) {
+        couponEventPublisher.publishIssuedEvent(event);
+    }
+
+    public void publishIssueFailedEvent(CouponEvent.IssueFailed event) {
+        couponEventPublisher.publishIssueFailEvent(event);
     }
 }

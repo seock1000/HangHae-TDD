@@ -33,8 +33,11 @@ public class CouponRepositoryImpl implements CouponRepository {
 
     @Override
     public Optional<Coupon> findCouponById(Long couponId) {
-        return couponRedisRepository.findById(couponId);
+        //return couponRedisRepository.findById(couponId);
+        return couponJpaRepository.findById(couponId);
     }
+
+
 
     @Deprecated
     @Override

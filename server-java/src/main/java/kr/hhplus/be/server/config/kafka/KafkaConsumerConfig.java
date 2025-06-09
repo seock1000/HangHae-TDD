@@ -42,7 +42,7 @@ public class KafkaConsumerConfig {
                 (record, exception) -> {
                     // 로깅 또는 알림 처리
                     log.error("Kafka 처리 중 오류 발생: topic={}, offset={}, exception={}",
-                            record.topic(), record.offset(), exception.getMessage(), exception);
+                            record.topic(), record.offset(), exception.getMessage());
                 },
                 new FixedBackOff(0L, 0) // 재시도 없이 바로 실패 처리
         );
